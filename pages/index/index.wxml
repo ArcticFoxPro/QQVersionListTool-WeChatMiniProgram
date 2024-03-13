@@ -1,0 +1,31 @@
+<!-- index.wxml -->
+
+<view class="block">
+  <t-navbar  title="QQ 版本列表实用工具" t-class-title="nav-title" />
+</view>
+
+<!-- 使用view包裹需要约束的部分 -->
+<view class="constraint-container">
+
+  <recycle-view scroll-y="{{true}}" class="qq-version-list" bind:refresh="onRefresh">
+    <view slot="default" wx:for="{{qqVersions}}" wx:key="versionNumber" class="qq-version-item">
+      <t-cell-group theme="card">
+        <t-cell title="版本：{{item.versionNumber}}" description="大小：{{item.size}} MB" leftIcon="" hover />
+      </t-cell-group>
+    </view>
+  </recycle-view>
+
+  <view class="bottom-button">
+    <view class="icon-button">
+      <t-button theme="light" icon="info-circle" shape="square" size="large" class="margin" aria-label="关于" data-key="showTooLongBtnContent" bind:tap="showDialog" block></t-button>
+      <t-button theme="light" icon="setting" shape="square" size="large" class="margin" aria-label="设置"></t-button>
+      <t-button theme="light" icon="refresh" shape="square" size="large" class="margin" aria-label="刷新" bind:tap="refreshData" block></t-button>
+    </view>
+    <view class="text-button">
+      <t-button theme="primary" icon="search" block size="large">猜版</t-button>
+    </view>
+  </view>
+
+</view>
+
+<t-dialog visible="{{showTooLongBtnContent}}" title="关于" content="QQ 版本列表实用工具 for WeChat MiniProgram{{'\n\n'}}版本：0.1{{'\n\n'}}Since 2024.03.13" confirm-btn="{{ aboutBaseBtn }}" cancel-btn="撤回同意用户协议" button-layout="vertical" bind:confirm="closeDialog" bind:cancel="closeDialog" />

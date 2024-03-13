@@ -1,0 +1,49 @@
+/* index.wxss */
+
+.page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.constraint-container {
+  flex: 1;
+  /* 占据剩余空间 */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  /* 调整上下间距 */
+}
+
+.qq-version-item {
+  margin-top: 32rpx;
+  margin-bottom: 32rpx;
+}
+
+.qq-version-list {
+  flex: 1;
+  /* 占据剩余空间 */
+}
+
+.bottom-button {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  gap: 32rpx;
+  display: flex;
+  justify-content: space-between;
+  padding: 32rpx;
+  background-color: #f6f6f6;
+}
+
+.icon-button {
+  display: flex;
+  gap: 32rpx;
+  align-items: center;
+}
+
+.text-button {
+  text-align: right;
+  flex: 1;
+}
