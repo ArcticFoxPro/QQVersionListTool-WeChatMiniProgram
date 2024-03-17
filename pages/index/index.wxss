@@ -1,49 +1,73 @@
 /* index.wxss */
 
 .page {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .constraint-container {
-  flex: 1;
-  /* 占据剩余空间 */
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  /* 调整上下间距 */
+    flex: 1;
+    /* 占据剩余空间 */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    /* 调整上下间距 */
 }
 
 .qq-version-item {
-  margin-top: 32rpx;
-  margin-bottom: 32rpx;
+    margin-top: 32rpx;
+    margin-bottom: 32rpx;
 }
 
 .qq-version-list {
-  flex: 1;
-  /* 占据剩余空间 */
+    flex: 1;
+    /* 占据剩余空间 */
 }
 
 .bottom-button {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  gap: 32rpx;
-  display: flex;
-  justify-content: space-between;
-  padding: 32rpx;
-  background-color: #f6f6f6;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    gap: 32rpx;
+    display: flex;
+    justify-content: space-between;
+    padding: 32rpx;
+    background-color: #f6f6f6;
 }
 
 .icon-button {
-  display: flex;
-  gap: 32rpx;
-  align-items: center;
+    display: flex;
+    gap: 32rpx;
+    align-items: center;
 }
 
 .text-button {
-  text-align: right;
-  flex: 1;
+    text-align: right;
+    flex: 1;
+}
+
+.about-header {
+    display: flex;
+    align-items: center;
+    height: 116rpx;
+}
+
+.about-title {
+    flex: 1;
+    text-align: center;
+    font-weight: 600;
+    font-size: 36rpx;
+}
+
+.about-button {
+    margin: 32rpx;
+}
+
+.about-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 32rpx;
 }

@@ -1,31 +1,54 @@
 <!-- index.wxml -->
 
 <view class="block">
-  <t-navbar  title="QQ 版本列表实用工具" t-class-title="nav-title" />
+    <t-navbar title="QQ 版本列表实用工具" t-class-title="nav-title"/>
 </view>
 
-<!-- 使用view包裹需要约束的部分 -->
+        <!-- 使用view包裹需要约束的部分 -->
 <view class="constraint-container">
 
-  <recycle-view scroll-y="{{true}}" class="qq-version-list" bind:refresh="onRefresh">
-    <view slot="default" wx:for="{{qqVersions}}" wx:key="versionNumber" class="qq-version-item">
-      <t-cell-group theme="card">
-        <t-cell title="版本：{{item.versionNumber}}" description="大小：{{item.size}} MB" leftIcon="" hover />
-      </t-cell-group>
-    </view>
-  </recycle-view>
+    <recycle-view scroll-y="{{true}}" class="qq-version-list" bind:refresh="onRefresh">
+        <view slot="default" wx:for="{{qqVersions}}" wx:key="versionNumber" class="qq-version-item">
+            <t-cell-group theme="card">
+                <t-cell title="版本：{{item.versionNumber}}" description="大小：{{item.size}} MB" leftIcon="" hover/>
+            </t-cell-group>
+        </view>
+    </recycle-view>
 
-  <view class="bottom-button">
-    <view class="icon-button">
-      <t-button theme="light" icon="info-circle" shape="square" size="large" class="margin" aria-label="关于" data-key="showTooLongBtnContent" bind:tap="showDialog" block></t-button>
-      <t-button theme="light" icon="setting" shape="square" size="large" class="margin" aria-label="设置"></t-button>
-      <t-button theme="light" icon="refresh" shape="square" size="large" class="margin" aria-label="刷新" bind:tap="refreshData" block></t-button>
+    <view class="bottom-button">
+        <view class="icon-button">
+            <t-button theme="light" variant="outline" icon="info-circle" shape="square" size="large" class="margin"
+                      aria-label="关于" bind:tap="handleAboutPopup" block></t-button>
+            <t-button theme="light" variant="outline" icon="setting" shape="square" size="large" class="margin"
+                      aria-label="设置"></t-button>
+            <t-button theme="light" variant="outline" icon="{{refreshIcon}}" shape="square" size="large" class="margin"
+                      aria-label="刷新" bind:tap="refreshData" block loading="{{onRefresh}}"></t-button>
+        </view>
+        <view class="text-button">
+            <t-button theme="primary" icon="search" block size="large">猜版</t-button>
+        </view>
     </view>
-    <view class="text-button">
-      <t-button theme="primary" icon="search" block size="large">猜版</t-button>
-    </view>
-  </view>
 
 </view>
 
-<t-dialog visible="{{showTooLongBtnContent}}" title="关于" content="QQ 版本列表实用工具 for WeChat MiniProgram{{'\n\n'}}版本：0.1{{'\n\n'}}Since 2024.03.13" confirm-btn="{{ aboutBaseBtn }}" cancel-btn="撤回同意用户协议" button-layout="vertical" bind:confirm="closeDialog" bind:cancel="closeDialog" />
+        <!--<t-dialog visible="{{showTooLongBtnContent}}" title="关于" content="QQ 版本列表实用工具 for WeChat MiniProgram{{'\n\n'}}版本：0.1{{'\n\n'}}Since 2024.03.13" confirm-btn="{{ aboutBaseBtn }}" cancel-btn="撤回同意用户协议" button-layout="vertical" bind:confirm="closeDialog" bind:cancel="closeDialog" />-->
+
+<t-popup visible="{{aboutVisible}}" bind:visible-change="aboutPopupVisible" placement="bottom">
+    <view class="block">
+        <view class="about-header">
+            <view class="about-title">关于</view>
+        </view>
+        <view style="text-align: center; margin-bottom: 8rpx;">QQ 版本列表实用工具 for WeChat MiniProgram</view>
+        <view style="text-align: center; margin-top: 8rpx; margin-bottom: 8rpx;">版本：0.0.1</view>
+        <view class="about-link">
+            <t-link size="small" theme="primary" prefix-icon="copy" content="开源地址（GitHub）" bind:tap="copyOSLink" hover />
+        </view>
+        <t-footer text="Copyright © 2023-Now QQ Ver. Tool. All Rights Reserved." links="{{links[0]}}"/>
+        <view class="about-button">
+            <t-button theme="primary" size="large" block bind:tap="closeAboutPopup">确定</t-button>
+        </view>
+        <view class="about-button">
+            <t-button theme="light" size="large" block bind:tap="closeAboutPopup">撤回同意用户协议</t-button>
+        </view>
+    </view>
+</t-popup>
