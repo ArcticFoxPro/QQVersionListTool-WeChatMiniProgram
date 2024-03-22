@@ -8,6 +8,12 @@
     "t-icon": "tdesign-miniprogram/icon/icon",
     "t-popup": "tdesign-miniprogram/popup/popup",
     "t-footer": "tdesign-miniprogram/footer/footer",
-    "t-link": "tdesign-miniprogram/link/link"
-  }
+    "t-link": "tdesign-miniprogram/link/link",
+    "t-loading": "tdesign-miniprogram/loading/loading",
+    "t-overlay": "tdesign-miniprogram/overlay/overlay",
+    "t-result": "tdesign-miniprogram/result/result",
+    "recycle-view": "miniprogram-recycle-view/recycle-view",
+    "recycle-item": "miniprogram-recycle-view/recycle-item"
+  },
+  "disableScroll":true
 }

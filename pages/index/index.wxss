@@ -1,28 +1,26 @@
 /* index.wxss */
 
 .page {
-    height: 100vh;
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
 }
 
-.constraint-container {
-    flex: 1;
-    /* 占据剩余空间 */
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    /* 调整上下间距 */
-}
 
 .qq-version-item {
-    margin-top: 32rpx;
-    margin-bottom: 32rpx;
+    margin-top: 28rpx;
+    margin-bottom: 4rpx;
 }
 
 .qq-version-list {
+    height: 20%;
+}
+
+.recycle-view-container {
     flex: 1;
-    /* 占据剩余空间 */
+    height: 20%;
+    -webkit-overflow-scrolling: touch;
+
 }
 
 .bottom-button {
@@ -66,8 +64,43 @@
 }
 
 .about-link {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  margin-top: 32rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 32rpx;
+}
+
+.guess-header {
+    display: flex;
+    align-items: center;
+    height: 116rpx;
+}
+
+.guess-title {
+    flex: 1;
+    text-align: center;
+    font-weight: 600;
+    font-size: 36rpx;
+}
+
+.guess-button {
+    margin: 32rpx;
+}
+
+
+.demo-section__content {
+    margin: 48rpx 32rpx 96rpx 32rpx;
+}
+
+.cell-detail-button {
+    margin: 32rpx;
+}
+
+.header-title {
+    font-size: 28px;
+    line-height: 36px;
+    padding: 8rpx 32rpx 16rpx;
+    background-color: #fff;
+    font-weight: 600;
+    color: rgba(0, 0, 0.9);
 }

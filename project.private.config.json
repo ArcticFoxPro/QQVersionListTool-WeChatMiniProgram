@@ -3,5 +3,6 @@
   "projectname": "qqverlist-wechatminiprogram",
   "setting": {
     "compileHotReLoad": true
-  }
+  },
+  "libVersion": "3.3.4"
 }

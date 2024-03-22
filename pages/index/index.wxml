@@ -1,47 +1,61 @@
 <!-- index.wxml -->
 
-<view class="block">
-    <t-navbar title="QQ 版本列表实用工具" t-class-title="nav-title"/>
-</view>
+<view class="page">
 
-        <!-- 使用view包裹需要约束的部分 -->
-<view class="constraint-container">
+    <view class="block" id="titleTop1">
+        <t-navbar title="{{titleTop}}" t-class-title="nav-title"/>
+    </view>
+    <view id="titleTop2" class="header-title">QQ 版本列表 Lite</view>
 
-    <recycle-view scroll-y="{{true}}" class="qq-version-list" bind:refresh="onRefresh">
-        <view slot="default" wx:for="{{qqVersions}}" wx:key="versionNumber" class="qq-version-item">
-            <t-cell-group theme="card">
-                <t-cell title="版本：{{item.versionNumber}}" description="大小：{{item.size}} MB" leftIcon="" hover/>
-            </t-cell-group>
-        </view>
-    </recycle-view>
 
-    <view class="bottom-button">
+    <view class="recycle-view-container">
+        <recycle-view scroll-y="{{true}}" height="{{heightRecycle}}" class="qq-version-list" bindscroll="titleChange"
+                      bind:refresh="onRefresh"
+                      enhanced>
+            <recycle-item style="width: 100%;" wx:for="{{qqVersions}}" wx:key="versionNumber" class="qq-version-item">
+                <t-cell-group theme="card">
+                    <t-cell title="版本：{{item.versionNumber}}" description="大小：{{item.size}} MB" leftIcon=""
+                            hover arrow
+                            data-index="{{index}}" bind:tap="clickCell"/>
+                </t-cell-group>
+            </recycle-item>
+        </recycle-view>
+    </view>
+
+    <view class="bottom-button" id="bottomButton">
         <view class="icon-button">
             <t-button theme="light" variant="outline" icon="info-circle" shape="square" size="large" class="margin"
                       aria-label="关于" bind:tap="handleAboutPopup" block></t-button>
             <t-button theme="light" variant="outline" icon="setting" shape="square" size="large" class="margin"
-                      aria-label="设置"></t-button>
-            <t-button theme="light" variant="outline" icon="{{refreshIcon}}" shape="square" size="large" class="margin"
-                      aria-label="刷新" bind:tap="refreshData" block loading="{{onRefresh}}"></t-button>
+                      aria-label="设置" disabled></t-button>
+            <t-button theme="light" variant="outline" icon="{{refreshIcon}}" shape="square" size="large"
+                      class="margin"
+                      aria-label="刷新" bind:tap="refreshData" block loading="{{onRefresh}}"
+                      disabled="{{onRefresh}}"></t-button>
         </view>
         <view class="text-button">
-            <t-button theme="primary" icon="search" block size="large">猜版</t-button>
+            <t-button theme="light" variant="outline" icon="search" block size="large" bind:tap="handleGuessPopup">
+                猜版
+            </t-button>
         </view>
     </view>
 
 </view>
 
+
         <!--<t-dialog visible="{{showTooLongBtnContent}}" title="关于" content="QQ 版本列表实用工具 for WeChat MiniProgram{{'\n\n'}}版本：0.1{{'\n\n'}}Since 2024.03.13" confirm-btn="{{ aboutBaseBtn }}" cancel-btn="撤回同意用户协议" button-layout="vertical" bind:confirm="closeDialog" bind:cancel="closeDialog" />-->
 
-<t-popup visible="{{aboutVisible}}" bind:visible-change="aboutPopupVisible" placement="bottom">
+<t-popup visible="{{aboutVisible}}" bind:visible-change="aboutPopupVisible" close-on-overlay-click placement="bottom">
     <view class="block">
         <view class="about-header">
             <view class="about-title">关于</view>
         </view>
-        <view style="text-align: center; margin-bottom: 8rpx;">QQ 版本列表实用工具 for WeChat MiniProgram</view>
+        <view style="text-align: center; margin-bottom: 8rpx;">QQ 版本列表 Lite for WeChat MiniProgram</view>
         <view style="text-align: center; margin-top: 8rpx; margin-bottom: 8rpx;">版本：0.0.1</view>
+        <view style="text-align: center; margin-top: 8rpx; margin-bottom: 8rpx;">作者：快乐小牛、有鲫雪狐</view>
         <view class="about-link">
-            <t-link size="small" theme="primary" prefix-icon="copy" content="开源地址（GitHub）" bind:tap="copyOSLink" hover />
+            <t-link size="small" theme="primary" prefix-icon="copy" content="开源地址（GitHub）" bind:tap="copyOSLink"
+                    hover/>
         </view>
         <t-footer text="Copyright © 2023-Now QQ Ver. Tool. All Rights Reserved." links="{{links[0]}}"/>
         <view class="about-button">
@@ -52,3 +66,60 @@
         </view>
     </view>
 </t-popup>
+
+<t-popup visible="{{guessVisible}}" bind:visible-change="guessPopupVisible" close-on-overlay-click placement="bottom">
+    <view class="block">
+        <view class="guess-header">
+            <view class="guess-title">猜版 for Android</view>
+        </view>
+        <view class="demo-section__content">
+            <t-result theme="default" title="微信小程序内无法使用猜版"
+                      description="由于微信平台限制，QQ 版本列表 Lite 微信小程序内无法使用猜版功能。请移步至 QQ 版本列表实用工具 for Android 以使用猜版功能（下方可复制对应链接）。"/>
+        </view>
+        <view class="guess-button">
+            <t-button theme="primary" block size="large" bind:tap="closeGuessPopup">好的</t-button>
+        </view>
+        <view class="guess-button">
+            <t-button theme="light" block size="large" bind:tap="copyAndroidOSLink">复制开源仓库地址</t-button>
+        </view>
+    </view>
+</t-popup>
+
+<t-popup visible="{{cellDetailVisible}}" bind:visible-change="cellDetialPopupVisible" close-on-overlay-click
+         placement="bottom">
+    <view class="block">
+        <view class="guess-header">
+            <view class="guess-title">详情</view>
+        </view>
+
+        <view style="margin: 0 32rpx 16rpx 32rpx;">版本：{{itemVersion}}</view>
+        <view style=" margin: 0 32rpx 16rpx 32rpx;">大小：{{itemSize}} MB</view>
+        <view style=" margin: 0 32rpx 16rpx 32rpx;">{{itemFeatureTitle}}</view>
+        <view wx:for="{{itemSummary}}">
+            <view style="margin: 0 32rpx 16rpx 32rpx;">- {{item}}</view>
+        </view>
+    </view>
+    <view class="cell-detail-button">
+        <t-button theme="primary" block size="large" bind:tap="closeCellDetailPopup">确定</t-button>
+    </view>
+    <view class="cell-detail-button">
+        <t-button theme="light" block size="large" bind:tap="displayJson">查看 Json 字符串</t-button>
+    </view>
+</t-popup>
+
+<t-popup visible="{{cellJsonDetailVisible}}" bind:visible-change="cellJsonDetialPopupVisible" close-on-overlay-click
+         placement="bottom">
+    <view class="block">
+        <view class="guess-header">
+            <view class="guess-title">Json 详情</view>
+        </view>
+        <view style=" margin: 0 32rpx 16rpx 32rpx;">
+            <text style="font-size:13px; " selectable="true">{{itemString}}</text>
+        </view>
+    </view>
+    <t-footer text="— 可长按选择复制内容 —"></t-footer>
+    <view class="cell-detail-button">
+        <t-button theme="primary" block size="large" bind:tap="closeCellJsonDetailPopup">确定</t-button>
+    </view>
+</t-popup>
+
