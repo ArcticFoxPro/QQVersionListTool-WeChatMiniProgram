@@ -10,7 +10,7 @@
 
 ## 简介
 
-QQ 版本列表 Lite for WeChat MiniProgram 是一个提供 QQ 版本列表的查看和对 QQ 下载链接的枚举法猜测的，使用 TDesign 组件库构建的微信小程序。QQ 版本列表 Lite 用户可以通过本应用及时获取到 QQ 版本更新的最新信息。
+QQ 版本列表 Lite for WeChat MiniProgram 是一个提供 QQ 版本列表查看的，使用 TDesign 组件库构建的微信小程序。QQ 版本列表 Lite 用户可以通过本应用及时获取到 QQ 版本更新的最新信息。
 
 ## 如何获取？
 
