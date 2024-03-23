@@ -1,6 +1,6 @@
 # QQ 版本列表 Lite for WeChat MiniProgram
 
-![QQ 版本列表 Lite Banner](/QQVerToolBanner.png)
+![QQ 版本列表 Lite Banner](/QQVerLiteBanner.png)
 
 ## 注意事项：使用前须知
 
