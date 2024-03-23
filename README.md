@@ -16,7 +16,7 @@ QQ 版本列表 Lite for WeChat MiniProgram 是一个提供 QQ 版本列表查�
 
 ### 微信小程序开发者
 
-微信小程序开发者可通过以下步骤使用QQ 版本列表 Lite for WeChat MiniProgram：
+微信小程序开发者可通过以下步骤使用 QQ 版本列表 Lite for WeChat MiniProgram：
 
 1. 为本地电脑配置 Node.js 和 NPM 环境。Node.js 官网：https://nodejs.org/
 2. 下载仓库源代码，并解压到本地。
