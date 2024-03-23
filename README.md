@@ -82,4 +82,5 @@ QQ 版本列表 Lite 的诞生离不开以下开源项目，感谢以下开源�
 ## 孪生项目
 
 [QQ 版本列表实用工具 for Android](https://github.com/klxiaoniu/QQVersionList)，Licenced under [GNU Affero General Public License Version 3](https://github.com/klxiaoniu/QQVersionList/blob/master/LICENSE)
+
 [![QQ 版本列表实用工具 Banner](/QQVerToolBanner.png)](https://github.com/klxiaoniu/QQVersionList)
