@@ -79,6 +79,7 @@ QQ 版本列表 Lite 采用 [木兰公共许可证, 第2版](/LICENSE) 开源许
 QQ 版本列表 Lite 的诞生离不开以下开源项目，感谢以下开源项目的作者和贡献者：
 
 - [TDesign WeChat MiniProgram（Tencent）](https://github.com/Tencent/tdesign-miniprogram)，[MIT License](https://github.com/Tencent/tdesign-miniprogram/blob/develop/LICENSE)
+- [Node.js](https://github.com/nodejs/node), [MIT License](https://github.com/nodejs/node/blob/main/LICENSE)
 
 ## 孪生项目
 
