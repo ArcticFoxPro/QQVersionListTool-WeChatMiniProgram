@@ -1,17 +1,39 @@
 // index.js
+
+/*
+    Copyright (c) 2024 ArcticFoxPro
+    QQ Ver. Lite is licensed under Mulan PubL v2.
+    You can use this software according to the terms and conditions of the Mulan PubL v2.
+    You may obtain a copy of Mulan PubL v2 at:
+             http://license.coscl.org.cn/MulanPubL-2.0
+    THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
+    EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
+    MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
+    See the Mulan PubL v2 for more details.
+*/
+
 const QQVersionBean = require('./QQVersionBean.js');
 
 Page({
     options: {
         styleIsolation: 'apply-shared',
     }, data: {
-        qqVersions: [], onRefresh: false, refreshIcon: "refresh", versionSmallVisible: wx.getStorage({
+        qqVersions: [],
+        onRefresh: false,
+        refreshIcon: "refresh",
+        versionSmallVisible: wx.getStorage({
             key: "versionSelect", success(res) {
                 console.log(res.data)
             }
-        }), seeJson: "查看 Json 字符串", titleTop: "", heightRecycle: 5000,
+        }),
+        seeJson: "查看 Json 字符串",
+        titleTop: "",
+        heightRecycle: 5000,
+        errorText: "",
+        UADisagreeText: "不同意并退出",
     }, onLoad: function () {
-        this.getData();
+
+
     }, onReady: async function () {
         const windowHeight = await new Promise((resolve) => {
             wx.getSystemInfo({
@@ -51,6 +73,12 @@ Page({
         console.log('元素高度3：', elementHeight3);
 
         this.setData({heightRecycle: windowHeight - elementHeight1 - elementHeight2 - elementHeight3});
+
+        if (wx.getStorageSync('UAAgreed') == "") {
+            this.setData({UAVisible: true});
+        }
+
+        this.getData();
     },
 
     refreshData: function () {
@@ -95,13 +123,18 @@ Page({
                     this.setData({onRefresh: false,});
                     this.setData({refreshIcon: "refresh",});
                     console.error(e);
-                    // 在这里处理错误，如显示错误提示对话框等
+                    const errorMessage = e.errMsg;
+                    this.setData({errorText: errorMessage});
+                    this.setData({errorVisible: true});
                 }
             }, fail: (err) => {
                 this.setData({onRefresh: false,});
                 this.setData({refreshIcon: "refresh",});
                 console.error(err);
-                // 在这里处理网络请求失败的情况
+                const errorMessage = err.errMsg;
+                this.setData({errorText: errorMessage});
+                this.setData({errorVisible: true});
+
             },
         });
     }, aboutPopupVisible(e) {
@@ -112,6 +145,10 @@ Page({
         this.setData({aboutVisible: true});
     }, closeAboutPopup() {
         this.setData({aboutVisible: false});
+    }, recallUA() {
+        this.setData({UADisagreeText: "撤回同意并退出"});
+        this.setData({aboutVisible: false});
+        this.setData({UAVisible: true});
     }, guessPopupVisible(e) {
         this.setData({
             guessVisible: e.detail.visible,
@@ -164,6 +201,32 @@ Page({
         } else {
             this.setData({titleTop: ""});
         }
+    }, errorPopupVisible(e) {
+        this.setData({
+            errorVisible: e.detail.visible,
+        });
+    }, closeErrorPopup() {
+        this.setData({errorVisible: false});
+    }, copyError() {
+        const errorMsg = this.data.errorText
+        wx.setClipboardData({
+            data: errorMsg, success(res) {
+            }, fail: function (res) {
+            }
+        })
+    }, UAPopupVisible(e) {
+        this.setData({
+            UAVisible: e.detail.visible,
+        });
+    }, UAAgree() {
+        wx.setStorageSync('UAAgreed', true);
+        this.setData({UAVisible: false})
+    }, UADisagree() {
+        wx.clearStorageSync()
+        wx.exitMiniProgram({
+            success: (res) => {
+            }
+        })
     }
 
 })

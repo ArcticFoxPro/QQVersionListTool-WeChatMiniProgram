@@ -1,5 +1,17 @@
 /* index.wxss */
 
+/*
+    Copyright (c) 2024 ArcticFoxPro
+    QQ Ver. Lite is licensed under Mulan PubL v2.
+    You can use this software according to the terms and conditions of the Mulan PubL v2.
+    You may obtain a copy of Mulan PubL v2 at:
+             http://license.coscl.org.cn/MulanPubL-2.0
+    THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
+    EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
+    MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
+    See the Mulan PubL v2 for more details.
+*/
+
 .page {
     display: flex;
     flex-direction: column;
@@ -13,12 +25,11 @@
 }
 
 .qq-version-list {
-    height: 20%;
+    
 }
 
 .recycle-view-container {
     flex: 1;
-    height: 20%;
     -webkit-overflow-scrolling: touch;
 
 }
@@ -103,4 +114,42 @@
     background-color: #fff;
     font-weight: 600;
     color: rgba(0, 0, 0.9);
+}
+
+.error-header {
+    display: flex;
+    align-items: center;
+    height: 116rpx;
+}
+
+.error-title {
+    flex: 1;
+    text-align: center;
+    font-weight: 600;
+    font-size: 36rpx;
+}
+
+.error-button {
+    margin: 32rpx;
+}
+.ua-header {
+    display: flex;
+    align-items: center;
+    height: 116rpx;
+}
+
+.ua-title {
+    flex: 1;
+    text-align: center;
+    font-weight: 600;
+    font-size: 36rpx;
+}
+
+.ua-button {
+    margin: 32rpx;
+}
+
+.page-s{
+    padding-left: 32rpx;
+    padding-right: 32rpx;
 }
