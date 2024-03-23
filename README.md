@@ -18,10 +18,11 @@ QQ 版本列表 Lite for WeChat MiniProgram 是一个提供 QQ 版本列表的�
 
 微信小程序开发者可通过以下步骤使用QQ 版本列表 Lite for WeChat MiniProgram：
 
-1. 下载仓库源代码，并解压到本地。
-2. 前往[微信公众平台](https://mp.weixin.qq.com/cgi-bin/wx)注册微信小程序开发者账号或[申请测试号](https://mp.weixin.qq.com/wxamp/sandbox)，取得 `AppID`。
-3. 下载[微信小程序开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)，登录后点击“小程序”-“导入”，填入上一步取得的 `AppID`，将 `<仓库源代码解压目录>/source` 目录选中后导入。
-4. 点击微信小程序开发者工具上方“预览”按钮并使用手机扫码，即可使用QQ 版本列表 Lite for WeChat MiniProgram。
+1. 为本地电脑配置 Node.js 和 NPM 环境。Node.js 官网：https://nodejs.org/
+2. 下载仓库源代码，并解压到本地。
+3. [前往微信公众平台注册微信小程序开发者账号](https://mp.weixin.qq.com/cgi-bin/wx)或[申请测试号](https://mp.weixin.qq.com/wxamp/sandbox)，取得 `AppID`。
+4. 下载[微信小程序开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)，登录后点击“小程序”-“导入”，填入上一步取得的 `AppID`，将 `<仓库源代码解压目录>/source` 目录选中后导入。
+5. 点击微信小程序开发者工具上方“预览”按钮并使用手机扫码，即可使用QQ 版本列表 Lite for WeChat MiniProgram。
 
 ### 非微信小程序开发者
 
