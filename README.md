@@ -12,6 +12,11 @@
 
 QQ 版本列表 Lite for WeChat MiniProgram 是一个提供 QQ 版本列表查看的，使用 TDesign 组件库构建的微信小程序。QQ 版本列表 Lite 用户可以通过本应用及时获取到 QQ 版本更新的最新信息。
 
+## To DO List
+
+- [ ] 适配深色模式（跟随 TDesign 组件库上游深色模式适配而更新）
+- [ ] 适配微信小程序 Skyline 渲染引擎（跟随 TDesign 组件库上游 Skyline 适配而更新）
+
 ## 如何获取？
 
 ### 微信小程序开发者
