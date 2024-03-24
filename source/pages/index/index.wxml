@@ -1,16 +1,16 @@
 <!-- index.wxml -->
 
-<!--
-    Copyright (c) 2024 ArcticFoxPro
-    QQ Ver. Lite is licensed under Mulan PubL v2.
-    You can use this software according to the terms and conditions of the Mulan PubL v2.
-    You may obtain a copy of Mulan PubL v2 at:
-             http://license.coscl.org.cn/MulanPubL-2.0
-    THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
-    EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
-    MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
-    See the Mulan PubL v2 for more details.
--->
+        <!--
+            Copyright (c) 2024 ArcticFoxPro
+            QQ Ver. Lite is licensed under Mulan PubL v2.
+            You can use this software according to the terms and conditions of the Mulan PubL v2.
+            You may obtain a copy of Mulan PubL v2 at:
+                     http://license.coscl.org.cn/MulanPubL-2.0
+            THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
+            EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
+            MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
+            See the Mulan PubL v2 for more details.
+        -->
 
 <view class="page">
 
@@ -38,15 +38,15 @@
         <view class="icon-button">
             <t-button theme="light" variant="outline" icon="info-circle" shape="square" size="large" class="margin"
                       aria-label="关于" bind:tap="handleAboutPopup" block></t-button>
-            <t-button theme="light" variant="outline" icon="setting" shape="square" size="large" class="margin"
-                      aria-label="设置" disabled></t-button>
+            <!--<t-button theme="light" variant="outline" icon="setting" shape="square" size="large" class="margin"
+                      aria-label="设置" disabled></t-button>-->
             <t-button theme="light" variant="outline" icon="{{refreshIcon}}" shape="square" size="large"
                       class="margin"
                       aria-label="刷新" bind:tap="refreshData" block loading="{{onRefresh}}"
                       disabled="{{onRefresh}}"></t-button>
         </view>
         <view class="text-button">
-            <t-button theme="light" variant="outline" icon="search" block size="large" bind:tap="handleGuessPopup">
+            <t-button variant="outline" icon="search" block size="large" bind:tap="handleGuessPopup">
                 猜版
             </t-button>
         </view>
@@ -55,15 +55,13 @@
 </view>
 
 
-        <!--<t-dialog visible="{{showTooLongBtnContent}}" title="关于" content="QQ 版本列表实用工具 for WeChat MiniProgram{{'\n\n'}}版本：0.1{{'\n\n'}}Since 2024.03.13" confirm-btn="{{ aboutBaseBtn }}" cancel-btn="撤回同意用户协议" button-layout="vertical" bind:confirm="closeDialog" bind:cancel="closeDialog" />-->
-
 <t-popup visible="{{aboutVisible}}" bind:visible-change="aboutPopupVisible" close-on-overlay-click placement="bottom">
     <view class="block">
         <view class="about-header">
             <view class="about-title">关于</view>
         </view>
         <view style="text-align: center; margin-bottom: 8rpx;">QQ 版本列表 Lite for WeChat MiniProgram</view>
-        <view style="text-align: center; margin-top: 8rpx; margin-bottom: 8rpx;">版本：0.0.1</view>
+        <view style="text-align: center; margin-top: 8rpx; margin-bottom: 8rpx;">版本：1.0.0</view>
         <view style="text-align: center; margin-top: 8rpx; margin-bottom: 8rpx;">作者：快乐小牛、有鲫雪狐</view>
         <view style="text-align: center; margin-top: 8rpx; margin-bottom: 8rpx;">Since 2024.03.12</view>
         <view style="text-align: center; margin-top: 8rpx; margin-bottom: 8rpx;">Licenesd under Mulan PubL v2</view>
@@ -155,7 +153,8 @@
     </view>
 </t-popup>
 
-<t-popup visible="{{UAVisible}}" bind:visible-change="UAPopupVisible" close-on-overlay-click="false" placement="bottom">
+<t-popup visible="{{UAVisible}}" bind:visible-change="UAPopupVisible" close-on-overlay-click="{{false}}"
+         placement="bottom">
     <view class="block">
         <view class="ua-header">
             <view class="ua-title">用户协议</view>
@@ -174,10 +173,10 @@
         </recycle-view>
 
         <view class="ua-button">
-            <t-button theme="light" block size="large" bind:tap="UAAgree">同意</t-button>
+            <t-button theme="primary" block size="large" bind:tap="UAAgree">同意</t-button>
         </view>
         <view class="error-button">
-            <t-button theme="light" block size="large" bind:tap="UADisagree">{{UADisagreeText}}</t-button>
+            <t-button theme="danger" block size="large" bind:tap="UADisagree">{{UADisagreeText}}</t-button>
         </view>
     </view>
 </t-popup>

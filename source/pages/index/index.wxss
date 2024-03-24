@@ -24,10 +24,6 @@
     margin-bottom: 4rpx;
 }
 
-.qq-version-list {
-    
-}
-
 .recycle-view-container {
     flex: 1;
     -webkit-overflow-scrolling: touch;
@@ -132,6 +128,7 @@
 .error-button {
     margin: 32rpx;
 }
+
 .ua-header {
     display: flex;
     align-items: center;
@@ -149,7 +146,7 @@
     margin: 32rpx;
 }
 
-.page-s{
+.page-s {
     padding-left: 32rpx;
     padding-right: 32rpx;
 }
