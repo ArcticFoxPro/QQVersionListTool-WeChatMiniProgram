@@ -28,7 +28,7 @@
                 <t-cell-group theme="card">
                     <t-cell title="版本：{{item.versionNumber}}" description="大小：{{item.size}} MB" leftIcon=""
                             hover arrow
-                            data-index="{{index}}" bind:tap="clickCell"/>
+                            data-index="{{index}}" bind:tap="clickCell" />
                 </t-cell-group>
             </recycle-item>
         </recycle-view>
@@ -61,7 +61,7 @@
             <view class="about-title">关于</view>
         </view>
         <view style="text-align: center; margin-bottom: 8rpx;">QQ 版本列表 Lite for WeChat MiniProgram</view>
-        <view style="text-align: center; margin-top: 8rpx; margin-bottom: 8rpx;">版本：1.0.0</view>
+        <view style="text-align: center; margin-top: 8rpx; margin-bottom: 8rpx;">版本：1.0.1</view>
         <view style="text-align: center; margin-top: 8rpx; margin-bottom: 8rpx;">作者：快乐小牛、有鲫雪狐</view>
         <view style="text-align: center; margin-top: 8rpx; margin-bottom: 8rpx;">Since 2024.03.12</view>
         <view style="text-align: center; margin-top: 8rpx; margin-bottom: 8rpx;">Licenesd under Mulan PubL v2</view>
@@ -106,6 +106,10 @@
 
         <view style="margin: 0 32rpx 16rpx 32rpx;">版本：{{itemVersion}}</view>
         <view style=" margin: 0 32rpx 16rpx 32rpx;">大小：{{itemSize}} MB</view>
+        <view style=" margin: 0 32rpx 6rpx 32rpx; " >占比历史最大包（{{maxSize}} MB）：</view>
+
+        <t-progress style="margin: 0 32rpx 16rpx 32rpx;" theme="plump" percentage="{{preSize}}" status="active" />
+
         <view style=" margin: 0 32rpx 16rpx 32rpx;">{{itemFeatureTitle}}</view>
         <view wx:for="{{itemSummary}}">
             <view style="margin: 0 32rpx 16rpx 32rpx;">- {{item}}</view>

@@ -118,6 +118,12 @@ Page({
                     this.setData({onRefresh: false,});
                     this.setData({refreshIcon: "refresh",});
 
+                    let maxSizeInFloat = qqVersionList.map(qv => parseFloat(qv.size)).filter(isFinite).reduce((max, current) => Math.max(max, current), -Infinity);
+
+                    
+
+                    this.setData({maxSize:maxSizeInFloat})
+
                     this.setData({versionBig: qqVersionList[0].versionNumber})
                 } catch (e) {
                     this.setData({onRefresh: false,});
@@ -175,6 +181,7 @@ Page({
         this.setData({itemSummary: this.data.qqVersions[index].summary});
         this.setData({itemString: JSON.stringify(this.data.qqVersions[index], null, 2)});
         this.setData({cellDetailVisible: true});
+        this.setData({preSize:((parseFloat(this.data.itemSize)/parseFloat(this.data.maxSize))*100).toFixed(2)})
 
 
     }, closeCellDetailPopup() {
