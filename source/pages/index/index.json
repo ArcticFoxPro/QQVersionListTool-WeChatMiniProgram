@@ -14,7 +14,8 @@
     "t-result": "tdesign-miniprogram/result/result",
     "recycle-view": "miniprogram-recycle-view/recycle-view",
     "recycle-item": "miniprogram-recycle-view/recycle-item",
-    "t-progress": "tdesign-miniprogram/progress/progress"
+    "t-progress": "tdesign-miniprogram/progress/progress",
+    "t-switch": "tdesign-miniprogram/switch/switch"
   },
   "disableScroll":true
 }

@@ -32,7 +32,7 @@ Page({
         errorText: "",
         UADisagreeText: "不同意并退出",
     }, onLoad: function () {
-
+        this.setData({PerProSwitch: wx.getStorageSync('isPerProOn')});
 
     }, onReady: async function () {
         const windowHeight = await new Promise((resolve) => {
@@ -120,9 +120,8 @@ Page({
 
                     let maxSizeInFloat = qqVersionList.map(qv => parseFloat(qv.size)).filter(isFinite).reduce((max, current) => Math.max(max, current), -Infinity);
 
-                    
 
-                    this.setData({maxSize:maxSizeInFloat})
+                    this.setData({maxSize: maxSizeInFloat})
 
                     this.setData({versionBig: qqVersionList[0].versionNumber})
                 } catch (e) {
@@ -181,7 +180,7 @@ Page({
         this.setData({itemSummary: this.data.qqVersions[index].summary});
         this.setData({itemString: JSON.stringify(this.data.qqVersions[index], null, 2)});
         this.setData({cellDetailVisible: true});
-        this.setData({preSize:((parseFloat(this.data.itemSize)/parseFloat(this.data.maxSize))*100).toFixed(2)})
+        this.setData({preSize: ((parseFloat(this.data.itemSize) / parseFloat(this.data.maxSize)) * 100).toFixed(2)})
 
 
     }, closeCellDetailPopup() {
@@ -234,6 +233,20 @@ Page({
             success: (res) => {
             }
         })
-    }
+    }, settingPopupVisible(e) {
+        this.setData({
+            settingVisible: e.detail.visible,
+        });
+    }, handleSettingPopup() {
+        if (wx.getStorageSync('isPerProOn') == "" || wx.getStorageSync('isPerProOn') == false) {
+            this.setData({PerProSwitch: false})
+        }
+        this.setData({settingVisible: true});
+    }, closeSettingPopup() {
+        this.setData({settingVisible: false});
+    }, handlePerProChange(e) {
+        wx.setStorageSync('isPerProOn', e.detail.value);
+        this.setData({PerProSwitch: e.detail.value})
+    },
 
 })

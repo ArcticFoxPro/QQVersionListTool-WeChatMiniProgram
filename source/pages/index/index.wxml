@@ -28,7 +28,7 @@
                 <t-cell-group theme="card">
                     <t-cell title="版本：{{item.versionNumber}}" description="大小：{{item.size}} MB" leftIcon=""
                             hover arrow
-                            data-index="{{index}}" bind:tap="clickCell" />
+                            data-index="{{index}}" bind:tap="clickCell"/>
                 </t-cell-group>
             </recycle-item>
         </recycle-view>
@@ -38,8 +38,8 @@
         <view class="icon-button">
             <t-button theme="light" variant="outline" icon="info-circle" shape="square" size="large" class="margin"
                       aria-label="关于" bind:tap="handleAboutPopup" block></t-button>
-            <!--<t-button theme="light" variant="outline" icon="setting" shape="square" size="large" class="margin"
-                      aria-label="设置" disabled></t-button>-->
+            <t-button theme="light" variant="outline" icon="setting" shape="square" size="large" class="margin"
+                      aria-label="设置" bind:tap="handleSettingPopup"></t-button>
             <t-button theme="light" variant="outline" icon="{{refreshIcon}}" shape="square" size="large"
                       class="margin"
                       aria-label="刷新" bind:tap="refreshData" block loading="{{onRefresh}}"
@@ -60,11 +60,11 @@
         <view class="about-header">
             <view class="about-title">关于</view>
         </view>
-        <view style="text-align: center; margin-bottom: 8rpx;">QQ 版本列表 Lite for WeChat MiniProgram</view>
-        <view style="text-align: center; margin-top: 8rpx; margin-bottom: 8rpx;">版本：1.0.1</view>
-        <view style="text-align: center; margin-top: 8rpx; margin-bottom: 8rpx;">作者：快乐小牛、有鲫雪狐</view>
-        <view style="text-align: center; margin-top: 8rpx; margin-bottom: 8rpx;">Since 2024.03.12</view>
-        <view style="text-align: center; margin-top: 8rpx; margin-bottom: 8rpx;">Licenesd under Mulan PubL v2</view>
+        <view style="text-align: center; margin-bottom: 12rpx;">QQ 版本列表 Lite for WeChat MiniProgram</view>
+        <view style="text-align: center; margin-top: 12rpx; margin-bottom: 12rpx;">版本：1.0.1</view>
+        <view style="text-align: center; margin-top: 12rpx; margin-bottom: 12rpx;">作者：快乐小牛、有鲫雪狐</view>
+        <view style="text-align: center; margin-top: 12rpx; margin-bottom: 12rpx;">Since 2024.03.12</view>
+        <view style="text-align: center; margin-top: 12rpx; margin-bottom: 12rpx;">Licenesd under Mulan PubL v2</view>
         <view class="about-link">
             <t-link size="small" theme="primary" prefix-icon="copy" content="开源地址（GitHub）" bind:tap="copyOSLink"
                     hover/>
@@ -106,9 +106,10 @@
 
         <view style="margin: 0 32rpx 16rpx 32rpx;">版本：{{itemVersion}}</view>
         <view style=" margin: 0 32rpx 16rpx 32rpx;">大小：{{itemSize}} MB</view>
-        <view style=" margin: 0 32rpx 6rpx 32rpx; " >占比历史最大包（{{maxSize}} MB）：</view>
+        <view style=" margin: 0 32rpx 6rpx 32rpx; " wx:if="{{PerProSwitch}}">占比历史最大包（{{maxSize}} MB）：</view>
 
-        <t-progress style="margin: 0 32rpx 16rpx 32rpx;" theme="plump" percentage="{{preSize}}" status="active" />
+        <t-progress style="margin: 0 32rpx 16rpx 32rpx;" theme="plump" wx:if="{{PerProSwitch}}" percentage="{{preSize}}"
+                    status="active"/>
 
         <view style=" margin: 0 32rpx 16rpx 32rpx;">{{itemFeatureTitle}}</view>
         <view wx:for="{{itemSummary}}">
@@ -183,5 +184,22 @@
             <t-button theme="danger" block size="large" bind:tap="UADisagree">{{UADisagreeText}}</t-button>
         </view>
     </view>
+</t-popup>
+
+<t-popup visible="{{settingVisible}}" bind:visible-change="settingPopupVisible" placement="bottom">
+    <view class="block">
+        <view class="setting-header">
+            <view class="setting-title">设置</view>
+        </view>
+        <t-cell title="版本列表详情展示当前包大小占比最大包指示条" bordered="{{false}}">
+            <t-switch style="margin: 0 0 0 48rpx;" value="{{PerProSwitch}}" slot="note"
+                      bindchange="handlePerProChange"/>
+        </t-cell>
+        <view class="setting-button">
+            <t-button theme="primary" block size="large" bind:tap="closeSettingPopup">确定</t-button>
+        </view>
+
+    </view>
+
 </t-popup>
 
