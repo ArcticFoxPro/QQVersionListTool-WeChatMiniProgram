@@ -38,9 +38,25 @@
     gap: 32rpx;
     display: flex;
     justify-content: space-between;
-    padding: 32rpx;
+    padding-left: 32rpx;
+    padding-bottom: 32rpx;
+    padding-right: 32rpx;
+    padding-top: 16rpx;
     background-color: #f6f6f6;
+    
 }
+
+.gradient-layer {
+    position: absolute;
+    top: -48rpx;
+    left: 0;
+    right: 0;
+    height: 48rpx;
+    z-index: 100;
+    background-image: linear-gradient(to bottom, transparent, #f6f6f6);
+}
+
+
 
 .icon-button {
     display: flex;

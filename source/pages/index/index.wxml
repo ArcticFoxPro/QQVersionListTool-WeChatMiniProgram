@@ -24,21 +24,26 @@
         <recycle-view scroll-y="{{true}}" height="{{heightRecycle}}" class="qq-version-list" bindscroll="titleChange"
                       bind:refresh="onRefresh"
                       enhanced>
-            <recycle-item style="width: 100%;" wx:for="{{qqVersions}}" wx:key="versionNumber" class="qq-version-item">
+            <recycle-item style="width: 100%;" wx:for="{{qqVersions}}" wx:key="versions" class="qq-version-item">
                 <t-cell-group theme="card">
                     <t-cell title="版本：{{item.versionNumber}}" description="大小：{{item.size}} MB" leftIcon=""
                             hover arrow
                             data-index="{{index}}" bind:tap="clickCell"/>
                 </t-cell-group>
             </recycle-item>
+            <recycle-item style="width: 100%;" wx:key="lastItem" >
+                <view style="margin: 0,0,48rpx,0;"></view>
+            </recycle-item>
         </recycle-view>
     </view>
 
     <view class="bottom-button" id="bottomButton">
+
+        <view class="gradient-layer"></view>
         <view class="icon-button">
             <t-button theme="light" variant="outline" icon="info-circle" shape="square" size="large" class="margin"
                       aria-label="关于" bind:tap="handleAboutPopup" block></t-button>
-            <t-button theme="light" variant="outline" icon="setting" shape="square" size="large" class="margin"
+            <t-button theme="light" variant="outline" icon="setting" block shape="square" size="large" class="margin"
                       aria-label="设置" bind:tap="handleSettingPopup"></t-button>
             <t-button theme="light" variant="outline" icon="{{refreshIcon}}" shape="square" size="large"
                       class="margin"
@@ -198,8 +203,6 @@
         <view class="setting-button">
             <t-button theme="primary" block size="large" bind:tap="closeSettingPopup">确定</t-button>
         </view>
-
     </view>
-
 </t-popup>
 

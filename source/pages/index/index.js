@@ -240,6 +240,8 @@ Page({
     }, handleSettingPopup() {
         if (wx.getStorageSync('isPerProOn') == "" || wx.getStorageSync('isPerProOn') == false) {
             this.setData({PerProSwitch: false})
+        } else if(wx.getStorageSync('isPerProOn') == true){
+            this.setData({PerProSwitch: true})
         }
         this.setData({settingVisible: true});
     }, closeSettingPopup() {
