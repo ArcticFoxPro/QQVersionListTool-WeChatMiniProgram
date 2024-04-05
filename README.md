@@ -59,7 +59,7 @@ QQ 版本列表 Lite for WeChat MiniProgram 是一个使用 TDesign 组件库构
 
 由于腾讯的下载服务器使用了将特征码作为二级域名的 CDN 域名，导致为腾讯服务器配置 `wx.request` 白名单变得异常困难，仅靠微信小程序前端代码无法完成猜版功能，因此 QQ 版本列表 Lite for WeChat MiniProgram 无法使用猜版功能，请移步至 [QQ 版本列表实用工具 for Android](https://github.com/klxiaoniu/QQVersionList) 以使用猜版功能。
 
-### 为什么 QQ 版本列表 Lite 不上架到微信？
+### 为什么 QQ 版本列表 Lite for WeChat MiniProgram 不上架到微信？
 
 QQ 版本列表 Lite for WeChat MiniProgram 仅供学习交流使用，不提供任何形式的服务，也不提供任何形式的技术支持。因此，QQ 版本列表 Lite for WeChat MiniProgram 不会上架到微信。
 
