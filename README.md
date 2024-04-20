@@ -14,7 +14,7 @@ QQ 版本列表 Lite for WeChat MiniProgram 是一个使用 TDesign 组件库构
 
 ## To Do List
 
-- [ ] 适配深色模式（跟随 TDesign 组件库上游深色模式适配而更新）
+- [x] ～适配深色模式（跟随 TDesign 组件库上游深色模式适配而更新）～（1.0.1 版本上线，采用 TDesign 微信小程序组件库 1.3.0）
 - [ ] 适配微信小程序 Skyline 渲染引擎（跟随 TDesign 组件库上游 Skyline 适配而更新）
 
 ## 如何获取？
