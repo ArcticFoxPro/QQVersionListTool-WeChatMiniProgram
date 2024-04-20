@@ -143,6 +143,18 @@ let PullDownRefresh = class PullDownRefresh extends SuperComponent {
                     this.setData({ barHeight: 0 });
                 }
             },
+            onDragStart(e) {
+                const { scrollTop, scrollLeft } = e.detail;
+                this.triggerEvent('dragstart', { scrollTop, scrollLeft });
+            },
+            onDragging(e) {
+                const { scrollTop, scrollLeft } = e.detail;
+                this.triggerEvent('dragging', { scrollTop, scrollLeft });
+            },
+            onDragEnd(e) {
+                const { scrollTop, scrollLeft } = e.detail;
+                this.triggerEvent('dragend', { scrollTop, scrollLeft });
+            },
             doRefresh() {
                 this.setData({
                     barHeight: this.loadingBarHeight,

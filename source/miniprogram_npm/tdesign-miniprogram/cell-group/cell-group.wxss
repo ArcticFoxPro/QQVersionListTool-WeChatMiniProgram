@@ -31,7 +31,7 @@
 .t-cell-group__title {
   font-family: PingFangSC-Regular;
   font-size: var(--td-cell-group-title-font-size, 28rpx);
-  color: var(--td-cell-group-title-color, var(--td-font-gray-3, rgba(0, 0, 0, 0.4)));
+  color: var(--td-cell-group-title-color, var(--td-text-color-placeholder, var(--td-font-gray-3, rgba(0, 0, 0, 0.4))));
   text-align: left;
   line-height: var(--td-cell-group-title-line-height, 90rpx);
   background-color: var(--td-cell-group-title-bg-color, var(--td-bg-color-secondarycontainer, var(--td-gray-color-1, #f3f3f3)));

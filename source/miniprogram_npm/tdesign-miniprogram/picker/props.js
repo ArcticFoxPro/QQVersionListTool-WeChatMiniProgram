@@ -18,6 +18,10 @@ const props = {
     keys: {
         type: Object,
     },
+    popupProps: {
+        type: Object,
+        value: {},
+    },
     title: {
         type: String,
         value: '',
@@ -32,10 +36,6 @@ const props = {
     visible: {
         type: Boolean,
         value: false,
-    },
-    popupProps: {
-        type: Object,
-        value: {},
     },
 };
 export default props;

@@ -39,6 +39,7 @@
   font-weight: 600;
   font-size: var(--td-drawer-title-font-size, 36rpx);
   padding: 48rpx 32rpx 16rpx;
+  color: var(--td-drawer-title-color, var(--td-text-color-primary, var(--td-font-gray-1, rgba(0, 0, 0, 0.9))));
 }
 .t-drawer__sidebar {
   height: var(--td-drawer-sidebar-height, 70vh);
@@ -58,7 +59,7 @@
   bottom: 0;
   left: unset;
   right: unset;
-  background-color: var(--td-drawer-border-color, var(--td-border-color, var(--td-gray-color-3, #e7e7e7)));
+  background-color: var(--td-drawer-border-color, var(--td-border-level-1-color, var(--td-gray-color-3, #e7e7e7)));
 }
 .t-drawer__sidebar-item::after {
   height: 1px;
@@ -71,11 +72,11 @@
 }
 .t-drawer__sidebar-item-title {
   flex: 1;
-  color: var(--td-drawer-title-color);
+  color: var(--td-drawer-title-color, var(--td-text-color-primary, var(--td-font-gray-1, rgba(0, 0, 0, 0.9))));
 }
 .t-drawer__sidebar-item-icon {
   padding-right: 16rpx;
-  color: var(--td-drawer-title-color, var(--td-drawer-title-color, var(--td-font-gray-1, rgba(0, 0, 0, 0.9))));
+  color: var(--td-drawer-item-icon-color, var(--td-drawer-title-color, var(--td-text-color-primary, var(--td-font-gray-1, rgba(0, 0, 0, 0.9)))));
   font-size: var(--td-drawer-item-icon-size, 48rpx);
 }
 .t-drawer__footer {

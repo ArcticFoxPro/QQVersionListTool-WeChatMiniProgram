@@ -1,4 +1,8 @@
 const props = {
+    tId: {
+        type: String,
+        value: null,
+    },
     error: {
         type: String,
         value: 'default',

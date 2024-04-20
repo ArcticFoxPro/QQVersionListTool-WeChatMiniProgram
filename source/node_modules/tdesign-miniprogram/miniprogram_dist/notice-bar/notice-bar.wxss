@@ -35,7 +35,7 @@
   flex: 1;
   overflow-x: hidden;
   line-height: 44rpx;
-  color: var(--td-notice-bar-font-color, var(--td-font-gray-1, rgba(0, 0, 0, 0.9)));
+  color: var(--td-notice-bar-font-color, var(--td-text-color-primary, var(--td-font-gray-1, rgba(0, 0, 0, 0.9))));
 }
 .t-notice-bar__content {
   display: inline-block;
@@ -61,7 +61,7 @@
   padding-right: var(--td-spacer, 16rpx);
 }
 .t-notice-bar__suffix-icon {
-  color: var(--td-notice-bar-suffix-icon-color, var(--td-font-gray-3, rgba(0, 0, 0, 0.4)));
+  color: var(--td-notice-bar-suffix-icon-color, var(--td-text-color-placeholder, var(--td-font-gray-3, rgba(0, 0, 0, 0.4))));
 }
 .t-notice-bar__prefix-icon,
 .t-notice-bar__suffix-icon {

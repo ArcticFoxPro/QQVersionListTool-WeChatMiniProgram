@@ -36,6 +36,19 @@ let Skeleton = class Skeleton extends SuperComponent {
             rowCol() {
                 this.init();
             },
+            'loading,delay'(loading, delay) {
+                if (!loading || delay === 0) {
+                    this.setData({
+                        isShow: loading,
+                    });
+                    return;
+                }
+                setTimeout(() => {
+                    this.setData({
+                        isShow: loading,
+                    });
+                }, delay);
+            },
         };
         this.lifetimes = {
             attached() {

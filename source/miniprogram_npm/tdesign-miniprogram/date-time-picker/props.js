@@ -7,6 +7,10 @@ const props = {
         type: String,
         value: '',
     },
+    customLocale: {
+        type: String,
+        value: 'zh',
+    },
     end: {
         type: null,
     },
@@ -24,6 +28,10 @@ const props = {
     mode: {
         type: null,
         value: 'date',
+    },
+    popupProps: {
+        type: Object,
+        value: {},
     },
     showWeek: {
         type: Boolean,
@@ -49,14 +57,6 @@ const props = {
     visible: {
         type: Boolean,
         value: false,
-    },
-    popupProps: {
-        type: Object,
-        value: {},
-    },
-    customLocale: {
-        type: String,
-        value: 'zh',
     },
 };
 export default props;

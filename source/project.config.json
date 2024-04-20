@@ -19,12 +19,17 @@
       "outputPath": ""
     },
     "ignoreUploadUnusedFiles": true,
-    "uglifyFileName": true
+    "uglifyFileName": true,
+    "condition": true
   },
   "condition": {},
   "editorSetting": {
     "tabIndent": "auto",
     "tabSize": 2
   },
-  "appid": "wxaf77f0b578920b6d"
+  "appid": "wxaf77f0b578920b6d",
+  "projectArchitecture": "multiPlatform",
+  "simulatorPluginLibVersion": {
+    "wxext14566970e7e9f62": "3.0.2-8"
+  }
 }

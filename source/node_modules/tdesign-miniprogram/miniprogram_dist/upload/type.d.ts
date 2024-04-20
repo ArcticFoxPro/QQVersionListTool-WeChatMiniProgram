@@ -100,6 +100,7 @@ export interface UploadFile {
     type?: 'image' | 'video';
     percent?: number;
     status: 'loading' | 'reload' | 'failed' | 'done';
+    thumb?: string;
 }
 export declare type MediaType = 'image' | 'video';
 export interface SizeLimitObj {

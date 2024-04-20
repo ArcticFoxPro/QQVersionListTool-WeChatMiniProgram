@@ -115,10 +115,10 @@
 }
 .t-count-down--square > .t-count-down__split--text,
 .t-count-down--round > .t-count-down__split--text {
-  color: var(--td-font-gray-1, rgba(0, 0, 0, 0.9));
+  color: var(--td-text-color-primary, var(--td-font-gray-1, rgba(0, 0, 0, 0.9)));
 }
 .t-count-down--default {
-  color: var(--td-countdown-default-color, var(--td-font-gray-1, rgba(0, 0, 0, 0.9)));
+  color: var(--td-countdown-default-color, var(--td-text-color-primary, var(--td-font-gray-1, rgba(0, 0, 0, 0.9))));
 }
 .t-count-down--square {
   color: var(--td-countdown-round-color, var(--td-font-white-1, #ffffff));

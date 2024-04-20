@@ -16,10 +16,6 @@ export interface TdCheckTagProps {
         type: null;
         value?: string | number | string[];
     };
-    style?: {
-        type: StringConstructor;
-        value?: string;
-    };
     disabled?: {
         type: BooleanConstructor;
         value?: boolean;

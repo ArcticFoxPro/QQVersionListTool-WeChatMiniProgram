@@ -31,6 +31,16 @@ let CheckBoxGroup = class CheckBoxGroup extends SuperComponent {
             options() {
                 this.initWithOptions();
             },
+            disabled(v) {
+                var _a;
+                if ((_a = this.data.options) === null || _a === void 0 ? void 0 : _a.length) {
+                    this.initWithOptions();
+                    return;
+                }
+                this.getChildren().forEach((item) => {
+                    item.setDisabled(v);
+                });
+            },
         };
         this.lifetimes = {
             ready() {

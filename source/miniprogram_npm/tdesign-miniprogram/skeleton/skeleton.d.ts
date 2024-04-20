@@ -11,6 +11,7 @@ export default class Skeleton extends SuperComponent {
     };
     observers: {
         rowCol(): void;
+        'loading,delay'(loading: boolean, delay: number): void;
     };
     lifetimes: {
         attached(): void;

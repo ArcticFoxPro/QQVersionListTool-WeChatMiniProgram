@@ -95,6 +95,10 @@ export default class Radio extends SuperComponent {
         optionLinked: boolean;
         iconVal: any[];
         _placement: string;
+        _disabled: boolean;
+    };
+    observers: {
+        disabled(v: any): void;
     };
     methods: {
         handleTap(e: any): void;

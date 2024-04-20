@@ -46,7 +46,7 @@
 }
 .t-loading__spinner--spinner {
   animation-timing-function: steps(12);
-  color: var(--td-font-gray-1, rgba(0, 0, 0, 0.9));
+  color: var(--td-text-color-primary, var(--td-font-gray-1, rgba(0, 0, 0, 0.9)));
 }
 .t-loading__spinner--spinner .t-loading__dot {
   position: absolute;
@@ -91,7 +91,7 @@
   animation-fill-mode: both;
 }
 .t-loading__text {
-  color: var(--td-loading-text-color, inherit);
+  color: var(--td-loading-text-color, var(--td-text-color-primary, var(--td-font-gray-1, rgba(0, 0, 0, 0.9))));
   font-size: var(--td-loading-text-font-size, 24rpx);
   line-height: var(--td-loading-text-line-height, 40rpx);
 }

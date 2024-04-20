@@ -85,6 +85,10 @@ export default class CheckBox extends SuperComponent {
     data: {
         prefix: string;
         classPrefix: string;
+        _disabled: boolean;
+    };
+    observers: {
+        disabled(v: any): void;
     };
     controlledProps: {
         key: string;
@@ -92,5 +96,6 @@ export default class CheckBox extends SuperComponent {
     }[];
     methods: {
         handleTap(e: WechatMiniprogram.TouchEvent): void;
+        setDisabled(disabled: Boolean): void;
     };
 }

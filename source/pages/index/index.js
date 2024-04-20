@@ -96,6 +96,7 @@ Page({
             url: 'https://im.qq.com/rainbow/androidQQVersionList', method: 'GET', success: (res) => {
                 try {
                     let responseData = res.data;
+                    console.log(responseData);
                     let start = responseData.indexOf("versions64\":[") + 12;
                     let end = responseData.indexOf(";\n" + "      typeof");
                     let totalJson = responseData.substring(start, end);

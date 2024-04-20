@@ -33,7 +33,7 @@
   position: fixed;
   right: var(--td-indexes-sidebar-right, 16rpx);
   width: var(--td-indexes-sidebar-item-size, 40rpx);
-  color: var(--td-indexes-sidebar-color, var(--td-font-gray-1, rgba(0, 0, 0, 0.9)));
+  color: var(--td-indexes-sidebar-color, var(--td-text-color-primary, var(--td-font-gray-1, rgba(0, 0, 0, 0.9))));
   font-size: var(--td-indexes-sidebar-font-size, 24rpx);
   line-height: var(--td-indexes-sidebar-line-height, 40rpx);
   display: flex;

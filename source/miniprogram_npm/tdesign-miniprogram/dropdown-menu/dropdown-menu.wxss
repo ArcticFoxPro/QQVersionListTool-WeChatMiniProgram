@@ -58,13 +58,13 @@
   padding: 0 var(--td-spacer, 16rpx);
   position: relative;
   overflow: hidden;
-  color: var(--td-dropdown-menu-colorm, var(--td-font-gray-1, rgba(0, 0, 0, 0.9)));
+  color: var(--td-dropdown-menu-colorm, var(--td-text-color-primary, var(--td-font-gray-1, rgba(0, 0, 0, 0.9))));
 }
 .t-dropdown-menu__item--active {
   color: var(--td-dropdown-menu-active-colorm, var(--td-brand-color, var(--td-primary-color-7, #0052d9)));
 }
 .t-dropdown-menu__item--disabled {
-  color: var(--td-dropdown-menu-disabled-colorm, var(--td-font-gray-4, rgba(0, 0, 0, 0.26)));
+  color: var(--td-dropdown-menu-disabled-colorm, var(--td-text-color-disabled, var(--td-font-gray-4, rgba(0, 0, 0, 0.26))));
 }
 .t-dropdown-menu__icon {
   font-size: var(--td-dropdown-menu-icon-sizem, 48rpx);

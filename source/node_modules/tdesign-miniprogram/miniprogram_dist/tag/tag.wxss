@@ -47,7 +47,7 @@
   align-items: center;
 }
 .t-tag__icon-close {
-  color: var(--td-tag-close-icon-color, var(--td-font-gray-3, rgba(0, 0, 0, 0.4)));
+  color: var(--td-tag-close-icon-color, var(--td-text-color-placeholder, var(--td-font-gray-3, rgba(0, 0, 0, 0.4))));
 }
 .t-tag__icon:not(:empty) + .t-tag__text:not(:empty),
 .t-tag__text:not(:empty) + .t-tag__icon-close:not(:empty) {
@@ -132,7 +132,7 @@
   background-color: var(--td-tag-danger-color, var(--td-error-color, var(--td-error-color-6, #d54941)));
 }
 .t-tag--dark.t-tag--default {
-  color: var(--td-tag-default-font-color, var(--td-font-gray-1, rgba(0, 0, 0, 0.9)));
+  color: var(--td-tag-default-font-color, var(--td-text-color-primary, var(--td-font-gray-1, rgba(0, 0, 0, 0.9))));
 }
 .t-tag--outline.t-tag--default {
   color: var(--td-tag-default-color, var(--td-bg-color-component, var(--td-gray-color-3, #e7e7e7)));
@@ -160,7 +160,7 @@
   background-color: var(--td-tag-danger-light-color, var(--td-error-color-1, #fff0ed));
 }
 .t-tag--outline.t-tag--default {
-  color: var(--td-tag-default-font-color, var(--td-font-gray-1, rgba(0, 0, 0, 0.9)));
+  color: var(--td-tag-default-font-color, var(--td-text-color-primary, var(--td-font-gray-1, rgba(0, 0, 0, 0.9))));
 }
 .t-tag--outline.t-tag--default {
   background-color: var(--td-tag-outline-bg-color, var(--td-bg-color-container, var(--td-font-white-1, #ffffff)));
@@ -203,7 +203,7 @@
   background-color: var(--td-tag-danger-light-color, var(--td-error-color-1, #fff0ed));
 }
 .t-tag--light.t-tag--default {
-  color: var(--td-tag-default-font-color, var(--td-font-gray-1, rgba(0, 0, 0, 0.9)));
+  color: var(--td-tag-default-font-color, var(--td-text-color-primary, var(--td-font-gray-1, rgba(0, 0, 0, 0.9))));
 }
 .t-tag--light-outline.t-tag--default {
   color: var(--td-tag-default-color, var(--td-bg-color-component, var(--td-gray-color-3, #e7e7e7)));
@@ -231,12 +231,12 @@
   background-color: var(--td-tag-danger-light-color, var(--td-error-color-1, #fff0ed));
 }
 .t-tag--light-outline.t-tag--default {
-  color: var(--td-tag-default-font-color, var(--td-font-gray-1, rgba(0, 0, 0, 0.9)));
+  color: var(--td-tag-default-font-color, var(--td-text-color-primary, var(--td-font-gray-1, rgba(0, 0, 0, 0.9))));
   border-color: var(--td-component-border, var(--td-gray-color-4, #dcdcdc));
 }
 .t-tag.t-tag--closable.t-tag--disabled {
   cursor: not-allowed;
-  color: var(--td-tag-disabled-color, var(--td-font-gray-4, rgba(0, 0, 0, 0.26)));
+  color: var(--td-tag-disabled-color, var(--td-text-color-disabled, var(--td-font-gray-4, rgba(0, 0, 0, 0.26))));
   background-color: var(--td-tag-disabled-background-color, var(--td-bg-color-component-disabled, var(--td-gray-color-2, #eeeeee)));
   border-color: var(--td-tag-disabled-border-color, var(--td-component-border, var(--td-gray-color-4, #dcdcdc)));
 }

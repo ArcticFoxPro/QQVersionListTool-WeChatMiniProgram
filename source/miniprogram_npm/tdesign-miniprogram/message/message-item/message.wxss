@@ -30,6 +30,7 @@
   top: 0;
   left: 0;
   right: 0;
+  transition: opacity 0.3s, transform 0.4s, top 0.4s;
   display: flex;
   justify-content: flex-start;
   height: 96rpx;
@@ -44,7 +45,7 @@
 }
 .t-message__text {
   display: inline-block;
-  color: var(--td-message-content-font-color, var(--td-font-gray-1, rgba(0, 0, 0, 0.9)));
+  color: var(--td-message-content-font-color, var(--td-text-color-primary, var(--td-font-gray-1, rgba(0, 0, 0, 0.9))));
   font-size: var(--td-font-size-base, 28rpx);
   line-height: 44rpx;
 }
@@ -77,10 +78,14 @@
   margin-right: var(--td-spacer, 16rpx);
 }
 .t-message__icon--right {
-  color: var(--td-message-close-icon-color, var(--td-font-gray-3, rgba(0, 0, 0, 0.4)));
+  color: var(--td-message-close-icon-color, var(--td-text-color-placeholder, var(--td-font-gray-3, rgba(0, 0, 0, 0.4))));
 }
 .t-message__icon--right:not(:empty),
 .t-message__link {
   flex: 0 0 auto;
   margin-left: var(--td-spacer, 16rpx);
+}
+.t-message__fade {
+  opacity: 0;
+  transform: translateY(-100%);
 }

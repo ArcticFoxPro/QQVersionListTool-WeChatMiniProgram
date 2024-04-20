@@ -1,10 +1,10 @@
 const props = {
     checked: {
-        type: null,
+        type: Boolean,
         value: undefined,
     },
     defaultChecked: {
-        type: null,
+        type: Boolean,
         value: undefined,
     },
     closable: {
@@ -13,10 +13,6 @@ const props = {
     },
     content: {
         type: null,
-    },
-    style: {
-        type: String,
-        value: '',
     },
     disabled: {
         type: Boolean,

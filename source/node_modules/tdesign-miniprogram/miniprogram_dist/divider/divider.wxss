@@ -75,7 +75,7 @@
 .t-divider__content {
   font-size: var(--td-divider-content-font-size, 24rpx);
   line-height: var(--td-divider-content-line-height, 40rpx);
-  color: var(--td-divider-content-color, var(--td-font-gray-3, rgba(0, 0, 0, 0.4)));
+  color: var(--td-divider-content-color, var(--td-text-color-placeholder, var(--td-font-gray-3, rgba(0, 0, 0, 0.4))));
 }
 .t-divider--left::before,
 .t-divider--right::after {

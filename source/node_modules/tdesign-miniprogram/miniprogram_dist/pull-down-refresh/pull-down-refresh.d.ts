@@ -38,6 +38,9 @@ export default class PullDownRefresh extends SuperComponent {
         onTouchStart(e: WechatMiniprogram.Component.TrivialInstance): void;
         onTouchMove(e: WechatMiniprogram.Component.TrivialInstance): void;
         onTouchEnd(e: WechatMiniprogram.Component.TrivialInstance): void;
+        onDragStart(e: WechatMiniprogram.ScrollViewDragStart): void;
+        onDragging(e: WechatMiniprogram.ScrollViewDragging): void;
+        onDragEnd(e: WechatMiniprogram.ScrollViewDragEnd): void;
         doRefresh(): void;
         setRefreshBarHeight(value: number): Promise<unknown>;
         setScrollTop(scrollTop: number): void;

@@ -183,3 +183,55 @@
 .setting-button {
     margin: 32rpx;
 }
+
+@media (prefers-color-scheme: dark){
+    .header-title {
+        background-color: #242424;
+        color: rgba(255, 255, 255,0.9);
+    }
+
+    .bottom-button {
+        background-color: #1e1e1e;
+        
+    }
+
+    .gradient-layer {
+        background-image: linear-gradient(to bottom, transparent, #1e1e1e);
+    }
+
+    .guess-title {
+        color: rgba(255, 255, 255,0.9);
+    }
+
+    .about-title{
+        color: rgba(255, 255, 255,0.9);
+    }
+
+    .ua-title{
+        color: rgba(255, 255, 255,0.9);
+    }
+
+    .setting-title{
+        color: rgba(255, 255, 255,0.9);
+    }
+
+    .page-s{
+        color: rgba(255, 255, 255,0.9);
+    }
+
+    .error-title{
+        color: rgba(255, 255, 255,0.9);
+    }
+
+    .json-text{
+        color: rgba(255, 255, 255,0.9);
+    }
+
+    .guess-text{
+        color: rgba(255, 255, 255,0.9);
+    }
+
+    .about-text{
+        color: rgba(255, 255, 255,0.9);
+    }
+}

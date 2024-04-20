@@ -1,14 +1,18 @@
 const props = {
-    text: {
-        type: String,
-        value: '',
+    links: {
+        type: Array,
+        value: [],
     },
     logo: {
         type: Object,
     },
-    links: {
-        type: Array,
-        value: [],
+    style: {
+        type: String,
+        value: '',
+    },
+    text: {
+        type: String,
+        value: '',
     },
 };
 export default props;

@@ -26,7 +26,7 @@
                       enhanced>
             <recycle-item style="width: 100%;" wx:for="{{qqVersions}}" wx:key="versions" class="qq-version-item">
                 <t-cell-group theme="card">
-                    <t-cell title="版本：{{item.versionNumber}}" description="大小：{{item.size}} MB" leftIcon=""
+                    <t-cell title="版本：{{item.versionNumber}}" description="额定大小：{{item.size}} MB" leftIcon=""
                             hover arrow
                             data-index="{{index}}" bind:tap="clickCell"/>
                 </t-cell-group>
@@ -65,11 +65,11 @@
         <view class="about-header">
             <view class="about-title">关于</view>
         </view>
-        <view style="text-align: center; margin-bottom: 12rpx;">QQ 版本列表 Lite for WeChat MiniProgram</view>
-        <view style="text-align: center; margin-top: 12rpx; margin-bottom: 12rpx;">版本：1.0.1</view>
-        <view style="text-align: center; margin-top: 12rpx; margin-bottom: 12rpx;">作者：快乐小牛、有鲫雪狐</view>
-        <view style="text-align: center; margin-top: 12rpx; margin-bottom: 12rpx;">Since 2024.03.12</view>
-        <view style="text-align: center; margin-top: 12rpx; margin-bottom: 12rpx;">Licenesd under Mulan PubL v2</view>
+        <view class="about-text" style="text-align: center; margin-bottom: 12rpx;">QQ 版本列表 Lite for WeChat MiniProgram</view>
+        <view class="about-text" style="text-align: center; margin-top: 12rpx; margin-bottom: 12rpx;">版本：1.0.1</view>
+        <view class="about-text" style="text-align: center; margin-top: 12rpx; margin-bottom: 12rpx;">作者：快乐小牛、有鲫雪狐</view>
+        <view class="about-text" style="text-align: center; margin-top: 12rpx; margin-bottom: 12rpx;">Since 2024.03.12</view>
+        <view class="about-text" style="text-align: center; margin-top: 12rpx; margin-bottom: 12rpx;">Licenesd under Mulan PubL v2</view>
         <view class="about-link">
             <t-link size="small" theme="primary" prefix-icon="copy" content="开源地址（GitHub）" bind:tap="copyOSLink"
                     hover/>
@@ -109,16 +109,16 @@
             <view class="guess-title">详情</view>
         </view>
 
-        <view style="margin: 0 32rpx 16rpx 32rpx;">版本：{{itemVersion}}</view>
-        <view style=" margin: 0 32rpx 16rpx 32rpx;">大小：{{itemSize}} MB</view>
-        <view style=" margin: 0 32rpx 6rpx 32rpx; " wx:if="{{PerProSwitch}}">占比历史最大包（{{maxSize}} MB）：</view>
+        <view class="guess-text" style="margin: 0 32rpx 16rpx 32rpx;">版本：{{itemVersion}}</view>
+        <view class="guess-text" style=" margin: 0 32rpx 16rpx 32rpx;">额定大小：{{itemSize}} MB</view>
+        <view class="guess-text" style=" margin: 0 32rpx 6rpx 32rpx; " wx:if="{{PerProSwitch}}">占比历史最大包（{{maxSize}} MB）：</view>
 
         <t-progress style="margin: 0 32rpx 16rpx 32rpx;" theme="plump" wx:if="{{PerProSwitch}}" percentage="{{preSize}}"
                     status="active"/>
 
-        <view style=" margin: 0 32rpx 16rpx 32rpx;">{{itemFeatureTitle}}</view>
+        <view class="guess-text" style=" margin: 0 32rpx 16rpx 32rpx;">{{itemFeatureTitle}}</view>
         <view wx:for="{{itemSummary}}">
-            <view style="margin: 0 32rpx 16rpx 32rpx;">- {{item}}</view>
+            <view class="guess-text" style="margin: 0 32rpx 16rpx 32rpx;">- {{item}}</view>
         </view>
     </view>
     <view class="cell-detail-button">
@@ -136,7 +136,7 @@
             <view class="guess-title">Json 详情</view>
         </view>
         <view style=" margin: 0 32rpx 16rpx 32rpx;">
-            <text style="font-size:13px; " selectable="true">{{itemString}}</text>
+            <text class="json-text" style="font-size:13px; " selectable="true">{{itemString}}</text>
         </view>
     </view>
     <t-footer text="— 可长按选择复制内容 —"></t-footer>
@@ -196,7 +196,7 @@
         <view class="setting-header">
             <view class="setting-title">设置</view>
         </view>
-        <t-cell title="版本列表详情展示当前包大小占比最大包指示条" bordered="{{false}}">
+        <t-cell title="版本列表详情展示额定包大小占比历史最大包指示条" bordered="{{false}}">
             <t-switch style="margin: 0 0 0 48rpx;" value="{{PerProSwitch}}" slot="note"
                       bindchange="handlePerProChange"/>
         </t-cell>
