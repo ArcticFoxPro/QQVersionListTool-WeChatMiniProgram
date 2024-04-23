@@ -123,7 +123,7 @@
     font-size: 28px;
     line-height: 36px;
     padding: 8rpx 32rpx 16rpx;
-    background-color: #fff;
+    background-color: var(--td-bg-color-container, var(--td-font-white-1, #ffffff));
     font-weight: 600;
     color: rgba(0, 0, 0.9);
 }
@@ -186,7 +186,7 @@
 
 @media (prefers-color-scheme: dark){
     .header-title {
-        background-color: #242424;
+        background-color: var(--td-bg-color-container);
         color: rgba(255, 255, 255,0.9);
     }
 
