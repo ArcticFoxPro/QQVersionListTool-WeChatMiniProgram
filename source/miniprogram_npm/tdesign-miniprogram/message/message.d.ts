@@ -9,8 +9,16 @@ export default class Message extends SuperComponent {
         classPrefix: string;
         messageList: any[];
     };
+    index: number;
+    instances: any[];
+    gap: number;
     observers: {};
-    ready(): void;
+    pageLifetimes: {
+        show(): void;
+    };
+    lifetimes: {
+        ready(): void;
+    };
     memoInitialData(): void;
     setMessage(msg: MessageProps, theme?: MessageType): void;
     addMessage(msgObj: MessageProps): void;

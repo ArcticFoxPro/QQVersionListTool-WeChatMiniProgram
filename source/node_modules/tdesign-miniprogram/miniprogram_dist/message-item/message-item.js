@@ -4,10 +4,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-import { SuperComponent, wxComponent } from '../../common/src/index';
-import config from '../../common/config';
-import props from '../props';
-import { getRect, unitConvert, calcIcon, isObject } from '../../common/utils';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import props from '../message/props';
+import { getRect, unitConvert, calcIcon, isObject } from '../common/utils';
 const { prefix } = config;
 const name = `${prefix}-message`;
 const SHOW_DURATION = 500;
@@ -28,7 +28,6 @@ let Message = class Message extends SuperComponent {
             `${prefix}-class-close-btn`,
         ];
         this.options = {
-            styleIsolation: 'apply-shared',
             multipleSlots: true,
         };
         this.properties = Object.assign({}, props);
@@ -41,6 +40,12 @@ let Message = class Message extends SuperComponent {
             wrapTop: -999,
             fadeClass: '',
         };
+        this.closeTimeoutContext = 0;
+        this.nextAnimationContext = 0;
+        this.resetAnimation = wx.createAnimation({
+            duration: 0,
+            timingFunction: 'linear',
+        });
         this.observers = {
             marquee(val) {
                 if (JSON.stringify(val) === '{}' || JSON.stringify(val) === 'true') {
@@ -68,24 +73,20 @@ let Message = class Message extends SuperComponent {
                 });
             },
         };
-        this.closeTimeoutContext = 0;
-        this.nextAnimationContext = 0;
-        this.resetAnimation = wx.createAnimation({
-            duration: 0,
-            timingFunction: 'linear',
-        });
-    }
-    ready() {
-        this.memoInitialData();
+        this.lifetimes = {
+            ready() {
+                this.memoInitialData();
+            },
+            detached() {
+                this.clearMessageAnimation();
+            },
+        };
     }
     memoInitialData() {
         this.initialData = Object.assign(Object.assign({}, this.properties), this.data);
     }
     resetData(cb) {
         this.setData(Object.assign({}, this.initialData), cb);
-    }
-    detached() {
-        this.clearMessageAnimation();
     }
     checkAnimation() {
         const { marquee } = this.properties;

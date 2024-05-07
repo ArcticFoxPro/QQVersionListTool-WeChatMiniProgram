@@ -15,7 +15,6 @@ let Avatar = class Avatar extends SuperComponent {
         super(...arguments);
         this.options = {
             multipleSlots: true,
-            styleIsolation: 'apply-shared',
         };
         this.externalClasses = [
             `${prefix}-class`,

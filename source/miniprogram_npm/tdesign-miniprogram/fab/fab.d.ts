@@ -1,5 +1,6 @@
 import { SuperComponent } from '../common/src/index';
 export default class Fab extends SuperComponent {
+    behaviors: string[];
     properties: import("./type").TdFabProps;
     externalClasses: string[];
     data: {

@@ -11,7 +11,7 @@ export default class Skeleton extends SuperComponent {
     };
     observers: {
         rowCol(): void;
-        'loading,delay'(loading: boolean, delay: number): void;
+        'loading, delay'(): void;
     };
     lifetimes: {
         attached(): void;
@@ -20,5 +20,6 @@ export default class Skeleton extends SuperComponent {
         init(): void;
         getColItemClass(obj: SkeletonRowColObj): ClassName;
         getColItemStyle(obj: SkeletonRowColObj): Styles;
+        isShowSkeleton(): void;
     };
 }

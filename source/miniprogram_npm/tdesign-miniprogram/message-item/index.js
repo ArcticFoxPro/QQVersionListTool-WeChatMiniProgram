@@ -9,8 +9,8 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-import { MessageType } from '../message.interface';
-import { getInstance } from '../../common/utils';
+import { MessageType } from '../message/message.interface';
+import { getInstance } from '../common/utils';
 const showMessage = function (options, theme = MessageType.info) {
     const { context, selector = '#t-message' } = options, otherOptions = __rest(options, ["context", "selector"]);
     const instance = getInstance(context, selector);

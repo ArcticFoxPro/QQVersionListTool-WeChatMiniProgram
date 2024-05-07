@@ -12,14 +12,10 @@ import { unitConvert } from '../common/utils';
 const SHOW_DURATION = 400;
 const { prefix } = config;
 const name = `${prefix}-message`;
-let index = 0;
-const instances = [];
-let gap = 12;
 let Message = class Message extends SuperComponent {
     constructor() {
         super(...arguments);
         this.options = {
-            styleIsolation: 'apply-shared',
             multipleSlots: true,
         };
         this.properties = Object.assign({}, props);
@@ -28,29 +24,38 @@ let Message = class Message extends SuperComponent {
             classPrefix: name,
             messageList: [],
         };
+        this.index = 0;
+        this.instances = [];
+        this.gap = 12;
         this.observers = {};
-    }
-    ready() {
-        this.memoInitialData();
+        this.pageLifetimes = {
+            show() {
+                this.hideAll();
+            },
+        };
+        this.lifetimes = {
+            ready() {
+                this.memoInitialData();
+            },
+        };
     }
     memoInitialData() {
         this.initialData = Object.assign(Object.assign({}, this.properties), this.data);
     }
     setMessage(msg, theme = MessageType.info) {
-        let id = `${name}_${index}`;
+        let id = `${name}_${this.index}`;
         if (msg.single) {
             id = name;
         }
-        gap = unitConvert(msg.gap || gap);
+        this.gap = unitConvert(msg.gap || this.gap);
         const msgObj = Object.assign(Object.assign({}, msg), { theme,
-            id,
-            gap });
-        const instanceIndex = instances.findIndex((x) => x.id === id);
+            id, gap: this.gap });
+        const instanceIndex = this.instances.findIndex((x) => x.id === id);
         if (instanceIndex < 0) {
             this.addMessage(msgObj);
         }
         else {
-            const instance = instances[instanceIndex];
+            const instance = this.instances[instanceIndex];
             const offsetHeight = this.getOffsetHeight(instanceIndex);
             instance.resetData(() => {
                 instance.setData(msgObj, instance.show.bind(instance, offsetHeight));
@@ -67,20 +72,20 @@ let Message = class Message extends SuperComponent {
         }, () => {
             const offsetHeight = this.getOffsetHeight();
             const instance = this.showMessageItem(msgObj, msgObj.id, offsetHeight);
-            if (instances) {
-                instances.push(instance);
-                index += 1;
+            if (this.instances) {
+                this.instances.push(instance);
+                this.index += 1;
             }
         });
     }
     getOffsetHeight(index = -1) {
         let offsetHeight = 0;
         let len = index;
-        if (len === -1 || len > instances.length) {
-            len = instances.length;
+        if (len === -1 || len > this.instances.length) {
+            len = this.instances.length;
         }
         for (let i = 0; i < len; i += 1) {
-            const instance = instances[i];
+            const instance = this.instances[i];
             offsetHeight += instance.data.height + instance.data.gap;
         }
         return offsetHeight;
@@ -108,26 +113,26 @@ let Message = class Message extends SuperComponent {
         if (!id) {
             this.hideAll();
         }
-        const instance = instances.find((x) => x.id === id);
+        const instance = this.instances.find((x) => x.id === id);
         if (instance) {
             instance.hide();
         }
     }
     hideAll() {
-        for (let i = 0; i < instances.length;) {
-            const instance = instances[i];
+        for (let i = 0; i < this.instances.length;) {
+            const instance = this.instances[i];
             instance.hide();
         }
     }
     removeInstance(id) {
-        const index = instances.findIndex((x) => x.id === id);
+        const index = this.instances.findIndex((x) => x.id === id);
         if (index < 0)
             return;
-        const instance = instances[index];
+        const instance = this.instances[index];
         const removedHeight = instance.data.height;
-        instances.splice(index, 1);
-        for (let i = index; i < instances.length; i += 1) {
-            const instance = instances[i];
+        this.instances.splice(index, 1);
+        for (let i = index; i < this.instances.length; i += 1) {
+            const instance = this.instances[i];
             instance.setData({
                 wrapTop: instance.data.wrapTop - removedHeight - instance.data.gap,
             });

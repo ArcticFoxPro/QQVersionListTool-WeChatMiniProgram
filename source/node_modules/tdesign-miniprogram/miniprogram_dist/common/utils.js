@@ -173,7 +173,7 @@ export const unitConvert = (value) => {
         }
         return parseInt(value, 10);
     }
-    return value;
+    return value !== null && value !== void 0 ? value : 0;
 };
 export const setIcon = (iconName, icon, defaultIcon) => {
     if (icon) {

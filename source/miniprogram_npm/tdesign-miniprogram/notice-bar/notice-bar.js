@@ -27,7 +27,6 @@ let NoticeBar = class NoticeBar extends SuperComponent {
             `${prefix}-class-suffix-icon`,
         ];
         this.options = {
-            styleIsolation: 'apply-shared',
             multipleSlots: true,
         };
         this.properties = props;

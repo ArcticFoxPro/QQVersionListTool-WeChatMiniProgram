@@ -14,6 +14,9 @@ import { getInstance } from '../common/utils';
 const showMessage = function (options, theme = MessageType.info) {
     const { context, selector = '#t-message' } = options, otherOptions = __rest(options, ["context", "selector"]);
     const instance = getInstance(context, selector);
+    if (typeof otherOptions.single !== 'boolean') {
+        otherOptions.single = true;
+    }
     if (instance) {
         instance.setMessage(otherOptions, theme);
         return instance;

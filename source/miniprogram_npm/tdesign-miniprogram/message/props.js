@@ -56,7 +56,7 @@ const props = {
     },
     single: {
         type: Boolean,
-        value: false,
+        value: true,
     },
 };
 export default props;

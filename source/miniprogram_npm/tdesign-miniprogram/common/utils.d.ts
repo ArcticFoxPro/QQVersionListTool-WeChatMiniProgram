@@ -18,7 +18,7 @@ export declare const getCharacterLength: (type: string, char: string | number, m
 };
 export declare const chunk: (arr: any[], size: number) => any[][];
 export declare const getInstance: (context?: Context, selector?: string) => WechatMiniprogram.Component.TrivialInstance;
-export declare const unitConvert: (value: number | string) => number;
+export declare const unitConvert: (value: number | string | null | undefined) => number;
 export declare const setIcon: (iconName: any, icon: any, defaultIcon: any) => {
     [x: string]: any;
 };

@@ -16,7 +16,6 @@ let Calendar = class Calendar extends SuperComponent {
         this.externalClasses = [`${prefix}-class`];
         this.options = {
             multipleSlots: true,
-            styleIsolation: 'apply-shared',
         };
         this.properties = props;
         this.data = {
