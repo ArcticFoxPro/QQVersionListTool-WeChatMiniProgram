@@ -3,7 +3,6 @@ export default class Navbar extends SuperComponent {
     externalClasses: string[];
     timer: any;
     options: {
-        addGlobalClass: boolean;
         multipleSlots: boolean;
     };
     properties: import("./type").TdNavbarProps;

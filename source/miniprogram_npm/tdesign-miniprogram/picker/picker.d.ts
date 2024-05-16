@@ -1,5 +1,6 @@
 import { SuperComponent, RelationsOptions } from '../common/src/index';
 export default class Picker extends SuperComponent {
+    behaviors: string[];
     properties: import("./type").TdPickerProps;
     externalClasses: string[];
     options: {

@@ -16,6 +16,7 @@ export default class PickerItem extends SuperComponent {
         columnIndex: number;
         labelAlias: string;
         valueAlias: string;
+        pickItemHeight: number;
     };
     methods: {
         onTouchStart(event: any): void;

@@ -8,14 +8,15 @@ import { SuperComponent, wxComponent } from '../common/src/index';
 import config from '../common/config';
 import props from './props';
 import { isObject, toCamel } from '../common/utils';
+import useCustomNavbar from '../mixins/using-custom-navbar';
 const { prefix } = config;
 const name = `${prefix}-dialog`;
 let Dialog = class Dialog extends SuperComponent {
     constructor() {
         super(...arguments);
+        this.behaviors = [useCustomNavbar];
         this.options = {
             multipleSlots: true,
-            addGlobalClass: true,
         };
         this.externalClasses = [
             `${prefix}-class`,

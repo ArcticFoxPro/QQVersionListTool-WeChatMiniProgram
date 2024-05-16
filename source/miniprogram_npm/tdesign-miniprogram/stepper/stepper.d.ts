@@ -1,9 +1,6 @@
 import { SuperComponent } from '../common/src/index';
 export default class Stepper extends SuperComponent {
     externalClasses: string[];
-    options: {
-        addGlobalClass: boolean;
-    };
     properties: {
         style?: {
             type: StringConstructor;

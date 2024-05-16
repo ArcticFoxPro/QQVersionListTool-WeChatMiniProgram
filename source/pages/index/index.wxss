@@ -12,6 +12,9 @@
     See the Mulan PubL v2 for more details.
 */
 
+@import '../../miniprogram_npm/tdesign-miniprogram/common/style/theme/_light.wxss';
+@import '../../miniprogram_npm/tdesign-miniprogram/common/style/theme/_dark.wxss';
+
 .page {
     display: flex;
     flex-direction: column;
@@ -20,22 +23,28 @@
 
 
 .qq-version-item {
-    margin-top: 28rpx;
-    margin-bottom: 4rpx;
+    padding-top: 28rpx;
+    padding-bottom: 4rpx;
+    background-color: #f6f6f6;
+}
+
+.qq-version-item-bottom{
+    background-color: #f6f6f6;
 }
 
 .recycle-view-container {
     flex: 1;
     -webkit-overflow-scrolling: touch;
-
+    background-color: #fff;
 }
+
+
 
 .bottom-button {
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
-    gap: 32rpx;
     display: flex;
     justify-content: space-between;
     padding-left: 32rpx;
@@ -43,7 +52,7 @@
     padding-right: 32rpx;
     padding-top: 16rpx;
     background-color: #f6f6f6;
-    
+
 }
 
 .gradient-layer {
@@ -56,12 +65,10 @@
     background-image: linear-gradient(to bottom, transparent, #f6f6f6);
 }
 
-
-
 .icon-button {
     display: flex;
-    gap: 32rpx;
     align-items: center;
+    margin-right: 32rpx;
 }
 
 .text-button {
@@ -184,15 +191,27 @@
     margin: 32rpx;
 }
 
-@media (prefers-color-scheme: dark){
+@media (prefers-color-scheme: dark) {
+
+    .recycle-view-container {
+        background-color: var(--td-bg-color-container);
+    }
+
+    .qq-version-item {
+        background-color: #1e1e1e;
+    }
+    
+    .qq-version-item-bottom{
+        background-color: #1e1e1e;
+    }
+
     .header-title {
         background-color: var(--td-bg-color-container);
-        color: rgba(255, 255, 255,0.9);
+        color: rgba(255, 255, 255, 0.9);
     }
 
     .bottom-button {
         background-color: #1e1e1e;
-        
     }
 
     .gradient-layer {
@@ -200,38 +219,38 @@
     }
 
     .guess-title {
-        color: rgba(255, 255, 255,0.9);
+        color: rgba(255, 255, 255, 0.9);
     }
 
-    .about-title{
-        color: rgba(255, 255, 255,0.9);
+    .about-title {
+        color: rgba(255, 255, 255, 0.9);
     }
 
-    .ua-title{
-        color: rgba(255, 255, 255,0.9);
+    .ua-title {
+        color: rgba(255, 255, 255, 0.9);
     }
 
-    .setting-title{
-        color: rgba(255, 255, 255,0.9);
+    .setting-title {
+        color: rgba(255, 255, 255, 0.9);
     }
 
-    .page-s{
-        color: rgba(255, 255, 255,0.9);
+    .page-s {
+        color: rgba(255, 255, 255, 0.9);
     }
 
-    .error-title{
-        color: rgba(255, 255, 255,0.9);
+    .error-title {
+        color: rgba(255, 255, 255, 0.9);
     }
 
-    .json-text{
-        color: rgba(255, 255, 255,0.9);
+    .json-text {
+        color: rgba(255, 255, 255, 0.9);
     }
 
-    .guess-text{
-        color: rgba(255, 255, 255,0.9);
+    .guess-text {
+        color: rgba(255, 255, 255, 0.9);
     }
 
-    .about-text{
-        color: rgba(255, 255, 255,0.9);
+    .about-text {
+        color: rgba(255, 255, 255, 0.9);
     }
 }

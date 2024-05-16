@@ -5,7 +5,7 @@ export declare const debounce: (func: any, wait?: number) => (...rest: any[]) =>
 export declare const throttle: (func: any, wait?: number, options?: any) => (...args: any[]) => void;
 export declare const classNames: (...args: any[]) => string;
 export declare const styles: (styleObj: any) => string;
-export declare const getAnimationFrame: (context: any, cb: Function) => WechatMiniprogram.NodesRef;
+export declare const getAnimationFrame: (context: any, cb: Function) => any;
 export declare const getRect: (context: any, selector: string, needAll?: boolean) => Promise<any>;
 export declare const isNumber: (value: any) => boolean;
 export declare const isNull: (value: any) => boolean;

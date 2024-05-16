@@ -36,8 +36,9 @@ let Input = class Input extends SuperComponent {
         };
         this.lifetimes = {
             ready() {
-                const { value } = this.properties;
-                this.updateValue(value !== null && value !== void 0 ? value : '');
+                var _a;
+                const { value, defaultValue } = this.properties;
+                this.updateValue((_a = value !== null && value !== void 0 ? value : defaultValue) !== null && _a !== void 0 ? _a : '');
             },
         };
         this.observers = {

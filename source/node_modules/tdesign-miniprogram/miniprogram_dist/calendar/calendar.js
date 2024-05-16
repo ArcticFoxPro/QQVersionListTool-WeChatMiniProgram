@@ -8,11 +8,13 @@ import { SuperComponent, wxComponent } from '../common/src/index';
 import config from '../common/config';
 import props from './props';
 import TCalendar from '../common/shared/calendar/index';
+import useCustomNavbar from '../mixins/using-custom-navbar';
 const { prefix } = config;
 const name = `${prefix}-calendar`;
 let Calendar = class Calendar extends SuperComponent {
     constructor() {
         super(...arguments);
+        this.behaviors = [useCustomNavbar];
         this.externalClasses = [`${prefix}-class`];
         this.options = {
             multipleSlots: true,

@@ -15,5 +15,12 @@
 	"lazyCodeLoading": "requiredComponents",
 	"miniApp": {
 		"useAuthorizePage": true
-	}
+	},
+	"renderer": "skyline",
+	"rendererOptions": {
+		"skyline": {
+			"defaultDisplayBlock": true
+		}
+	},
+	"darkmode": true
 }

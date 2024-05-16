@@ -1,5 +1,6 @@
 {
   "component": true,
+  "styleIsolation": "apply-shared",
   "usingComponents": {
     "t-navbar": "tdesign-miniprogram/navbar/navbar",
     "t-button": "tdesign-miniprogram/button/button",
@@ -12,8 +13,6 @@
     "t-loading": "tdesign-miniprogram/loading/loading",
     "t-overlay": "tdesign-miniprogram/overlay/overlay",
     "t-result": "tdesign-miniprogram/result/result",
-    "recycle-view": "miniprogram-recycle-view/recycle-view",
-    "recycle-item": "miniprogram-recycle-view/recycle-item",
     "t-progress": "tdesign-miniprogram/progress/progress",
     "t-switch": "tdesign-miniprogram/switch/switch"
   },

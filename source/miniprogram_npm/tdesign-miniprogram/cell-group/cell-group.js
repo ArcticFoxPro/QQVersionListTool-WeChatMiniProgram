@@ -18,9 +18,6 @@ let CellGroup = class CellGroup extends SuperComponent {
                 type: 'child',
             },
         };
-        this.options = {
-            addGlobalClass: true,
-        };
         this.properties = props;
         this.data = {
             prefix,

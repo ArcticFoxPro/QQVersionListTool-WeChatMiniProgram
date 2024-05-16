@@ -1,6 +1,6 @@
 /**app.wxss**/
-@import './miniprogram_npm/tdesign-miniprogram/common/style/_variables.wxss';
-@import './miniprogram_npm/tdesign-miniprogram/common/style/theme/_dark.wxss'; 
+@import './miniprogram_npm/tdesign-miniprogram/common/style/theme/_light.wxss'; 
+@import './miniprogram_npm/tdesign-miniprogram/common/style/theme/_dark.wxss';
 
 .container {
   height: 100%;

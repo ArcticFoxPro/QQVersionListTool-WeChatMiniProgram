@@ -4,6 +4,7 @@ import { TdCalendarProps } from './type';
 export interface CalendarProps extends TdCalendarProps {
 }
 export default class Calendar extends SuperComponent {
+    behaviors: string[];
     externalClasses: string[];
     options: WechatMiniprogram.Component.ComponentOptions;
     properties: TdCalendarProps;

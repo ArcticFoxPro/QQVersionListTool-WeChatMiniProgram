@@ -23,17 +23,16 @@ Page({
         refreshIcon: "refresh",
         versionSmallVisible: wx.getStorage({
             key: "versionSelect", success(res) {
-                console.log(res.data)
+                //console.log(res.data)
             }
         }),
-        seeJson: "查看 Json 字符串",
+        seeJson: "查看 JSON 字符串",
         titleTop: "",
         heightRecycle: 5000,
         errorText: "",
         UADisagreeText: "不同意并退出",
     }, onLoad: function () {
         this.setData({PerProSwitch: wx.getStorageSync('isPerProOn')});
-
     }, onReady: async function () {
         const windowHeight = await new Promise((resolve) => {
             wx.getSystemInfo({
@@ -55,7 +54,7 @@ Page({
                     if (res[0]) {
                         resolve(res[0].height);
                     } else {
-                        console.log('未找到对应的元素：', selector);
+                        //console.log('未找到对应的元素：', selector);
                         resolve(0); // 如果找不到元素，返回默认值0
                     }
                 });
@@ -67,14 +66,16 @@ Page({
         elementHeight2 = await getElementHeight('#titleTop2');
         elementHeight3 = await getElementHeight('#bottomButton');
 
-        console.log('窗口高度：', windowHeight);
-        console.log('元素高度1：', elementHeight1);
-        console.log('元素高度2：', elementHeight2);
-        console.log('元素高度3：', elementHeight3);
+        //console.log('窗口高度：', windowHeight);
+        //console.log('元素高度1：', elementHeight1);
+        //console.log('元素高度2：', elementHeight2);
+        //console.log('元素高度3：', elementHeight3);
 
-        this.setData({heightRecycle: windowHeight - elementHeight1 - elementHeight2 - elementHeight3});
+        this.setData({heightRecycle: windowHeight - elementHeight1 - elementHeight3});
 
-        if (wx.getStorageSync('UAAgreed') == "") {
+        this.setData({largeTitleTopHeight: elementHeight2});
+
+        if (wx.getStorageSync('UAAgreed') === "") {
             this.setData({UAVisible: true});
         }
 
@@ -96,7 +97,7 @@ Page({
             url: 'https://im.qq.com/rainbow/androidQQVersionList', method: 'GET', success: (res) => {
                 try {
                     let responseData = res.data;
-                    console.log(responseData);
+                    //console.log(responseData);
                     let start = responseData.indexOf("versions64\":[") + 12;
                     let end = responseData.indexOf(";\n" + "      typeof");
                     let totalJson = responseData.substring(start, end);
@@ -128,7 +129,7 @@ Page({
                 } catch (e) {
                     this.setData({onRefresh: false,});
                     this.setData({refreshIcon: "refresh",});
-                    console.error(e);
+                    //console.error(e);
                     const errorMessage = e.errMsg;
                     this.setData({errorText: errorMessage});
                     this.setData({errorVisible: true});
@@ -136,7 +137,7 @@ Page({
             }, fail: (err) => {
                 this.setData({onRefresh: false,});
                 this.setData({refreshIcon: "refresh",});
-                console.error(err);
+                //console.error(err);
                 const errorMessage = err.errMsg;
                 this.setData({errorText: errorMessage});
                 this.setData({errorVisible: true});
@@ -192,6 +193,12 @@ Page({
         this.setData({cellJsonDetailVisible: true});
     }, closeCellJsonDetailPopup() {
         this.setData({cellJsonDetailVisible: false});
+    }, copyCellJsonDetailPopup() {
+        wx.setClipboardData({
+            data: this.data.itemString, success(res) {
+            }, fail: function (res) {
+            }
+        })
     }, cellDetialPopupVisible(e) {
         this.setData({
             cellDetailVisible: e.detail.visible,
@@ -201,10 +208,10 @@ Page({
             cellJsonDetailVisible: e.detail.visible,
         });
     }, titleChange(e) {
-        console.log(e.detail.scrollTop)
-        if (e.detail.scrollTop >= 50) {
+        //console.log(e.detail.scrollTop)
+        if (e.detail.scrollTop >= this.data.largeTitleTopHeight) {
             this.setData({titleTop: "QQ 版本列表 Lite"});
-            console.log("Yes")
+            //console.log("Yes")
         } else {
             this.setData({titleTop: ""});
         }
@@ -231,7 +238,7 @@ Page({
     }, UADisagree() {
         wx.clearStorageSync()
         wx.exitMiniProgram({
-            success: (res) => {
+            success: () => {
             }
         })
     }, settingPopupVisible(e) {
@@ -239,9 +246,9 @@ Page({
             settingVisible: e.detail.visible,
         });
     }, handleSettingPopup() {
-        if (wx.getStorageSync('isPerProOn') == "" || wx.getStorageSync('isPerProOn') == false) {
+        if (wx.getStorageSync('isPerProOn') === "" || wx.getStorageSync('isPerProOn') === false) {
             this.setData({PerProSwitch: false})
-        } else if(wx.getStorageSync('isPerProOn') == true){
+        } else if (wx.getStorageSync('isPerProOn') === true) {
             this.setData({PerProSwitch: true})
         }
         this.setData({settingVisible: true});

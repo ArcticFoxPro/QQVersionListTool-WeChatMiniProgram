@@ -3,14 +3,6 @@ export interface TdProgressProps {
         type: null;
         value?: string | Array<string> | Record<string, string>;
     };
-    style?: {
-        type: StringConstructor;
-        value?: string;
-    };
-    externalClasses?: {
-        type: ArrayConstructor;
-        value?: ['t-class', 't-class-bar', 't-class-label'];
-    };
     label?: {
         type: null;
         value?: string | boolean;
@@ -26,6 +18,10 @@ export interface TdProgressProps {
     strokeWidth?: {
         type: null;
         value?: string | number;
+    };
+    style?: {
+        type: StringConstructor;
+        value?: string;
     };
     theme?: {
         type: StringConstructor;

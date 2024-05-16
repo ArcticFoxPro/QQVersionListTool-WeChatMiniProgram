@@ -67,9 +67,8 @@ export const styles = function (styleObj) {
         .join('; ');
 };
 export const getAnimationFrame = function (context, cb) {
-    return wx
+    return context
         .createSelectorQuery()
-        .in(context)
         .selectViewport()
         .boundingClientRect()
         .exec(() => {
@@ -78,8 +77,8 @@ export const getAnimationFrame = function (context, cb) {
 };
 export const getRect = function (context, selector, needAll = false) {
     return new Promise((resolve, reject) => {
-        wx.createSelectorQuery()
-            .in(context)[needAll ? 'selectAll' : 'select'](selector)
+        context
+            .createSelectorQuery()[needAll ? 'selectAll' : 'select'](selector)
             .boundingClientRect((rect) => {
             if (rect) {
                 resolve(rect);

@@ -1,6 +1,7 @@
 import { SuperComponent } from '../common/src/index';
 export default class ActionSheet extends SuperComponent {
     static show: (options: import("./show").ActionSheetShowOption) => WechatMiniprogram.Component.TrivialInstance;
+    behaviors: string[];
     externalClasses: string[];
     properties: {
         align?: {

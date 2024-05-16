@@ -50,6 +50,7 @@ let PickerItem = class PickerItem extends SuperComponent {
             columnIndex: 0,
             labelAlias: 'label',
             valueAlias: 'value',
+            pickItemHeight: rpx2px(itemHeight),
         };
         this.methods = {
             onTouchStart(event) {

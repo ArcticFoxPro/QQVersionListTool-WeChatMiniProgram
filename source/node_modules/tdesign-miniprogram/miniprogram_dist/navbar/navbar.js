@@ -14,6 +14,8 @@ let Navbar = class Navbar extends SuperComponent {
         super(...arguments);
         this.externalClasses = [
             `${prefix}-class`,
+            `${prefix}-class-placeholder`,
+            `${prefix}-class-content`,
             `${prefix}-class-title`,
             `${prefix}-class-left`,
             `${prefix}-class-center`,
@@ -24,7 +26,6 @@ let Navbar = class Navbar extends SuperComponent {
         ];
         this.timer = null;
         this.options = {
-            addGlobalClass: true,
             multipleSlots: true,
         };
         this.properties = props;
