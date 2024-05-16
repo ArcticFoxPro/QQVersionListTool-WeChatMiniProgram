@@ -70,6 +70,7 @@ Page({
         //console.log('元素高度1：', elementHeight1);
         //console.log('元素高度2：', elementHeight2);
         //console.log('元素高度3：', elementHeight3);
+        console.log('元素高度2：', windowHeight - elementHeight1 - elementHeight3);
 
         this.setData({heightRecycle: windowHeight - elementHeight1 - elementHeight3});
 

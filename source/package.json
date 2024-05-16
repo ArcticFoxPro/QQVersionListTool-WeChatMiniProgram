@@ -1,7 +1,6 @@
 {
   "dependencies": {
     "@miniprogram-component-plus/sticky": "^1.0.1",
-    "miniprogram-recycle-view": "^0.1.5",
     "tdesign-miniprogram": "^1.4.0"
   }
 }
