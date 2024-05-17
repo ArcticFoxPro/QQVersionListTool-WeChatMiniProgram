@@ -13,16 +13,18 @@
                 -->
 
 <view class="page">
-<view id="titleTop1">
-    <t-navbar t-class-placeholder="t-navbar-placeholder" t-class-content="t-navbar-content"
-              t-class-title="nav-title">
-        <view slot="left" style="width: 70vw; font-size: 36rpx; font-weight: 600;margin-left: 16rpx;">{{titleTop}}
-        </view>
-    </t-navbar></view>
+    <view id="titleTop1">
+        <t-navbar t-class-placeholder="t-navbar-placeholder" t-class-content="t-navbar-content"
+                  t-class-title="nav-title">
+            <view slot="left" style="width: 70vw; font-size: 36rpx; font-weight: 600;margin-left: 16rpx;">{{titleTop}}
+            </view>
+        </t-navbar>
+    </view>
 
     <view class="recycle-view-container">
         <scroll-view type="list" enable-passive scroll-y="{{true}}" style="height:{{heightRecycle+'px'}};"
-                     class="qq-version-list" bindscroll="titleChange" bind:refresh="onRefresh" enhanced>
+                     class="qq-version-list" bindscroll="titleChange" throttle="{{!ThrottleSwitch}}"
+                     bind:refresh="onRefresh" enhanced>
             <view id="titleTop2" class="header-title">QQ 版本列表 Lite</view>
             <view style="width: 100%;" wx:for="{{qqVersions}}" wx:key="versions" class="qq-version-item">
                 <t-cell-group theme="card">
@@ -30,7 +32,7 @@
                             hover arrow data-index="{{index}}" bind:tap="clickCell"/>
                 </t-cell-group>
             </view>
-            <view class="qq-version-item-bottom" style="width: 100%; padding: 24rpx" wx:key="lastItem"></view>
+            <view class="qq-version-item-bottom" style="width: 100%; padding: 24rpx" wx:key="lastItem" wx:if="{{qqVersions.length>=1}}"></view>
         </scroll-view>
     </view>
 
@@ -201,6 +203,10 @@
         <view class="setting-header">
             <view class="setting-title">设置</view>
         </view>
+        <t-cell title="高性能模式" description="开启后能更精确监听滚动事件以精准更改标题栏显示状态，但系统资源占用更高" bordered="{{false}}">
+            <t-switch style="margin: 0 0 0 48rpx;" value="{{ThrottleSwitch}}" slot="note"
+                      bindchange="handleThrottleChange"/>
+        </t-cell>
         <t-cell title="版本列表详情展示额定包大小占比历史最大包指示条" bordered="{{false}}">
             <t-switch style="margin: 0 0 0 48rpx;" value="{{PerProSwitch}}" slot="note"
                       bindchange="handlePerProChange"/>

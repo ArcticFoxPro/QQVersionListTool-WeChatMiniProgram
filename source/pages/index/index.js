@@ -33,6 +33,11 @@ Page({
         UADisagreeText: "不同意并退出",
     }, onLoad: function () {
         this.setData({PerProSwitch: wx.getStorageSync('isPerProOn')});
+        if (wx.getStorageSync('isThrottleOn') === false) {
+            this.setData({ThrottleSwitch: false})
+        } else if (wx.getStorageSync('isThrottleOn') === "" || wx.getStorageSync('isThrottleOn') === true) {
+            this.setData({ThrottleSwitch: true})
+        }
     }, onReady: async function () {
         const windowHeight = await new Promise((resolve) => {
             wx.getSystemInfo({
@@ -70,7 +75,7 @@ Page({
         //console.log('元素高度1：', elementHeight1);
         //console.log('元素高度2：', elementHeight2);
         //console.log('元素高度3：', elementHeight3);
-        console.log('元素高度2：', windowHeight - elementHeight1 - elementHeight3);
+        //console.log('元素高度2：', windowHeight - elementHeight1 - elementHeight3);
 
         this.setData({heightRecycle: windowHeight - elementHeight1 - elementHeight3});
 
@@ -259,5 +264,8 @@ Page({
         wx.setStorageSync('isPerProOn', e.detail.value);
         this.setData({PerProSwitch: e.detail.value})
     },
-
+    handleThrottleChange(e) {
+        wx.setStorageSync('isThrottleOn', e.detail.value);
+        this.setData({ThrottleSwitch: e.detail.value})
+    },
 })
