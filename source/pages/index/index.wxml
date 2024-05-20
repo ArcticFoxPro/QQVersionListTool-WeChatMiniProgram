@@ -14,7 +14,7 @@
 
 <view class="page">
     <view id="titleTop1">
-        <t-navbar t-class-placeholder="t-navbar-placeholder" t-class-content="t-navbar-content" class="{{animationData}}"
+        <t-navbar t-class-placeholder="t-navbar-placeholder" t-class-content="t-navbar-content"
                   t-class-title="nav-title">
             <view id="smallTitle" slot="left" style="width: 70vw; font-size: 36rpx; font-weight: 600;margin-left: 16rpx; opacity: {{titleOpacity}};"
                   >QQ 版本列表 Lite
