@@ -27,10 +27,10 @@ Page({
             }
         }),
         seeJson: "查看 JSON 字符串",
-        titleTop: "",
         heightRecycle: 5000,
         errorText: "",
         UADisagreeText: "不同意并退出",
+        titleOpacity: 0,
     }, onLoad: function () {
         this.setData({PerProSwitch: wx.getStorageSync('isPerProOn')});
         if (wx.getStorageSync('isThrottleOn') === false) {
@@ -214,13 +214,16 @@ Page({
             cellJsonDetailVisible: e.detail.visible,
         });
     }, titleChange(e) {
-        //console.log(e.detail.scrollTop)
-        if (e.detail.scrollTop >= this.data.largeTitleTopHeight) {
-            this.setData({titleTop: "QQ 版本列表 Lite"});
-            //console.log("Yes")
-        } else {
-            this.setData({titleTop: ""});
+        let opa=0;
+        if (e.detail.scrollTop >= 0) {
+            opa = (e.detail.scrollTop - this.data.largeTitleTopHeight / 2) * 2 / this.data.largeTitleTopHeight;
         }
+        if (opa < 0) opa = 0; else if (opa > 1) opa = 1;
+
+        this.setData({
+            titleOpacity: opa,
+        });
+
     }, errorPopupVisible(e) {
         this.setData({
             errorVisible: e.detail.visible,
@@ -263,8 +266,7 @@ Page({
     }, handlePerProChange(e) {
         wx.setStorageSync('isPerProOn', e.detail.value);
         this.setData({PerProSwitch: e.detail.value})
-    },
-    handleThrottleChange(e) {
+    }, handleThrottleChange(e) {
         wx.setStorageSync('isThrottleOn', e.detail.value);
         this.setData({ThrottleSwitch: e.detail.value})
     },

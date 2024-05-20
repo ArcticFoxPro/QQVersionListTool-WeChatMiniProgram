@@ -14,9 +14,10 @@
 
 <view class="page">
     <view id="titleTop1">
-        <t-navbar t-class-placeholder="t-navbar-placeholder" t-class-content="t-navbar-content"
+        <t-navbar t-class-placeholder="t-navbar-placeholder" t-class-content="t-navbar-content" class="{{animationData}}"
                   t-class-title="nav-title">
-            <view slot="left" style="width: 70vw; font-size: 36rpx; font-weight: 600;margin-left: 16rpx;">{{titleTop}}
+            <view id="smallTitle" slot="left" style="width: 70vw; font-size: 36rpx; font-weight: 600;margin-left: 16rpx; opacity: {{titleOpacity}};"
+                  >QQ 版本列表 Lite
             </view>
         </t-navbar>
     </view>
@@ -32,7 +33,8 @@
                             hover arrow data-index="{{index}}" bind:tap="clickCell"/>
                 </t-cell-group>
             </view>
-            <view class="qq-version-item-bottom" style="width: 100%; padding: 24rpx" wx:key="lastItem" wx:if="{{qqVersions.length>=1}}"></view>
+            <view class="qq-version-item-bottom" style="width: 100%; padding: 24rpx" wx:key="lastItem"
+                  wx:if="{{qqVersions.length>=1}}"></view>
         </scroll-view>
     </view>
 
@@ -203,7 +205,8 @@
         <view class="setting-header">
             <view class="setting-title">设置</view>
         </view>
-        <t-cell title="高性能模式" description="开启后能更精确监听滚动事件以精准更改标题栏显示状态，但系统资源占用更高" bordered="{{false}}">
+        <t-cell title="高性能模式" description="开启后能更精确监听滚动事件以精准更改标题栏显示状态，但系统资源占用更高"
+                bordered="{{false}}">
             <t-switch style="margin: 0 0 0 48rpx;" value="{{ThrottleSwitch}}" slot="note"
                       bindchange="handleThrottleChange"/>
         </t-cell>
