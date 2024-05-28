@@ -32,11 +32,17 @@ Page({
         UADisagreeText: "不同意并退出",
         titleOpacity: 0,
     }, onLoad: function () {
-        this.setData({PerProSwitch: wx.getStorageSync('isPerProOn')});
+        this.setData({
+            PerProSwitch: wx.getStorageSync('isPerProOn')
+        });
         if (wx.getStorageSync('isThrottleOn') === false) {
-            this.setData({ThrottleSwitch: false})
+            this.setData({
+                ThrottleSwitch: false
+            })
         } else if (wx.getStorageSync('isThrottleOn') === "" || wx.getStorageSync('isThrottleOn') === true) {
-            this.setData({ThrottleSwitch: true})
+            this.setData({
+                ThrottleSwitch: true
+            })
         }
     }, onReady: async function () {
         const windowHeight = await new Promise((resolve) => {
@@ -77,12 +83,18 @@ Page({
         //console.log('元素高度3：', elementHeight3);
         //console.log('元素高度2：', windowHeight - elementHeight1 - elementHeight3);
 
-        this.setData({heightRecycle: windowHeight - elementHeight1 - elementHeight3});
+        this.setData({
+            heightRecycle: windowHeight - elementHeight1 - elementHeight3
+        });
 
-        this.setData({largeTitleTopHeight: elementHeight2});
+        this.setData({
+            largeTitleTopHeight: elementHeight2
+        });
 
         if (wx.getStorageSync('UAAgreed') === "") {
-            this.setData({UAVisible: true});
+            this.setData({
+                UAVisible: true
+            });
         }
 
         this.getData();
@@ -97,8 +109,12 @@ Page({
             }
         })
     }, getData: function () {
-        this.setData({refreshIcon: null,});
-        this.setData({onRefresh: true,});
+        this.setData({
+            refreshIcon: null,
+        });
+        this.setData({
+            onRefresh: true,
+        });
         wx.request({
             url: 'https://im.qq.com/rainbow/androidQQVersionList', method: 'GET', success: (res) => {
                 try {
@@ -123,30 +139,54 @@ Page({
                     this.setData({
                         qqVersions: qqVersionList,
                     });
-                    this.setData({onRefresh: false,});
-                    this.setData({refreshIcon: "refresh",});
+                    this.setData({
+                        onRefresh: false,
+                    });
+                    this.setData({
+                        refreshIcon: "refresh",
+                    });
 
                     let maxSizeInFloat = qqVersionList.map(qv => parseFloat(qv.size)).filter(isFinite).reduce((max, current) => Math.max(max, current), -Infinity);
 
 
-                    this.setData({maxSize: maxSizeInFloat})
+                    this.setData({
+                        maxSize: maxSizeInFloat
+                    })
 
-                    this.setData({versionBig: qqVersionList[0].versionNumber})
+                    this.setData({
+                        versionBig: qqVersionList[0].versionNumber
+                    })
                 } catch (e) {
-                    this.setData({onRefresh: false,});
-                    this.setData({refreshIcon: "refresh",});
+                    this.setData({
+                        onRefresh: false,
+                    });
+                    this.setData({
+                        refreshIcon: "refresh",
+                    });
                     //console.error(e);
                     const errorMessage = e.errMsg;
-                    this.setData({errorText: errorMessage});
-                    this.setData({errorVisible: true});
+                    this.setData({
+                        errorText: errorMessage
+                    });
+                    this.setData({
+                        errorVisible: true
+                    });
                 }
             }, fail: (err) => {
-                this.setData({onRefresh: false,});
-                this.setData({refreshIcon: "refresh",});
+                this.setData({
+                    onRefresh: false,
+                });
+                this.setData({
+                    refreshIcon: "refresh",
+                });
                 //console.error(err);
                 const errorMessage = err.errMsg;
-                this.setData({errorText: errorMessage});
-                this.setData({errorVisible: true});
+                this.setData({
+                    errorText: errorMessage
+                });
+                this.setData({
+                    errorVisible: true
+                });
 
             },
         });
@@ -155,23 +195,39 @@ Page({
             aboutVisible: e.detail.visible,
         });
     }, handleAboutPopup() {
-        this.setData({aboutVisible: true});
+        this.setData({
+            aboutVisible: true
+        });
     }, closeAboutPopup() {
-        this.setData({aboutVisible: false});
+        this.setData({
+            aboutVisible: false
+        });
     }, recallUA() {
-        this.setData({UADisagreeText: "撤回同意并退出"});
-        this.setData({aboutVisible: false});
-        this.setData({UAVisible: true});
+        this.setData({
+            UADisagreeText: "撤回同意并退出"
+        });
+        this.setData({
+            aboutVisible: false
+        });
+        this.setData({
+            UAVisible: true
+        });
     }, guessPopupVisible(e) {
         this.setData({
             guessVisible: e.detail.visible,
         });
     }, handleGuessPopup() {
-        this.setData({guessVisible: true});
+        this.setData({
+            guessVisible: true
+        });
     }, closeGuessPopup() {
-        this.setData({guessVisible: false});
+        this.setData({
+            guessVisible: false
+        });
     }, copyAndroidOSLink() {
-        this.setData({guessVisible: false});
+        this.setData({
+            guessVisible: false
+        });
         wx.setClipboardData({
             data: 'https://github.com/klxiaoniu/QQVersionList', success(res) {
             }, fail: function (res) {
@@ -181,24 +237,44 @@ Page({
         //console.log(e.currentTarget.dataset.index);
         const index = e.currentTarget.dataset.index;
         //this.setData({selectCell:index})
-        this.setData({itemVersion: this.data.qqVersions[index].versionNumber});
-        this.setData({itemSize: this.data.qqVersions[index].size});
-        this.setData({itemFeatureTitle: this.data.qqVersions[index].featureTitle});
+        this.setData({
+            itemVersion: this.data.qqVersions[index].versionNumber
+        });
+        this.setData({
+            itemSize: this.data.qqVersions[index].size
+        });
+        this.setData({
+            itemFeatureTitle: this.data.qqVersions[index].featureTitle
+        });
         //console.log(this.data.qqVersions[index].summary);
-        this.setData({itemSummary: this.data.qqVersions[index].summary});
-        this.setData({itemString: JSON.stringify(this.data.qqVersions[index], null, 2)});
-        this.setData({cellDetailVisible: true});
-        this.setData({preSize: ((parseFloat(this.data.itemSize) / parseFloat(this.data.maxSize)) * 100).toFixed(2)})
-
-
+        this.setData({
+            itemSummary: this.data.qqVersions[index].summary
+        });
+        this.setData({
+            itemString: JSON.stringify(this.data.qqVersions[index], null, 2)
+        });
+        this.setData({
+            cellDetailVisible: true
+        });
+        this.setData({
+            preSize: ((parseFloat(this.data.itemSize) / parseFloat(this.data.maxSize)) * 100).toFixed(2)
+        })
     }, closeCellDetailPopup() {
-        this.setData({cellDetailVisible: false});
+        this.setData({
+            cellDetailVisible: false
+        });
     }, displayJson() {
-        this.setData({cellDetailVisible: false});
+        this.setData({
+            cellDetailVisible: false
+        });
 
-        this.setData({cellJsonDetailVisible: true});
+        this.setData({
+            cellJsonDetailVisible: true
+        });
     }, closeCellJsonDetailPopup() {
-        this.setData({cellJsonDetailVisible: false});
+        this.setData({
+            cellJsonDetailVisible: false
+        });
     }, copyCellJsonDetailPopup() {
         wx.setClipboardData({
             data: this.data.itemString, success(res) {
@@ -214,7 +290,7 @@ Page({
             cellJsonDetailVisible: e.detail.visible,
         });
     }, titleChange(e) {
-        let opa=0;
+        let opa = 0;
         if (e.detail.scrollTop >= 0) {
             opa = (e.detail.scrollTop - this.data.largeTitleTopHeight / 2) * 2 / this.data.largeTitleTopHeight;
         }
@@ -229,7 +305,9 @@ Page({
             errorVisible: e.detail.visible,
         });
     }, closeErrorPopup() {
-        this.setData({errorVisible: false});
+        this.setData({
+            errorVisible: false
+        });
     }, copyError() {
         const errorMsg = this.data.errorText
         wx.setClipboardData({
@@ -243,7 +321,9 @@ Page({
         });
     }, UAAgree() {
         wx.setStorageSync('UAAgreed', true);
-        this.setData({UAVisible: false})
+        this.setData({
+            UAVisible: false
+        })
     }, UADisagree() {
         wx.clearStorageSync()
         wx.exitMiniProgram({
@@ -256,18 +336,30 @@ Page({
         });
     }, handleSettingPopup() {
         if (wx.getStorageSync('isPerProOn') === "" || wx.getStorageSync('isPerProOn') === false) {
-            this.setData({PerProSwitch: false})
+            this.setData({
+                PerProSwitch: false
+            })
         } else if (wx.getStorageSync('isPerProOn') === true) {
-            this.setData({PerProSwitch: true})
+            this.setData({
+                PerProSwitch: true
+            })
         }
-        this.setData({settingVisible: true});
+        this.setData({
+            settingVisible: true
+        });
     }, closeSettingPopup() {
-        this.setData({settingVisible: false});
+        this.setData({
+            settingVisible: false
+        });
     }, handlePerProChange(e) {
         wx.setStorageSync('isPerProOn', e.detail.value);
-        this.setData({PerProSwitch: e.detail.value})
+        this.setData({
+            PerProSwitch: e.detail.value
+        })
     }, handleThrottleChange(e) {
         wx.setStorageSync('isThrottleOn', e.detail.value);
-        this.setData({ThrottleSwitch: e.detail.value})
+        this.setData({
+            ThrottleSwitch: e.detail.value
+        })
     },
 })

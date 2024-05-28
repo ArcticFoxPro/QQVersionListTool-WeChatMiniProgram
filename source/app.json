@@ -3,9 +3,10 @@
 		"pages/index/index",
 		"pages/logs/logs"
 	],
+	"themeLocation": "theme.json",
 	"window": {
 		"navigationStyle": "custom",
-		"navigationBarTextStyle": "black",
+		"navigationBarTextStyle":"@navTxtStyle",
 		"navigationBarTitleText": "Weixin",
 		"navigationBarBackgroundColor": "#F6F6F6",
 		"backgroundColor": "#F6F6F6"

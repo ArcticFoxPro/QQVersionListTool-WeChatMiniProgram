@@ -61,22 +61,22 @@
 <t-popup visible="{{aboutVisible}}" bind:visible-change="aboutPopupVisible" close-on-overlay-click placement="bottom">
     <view class="block">
         <view class="about-header">
-            <view class="about-title">关于</view>
+            <view class="about-title" id="ability-about">关于</view>
         </view>
-        <view class="about-text" style="text-align: center; margin-bottom: 12rpx;">QQ 版本列表 Lite for WeChat
+        <view class="about-text" style=" margin: 0 48rpx 12rpx 48rpx;">QQ 版本列表 Lite for WeChat
             MiniProgram
         </view>
-        <view class="about-text" style="text-align: center; margin-top: 12rpx; margin-bottom: 12rpx;">版本：1.0.2</view>
-        <view class="about-text" style="text-align: center; margin-top: 12rpx; margin-bottom: 12rpx;">
+        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">版本：1.0.2</view>
+        <view class="about-text" style="margin: 12rpx;padding: 0 36rpx;">
             作者：快乐小牛、有鲫雪狐
         </view>
-        <view class="about-text" style="text-align: center; margin-top: 12rpx; margin-bottom: 12rpx;">Since 2024.03.12
-        </view>
-        <view class="about-text" style="text-align: center; margin-top: 12rpx; margin-bottom: 12rpx;">Licenesd under
+        <view class="about-text" style="margin: 12rpx;padding: 0 36rpx;">开源协议：
             Mulan PubL v2
         </view>
+        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">Since 2024.03.12
+        </view>
         <view class="about-link">
-            <t-link size="small" theme="primary" prefix-icon="copy" content="开源地址（GitHub）" bind:tap="copyOSLink"
+            <t-link size="small" theme="primary" prefix-icon="logo-github" content="GitHub 项目地址" bind:tap="copyOSLink"
                     hover/>
         </view>
         <t-footer text="Copyright © 2024-Now QQ Ver. Lite. All Rights Reserved." links="{{links[0]}}"/>
@@ -92,7 +92,7 @@
 <t-popup visible="{{guessVisible}}" bind:visible-change="guessPopupVisible" close-on-overlay-click placement="bottom">
     <view class="block">
         <view class="guess-header">
-            <view class="guess-title">猜版 for Android</view>
+            <view class="guess-title" id="ability-guess">猜版 for Android</view>
         </view>
         <view class="demo-section__content">
             <t-result theme="default" title="微信小程序内无法使用猜版"
@@ -111,7 +111,7 @@
          placement="bottom">
     <view class="block">
         <view class="guess-header">
-            <view class="guess-title">详情</view>
+            <view class="guess-title" id="ability-cellitem">详情</view>
         </view>
 
         <view class="guess-text" style="margin: 0 32rpx 16rpx 32rpx;">版本：{{itemVersion}}</view>
@@ -140,7 +140,7 @@
          placement="bottom">
     <view class="block">
         <view class="guess-header">
-            <view class="guess-title">JSON 详情</view>
+            <view class="guess-title" id="ability-jsonitem">JSON 详情</view>
         </view>
         <view style=" margin: 0 32rpx 16rpx 32rpx;">
             <text class="json-text" style="font-size:13px; " selectable="true">{{itemString}}</text>
@@ -158,7 +158,7 @@
 <t-popup visible="{{errorVisible}}" bind:visible-change="errorPopupVisible" close-on-overlay-click placement="bottom">
     <view class="block">
         <view class="error-header">
-            <view class="error-title">错误</view>
+            <view class="error-title" id="ability-error">错误</view>
         </view>
         <view class="demo-section__content">
             <t-result theme="error" title="发生错误" description="{{errorText}}"/>
@@ -176,7 +176,7 @@
          placement="bottom">
     <view class="block">
         <view class="ua-header">
-            <view class="ua-title">用户协议</view>
+            <view class="ua-title" id="ability-ua">用户协议</view>
         </view>
 
         <scroll-view type="list" scroll-y="{{true}}" style="height: {{(heightRecycle*3/4)+'px'}};"
@@ -203,7 +203,7 @@
 <t-popup visible="{{settingVisible}}" bind:visible-change="settingPopupVisible" placement="bottom">
     <view class="block">
         <view class="setting-header">
-            <view class="setting-title">设置</view>
+            <view class="setting-title" id="ability-setting">设置</view>
         </view>
         <t-cell title="高性能模式" description="开启后能更精确监听滚动事件以精准更改标题栏显示状态，但系统资源占用更高"
                 bordered="{{false}}">
