@@ -47,6 +47,10 @@ const props = {
         type: String,
         value: '',
     },
+    usePopup: {
+        type: Boolean,
+        value: true,
+    },
     value: {
         type: null,
         value: null,

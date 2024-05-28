@@ -30,6 +30,10 @@ export interface TdPickerProps {
         type: StringConstructor;
         value?: string;
     };
+    usePopup?: {
+        type: BooleanConstructor;
+        value?: boolean;
+    };
     value?: {
         type: ArrayConstructor;
         value?: Array<PickerValue>;

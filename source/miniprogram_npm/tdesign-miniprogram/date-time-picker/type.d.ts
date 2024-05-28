@@ -52,6 +52,10 @@ export interface TdDateTimePickerProps {
         type: StringConstructor;
         value?: string;
     };
+    usePopup?: {
+        type: BooleanConstructor;
+        value?: boolean;
+    };
     value?: {
         type: null;
         value?: DateValue;

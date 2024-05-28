@@ -101,7 +101,7 @@
   font-size: var(--td-font-size-base, 28rpx);
 }
 .t-count-down {
-  font-family: 'DIN Alternate', 'Courier New', Courier, monospace;
+  font-family: TCloudNumber, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Hiragino Sans GB, Microsoft YaHei UI, Microsoft YaHei, Source Han Sans CN, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
   display: flex;
 }
 .t-count-down .t-count-down__item,

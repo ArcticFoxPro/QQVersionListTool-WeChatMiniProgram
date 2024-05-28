@@ -13,6 +13,6 @@ export default class Icon extends SuperComponent {
     };
     methods: {
         onTap(event: any): void;
-        setIconStyle(): void;
+        setIconStyle(): Promise<void>;
     };
 }

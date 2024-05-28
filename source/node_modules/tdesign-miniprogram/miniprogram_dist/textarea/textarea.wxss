@@ -70,6 +70,7 @@
   font-size: var(--td-font-size-m, 32rpx);
 }
 .t-textarea__indicator:not(:empty) {
+  flex-shrink: 0;
   color: var(--td-textarea-indicator-text-color, var(--td-text-color-placeholder, var(--td-font-gray-3, rgba(0, 0, 0, 0.4))));
   font-size: var(--td-spacer-1, 24rpx);
   text-align: right;
