@@ -12,12 +12,15 @@
                     See the Mulan PubL v2 for more details.
                 -->
 
+<wxs module="format" src="./format.wxs"></wxs>
+
 <view class="page">
     <view id="titleTop1">
         <t-navbar t-class-placeholder="t-navbar-placeholder" t-class-content="t-navbar-content"
                   t-class-title="nav-title">
-            <view id="smallTitle" slot="left" style="width: 70vw; font-size: 36rpx; font-weight: 600;margin-left: 16rpx; opacity: {{titleOpacity}};"
-                  >QQ 版本列表 Lite
+            <view id="smallTitle" slot="left"
+                  style="width: 70vw; font-size: 36rpx; font-weight: 600;margin-left: 16rpx; opacity: {{titleOpacity}};">
+                QQ 版本列表 Lite
             </view>
         </t-navbar>
     </view>
@@ -30,7 +33,11 @@
             <view style="width: 100%;" wx:for="{{qqVersions}}" wx:key="versions" class="qq-version-item">
                 <t-cell-group theme="card">
                     <t-cell title="版本：{{item.versionNumber}}" description="额定大小：{{item.size}} MB" leftIcon=""
-                            hover arrow data-index="{{index}}" bind:tap="clickCell"/>
+                            hover arrow data-index="{{index}}" bind:tap="clickCell">
+                        <t-tag style="font-family: TCloudNumber, sans-serif;" variant="light" theme="primary" slot="note" wx:if="{{PerProSwitch}}">
+                            {{format.formatPercent(item.size, maxSize)}}
+                        </t-tag>
+                    </t-cell>
                 </t-cell-group>
             </view>
             <view class="qq-version-item-bottom" style="width: 100%; padding: 24rpx" wx:key="lastItem"
@@ -52,7 +59,6 @@
         </view>
         <t-button variant="outline" icon="search" block size="large" bind:tap="handleGuessPopup" class="text-button">猜版
         </t-button>
-
     </view>
 
 </view>
@@ -66,17 +72,18 @@
         <view class="about-text" style=" margin: 0 48rpx 12rpx 48rpx;">QQ 版本列表 Lite for WeChat
             MiniProgram
         </view>
-        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">版本：1.0.2</view>
+        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">版本：1.0.3</view>
         <view class="about-text" style="margin: 12rpx;padding: 0 36rpx;">
             作者：快乐小牛、有鲫雪狐
         </view>
-        <view class="about-text" style="margin: 12rpx;padding: 0 36rpx;">开源协议：
-            Mulan PubL v2
+        <view class="about-text" style="margin: 12rpx;padding: 0 36rpx;">
+            开源协议：Mulan PubL v2
         </view>
         <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">Since 2024.03.12
         </view>
         <view class="about-link">
-            <t-link size="small" theme="primary" prefix-icon="logo-github" content="GitHub 项目地址" bind:tap="copyOSLink"
+            <t-link size="small" theme="primary" prefix-icon="logo-github" content="GitHub 项目地址"
+                    bind:tap="copyOSLink"
                     hover/>
         </view>
         <t-footer text="Copyright © 2024-Now QQ Ver. Lite. All Rights Reserved." links="{{links[0]}}"/>
@@ -129,10 +136,8 @@
         </view>
     </view>
     <view class="cell-detail-button">
-        <t-button theme="primary" block size="large" bind:tap="closeCellDetailPopup">确定</t-button>
-    </view>
-    <view class="cell-detail-button">
-        <t-button theme="light" block size="large" bind:tap="displayJson">查看 JSON 字符串</t-button>
+        <t-button theme="light" block size="large" bind:tap="displayJson" style="margin-right: 8px;">查看源 JSON</t-button>
+        <t-button theme="primary" block size="large" bind:tap="closeCellDetailPopup" style="margin-left: 8px;">确定</t-button>
     </view>
 </t-popup>
 
@@ -143,15 +148,13 @@
             <view class="guess-title" id="ability-jsonitem">JSON 详情</view>
         </view>
         <view style=" margin: 0 32rpx 16rpx 32rpx;">
-            <text class="json-text" style="font-size:13px; " selectable="true">{{itemString}}</text>
+            <text user-select class="json-text" style="font-size:13px; " selectable="true">{{itemString}}</text>
         </view>
     </view>
-    <t-footer text="— WebView 模式下可长按选择复制内容 —"></t-footer>
-    <view class="cell-detail-button">
-        <t-button theme="primary" block size="large" bind:tap="closeCellJsonDetailPopup">确定</t-button>
-    </view>
-    <view class="cell-detail-button">
-        <t-button theme="light" block size="large" bind:tap="copyCellJsonDetailPopup">复制 JSON 字符串</t-button>
+    <t-footer text="— 可长按选择复制内容 —"></t-footer>
+    <view class="json-detail-button">
+        <t-button theme="light" block size="large" bind:tap="copyCellJsonDetailPopup" style="margin-right: 8px;">复制全部</t-button>
+        <t-button theme="primary" block size="large" bind:tap="closeCellJsonDetailPopup" style="margin-left: 8px;">确定</t-button>
     </view>
 </t-popup>
 
@@ -164,10 +167,8 @@
             <t-result theme="error" title="发生错误" description="{{errorText}}"/>
         </view>
         <view class="error-button">
-            <t-button theme="light" block size="large" bind:tap="closeErrorPopup">确定</t-button>
-        </view>
-        <view class="error-button">
-            <t-button theme="light" block size="large" bind:tap="copyError">复制错误信息</t-button>
+            <t-button theme="light" block size="large" bind:tap="copyError" style="margin-right: 8px;">复制错误信息</t-button>
+            <t-button theme="light" block size="large" bind:tap="closeErrorPopup" style="margin-left: 8px;">确定</t-button>
         </view>
     </view>
 </t-popup>
@@ -210,12 +211,12 @@
             <t-switch style="margin: 0 0 0 48rpx;" value="{{ThrottleSwitch}}" slot="note"
                       bindchange="handleThrottleChange"/>
         </t-cell>
-        <t-cell title="版本列表详情展示额定包大小占比历史最大包指示条" bordered="{{false}}">
+        <t-cell title="版本列表展示额定包大小占比历史最大包指示条" bordered="{{false}}">
             <t-switch style="margin: 0 0 0 48rpx;" value="{{PerProSwitch}}" slot="note"
                       bindchange="handlePerProChange"/>
         </t-cell>
         <view class="setting-button">
-            <t-button theme="primary" block size="large" bind:tap="closeSettingPopup">确定</t-button>
+            <t-button theme="light" block size="large" bind:tap="closeSettingPopup">确定</t-button>
         </view>
     </view>
 </t-popup>

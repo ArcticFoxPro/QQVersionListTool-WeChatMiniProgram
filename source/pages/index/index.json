@@ -14,7 +14,8 @@
     "t-overlay": "tdesign-miniprogram/overlay/overlay",
     "t-result": "tdesign-miniprogram/result/result",
     "t-progress": "tdesign-miniprogram/progress/progress",
-    "t-switch": "tdesign-miniprogram/switch/switch"
+    "t-switch": "tdesign-miniprogram/switch/switch",
+    "t-tag": "tdesign-miniprogram/tag/tag"
   },
   "disableScroll":true
 }

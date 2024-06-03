@@ -98,9 +98,7 @@ Page({
         }
 
         this.getData();
-    },
-
-    refreshData: function () {
+    }, refreshData: function () {
         this.getData();
     }, copyOSLink() {
         wx.setClipboardData({

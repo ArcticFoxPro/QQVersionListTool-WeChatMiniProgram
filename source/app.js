@@ -3,6 +3,6 @@ App({
   onLaunch() {
   },
   globalData: {
-    
+
   }
 })
