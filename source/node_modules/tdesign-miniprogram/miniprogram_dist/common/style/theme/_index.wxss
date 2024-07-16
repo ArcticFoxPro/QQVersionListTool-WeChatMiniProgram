@@ -1,5 +1,6 @@
 @media (prefers-color-scheme: light) {
-  page {
+  page,
+  .page {
     --td-primary-color-1: #f2f3ff;
     --td-primary-color-2: #d9e1ff;
     --td-primary-color-3: #b5c7ff;
@@ -126,7 +127,8 @@
   }
 }
 @media (prefers-color-scheme: dark) {
-  page {
+  page,
+  .page {
     --td-primary-color-1: #1b2f51;
     --td-primary-color-2: #173463;
     --td-primary-color-3: #143975;
@@ -247,7 +249,8 @@
     --td-scroll-track-color: #333;
   }
 }
-page {
+page,
+.page {
   --td-radius-small: 6rpx;
   --td-radius-default: 12rpx;
   --td-radius-large: 18rpx;
@@ -255,7 +258,8 @@ page {
   --td-radius-round: 999px;
   --td-radius-circle: 50%;
 }
-page {
+page,
+.page {
   --td-font-family: PingFang SC, Microsoft YaHei, Arial Regular;
   --td-font-family-medium: PingFang SC, Microsoft YaHei, Arial Medium;
   --td-font-size: 20rpx;
@@ -266,7 +270,8 @@ page {
   --td-font-size-l: 40rpx;
   --td-font-size-xl: 72rpx;
 }
-page {
+page,
+.page {
   --td-spacer: 16rpx;
   --td-spacer-1: 24rpx;
   --td-spacer-2: 32rpx;
@@ -276,7 +281,12 @@ page {
   --td-spacer-6: 160rpx;
 }
 @media (prefers-color-scheme: dark) {
-  page {
+  page,
+  .page {
     --td-button-primary-disabled-color: var(--td-font-white-4);
+    --td-skeleton-animation-gradient: rgba(255, 255, 255, 0.06);
+    --td-slider-dot-bg-color: var(--td-gray-color-4);
+    --td-slider-dot-disabled-bg-color: var(--td-gray-color-11);
+    --td-slider-dot-disabled-border-color: var(--td-gray-color-12);
   }
 }

@@ -102,7 +102,7 @@ let PullDownRefresh = class PullDownRefresh extends SuperComponent {
                 this.triggerEvent('scroll', { scrollTop });
             },
             onTouchStart(e) {
-                if (this.isPulling || !this.data.enableToRefresh)
+                if (this.isPulling || !this.data.enableToRefresh || this.properties.disabled)
                     return;
                 const { touches } = e;
                 if (touches.length !== 1)
@@ -113,7 +113,7 @@ let PullDownRefresh = class PullDownRefresh extends SuperComponent {
                 this.isPulling = true;
             },
             onTouchMove(e) {
-                if (!this.startPoint)
+                if (!this.startPoint || this.properties.disabled)
                     return;
                 const { touches } = e;
                 if (touches.length !== 1)
@@ -125,7 +125,7 @@ let PullDownRefresh = class PullDownRefresh extends SuperComponent {
                 }
             },
             onTouchEnd(e) {
-                if (!this.startPoint)
+                if (!this.startPoint || this.properties.disabled)
                     return;
                 const { changedTouches } = e;
                 if (changedTouches.length !== 1)
@@ -144,18 +144,26 @@ let PullDownRefresh = class PullDownRefresh extends SuperComponent {
                 }
             },
             onDragStart(e) {
+                if (this.properties.disabled)
+                    return;
                 const { scrollTop, scrollLeft } = e.detail;
                 this.triggerEvent('dragstart', { scrollTop, scrollLeft });
             },
             onDragging(e) {
+                if (this.properties.disabled)
+                    return;
                 const { scrollTop, scrollLeft } = e.detail;
                 this.triggerEvent('dragging', { scrollTop, scrollLeft });
             },
             onDragEnd(e) {
+                if (this.properties.disabled)
+                    return;
                 const { scrollTop, scrollLeft } = e.detail;
                 this.triggerEvent('dragend', { scrollTop, scrollLeft });
             },
             doRefresh() {
+                if (this.properties.disabled)
+                    return;
                 this.setData({
                     barHeight: this.loadingBarHeight,
                     refreshStatus: 2,

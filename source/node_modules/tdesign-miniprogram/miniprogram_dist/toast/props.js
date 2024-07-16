@@ -7,9 +7,6 @@ const props = {
         type: Number,
         value: 2000,
     },
-    externalClasses: {
-        type: Array,
-    },
     icon: {
         type: null,
     },

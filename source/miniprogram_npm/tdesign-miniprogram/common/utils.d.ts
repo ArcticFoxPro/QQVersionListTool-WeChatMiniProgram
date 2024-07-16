@@ -30,4 +30,5 @@ export declare const getCurrentPage: <T>() => T & WechatMiniprogram.OptionalInte
 export declare const uniqueFactory: (compName: any) => () => string;
 export declare const calcIcon: (icon: string | Record<string, any>, defaultIcon?: string) => string | Record<string, any>;
 export declare const isOverSize: (size: any, sizeLimit: any) => boolean;
+export declare const rpx2px: (rpx: any) => number;
 export {};

@@ -235,3 +235,4 @@ export const isOverSize = (size, sizeLimit) => {
     const computedSize = typeof sizeLimit === 'number' ? sizeLimit * base : (sizeLimit === null || sizeLimit === void 0 ? void 0 : sizeLimit.size) * unitMap[(_a = sizeLimit === null || sizeLimit === void 0 ? void 0 : sizeLimit.unit) !== null && _a !== void 0 ? _a : 'KB'];
     return size > computedSize;
 };
+export const rpx2px = (rpx) => Math.floor((systemInfo.windowWidth * rpx) / 750);

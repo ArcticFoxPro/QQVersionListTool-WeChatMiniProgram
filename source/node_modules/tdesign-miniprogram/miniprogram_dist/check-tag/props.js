@@ -1,10 +1,10 @@
 const props = {
     checked: {
-        type: Boolean,
+        type: null,
         value: undefined,
     },
     defaultChecked: {
-        type: Boolean,
+        type: null,
         value: undefined,
     },
     closable: {

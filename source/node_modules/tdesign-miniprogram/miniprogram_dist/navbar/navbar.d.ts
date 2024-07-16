@@ -15,9 +15,13 @@ export default class Navbar extends SuperComponent {
         classPrefix: string;
         boxStyle: string;
         showTitle: string;
+        hideLeft: boolean;
+        hideCenter: boolean;
     };
     attached(): void;
+    detached(): void;
     methods: {
+        queryElements(capsuleRect: any): void;
         goBack(): void;
     };
 }

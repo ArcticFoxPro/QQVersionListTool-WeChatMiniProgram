@@ -3,6 +3,9 @@ import { TdTabsProps } from './type';
 export interface TabsProps extends TdTabsProps {
 }
 export default class Tabs extends SuperComponent {
+    options: {
+        pureDataPattern: RegExp;
+    };
     behaviors: string[];
     externalClasses: string[];
     relations: RelationsOptions;
@@ -18,6 +21,7 @@ export default class Tabs extends SuperComponent {
         prefix: string;
         classPrefix: string;
         tabs: any[];
+        currentLabels: any[];
         currentIndex: number;
         trackStyle: string;
         offset: number;

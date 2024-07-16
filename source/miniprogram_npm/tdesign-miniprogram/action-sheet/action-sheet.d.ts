@@ -26,7 +26,7 @@ export default class ActionSheet extends SuperComponent {
         };
         popupProps?: {
             type: ObjectConstructor;
-            value?: object;
+            value?: import("../popup").TdPopupProps;
         };
         showCancel?: {
             type: BooleanConstructor;
@@ -39,6 +39,10 @@ export default class ActionSheet extends SuperComponent {
         theme?: {
             type: StringConstructor;
             value?: "list" | "grid";
+        };
+        usingCustomNavbar?: {
+            type: BooleanConstructor;
+            value?: boolean;
         };
         visible: {
             type: BooleanConstructor;

@@ -91,7 +91,6 @@
   transform: matrix(1, 0, 0, -1, 0, 0);
 }
 .t-picker__indicator {
-  height: var(--td-picker-item-height, 80rpx);
   position: absolute;
   left: 32rpx;
   right: 32rpx;

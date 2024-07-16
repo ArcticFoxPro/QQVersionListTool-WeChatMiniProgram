@@ -32,9 +32,6 @@ const props = {
         type: Boolean,
         value: true,
     },
-    transitionProps: {
-        type: Object,
-    },
     visible: {
         type: Boolean,
         value: null,

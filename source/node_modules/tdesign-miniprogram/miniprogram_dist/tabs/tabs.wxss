@@ -37,7 +37,7 @@
   background: var(--td-tab-nav-bg-color, var(--td-bg-color-container, var(--td-font-white-1, #ffffff)));
 }
 .t-tabs__wrapper--card {
-  background: var(--td-bg-color-secondarycontainer, var(--td-gray-color-1, #f3f3f3));
+  background: var(--td-tab-item-tag-bg, var(--td-bg-color-secondarycontainer, var(--td-gray-color-1, #f3f3f3)));
   --td-tab-border-color: transparent;
 }
 .t-tabs__item {
@@ -93,7 +93,7 @@
   padding: 0 16rpx;
 }
 .t-tabs__item--card.t-tabs__item--active {
-  background-color: var(--td-bg-color-container, var(--td-font-white-1, #ffffff));
+  background-color: var(--td-tab-nav-bg-color, var(--td-bg-color-container, var(--td-font-white-1, #ffffff)));
   border-radius: 18rpx 18rpx 0 0;
 }
 .t-tabs__item--card.t-tabs__item--active:first-child {
@@ -111,7 +111,7 @@
   bottom: 0;
   width: 36rpx;
   height: 36rpx;
-  background: var(--td-bg-color-container, var(--td-font-white-1, #ffffff));
+  background: var(--td-tab-nav-bg-color, var(--td-bg-color-container, var(--td-font-white-1, #ffffff)));
 }
 .t-tabs__item-prefix::after,
 .t-tabs__item-suffix::after {
@@ -119,7 +119,7 @@
   display: block;
   width: 100%;
   height: 100%;
-  background-color: var(--td-bg-color-secondarycontainer, var(--td-gray-color-1, #f3f3f3));
+  background-color: var(--td-tab-item-tag-bg, var(--td-bg-color-secondarycontainer, var(--td-gray-color-1, #f3f3f3)));
 }
 .t-tabs__item-prefix {
   right: 0;

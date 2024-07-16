@@ -5,10 +5,14 @@ export default class Search extends SuperComponent {
         multipleSlots: boolean;
     };
     properties: import("./type").TdSearchProps;
-    observers: {};
+    observers: {
+        resultList(val: any): void;
+    };
     data: {
         classPrefix: string;
         prefix: string;
+        isShowResultList: boolean;
+        isSelected: boolean;
     };
     onInput(e: any): void;
     onFocus(e: any): void;
@@ -16,4 +20,5 @@ export default class Search extends SuperComponent {
     handleClear(): void;
     onConfirm(e: any): void;
     onActionClick(): void;
+    onSelectResultItem(e: any): void;
 }

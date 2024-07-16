@@ -15,7 +15,11 @@
     "t-result": "tdesign-miniprogram/result/result",
     "t-progress": "tdesign-miniprogram/progress/progress",
     "t-switch": "tdesign-miniprogram/switch/switch",
-    "t-tag": "tdesign-miniprogram/tag/tag"
+    "t-tag": "tdesign-miniprogram/tag/tag",
+    "t-tabs": "tdesign-miniprogram/tabs/tabs",
+    "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
+    "t-input": "tdesign-miniprogram/input/input",
+    "t-message": "tdesign-miniprogram/message/message"
   },
   "disableScroll":true
 }

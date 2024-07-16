@@ -1,4 +1,8 @@
 const props = {
+    disabled: {
+        type: Boolean,
+        value: false,
+    },
     enableBackToTop: {
         type: Boolean,
         value: true,

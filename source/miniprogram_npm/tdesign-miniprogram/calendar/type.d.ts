@@ -8,10 +8,6 @@ export interface TdCalendarProps {
         type: null;
         value?: string | ButtonProps | null;
     };
-    style?: {
-        type: StringConstructor;
-        value?: string;
-    };
     firstDayOfWeek?: {
         type: NumberConstructor;
         value?: number;
@@ -37,6 +33,10 @@ export interface TdCalendarProps {
         value?: 'single' | 'multiple' | 'range';
     };
     usePopup?: {
+        type: BooleanConstructor;
+        value?: boolean;
+    };
+    usingCustomNavbar?: {
         type: BooleanConstructor;
         value?: boolean;
     };

@@ -28,6 +28,12 @@ isComponent: true
 
 ## 代码演示
 
+<a href="https://developers.weixin.qq.com/s/qua7YimQ7tSx" title="在开发者工具中预览效果" target="_blank" rel="noopener noreferrer"> 在开发者工具中预览效果 </a>
+
+<blockquote style="background-color: #d9e1ff; font-size: 15px; line-height: 26px;margin: 16px 0 0;padding: 16px; border-radius: 6px; color: #0052d9" >
+<p>Tips: 请确保开发者工具为打开状态。导入开发者工具后，依次执行：npm i > 构建npm包 > 勾选 "将JS编译成ES5"</p>
+</blockquote>
+
 ### 01 组件类型
 
 基础进度条
@@ -85,5 +91,11 @@ t-class-label | 标签样式类
 名称 | 默认值 | 描述 
 -- | -- | --
 --td-progress-circle-inner-bg-color | @font-white-1 | - 
+--td-progress-circle-width | 224rpx | - 
+--td-progress-circle-from | 0deg | - 
 --td-progress-inner-bg-color | @brand-color | - 
---td-progress-track-bg-color | @bg-color-component | -
+--td-progress-line-stroke-width | 12rpx | - 
+--td-progress-stroke-circle-width | 12rpx | - 
+--td-progress-stroke-plump-width | 40rpx | - 
+--td-progress-track-bg-color | @bg-color-component | - 
+

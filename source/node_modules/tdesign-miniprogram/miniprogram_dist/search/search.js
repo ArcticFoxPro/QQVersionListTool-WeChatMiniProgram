@@ -25,10 +25,34 @@ let Search = class Search extends SuperComponent {
             multipleSlots: true,
         };
         this.properties = props;
-        this.observers = {};
+        this.observers = {
+            resultList(val) {
+                const { isSelected } = this.data;
+                if (val.length) {
+                    if (isSelected) {
+                        this.setData({
+                            isShowResultList: false,
+                            isSelected: false,
+                        });
+                    }
+                    else {
+                        this.setData({
+                            isShowResultList: true,
+                        });
+                    }
+                }
+                else {
+                    this.setData({
+                        isShowResultList: false,
+                    });
+                }
+            },
+        };
         this.data = {
             classPrefix: name,
             prefix,
+            isShowResultList: false,
+            isSelected: false,
         };
     }
     onInput(e) {
@@ -38,7 +62,9 @@ let Search = class Search extends SuperComponent {
             const { characters } = getCharacterLength('maxcharacter', value, maxcharacter);
             value = characters;
         }
-        this.setData({ value });
+        this.setData({
+            value,
+        });
         this.triggerEvent('change', { value });
     }
     onFocus(e) {
@@ -52,6 +78,7 @@ let Search = class Search extends SuperComponent {
     handleClear() {
         this.setData({ value: '' });
         this.triggerEvent('clear', { value: '' });
+        this.triggerEvent('change', { value: '' });
     }
     onConfirm(e) {
         const { value } = e.detail;
@@ -59,6 +86,16 @@ let Search = class Search extends SuperComponent {
     }
     onActionClick() {
         this.triggerEvent('action-click');
+    }
+    onSelectResultItem(e) {
+        const { index } = e.currentTarget.dataset;
+        const item = this.properties.resultList[index];
+        this.setData({
+            value: item,
+            isSelected: true,
+        });
+        this.triggerEvent('change', { value: item });
+        this.triggerEvent('selectresult', { index, item });
     }
 };
 Search = __decorate([

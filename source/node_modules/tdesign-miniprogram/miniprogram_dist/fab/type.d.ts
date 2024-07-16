@@ -1,13 +1,19 @@
+import { ButtonProps } from '../button/index';
 export interface TdFabProps {
     buttonProps?: {
         type: ObjectConstructor;
-        value?: object;
+        value?: ButtonProps;
     };
-    style?: {
+    draggable?: {
+        type: BooleanConstructor;
+        optionalTypes: Array<StringConstructor>;
+        value?: boolean | 'all' | 'vertical' | 'horizontal';
+    };
+    icon?: {
         type: StringConstructor;
         value?: string;
     };
-    icon?: {
+    style?: {
         type: StringConstructor;
         value?: string;
     };
@@ -15,9 +21,8 @@ export interface TdFabProps {
         type: StringConstructor;
         value?: string;
     };
-    draggable?: {
+    usingCustomNavbar?: {
         type: BooleanConstructor;
-        optionalTypes: Array<StringConstructor>;
-        value?: boolean | 'all' | 'vertical' | 'horizontal';
+        value?: boolean;
     };
 }

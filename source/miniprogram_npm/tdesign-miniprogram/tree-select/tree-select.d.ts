@@ -9,7 +9,7 @@ export default class TreeSelect extends SuperComponent {
         prefix: string;
         classPrefix: string;
     };
-    properties: import("./type").TdTreeSelectProps<TreeOptionData>;
+    properties: import("./type").TdTreeSelectProps<TreeOptionData<string | number>>;
     controlledProps: {
         key: string;
         event: string;

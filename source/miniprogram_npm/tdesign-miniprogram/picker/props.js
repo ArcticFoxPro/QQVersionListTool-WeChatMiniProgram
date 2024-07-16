@@ -15,6 +15,10 @@ const props = {
         type: Boolean,
         value: true,
     },
+    itemHeight: {
+        type: Number,
+        value: 80,
+    },
     keys: {
         type: Object,
     },
@@ -29,6 +33,10 @@ const props = {
     usePopup: {
         type: Boolean,
         value: true,
+    },
+    usingCustomNavbar: {
+        type: Boolean,
+        value: false,
     },
     value: {
         type: Array,

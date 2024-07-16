@@ -18,6 +18,10 @@ export interface TdPickerProps {
         type: BooleanConstructor;
         value?: boolean;
     };
+    itemHeight?: {
+        type: NumberConstructor;
+        value?: number;
+    };
     keys?: {
         type: ObjectConstructor;
         value?: KeysType;
@@ -31,6 +35,10 @@ export interface TdPickerProps {
         value?: string;
     };
     usePopup?: {
+        type: BooleanConstructor;
+        value?: boolean;
+    };
+    usingCustomNavbar?: {
         type: BooleanConstructor;
         value?: boolean;
     };

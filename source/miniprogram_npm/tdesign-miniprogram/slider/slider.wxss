@@ -37,6 +37,10 @@
 .t-slider--disabled .t-slider__scale-desc {
   color: var(--td-slider-disabled-text-color, var(--td-text-color-disabled, var(--td-font-gray-4, rgba(0, 0, 0, 0.26))));
 }
+.t-slider--disabled .t-slider__dot {
+  background-color: var(--td-slider-dot-disabled-bg-color, #fff);
+  border-color: var(--td-slider-dot-disabled-border-color, #f3f3f3);
+}
 .t-slider--top {
   padding-top: 40rpx;
 }

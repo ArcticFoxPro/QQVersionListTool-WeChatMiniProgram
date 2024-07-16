@@ -47,7 +47,7 @@ export default class CheckBox extends SuperComponent {
         };
         icon?: {
             type: null;
-            value?: string[] | "circle" | "rectangle" | "line";
+            value?: string[] | "rectangle" | "circle" | "line";
         };
         indeterminate?: {
             type: BooleanConstructor;

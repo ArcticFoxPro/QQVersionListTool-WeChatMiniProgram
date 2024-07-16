@@ -12,6 +12,8 @@
     See the Mulan PubL v2 for more details.
 */
 
+import Message from 'tdesign-miniprogram/message/index';
+
 const QQVersionBean = require('./QQVersionBean.js');
 
 Page({
@@ -31,9 +33,34 @@ Page({
         errorText: "",
         UADisagreeText: "不同意并退出",
         titleOpacity: 0,
+        guessTabDefault: 0,
+        wechatVersionBig: "",
+        wechatVersionTrue: "",
+        wechatVersion16code: "",
+        wetypeVersionBig: "",
+        wetypeVersionLink: "",
+        loadingVisible: false,
+        continueGuessing: false,
+        successGuessedLink: "",
+        guessSuccessVisible: false,
     }, onLoad: function () {
         this.setData({
             PerProSwitch: wx.getStorageSync('isPerProOn')
+        });
+        this.setData({
+            wechatVersionBig: wx.getStorageSync('wechatVersionBig')
+        });
+        this.setData({
+            wechatVersionTrue: wx.getStorageSync('wechatVersionTrue')
+        });
+        this.setData({
+            wechatVersion16code: wx.getStorageSync('wechatVersion16code')
+        });
+        this.setData({
+            wetypeVersionBig: wx.getStorageSync('wetypeVersionBig')
+        });
+        this.setData({
+            wetypeVersionLink: wx.getStorageSync('wetypeVersionLink')
         });
         if (wx.getStorageSync('isThrottleOn') === false) {
             this.setData({
@@ -43,6 +70,11 @@ Page({
             this.setData({
                 ThrottleSwitch: true
             })
+        }
+        if (wx.getStorageSync('guessTabDefault') !== '') {
+            this.setData({
+                guessTabDefault: wx.getStorageSync('guessTabDefault')
+            });
         }
     }, onReady: async function () {
         const windowHeight = await new Promise((resolve) => {
@@ -98,14 +130,12 @@ Page({
         }
 
         this.getData();
+    }, onunload: function () {
+        this.stopGuessing();
     }, refreshData: function () {
         this.getData();
     }, copyOSLink() {
-        wx.setClipboardData({
-            data: 'https://github.com/ArcticFoxPro/QQVersionListTool-WeChatMiniProgram', success(res) {
-            }, fail: function (res) {
-            }
-        })
+        this.copyUtil('https://github.com/ArcticFoxPro/QQVersionListTool-WeChatMiniProgram');
     }, getData: function () {
         this.setData({
             refreshIcon: null,
@@ -213,6 +243,9 @@ Page({
     }, guessPopupVisible(e) {
         this.setData({
             guessVisible: e.detail.visible,
+        }, () => {
+            const tabs = this.selectComponent('tabs');
+            tabs.setTrack();
         });
     }, handleGuessPopup() {
         this.setData({
@@ -226,11 +259,7 @@ Page({
         this.setData({
             guessVisible: false
         });
-        wx.setClipboardData({
-            data: 'https://github.com/klxiaoniu/QQVersionList', success(res) {
-            }, fail: function (res) {
-            }
-        })
+        this.copyUtil('https://github.com/klxiaoniu/QQVersionList');
     }, clickCell(e) {
         //console.log(e.currentTarget.dataset.index);
         const index = e.currentTarget.dataset.index;
@@ -274,11 +303,7 @@ Page({
             cellJsonDetailVisible: false
         });
     }, copyCellJsonDetailPopup() {
-        wx.setClipboardData({
-            data: this.data.itemString, success(res) {
-            }, fail: function (res) {
-            }
-        })
+        this.copyUtil(this.data.itemString);
     }, cellDetialPopupVisible(e) {
         this.setData({
             cellDetailVisible: e.detail.visible,
@@ -307,12 +332,7 @@ Page({
             errorVisible: false
         });
     }, copyError() {
-        const errorMsg = this.data.errorText
-        wx.setClipboardData({
-            data: errorMsg, success(res) {
-            }, fail: function (res) {
-            }
-        })
+        this.copyUtil(this.data.errorText);
     }, UAPopupVisible(e) {
         this.setData({
             UAVisible: e.detail.visible,
@@ -358,6 +378,195 @@ Page({
         wx.setStorageSync('isThrottleOn', e.detail.value);
         this.setData({
             ThrottleSwitch: e.detail.value
+        })
+    }, onTabsChange(e) {
+        this.setData({
+            guessTabDefault: e.detail.value
+        })
+        wx.setStorageSync('guessTabDefault', e.detail.value);
+    }, onInputWeChatBig(e) {
+        this.setData({
+            wechatVersionBig: e.detail.value
+        });
+    }, onInputWeChatTrue(e) {
+        this.setData({
+            wechatVersionTrue: e.detail.value
+        });
+    }, onInputWeChat16code(e) {
+        this.setData({
+            wechatVersion16code: e.detail.value
+        });
+    }, onInputWeTypeBig(e) {
+        this.setData({
+            wetypeVersionBig: e.detail.value
+        });
+    }, onInputWeTypeLink(e) {
+        this.setData({
+            wetypeVersionLink: e.detail.value
+        });
+    }, startWeChatGuess() {
+        const wechatVersionBig = this.data.wechatVersionBig;
+        const wechatVersionTrue = this.data.wechatVersionTrue;
+        const wechatVersion16code = this.data.wechatVersion16code;
+        if (wechatVersionBig === '' || wechatVersionTrue === '' || wechatVersion16code === '') {
+            this.setData({
+                errorText: '存在未填写的参数，请检查内容是否填写完毕'
+            });
+            this.setData({
+                errorVisible: true
+            });
+        } else {
+            this.closeGuessPopup();
+            wx.setStorageSync('wechatVersionBig', wechatVersionBig);
+            wx.setStorageSync('wechatVersionTrue', wechatVersionTrue);
+            wx.setStorageSync('wechatVersion16code', wechatVersion16code);
+            this.guessUrl(wechatVersionBig, wechatVersionTrue, wechatVersion16code, 'WeChat').then(r => {
+            })
+        }
+    }, startWeTypeGuess() {
+        const wetypeVersionBig = this.data.wetypeVersionBig;
+        const wetypeVersionLink = this.data.wetypeVersionLink;
+        if (wetypeVersionBig === '' || wetypeVersionLink === '') {
+            this.setData({
+                errorText: '存在未填写的参数，请检查内容是否填写完毕'
+            });
+            this.setData({
+                errorVisible: true
+            });
+        } else {
+            this.closeGuessPopup();
+            wx.setStorageSync('wetypeVersionBig', wetypeVersionBig);
+            wx.setStorageSync('wetypeVersionLink', wetypeVersionLink);
+            this.guessUrl(wetypeVersionBig, wetypeVersionLink, '', 'WeType').then(r => {
+            })
+        }
+    }, async fetchLink(url) {
+        return new Promise((resolve, reject) => {
+            wx.request({
+                url, method: 'HEAD', success: function (res) {
+                    resolve(res.statusCode === 200);
+                }, fail: function (err) {
+                    reject(err);
+                }
+            });
+        });
+    }, async guessUrl(versionBig, versionSuf, version16code, mode) {
+        let guessedLink = '';
+        let v16codeStr = version16code;
+        let vSuf = versionSuf;
+        this.setData({
+            continueGuessing: 'STATUS_ONGOING'
+        });
+        let timerId;
+
+        const guess = () => {
+            if (this.data.continueGuessing === 'STATUS_ONGOING') {
+                if (mode === 'WeChat') {
+                    guessedLink = `https://dldir1.qq.com/weixin/android/weixin${versionBig}android${versionSuf}_0x${v16codeStr}_arm64.apk`;
+                } else if (mode === 'WeType') {
+                    guessedLink = `https://download.z.weixin.qq.com/app/android/${versionBig}/wxkb_${vSuf}_32.apk`;
+                }
+                //console.log(`正在猜测下载地址：${guessedLink}`);
+                this.setData({
+                    loadingVisible: true
+                });
+                this.setData({
+                    guessSuccessVisible: false
+                });
+                this.setData({
+                    updateProgressDialogMessage: `正在猜测下载地址：${guessedLink}`
+                })
+                this.fetchLink(guessedLink).then(isSuccess => {
+                    if (isSuccess) {
+                        this.setData({
+                            successGuessedLink: guessedLink
+                        });
+                        this.setData({
+                            guessSuccessVisible: true
+                        });
+                        if (mode === 'WeChat') v16codeStr = (parseInt(v16codeStr, 16) + 1).toString(16); else if (mode === 'WeType') vSuf = (Number(vSuf) + 1).toString();
+                        timerId = setTimeout(guess, 100);
+                        this.setData({
+                            continueGuessing: 'STATUS_PAUSE'
+                        });
+                    } else {
+                        if (mode === 'WeChat') v16codeStr = (parseInt(v16codeStr, 16) + 1).toString(16); else if (mode === 'WeType') vSuf = (Number(vSuf) + 1).toString();
+                        timerId = setTimeout(guess, 100);
+                    }
+                }).catch(err => {
+                    console.error(err);
+                    const errorMessage = err.errMsg;
+                    this.setData({
+                        errorText: errorMessage
+                    });
+                    this.setData({
+                        errorVisible: true
+                    });
+                });
+            } else if (this.data.continueGuessing === 'STATUS_PAUSE') {
+                timerId = setTimeout(guess, 100);
+            } else if (this.data.continueGuessing === 'STATUS_END') {
+                this.setData({
+                    loadingVisible: false
+                });
+                this.setData({
+                    guessSuccessVisible: false
+                });
+                Message.info({
+                    context: this,
+                    offset: [90, 32],
+                    duration: 1500,
+                    icon: false,
+                    single: false,
+                    content: '已停止猜测',
+                    align: 'center'
+                });
+                clearTimeout(timerId);
+                timerId = null;
+            }
+        };
+
+        clearTimeout(timerId); // 清除之前的定时器
+        timerId = setTimeout(guess, 0);
+    }, cancelGuess() {
+        this.setData({
+            continueGuessing: 'STATUS_END'
+        });
+        clearTimeout(this.timerId);
+    }, continueGuess() {
+        this.setData({
+            continueGuessing: 'STATUS_ONGOING'
+        });
+    }, copyGuessSuccess() {
+        this.copyUtil(this.data.successGuessedLink);
+        setTimeout(() => {
+            this.setData({
+                continueGuessing: 'STATUS_END'
+            });
+        }, 100)
+    }, guessSuccessPopupVisible(e) {
+        this.setData({
+            guessSuccessVisible: e.detail.visible,
+        });
+    },copyUtil(copyData){
+        const that = this;
+        wx.setClipboardData({
+            data: copyData, success(res) {
+                setTimeout(() => {
+                    wx.showToast({title: '', duration: 0, icon: 'none'});
+                    wx.hideToast();
+                }, 0)
+                Message.success({
+                    context: that,
+                    offset: [90, 32],
+                    duration: 1500,
+                    icon: false,
+                    single: false,
+                    content: `已复制：${copyData}`,
+                    align: 'center'
+                });
+            }, fail: function (res) {
+            }
         })
     },
 })

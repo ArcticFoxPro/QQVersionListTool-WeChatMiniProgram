@@ -7,10 +7,6 @@ const props = {
         type: null,
         value: '',
     },
-    style: {
-        type: String,
-        value: '',
-    },
     firstDayOfWeek: {
         type: Number,
         value: 0,
@@ -26,6 +22,7 @@ const props = {
     },
     title: {
         type: String,
+        value: '请选择日期',
     },
     type: {
         type: String,

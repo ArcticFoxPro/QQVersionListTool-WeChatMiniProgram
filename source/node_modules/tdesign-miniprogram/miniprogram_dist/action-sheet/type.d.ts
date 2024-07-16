@@ -1,3 +1,4 @@
+import { PopupProps } from '../popup/index';
 export interface TdActionSheetProps {
     align?: {
         type: StringConstructor;
@@ -21,7 +22,7 @@ export interface TdActionSheetProps {
     };
     popupProps?: {
         type: ObjectConstructor;
-        value?: object;
+        value?: PopupProps;
     };
     showCancel?: {
         type: BooleanConstructor;
@@ -34,6 +35,10 @@ export interface TdActionSheetProps {
     theme?: {
         type: StringConstructor;
         value?: 'list' | 'grid';
+    };
+    usingCustomNavbar?: {
+        type: BooleanConstructor;
+        value?: boolean;
     };
     visible: {
         type: BooleanConstructor;

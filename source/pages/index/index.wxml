@@ -1,18 +1,20 @@
 <!-- index.wxml -->
 
         <!--
-                    Copyright (c) 2024 ArcticFoxPro
-                    QQ Ver. Lite is licensed under Mulan PubL v2.
-                    You can use this software according to the terms and conditions of the Mulan PubL v2.
-                    You may obtain a copy of Mulan PubL v2 at:
-                             http://license.coscl.org.cn/MulanPubL-2.0
-                    THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
-                    EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
-                    MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
-                    See the Mulan PubL v2 for more details.
-                -->
+                                            Copyright (c) 2024 ArcticFoxPro
+                                            QQ Ver. Lite is licensed under Mulan PubL v2.
+                                            You can use this software according to the terms and conditions of the Mulan PubL v2.
+                                            You may obtain a copy of Mulan PubL v2 at:
+                                                     http://license.coscl.org.cn/MulanPubL-2.0
+                                            THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
+                                            EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
+                                            MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
+                                            See the Mulan PubL v2 for more details.
+                                        -->
 
 <wxs module="format" src="./format.wxs"></wxs>
+
+<t-message id="t-message" />
 
 <view class="page">
     <view id="titleTop1">
@@ -34,7 +36,8 @@
                 <t-cell-group theme="card">
                     <t-cell title="版本：{{item.versionNumber}}" description="额定大小：{{item.size}} MB" leftIcon=""
                             hover arrow data-index="{{index}}" bind:tap="clickCell">
-                        <t-tag style="font-family: TCloudNumber, sans-serif;" variant="light" theme="primary" slot="note" wx:if="{{PerProSwitch}}">
+                        <t-tag style="font-family: TCloudNumber, sans-serif;" variant="light" theme="primary"
+                               slot="note" wx:if="{{PerProSwitch}}">
                             {{format.formatPercent(item.size, maxSize)}}
                         </t-tag>
                     </t-cell>
@@ -58,6 +61,7 @@
                       disabled="{{onRefresh}}"></t-button>
         </view>
         <t-button variant="outline" icon="search" block size="large" bind:tap="handleGuessPopup" class="text-button">猜版
+            Extd.
         </t-button>
     </view>
 
@@ -72,7 +76,7 @@
         <view class="about-text" style=" margin: 0 48rpx 12rpx 48rpx;">QQ 版本列表 Lite for WeChat
             MiniProgram
         </view>
-        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">版本：1.0.3</view>
+        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">版本：1.1.0</view>
         <view class="about-text" style="margin: 12rpx;padding: 0 36rpx;">
             作者：快乐小牛、有鲫雪狐
         </view>
@@ -83,8 +87,7 @@
         </view>
         <view class="about-link">
             <t-link size="small" theme="primary" prefix-icon="logo-github" content="GitHub 项目地址"
-                    bind:tap="copyOSLink"
-                    hover/>
+                    bind:tap="copyOSLink" hover/>
         </view>
         <t-footer text="Copyright © 2024-Now QQ Ver. Lite. All Rights Reserved." links="{{links[0]}}"/>
         <view class="about-button">
@@ -96,21 +99,55 @@
     </view>
 </t-popup>
 
-<t-popup visible="{{guessVisible}}" bind:visible-change="guessPopupVisible" close-on-overlay-click placement="bottom">
+<t-popup visible="{{guessVisible}}" bind:visible-change="guessPopupVisible" close-on-overlay-click placement="bottom"
+         z-index="11001">
     <view class="block">
         <view class="guess-header">
-            <view class="guess-title" id="ability-guess">猜版 for Android</view>
+            <view class="guess-title" id="ability-guess">猜版 Extended for Android</view>
         </view>
-        <view class="demo-section__content">
-            <t-result theme="default" title="微信小程序内无法使用猜版"
-                      description="由于微信平台限制，QQ 版本列表 Lite 微信小程序内无法使用猜版功能。请移步至 QQ 版本列表实用工具 for Android 以使用猜版功能（下方可复制对应链接）。"/>
-        </view>
-        <view class="guess-button">
-            <t-button theme="primary" block size="large" bind:tap="closeGuessPopup">确定</t-button>
-        </view>
-        <view class="guess-button">
-            <t-button theme="light" block size="large" bind:tap="copyAndroidOSLink">复制开源仓库地址</t-button>
-        </view>
+        <t-tabs value="{{guessTabDefault}}" bind:change="onTabsChange" bind:click="onTabsClick" t-class="custom-tabs"
+                t-class-content="custom-panel" theme="tag" id="tabs">
+            <t-tab-panel label="QQ-不可用" value="0">
+                <view class="section__content">
+                    <t-result theme="default" title="微信小程序内无法使用 QQ 猜版"
+                              description="由于微信平台限制，QQ 版本列表 Lite 微信小程序内无法使用 QQ 猜版功能。请移步至 QQ 版本列表实用工具 for Android 以使用 QQ 猜版功能（下方可复制对应链接）。"/>
+                </view>
+                <view class="guess-button">
+                    <t-button theme="primary" block size="large" bind:tap="closeGuessPopup">确定</t-button>
+                </view>
+                <view class="guess-button">
+                    <t-button theme="light" block size="large" bind:tap="copyAndroidOSLink">复制开源仓库地址</t-button>
+                </view>
+            </t-tab-panel>
+            <t-tab-panel label="微信" value="1">
+                <t-input id="wechat-version-big" label="主版本号" placeholder="点击以输入" value="{{wechatVersionBig}}"
+                         tips="无需填写小数点，填写格式为 xyz" bind:change="onInputWeChatBig" confirm-type="next"/>
+                <t-input id="wechat-version-true" label="真实版本号" placeholder="点击以输入"
+                         value="{{wechatVersionTrue}}" tips="填写真实版本号（版本码）" bind:change="onInputWeChatTrue"
+                         confirm-type="next"/>
+                <t-input id="wechat-version-16code" label="十六进制代码" placeholder="点击以输入"
+                         value="{{wechatVersion16code}}" tips="填写十六进制代码，无需填写开头的“0x”"
+                         bind:change="onInputWeChat16code" confirm-type="done"/>
+                <view class="guess-button">
+                    <t-button theme="primary" block size="large" bind:tap="startWeChatGuess">开始</t-button>
+                </view>
+                <view class="guess-button">
+                    <t-button theme="light" block size="large" bind:tap="closeGuessPopup">取消</t-button>
+                </view>
+            </t-tab-panel>
+            <t-tab-panel label="微信输入法" value="2">
+                <t-input id="wetype-version-big" label="主版本号" placeholder="点击以输入" tips="填写格式为 x.y.z"
+                         value="{{wetypeVersionBig}}" confirm-type="next" bind:change="onInputWeTypeBig"/>
+                <t-input id="wetype-version-link" label="直链版本号" placeholder="点击以输入" tips="填写直链版本号"
+                         value="{{wetypeVersionLink}}" confirm-type="done" bind:change="onInputWeTypeLink"/>
+                <view class="guess-button">
+                    <t-button theme="primary" block size="large" bind:tap="startWeTypeGuess">开始</t-button>
+                </view>
+                <view class="guess-button">
+                    <t-button theme="light" block size="large" bind:tap="closeGuessPopup">取消</t-button>
+                </view>
+            </t-tab-panel>
+        </t-tabs>
     </view>
 </t-popup>
 
@@ -127,8 +164,8 @@
             MB）：
         </view>
 
-        <t-progress style="margin: 0 32rpx 16rpx 32rpx;" theme="plump" wx:if="{{PerProSwitch}}" percentage="{{preSize}}"
-                    status="active"/>
+        <t-progress style="margin: 0 32rpx 16rpx 32rpx; font-family: TCloudNumber, sans-serif;" theme="plump"
+                    wx:if="{{PerProSwitch}}" percentage="{{preSize}}" status="active"/>
 
         <view class="guess-text" style=" margin: 0 32rpx 16rpx 32rpx;">{{itemFeatureTitle}}</view>
         <view wx:for="{{itemSummary}}">
@@ -136,8 +173,10 @@
         </view>
     </view>
     <view class="cell-detail-button">
-        <t-button theme="light" block size="large" bind:tap="displayJson" style="margin-right: 8px;">查看源 JSON</t-button>
-        <t-button theme="primary" block size="large" bind:tap="closeCellDetailPopup" style="margin-left: 8px;">确定</t-button>
+        <t-button theme="light" block size="large" bind:tap="displayJson" style="margin-right: 8px;">查看源 JSON
+        </t-button>
+        <t-button theme="primary" block size="large" bind:tap="closeCellDetailPopup" style="margin-left: 8px;">确定
+        </t-button>
     </view>
 </t-popup>
 
@@ -153,22 +192,31 @@
     </view>
     <t-footer text="— 可长按选择复制内容 —"></t-footer>
     <view class="json-detail-button">
-        <t-button theme="light" block size="large" bind:tap="copyCellJsonDetailPopup" style="margin-right: 8px;">复制全部</t-button>
-        <t-button theme="primary" block size="large" bind:tap="closeCellJsonDetailPopup" style="margin-left: 8px;">确定</t-button>
+        <t-button theme="light" block size="large" bind:tap="copyCellJsonDetailPopup" style="margin-right: 8px;">
+            复制全部
+        </t-button>
+        <t-button theme="primary" block size="large" bind:tap="closeCellJsonDetailPopup" style="margin-left: 8px;">
+            确定
+        </t-button>
     </view>
 </t-popup>
 
-<t-popup visible="{{errorVisible}}" bind:visible-change="errorPopupVisible" close-on-overlay-click placement="bottom">
+<t-overlay visible="{{errorVisible}}" duration="{{500}}" z-index="11111"/>
+
+<t-popup visible="{{errorVisible}}" show-overlay="{{false}}" bind:visible-change="errorPopupVisible"
+         close-on-overlay-click placement="bottom">
     <view class="block">
         <view class="error-header">
             <view class="error-title" id="ability-error">错误</view>
         </view>
-        <view class="demo-section__content">
+        <view class="section__content">
             <t-result theme="error" title="发生错误" description="{{errorText}}"/>
         </view>
         <view class="error-button">
-            <t-button theme="light" block size="large" bind:tap="copyError" style="margin-right: 8px;">复制错误信息</t-button>
-            <t-button theme="light" block size="large" bind:tap="closeErrorPopup" style="margin-left: 8px;">确定</t-button>
+            <t-button theme="light" block size="large" bind:tap="copyError" style="margin-right: 8px;">复制错误信息
+            </t-button>
+            <t-button theme="light" block size="large" bind:tap="closeErrorPopup" style="margin-left: 8px;">确定
+            </t-button>
         </view>
     </view>
 </t-popup>
@@ -217,6 +265,47 @@
         </t-cell>
         <view class="setting-button">
             <t-button theme="light" block size="large" bind:tap="closeSettingPopup">确定</t-button>
+        </view>
+    </view>
+</t-popup>
+
+<t-overlay visible="{{loadingVisible}}" duration="{{500}}" z-index="11002"/>
+
+<t-popup visible="{{loadingVisible}}" z-index="11003" show-overlay="{{false}}" bind:visible-change="loadingPopupVisible"
+         placement="bottom" close-on-overlay-click>
+    <view class="block">
+        <view class="guess-header">
+            <view class="guess-title">猜版 Extended</view>
+        </view>
+
+        <view class="guess-message-loading">
+            <t-loading align="center" theme="circular" size="64rpx" class="large"/>
+            <view class="message-container">{{updateProgressDialogMessage}}</view>
+        </view>
+
+        <view class="loading-button">
+            <t-button theme="light" size="large" block bind:tap="cancelGuess">取消</t-button>
+        </view>
+    </view>
+</t-popup>
+
+<t-popup visible="{{guessSuccessVisible}}" bind:visible-change="guessSuccessPopupVisible" close-on-overlay-click
+         placement="bottom">
+    <view class="block">
+        <view class="guess-success-header">
+            <view class="guess-success-title" id="ability-guess-success">猜版 Extended</view>
+        </view>
+        <view class="section__content">
+            <t-result theme="success" title="猜测成功" description="{{successGuessedLink}}"/>
+        </view>
+        <view class="guess-success-button">
+            <t-button theme="primary" block size="large" bind:tap="copyGuessSuccess">复制并停止</t-button>
+        </view>
+        <view class="guess-success-button">
+            <t-button theme="light" block size="large" bind:tap="cancelGuess" style="margin-right: 8px;">仅停止
+            </t-button>
+            <t-button theme="light" block size="large" bind:tap="continueGuess" style="margin-left: 8px;">跳过以继续
+            </t-button>
         </view>
     </view>
 </t-popup>

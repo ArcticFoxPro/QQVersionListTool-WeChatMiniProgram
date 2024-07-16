@@ -16,7 +16,9 @@ export default class PickerItem extends SuperComponent {
         columnIndex: number;
         labelAlias: string;
         valueAlias: string;
-        pickItemHeight: number;
+    };
+    lifetimes: {
+        created(): void;
     };
     methods: {
         onTouchStart(event: any): void;
@@ -26,6 +28,5 @@ export default class PickerItem extends SuperComponent {
         resetOrigin(): void;
         getCount(): any;
     };
-    calculateViewDeltaY(touchDeltaY: number): number;
-    created(): void;
+    calculateViewDeltaY(touchDeltaY: number, itemHeight: number): number;
 }

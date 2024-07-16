@@ -5,6 +5,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { SuperComponent, wxComponent } from '../common/src/index';
+import { getRect } from '../common/utils';
 import config from '../common/config';
 import props from './props';
 const { prefix } = config;
@@ -63,8 +64,35 @@ let Navbar = class Navbar extends SuperComponent {
             classPrefix: name,
             boxStyle: '',
             showTitle: '',
+            hideLeft: false,
+            hideCenter: false,
         };
         this.methods = {
+            queryElements(capsuleRect) {
+                Promise.all([
+                    getRect(this, `.${this.data.classPrefix}__left`),
+                    getRect(this, `.${this.data.classPrefix}__center`),
+                ]).then(([leftRect, centerRect]) => {
+                    if (leftRect.right > capsuleRect.left) {
+                        this.setData({
+                            hideLeft: true,
+                            hideCenter: true,
+                        });
+                    }
+                    else if (centerRect.right > capsuleRect.left) {
+                        this.setData({
+                            hideLeft: false,
+                            hideCenter: true,
+                        });
+                    }
+                    else {
+                        this.setData({
+                            hideLeft: false,
+                            hideCenter: false,
+                        });
+                    }
+                });
+            },
             goBack() {
                 const { delta } = this.data;
                 const that = this;
@@ -96,22 +124,29 @@ let Navbar = class Navbar extends SuperComponent {
         wx.getSystemInfo({
             success: (res) => {
                 const boxStyleList = [];
-                const { statusBarHeight } = wx.getSystemInfoSync();
-                boxStyleList.push(`--td-navbar-padding-top: ${statusBarHeight}px`);
+                boxStyleList.push(`--td-navbar-padding-top: ${res.statusBarHeight}px`);
                 if (rect && (res === null || res === void 0 ? void 0 : res.windowWidth)) {
                     boxStyleList.push(`--td-navbar-right: ${res.windowWidth - rect.left}px`);
                 }
                 boxStyleList.push(`--td-navbar-capsule-height: ${rect.height}px`);
                 boxStyleList.push(`--td-navbar-capsule-width: ${rect.width}px`);
-                boxStyleList.push(`--td-navbar-height: ${(rect.top - statusBarHeight) * 2 + rect.height}px`);
+                boxStyleList.push(`--td-navbar-height: ${(rect.top - res.statusBarHeight) * 2 + rect.height}px`);
                 this.setData({
                     boxStyle: `${boxStyleList.join('; ')}`,
                 });
+                if (wx.onMenuButtonBoundingClientRectWeightChange) {
+                    wx.onMenuButtonBoundingClientRectWeightChange((res) => this.queryElements(res));
+                }
             },
             fail: (err) => {
                 console.error('navbar 获取系统信息失败', err);
             },
         });
+    }
+    detached() {
+        if (wx.offMenuButtonBoundingClientRectWeightChange) {
+            wx.offMenuButtonBoundingClientRectWeightChange((res) => this.queryElements(res));
+        }
     }
 };
 Navbar = __decorate([

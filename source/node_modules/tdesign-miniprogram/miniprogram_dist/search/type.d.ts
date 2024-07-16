@@ -1,33 +1,53 @@
 export interface TdSearchProps {
-    style?: {
-        type: StringConstructor;
-        value?: string;
-    };
     action?: {
         type: StringConstructor;
         value?: string;
+    };
+    adjustPosition?: {
+        type: BooleanConstructor;
+        value?: boolean;
+    };
+    alwaysEmbed?: {
+        type: BooleanConstructor;
+        value?: boolean;
     };
     center?: {
         type: BooleanConstructor;
         value?: boolean;
     };
-    disabled?: {
+    clearable?: {
         type: BooleanConstructor;
         value?: boolean;
     };
-    externalClasses?: {
-        type: ArrayConstructor;
-        value?: ['t-class', 't-class-input', 't-class-input-container', 't-class-cancel', 't-class-left', 't-class-right'];
+    confirmHold?: {
+        type: BooleanConstructor;
+        value?: boolean;
+    };
+    confirmType?: {
+        type: StringConstructor;
+        value?: 'send' | 'search' | 'next' | 'go' | 'done';
+    };
+    cursor: {
+        type: NumberConstructor;
+        value?: number;
     };
     cursorSpacing?: {
         type: NumberConstructor;
         value?: number;
     };
+    disabled?: {
+        type: BooleanConstructor;
+        value?: boolean;
+    };
     focus?: {
         type: BooleanConstructor;
         value?: boolean;
     };
-    label?: {
+    holdKeyboard?: {
+        type: BooleanConstructor;
+        value?: boolean;
+    };
+    leftIcon?: {
         type: StringConstructor;
         value?: string;
     };
@@ -39,39 +59,7 @@ export interface TdSearchProps {
         type: NumberConstructor;
         value?: number;
     };
-    confirmType?: {
-        type: StringConstructor;
-        value?: 'send' | 'search' | 'next' | 'go' | 'done';
-    };
-    alwaysEmbed?: {
-        type: BooleanConstructor;
-        value?: boolean;
-    };
-    confirmHold?: {
-        type: BooleanConstructor;
-        value?: boolean;
-    };
-    cursor: {
-        type: NumberConstructor;
-        value?: number;
-    };
-    selectionStart?: {
-        type: NumberConstructor;
-        value?: number;
-    };
-    selectionEnd?: {
-        type: NumberConstructor;
-        value?: number;
-    };
-    adjustPosition?: {
-        type: BooleanConstructor;
-        value?: boolean;
-    };
-    holdKeyboard?: {
-        type: BooleanConstructor;
-        value?: boolean;
-    };
-    placeholderStyle: {
+    placeholder?: {
         type: StringConstructor;
         value?: string;
     };
@@ -79,31 +67,35 @@ export interface TdSearchProps {
         type: StringConstructor;
         value?: string;
     };
-    leftIcon?: {
+    placeholderStyle: {
         type: StringConstructor;
         value?: string;
     };
-    placeholder?: {
-        type: StringConstructor;
-        value?: string;
+    resultList?: {
+        type: ArrayConstructor;
+        value?: Array<string>;
     };
-    rightIcon?: {
-        type: StringConstructor;
-        value?: string;
+    selectionEnd?: {
+        type: NumberConstructor;
+        value?: number;
+    };
+    selectionStart?: {
+        type: NumberConstructor;
+        value?: number;
     };
     shape?: {
         type: StringConstructor;
         value?: 'square' | 'round';
     };
-    value?: {
+    style?: {
         type: StringConstructor;
         value?: string;
     };
-    clearable: {
-        type: BooleanConstructor;
-        value?: boolean;
+    type?: {
+        type: StringConstructor;
+        value?: 'text' | 'number' | 'idcard' | 'digit' | 'nickname';
     };
-    type: {
+    value?: {
         type: StringConstructor;
         value?: string;
     };

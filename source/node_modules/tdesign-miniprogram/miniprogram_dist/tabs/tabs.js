@@ -24,6 +24,9 @@ const getUniqueID = uniqueFactory('tabs');
 let Tabs = class Tabs extends SuperComponent {
     constructor() {
         super(...arguments);
+        this.options = {
+            pureDataPattern: /^currentLabels$/,
+        };
         this.behaviors = [touch];
         this.externalClasses = [
             `${prefix}-class`,
@@ -66,6 +69,7 @@ let Tabs = class Tabs extends SuperComponent {
             prefix,
             classPrefix: name,
             tabs: [],
+            currentLabels: [],
             currentIndex: -1,
             trackStyle: '',
             offset: 0,
@@ -117,18 +121,23 @@ let Tabs = class Tabs extends SuperComponent {
             setCurrentIndex(index) {
                 if (index <= -1 || index >= this.children.length)
                     return;
+                const Labels = [];
                 this.children.forEach((child, idx) => {
                     const isActive = index === idx;
                     if (isActive !== child.data.active) {
                         child.render(isActive, this);
                     }
+                    Labels.push(child.data.label);
                 });
-                if (this.data.currentIndex === index)
+                const { currentIndex, currentLabels } = this.data;
+                if (currentIndex === index && currentLabels.join('') === Labels.join(''))
                     return;
                 this.setData({
                     currentIndex: index,
+                    currentLabels: Labels,
+                }, () => {
+                    this.setTrack();
                 });
-                this.setTrack();
             },
             getCurrentName() {
                 if (this.children) {
