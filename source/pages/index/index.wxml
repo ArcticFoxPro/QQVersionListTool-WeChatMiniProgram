@@ -60,7 +60,7 @@
                       class="refresh-home" aria-label="刷新" bind:tap="refreshData" block loading="{{onRefresh}}"
                       disabled="{{onRefresh}}"></t-button>
         </view>
-        <t-button variant="outline" icon="search" block size="large" bind:tap="handleGuessPopup" class="text-button">猜版
+        <t-button theme="light" variant="outline" icon="search" block size="large" bind:tap="handleGuessPopup" class="text-button">猜版
             Extd.
         </t-button>
     </view>
@@ -279,7 +279,7 @@
         </view>
 
         <view class="guess-message-loading">
-            <t-loading align="center" theme="circular" size="64rpx" class="large"/>
+            <t-loading align="center" theme="circular" size="68rpx" class="large"/>
             <view class="message-container">{{updateProgressDialogMessage}}</view>
         </view>
 

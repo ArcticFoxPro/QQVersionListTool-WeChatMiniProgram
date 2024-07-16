@@ -530,6 +530,9 @@ Page({
         timerId = setTimeout(guess, 0);
     }, cancelGuess() {
         this.setData({
+            loadingVisible: false
+        });
+        this.setData({
             continueGuessing: 'STATUS_END'
         });
         clearTimeout(this.timerId);
@@ -539,11 +542,14 @@ Page({
         });
     }, copyGuessSuccess() {
         this.copyUtil(this.data.successGuessedLink);
+        this.setData({
+            guessSuccessVisible: false
+        });
         setTimeout(() => {
             this.setData({
                 continueGuessing: 'STATUS_END'
             });
-        }, 100)
+        }, 50)
     }, guessSuccessPopupVisible(e) {
         this.setData({
             guessSuccessVisible: e.detail.visible,
