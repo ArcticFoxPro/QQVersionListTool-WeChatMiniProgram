@@ -48,7 +48,7 @@ QQ 版本列表 Lite for WeChat MiniProgram 是一个使用 TDesign 组件库构
 QQ 版本列表 Lite for WeChat MiniProgram 无法使用 QQ 猜版功能。
 
 > [!TIP]
-> QQ 版本列表 Lite 实验性支持了 Android 微信和 Android 微信输入法的猜版。
+> QQ 版本列表 Lite 自 1.1.0 版本起实验性支持了 Android 微信和 Android 微信输入法的猜版。
 > 
 > 若选择微信猜版，对话框将变更为三个输入框，分别是“主版本号”、“真实版本号”和“十六进制代码”，对应的直链为：
 >
