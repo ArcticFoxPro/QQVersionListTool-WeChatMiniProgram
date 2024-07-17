@@ -19,7 +19,8 @@
     "t-tabs": "tdesign-miniprogram/tabs/tabs",
     "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
     "t-input": "tdesign-miniprogram/input/input",
-    "t-message": "tdesign-miniprogram/message/message"
+    "t-message": "tdesign-miniprogram/message/message",
+    "t-notice-bar": "tdesign-miniprogram/notice-bar/notice-bar"
   },
   "disableScroll":true
 }

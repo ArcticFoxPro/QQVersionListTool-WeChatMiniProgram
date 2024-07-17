@@ -1,20 +1,20 @@
 <!-- index.wxml -->
 
         <!--
-                                            Copyright (c) 2024 ArcticFoxPro
-                                            QQ Ver. Lite is licensed under Mulan PubL v2.
-                                            You can use this software according to the terms and conditions of the Mulan PubL v2.
-                                            You may obtain a copy of Mulan PubL v2 at:
-                                                     http://license.coscl.org.cn/MulanPubL-2.0
-                                            THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
-                                            EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
-                                            MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
-                                            See the Mulan PubL v2 for more details.
-                                        -->
+                        Copyright (c) 2024 ArcticFoxPro
+                        QQ Ver. Lite is licensed under Mulan PubL v2.
+                        You can use this software according to the terms and conditions of the Mulan PubL v2.
+                        You may obtain a copy of Mulan PubL v2 at:
+                                 http://license.coscl.org.cn/MulanPubL-2.0
+                        THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
+                        EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
+                        MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
+                        See the Mulan PubL v2 for more details.
+                -->
 
 <wxs module="format" src="./format.wxs"></wxs>
 
-<t-message id="t-message" />
+<t-message id="t-message"/>
 
 <view class="page">
     <view id="titleTop1">
@@ -60,7 +60,8 @@
                       class="refresh-home" aria-label="刷新" bind:tap="refreshData" block loading="{{onRefresh}}"
                       disabled="{{onRefresh}}"></t-button>
         </view>
-        <t-button theme="light" variant="outline" icon="search" block size="large" bind:tap="handleGuessPopup" class="text-button">猜版
+        <t-button theme="light" variant="outline" icon="search" block size="large" bind:tap="handleGuessPopup"
+                  class="text-button">猜版
             Extd.
         </t-button>
     </view>
@@ -73,18 +74,12 @@
         <view class="about-header">
             <view class="about-title" id="ability-about">关于</view>
         </view>
-        <view class="about-text" style=" margin: 0 48rpx 12rpx 48rpx;">QQ 版本列表 Lite for WeChat
-            MiniProgram
-        </view>
+        <view class="about-text" style=" margin: 0 48rpx 12rpx 48rpx;">QQ 版本列表 Lite for WeChat MiniProgram</view>
         <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">版本：1.1.0</view>
-        <view class="about-text" style="margin: 12rpx;padding: 0 36rpx;">
-            作者：快乐小牛、有鲫雪狐
-        </view>
-        <view class="about-text" style="margin: 12rpx;padding: 0 36rpx;">
-            开源协议：Mulan PubL v2
-        </view>
-        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">Since 2024.03.12
-        </view>
+        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">作者：快乐小牛、有鲫雪狐</view>
+        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">Designed & Built with TDesign</view>
+        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">Licenesd under Mulan PubL v2</view>
+        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">Since 2024.03.12</view>
         <view class="about-link">
             <t-link size="small" theme="primary" prefix-icon="logo-github" content="GitHub 项目地址"
                     bind:tap="copyOSLink" hover/>
@@ -120,12 +115,20 @@
                 </view>
             </t-tab-panel>
             <t-tab-panel label="微信" value="1">
-                <t-input id="wechat-version-big" label="主版本号" placeholder="点击以输入" value="{{wechatVersionBig}}"
-                         tips="无需填写小数点，填写格式为 xyz" bind:change="onInputWeChatBig" confirm-type="next"/>
-                <t-input id="wechat-version-true" label="真实版本号" placeholder="点击以输入"
-                         value="{{wechatVersionTrue}}" tips="填写真实版本号（版本码）" bind:change="onInputWeChatTrue"
+                <t-notice-bar visible="{{true}}" prefixIcon="{{false}}"
+                              content="微信猜版功能为 QQ 版本列表 Lite 附带的实验性功能，可能存在不可预知的稳定性问题。请明确并确保自身具备足够的风险识别和承受能力。">
+                    <view slot="prefix-icon">
+                        <t-icon name="error-circle-filled"></t-icon>
+                    </view>
+                </t-notice-bar>
+                <t-input id="wechat-version-big" label="主版本号" placeholder="无需填写小数点"
+                         value="{{wechatVersionBig}}"
+                         tips="无需填写小数点，填写格式为 xyz" type="number" bind:change="onInputWeChatBig"
                          confirm-type="next"/>
-                <t-input id="wechat-version-16code" label="十六进制代码" placeholder="点击以输入"
+                <t-input id="wechat-version-true" label="真实版本号" placeholder="点击以输入"
+                         value="{{wechatVersionTrue}}" tips="填写真实版本号（版本码）" type="number"
+                         bind:change="onInputWeChatTrue" confirm-type="next"/>
+                <t-input id="wechat-version-16code" label="十六进制代码" placeholder="无需填写开头的“0x”"
                          value="{{wechatVersion16code}}" tips="填写十六进制代码，无需填写开头的“0x”"
                          bind:change="onInputWeChat16code" confirm-type="done"/>
                 <view class="guess-button">
@@ -136,10 +139,17 @@
                 </view>
             </t-tab-panel>
             <t-tab-panel label="微信输入法" value="2">
+                <t-notice-bar visible="{{true}}" prefixIcon="{{false}}"
+                              content="微信输入法猜版功能为 QQ 版本列表 Lite 附带的实验性功能，可能存在不可预知的稳定性问题。请明确并确保自身具备足够的风险识别和承受能力。">
+                    <view slot="prefix-icon">
+                        <t-icon name="error-circle-filled"></t-icon>
+                    </view>
+                </t-notice-bar>
                 <t-input id="wetype-version-big" label="主版本号" placeholder="点击以输入" tips="填写格式为 x.y.z"
-                         value="{{wetypeVersionBig}}" confirm-type="next" bind:change="onInputWeTypeBig"/>
+                         type="digit" value="{{wetypeVersionBig}}" confirm-type="next" bind:change="onInputWeTypeBig"/>
                 <t-input id="wetype-version-link" label="直链版本号" placeholder="点击以输入" tips="填写直链版本号"
-                         value="{{wetypeVersionLink}}" confirm-type="done" bind:change="onInputWeTypeLink"/>
+                         type="number" value="{{wetypeVersionLink}}" confirm-type="done"
+                         bind:change="onInputWeTypeLink"/>
                 <view class="guess-button">
                     <t-button theme="primary" block size="large" bind:tap="startWeTypeGuess">开始</t-button>
                 </view>
