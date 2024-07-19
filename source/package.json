@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "@miniprogram-component-plus/sticky": "^1.0.1",
     "tdesign-miniprogram": "^1.4.5"
   }
 }

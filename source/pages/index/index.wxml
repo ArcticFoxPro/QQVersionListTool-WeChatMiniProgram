@@ -1,16 +1,16 @@
 <!-- index.wxml -->
 
         <!--
-                        Copyright (c) 2024 ArcticFoxPro
-                        QQ Ver. Lite is licensed under Mulan PubL v2.
-                        You can use this software according to the terms and conditions of the Mulan PubL v2.
-                        You may obtain a copy of Mulan PubL v2 at:
-                                 http://license.coscl.org.cn/MulanPubL-2.0
-                        THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
-                        EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
-                        MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
-                        See the Mulan PubL v2 for more details.
-                -->
+        Copyright (c) 2024 ArcticFoxPro
+        QQ Ver. Lite is licensed under Mulan PubL v2.
+        You can use this software according to the terms and conditions of the Mulan PubL v2.
+        You may obtain a copy of Mulan PubL v2 at:
+                http://license.coscl.org.cn/MulanPubL-2.0
+        THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
+        EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
+        MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
+        See the Mulan PubL v2 for more details.
+        -->
 
 <wxs module="format" src="./format.wxs"></wxs>
 
@@ -60,9 +60,8 @@
                       class="refresh-home" aria-label="刷新" bind:tap="refreshData" block loading="{{onRefresh}}"
                       disabled="{{onRefresh}}"></t-button>
         </view>
-        <t-button theme="light" variant="outline" icon="search" block size="large" bind:tap="handleGuessPopup"
-                  class="text-button">猜版
-            Extd.
+        <t-button theme="primary" icon="search" block size="large" bind:tap="handleGuessPopup"
+                  class="text-button">猜版 Extd.
         </t-button>
     </view>
 
@@ -74,17 +73,19 @@
         <view class="about-header">
             <view class="about-title" id="ability-about">关于</view>
         </view>
-        <view class="about-text" style=" margin: 0 48rpx 12rpx 48rpx;">QQ 版本列表 Lite for WeChat MiniProgram</view>
+        <view class="about-text" style="margin: 0 48rpx 12rpx 48rpx;">QQ 版本列表 Lite for WeChat MiniProgram</view>
         <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">版本：1.1.0</view>
         <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">作者：快乐小牛、有鲫雪狐</view>
-        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">Designed & Built with TDesign</view>
-        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">Licenesd under Mulan PubL v2</view>
-        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">Since 2024.03.12</view>
+        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx 12rpx 36rpx;">Since 2024.03.12</view>
+        <view class="TD_and_MulanPubLv2">
+            <image src="{{ theme === 'dark' ? '../../assets/Built-with-TDesign-Licensed-under-MulanPubLv2-dark.png' : '../../assets/Built-with-TDesign-Licensed-under-MulanPubLv2-light.png' }}"
+                   mode="widthFix" style="width: 75%; height: auto; align-self: center;"/>
+        </view>
         <view class="about-link">
             <t-link size="small" theme="primary" prefix-icon="logo-github" content="GitHub 项目地址"
                     bind:tap="copyOSLink" hover/>
         </view>
-        <t-footer text="Copyright © 2024-Now QQ Ver. Lite. All Rights Reserved." links="{{links[0]}}"/>
+        <t-footer text="Copyright © 2024-Now QQ Ver. Lite. All Rights Reserved."/>
         <view class="about-button">
             <t-button theme="primary" size="large" block bind:tap="closeAboutPopup">确定</t-button>
         </view>
@@ -102,7 +103,33 @@
         </view>
         <t-tabs value="{{guessTabDefault}}" bind:change="onTabsChange" bind:click="onTabsClick" t-class="custom-tabs"
                 t-class-content="custom-panel" theme="tag" id="tabs">
-            <t-tab-panel label="QQ-不可用" value="0">
+            <t-tab-panel label="QQ" value="0">
+
+                <t-notice-bar visible="{{QQTestSwitch}}" prefixIcon="{{false}}"
+                              content="鉴于 QQ 测试版可能存在不可预知的稳定性问题，您在下载及使用该测试版本之前，必须明确并确保自身具备足够的风险识别和承受能力。">
+                    <view slot="prefix-icon">
+                        <t-icon name="error-circle-filled"></t-icon>
+                    </view>
+                </t-notice-bar>
+
+                <t-input id="qq-official-version-big" label="主版本号" placeholder="点击以输入" value="{{qqVersionBig}}"
+                         tips="填写格式为 x.y.z" bind:change="onInputQQBig"
+                         confirm-type="{{QQTestSwitch ? 'next' : 'done'}}"/>
+                <t-input disabled="{{!QQTestSwitch}}" id="qq-official-version-big" label="小版本号" placeholder="点击以输入"
+                         value="{{qqVersionSmall}}" tips="填写起始猜测小版本号，猜正式版时无需填写" type="number"
+                         bind:change="onInputQQSmall" confirm-type="done"/>
+                <t-cell title="测试版猜版" description="此开关为关闭状态时将猜测正式版" bordered="{{false}}">
+                    <t-switch style="margin: 0 0 0 48rpx;" value="{{QQTestSwitch}}" slot="note"
+                              bind:change="handleQQTestSwitchChange"/>
+                </t-cell>
+                <view class="guess-button">
+                    <t-button theme="primary" block size="large" bind:tap="startQQGuess">开始</t-button>
+                </view>
+                <view class="guess-button">
+                    <t-button theme="light" block size="large" bind:tap="closeGuessPopup">取消</t-button>
+                </view>
+
+                <!--
                 <view class="section__content">
                     <t-result theme="default" title="微信小程序内无法使用 QQ 猜版"
                               description="由于微信平台限制，QQ 版本列表 Lite 微信小程序内无法使用 QQ 猜版功能。请移步至 QQ 版本列表实用工具 for Android 以使用 QQ 猜版功能（下方可复制对应链接）。"/>
@@ -113,6 +140,7 @@
                 <view class="guess-button">
                     <t-button theme="light" block size="large" bind:tap="copyAndroidOSLink">复制开源仓库地址</t-button>
                 </view>
+                -->
             </t-tab-panel>
             <t-tab-panel label="微信" value="1">
                 <t-notice-bar visible="{{true}}" prefixIcon="{{false}}"
@@ -267,11 +295,11 @@
         <t-cell title="高性能模式" description="开启后能更精确监听滚动事件以精准更改标题栏显示状态，但系统资源占用更高"
                 bordered="{{false}}">
             <t-switch style="margin: 0 0 0 48rpx;" value="{{ThrottleSwitch}}" slot="note"
-                      bindchange="handleThrottleChange"/>
+                      bind:change="handleThrottleChange"/>
         </t-cell>
         <t-cell title="版本列表展示额定包大小占比历史最大包指示条" bordered="{{false}}">
             <t-switch style="margin: 0 0 0 48rpx;" value="{{PerProSwitch}}" slot="note"
-                      bindchange="handlePerProChange"/>
+                      bind:change="handlePerProChange"/>
         </t-cell>
         <view class="setting-button">
             <t-button theme="light" block size="large" bind:tap="closeSettingPopup">确定</t-button>

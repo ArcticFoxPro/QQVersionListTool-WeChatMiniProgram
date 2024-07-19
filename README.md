@@ -45,7 +45,33 @@ QQ 版本列表 Lite for WeChat MiniProgram 是一个使用 TDesign 组件库构
 
 ### 猜版 Extended
 
-QQ 版本列表 Lite for WeChat MiniProgram 无法使用 QQ 猜版功能。
+在 Android QQ - 首页侧滑菜单 - 设置 - 关于QQ与帮助 中可得知，Android QQ 的版本号通常为 `x.y.z.nnnnn`。其中 `x.y.z` 在这里被称为“主版本号”，而 `nnnnn` 被称为“小版本号”。
+
+在 QQ 版本列表 Lite 界面，点击右下角放大镜图标浮动按钮即可进入“猜版 Extended for Android”对话框。
+
+对话框含有两个输入框和一个开关，分别是“主版本号”、“小版本号”和“测试版猜版”开关。“主版本号”已经预填入了版本列表显示的最新版本号，也可自行修改。
+
+- 若“测试版猜版”开关为关时开始猜版，无需填写小版本号，软件将尝试访问以下链接：
+  - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>_64.apk`
+  - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>_64_HB.apk`
+  - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>_64_HB1.apk`
+  - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>_64_HB2.apk`
+  - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>_64_HB3.apk`
+  - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>_64_BBPJ.apk`
+  - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>_HB_64.apk`
+  - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>_HB1_64.apk`
+  - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>_HB2_64.apk`
+  - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>_HB3_64.apk`
+  - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>_BBPJ_64.apk`
+
+- 若“测试版猜版”开关为开时，则需要填写起始小版本号后才可开始猜版。
+  - 小版本号需填写 5 的倍数。如需解除此限制，请等待后续 QQ 版本列表 Lite 版本更新或使用 [QQ 版本列表实用工具 for Android](https://github.com/klxiaoniu/QQVersionList)。
+  - 默认情况下，软件将尝试访问以下链接：
+    - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_64.apk`
+    - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_64_HB.apk`
+    - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_HB_64.apk`
+
+    若当次访问未果，默认情况下将按照设置逻辑自动递增小版本号后再次尝试访问，直到访问成功为止。
 
 > [!TIP]
 > QQ 版本列表 Lite 自 1.1.0 版本起实验性支持了 Android 微信和 Android 微信输入法的猜版。
@@ -69,27 +95,11 @@ QQ 版本列表 Lite for WeChat MiniProgram 无法使用 QQ 猜版功能。
 
 ## 常见问题
 
-### 为什么 QQ 版本列表 Lite for WeChat MiniProgram 无法使用 QQ 猜版功能？
-
-根据[微信公众平台相关规定](https://developers.weixin.qq.com/miniprogram/dev/framework/ability/network.html)：
-
-> 每个微信小程序需要事先设置通讯域名，小程序只可以跟指定的域名进行网络通信。包括普通 HTTPS 请求（`wx.request`）、上传文件（`wx.uploadFile`）、下载文件（`wx.downloadFile`）和 WebSocket 通信（`wx.connectSocket`）。
-> 
-> - 域名只支持 https（`wx.request、wx.uploadFile、wx.downloadFile`）和 wss（`wx.connectSocket`）协议；
-> - 域名不能使用 IP 地址（小程序的局域网 IP 除外）或 `localhost`；
-> - 对于 https 域名，可以配置端口，如 `https://myserver.com:8080`，但是配置后只能向 `https://myserver.com:8080` 发起请求。如果向 `https://myserver.com`、`https://myserver.com:9091` 等 URL 请求则会失败。如果不配置端口。如 `https://myserver.com`，那么请求的 URL 中也不能包含端口，甚至是默认的 `443` 端口也不可以。如果向 `https://myserver.com:443` 请求则会失败。
-> - 对于 `wss` 域名，无需配置端口，默认允许请求该域名下所有端口。
-> - 域名必须经过 ICP 备案；
-> - 出于安全考虑，`api.weixin.qq.com` 不能被配置为服务器域名，相关 API 也不能在小程序内调用。 开发者应将 `AppSecret` 保存到后台服务器中，通过服务器使用 `getAccessToken` 接口获取 `access_token`，并调用相关 API；
-> - 不支持配置父域名，使用子域名。
-
-由于腾讯的下载服务器使用了将特征码作为二级域名的 CDN 域名，导致为腾讯服务器配置 `wx.request` 白名单变得异常困难，仅靠微信小程序前端代码无法完成猜版功能，因此 QQ 版本列表 Lite for WeChat MiniProgram 无法使用猜版功能，请移步至 [QQ 版本列表实用工具 for Android](https://github.com/klxiaoniu/QQVersionList) 以使用猜版功能。
-
 ### 为什么 QQ 版本列表 Lite for WeChat MiniProgram 不上架到微信？
 
 QQ 版本列表 Lite for WeChat MiniProgram 仅供学习交流使用，不提供任何形式的服务，也不提供任何形式的技术支持。因此，QQ 版本列表 Lite for WeChat MiniProgram 不会上架到微信。
 
-### 版本列表中已经有新的版本号了，为什么我使用 [QQ 版本列表实用工具 for Android](https://github.com/klxiaoniu/QQVersionList) 猜版却获取不到下载链接？
+### 版本列表中已经有新的版本号了，为什么我使用猜版却获取不到下载链接？
 
 即使版本列表已出现了新的版本号，也并不意味着 QQ 团队已经完成了新版本（含测试版）安装包在腾讯公网服务器的部署和发布。一种可能的情况是，QQ 团队正在进行新版本的内部测试阶段，因而尚未对外提供公网下载渠道。
 
@@ -99,7 +109,7 @@ QQ 版本列表 Lite for WeChat MiniProgram 仅供学习交流使用，不提供
 > QQ 版本列表 Lite 始终坚守法律底线，秉持尊重与保护所有用户及第三方合法权益的原则。我们深切认识到任何可能存在的权益侵犯行为都会对权益方造成潜在影响，对此，我们表示由衷歉意，并承诺，一旦接到权益方的权益受到侵犯的通知，我们将立即依法启动核查程序，并在确认侵权事实后，迅速采取有效措施，以最大程度地消除不良影响，恢复并保障权益方的合法权益。敬请相关权益方在发现 QQ 版本列表 Lite 存在任何侵权内容时，及时与我们取得联系，我们将竭诚为权益方提供必要的协助与支持。
 
 > [!NOTE]
-> “QQ”“腾讯 QQ”“腾讯”“微信”“WeChat”“微信输入法”“WeType”是深圳市腾讯计算机系统有限公司和/或其关联公司的商标。本应用对“QQ”“腾讯 QQ”“腾讯”“微信”“WeChat”“微信输入法”“WeType”的使用旨在注明和指向对应主体，并非表示对“QQ”、“腾讯 QQ”、“腾讯”、“微信”、“WeChat”、“微信输入法”、“WeType”商标的注册和拥有。
+> “腾讯”“QQ”“腾讯 QQ”“微信”“WeChat”“微信输入法”“WeType”“TDesign”是深圳市腾讯计算机系统有限公司和/或其关联公司的商标。本应用对“腾讯”“QQ”“腾讯 QQ”“微信”“WeChat”“微信输入法”“WeType”“TDesign”的使用旨在注明和指向对应主体，并非表示对“腾讯”“QQ”“腾讯 QQ”“微信”“WeChat”“微信输入法”“WeType”“TDesign”商标的注册和拥有。
 
 > [!NOTE]
 > Android™ 是 Google LLC 的商标。

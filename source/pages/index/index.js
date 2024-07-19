@@ -39,11 +39,17 @@ Page({
         wechatVersion16code: "",
         wetypeVersionBig: "",
         wetypeVersionLink: "",
+        qqVersionBig: "",
+        qqVersionSmall: "",
         loadingVisible: false,
         continueGuessing: false,
         successGuessedLink: "",
         guessSuccessVisible: false,
+        QQTestSwitch: false,
     }, onLoad: function () {
+        this.setData({
+            theme: wx.getSystemInfoSync().theme || 'light'
+        });
         this.setData({
             PerProSwitch: wx.getStorageSync('isPerProOn')
         });
@@ -62,6 +68,21 @@ Page({
         this.setData({
             wetypeVersionLink: wx.getStorageSync('wetypeVersionLink')
         });
+        this.setData({
+            qqVersionBig: wx.getStorageSync('qqVersionBig')
+        });
+        this.setData({
+            qqVersionSmall: wx.getStorageSync('qqVersionSmall')
+        });
+        if (wx.getStorageSync('isQQTestOn') === false || wx.getStorageSync('isQQTestOn') === "") {
+            this.setData({
+                QQTestSwitch: false
+            })
+        } else if (wx.getStorageSync('isQQTestOn') === true) {
+            this.setData({
+                QQTestSwitch: true
+            })
+        }
         if (wx.getStorageSync('isThrottleOn') === false) {
             this.setData({
                 ThrottleSwitch: false
@@ -167,6 +188,10 @@ Page({
                     this.setData({
                         qqVersions: qqVersionList,
                     });
+                    this.setData({
+                        qqVersionBig: qqVersionList[0].versionNumber,
+                    });
+                    wx.setStorageSync('qqVersionBig', qqVersionList[0].versionNumber);
                     this.setData({
                         onRefresh: false,
                     });
@@ -370,21 +395,39 @@ Page({
             settingVisible: false
         });
     }, handlePerProChange(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
         wx.setStorageSync('isPerProOn', e.detail.value);
         this.setData({
             PerProSwitch: e.detail.value
         })
     }, handleThrottleChange(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
         wx.setStorageSync('isThrottleOn', e.detail.value);
         this.setData({
             ThrottleSwitch: e.detail.value
+        })
+    }, handleQQTestSwitchChange(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        wx.setStorageSync('isQQTestOn', e.detail.value);
+        this.setData({
+            QQTestSwitch: e.detail.value
         })
     }, onTabsChange(e) {
         this.setData({
             guessTabDefault: e.detail.value
         })
         wx.setStorageSync('guessTabDefault', e.detail.value);
-    }, onInputWeChatBig(e) {
+    }, onTabsClick(){
+        wx.vibrateShort({
+            type: 'light',
+        });
+    },onInputWeChatBig(e) {
         this.setData({
             wechatVersionBig: e.detail.value
         });
@@ -404,6 +447,14 @@ Page({
         this.setData({
             wetypeVersionLink: e.detail.value
         });
+    }, onInputQQBig(e) {
+        this.setData({
+            qqVersionBig: e.detail.value
+        });
+    }, onInputQQSmall(e) {
+        this.setData({
+            qqVersionSmall: e.detail.value
+        })
     }, startWeChatGuess() {
         const wechatVersionBig = this.data.wechatVersionBig;
         const wechatVersionTrue = this.data.wechatVersionTrue;
@@ -421,6 +472,32 @@ Page({
             wx.setStorageSync('wechatVersionTrue', wechatVersionTrue);
             wx.setStorageSync('wechatVersion16code', wechatVersion16code);
             this.guessUrl(wechatVersionBig, wechatVersionTrue, wechatVersion16code, 'WeChat').then(r => {
+            })
+        }
+    }, startQQGuess() {
+        const qqVersionBig = this.data.qqVersionBig;
+        const qqVersionSmall = this.data.qqVersionSmall;
+        if ((qqVersionBig === '' && (this.data.QQTestSwitch === false || this.data.QQTestSwitch === "")) || ((qqVersionBig === '' || qqVersionSmall === '') && this.data.QQTestSwitch === true)) {
+            this.setData({
+                errorText: '存在未填写的参数，请检查内容是否填写完毕'
+            });
+            this.setData({
+                errorVisible: true
+            });
+        } else if (qqVersionSmall % 5 !== 0 && this.data.QQTestSwitch === true) {
+            this.setData({
+                errorText: '小版本号需填写 5 的倍数。如需解除此限制，请等待后续 QQ 版本列表 Lite 版本更新或使用 QQ 版本列表实用工具 for Android。'
+            });
+            this.setData({
+                errorVisible: true
+            });
+        } else {
+            this.closeGuessPopup();
+            if (this.data.QQTestSwitch === true) {
+                wx.setStorageSync('qqVersionSmall', qqVersionSmall);
+                this.guessUrl(qqVersionBig, qqVersionSmall, '', 'QQTest').then(r => {
+                })
+            } else if (this.data.QQTestSwitch === false || this.data.QQTestSwitch === "") this.guessUrl(qqVersionBig, '', '', 'QQOfficial').then(r => {
             })
         }
     }, startWeTypeGuess() {
@@ -458,6 +535,9 @@ Page({
             continueGuessing: 'STATUS_ONGOING'
         });
         let timerId;
+        const soList = ["_64", "_64_HB", "_64_HB1", "_64_HB2", "_64_HB3", "_HB_64", "_HB1_64", "_HB2_64", "_HB3_64", "_64_BBPJ", "_BBPJ_64"];
+        const stList = ["_64", "_64_HB", "_HB_64"];
+        let sIndex = 0;
 
         const guess = () => {
             if (this.data.continueGuessing === 'STATUS_ONGOING') {
@@ -465,8 +545,11 @@ Page({
                     guessedLink = `https://dldir1.qq.com/weixin/android/weixin${versionBig}android${versionSuf}_0x${v16codeStr}_arm64.apk`;
                 } else if (mode === 'WeType') {
                     guessedLink = `https://download.z.weixin.qq.com/app/android/${versionBig}/wxkb_${vSuf}_32.apk`;
+                } else if (mode === 'QQOfficial') {
+                    guessedLink = `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_${versionBig}${soList[sIndex]}.apk`;
+                } else if (mode === 'QQTest') {
+                    guessedLink = `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_${versionBig}.${vSuf}${stList[sIndex]}.apk`;
                 }
-                //console.log(`正在猜测下载地址：${guessedLink}`);
                 this.setData({
                     loadingVisible: true
                 });
@@ -484,13 +567,31 @@ Page({
                         this.setData({
                             guessSuccessVisible: true
                         });
-                        if (mode === 'WeChat') v16codeStr = (parseInt(v16codeStr, 16) + 1).toString(16); else if (mode === 'WeType') vSuf = (Number(vSuf) + 1).toString();
+                        if (mode === 'WeChat') v16codeStr = (parseInt(v16codeStr, 16) + 1).toString(16); else if (mode === 'WeType') vSuf = (Number(vSuf) + 1).toString(); else if (mode === 'QQOfficial') {
+                            if (sIndex >= soList.length - 1) this.setData({
+                                continueGuessing: 'STATUS_END'
+                            }); else sIndex++;
+                        } else if (mode === 'QQTest') {
+                            if (sIndex >= stList.length - 1) {
+                                vSuf = (Number(vSuf)+5).toString();
+                                sIndex = 0;
+                            } else sIndex++;
+                        }
                         timerId = setTimeout(guess, 100);
                         this.setData({
                             continueGuessing: 'STATUS_PAUSE'
                         });
                     } else {
-                        if (mode === 'WeChat') v16codeStr = (parseInt(v16codeStr, 16) + 1).toString(16); else if (mode === 'WeType') vSuf = (Number(vSuf) + 1).toString();
+                        if (mode === 'WeChat') v16codeStr = (parseInt(v16codeStr, 16) + 1).toString(16); else if (mode === 'WeType') vSuf = (Number(vSuf) + 1).toString(); else if (mode === 'QQOfficial') {
+                            if (sIndex >= soList.length - 1) this.setData({
+                                continueGuessing: 'STATUS_END'
+                            }); else sIndex++;
+                        } else if (mode === 'QQTest') {
+                            if (sIndex >= stList.length - 1) {
+                                vSuf = (Number(vSuf)+5).toString();
+                                sIndex = 0;
+                            } else sIndex++;
+                        }
                         timerId = setTimeout(guess, 100);
                     }
                 }).catch(err => {
@@ -554,12 +655,14 @@ Page({
         this.setData({
             guessSuccessVisible: e.detail.visible,
         });
-    },copyUtil(copyData){
+    }, copyUtil(copyData) {
         const that = this;
         wx.setClipboardData({
             data: copyData, success(res) {
                 setTimeout(() => {
-                    wx.showToast({title: '', duration: 0, icon: 'none'});
+                    wx.showToast({
+                        title: '', duration: 0, icon: 'none'
+                    });
                     wx.hideToast();
                 }, 0)
                 Message.success({
