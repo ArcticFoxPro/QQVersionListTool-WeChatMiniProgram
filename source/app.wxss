@@ -35,7 +35,7 @@
     word-break: normal;
 }
 
-.t-message__text-wrap{
+.t-message__text-wrap {
     overflow: hidden;
 }
 

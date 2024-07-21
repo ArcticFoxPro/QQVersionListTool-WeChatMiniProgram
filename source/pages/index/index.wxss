@@ -43,7 +43,7 @@
 
 .recycle-view-container {
     flex: 1;
-    --webkit-overflow-scrolling: touch;
+    -webkit-overflow-scrolling: touch;
     background-color: #fff;
 }
 

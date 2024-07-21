@@ -3,7 +3,8 @@
   "projectname": "qqverlist-wechatminiprogram",
   "setting": {
     "compileHotReLoad": true,
-    "skylineRenderEnable": false
+    "skylineRenderEnable": false,
+    "preloadBackgroundData": false
   },
   "libVersion": "development"
 }

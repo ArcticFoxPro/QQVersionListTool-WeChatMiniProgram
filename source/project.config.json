@@ -21,7 +21,8 @@
     "ignoreUploadUnusedFiles": true,
     "uglifyFileName": true,
     "condition": true,
-    "compileWorklet": true
+    "compileWorklet": true,
+    "swc": true
   },
   "condition": {},
   "editorSetting": {

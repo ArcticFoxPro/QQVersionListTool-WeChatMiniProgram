@@ -74,7 +74,7 @@
             <view class="about-title" id="ability-about">关于</view>
         </view>
         <view class="about-text" style="margin: 0 48rpx 12rpx 48rpx;">QQ 版本列表 Lite for WeChat MiniProgram</view>
-        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">版本：1.1.0</view>
+        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">版本：1.1.1</view>
         <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">作者：快乐小牛、有鲫雪狐</view>
         <view class="about-text" style="margin: 12rpx; padding: 0 36rpx 12rpx 36rpx;">Since 2024.03.12</view>
         <view class="TD_and_MulanPubLv2">
@@ -113,7 +113,7 @@
                 </t-notice-bar>
 
                 <t-input id="qq-official-version-big" label="主版本号" placeholder="点击以输入" value="{{qqVersionBig}}"
-                         tips="填写格式为 x.y.z" bind:change="onInputQQBig"
+                         tips="填写格式为 x.y.z" bind:change="onInputQQBig" type="digit" 
                          confirm-type="{{QQTestSwitch ? 'next' : 'done'}}"/>
                 <t-input disabled="{{!QQTestSwitch}}" id="qq-official-version-big" label="小版本号" placeholder="点击以输入"
                          value="{{qqVersionSmall}}" tips="填写起始猜测小版本号，猜正式版时无需填写" type="number"
@@ -129,18 +129,6 @@
                     <t-button theme="light" block size="large" bind:tap="closeGuessPopup">取消</t-button>
                 </view>
 
-                <!--
-                <view class="section__content">
-                    <t-result theme="default" title="微信小程序内无法使用 QQ 猜版"
-                              description="由于微信平台限制，QQ 版本列表 Lite 微信小程序内无法使用 QQ 猜版功能。请移步至 QQ 版本列表实用工具 for Android 以使用 QQ 猜版功能（下方可复制对应链接）。"/>
-                </view>
-                <view class="guess-button">
-                    <t-button theme="primary" block size="large" bind:tap="closeGuessPopup">确定</t-button>
-                </view>
-                <view class="guess-button">
-                    <t-button theme="light" block size="large" bind:tap="copyAndroidOSLink">复制开源仓库地址</t-button>
-                </view>
-                -->
             </t-tab-panel>
             <t-tab-panel label="微信" value="1">
                 <t-notice-bar visible="{{true}}" prefixIcon="{{false}}"
