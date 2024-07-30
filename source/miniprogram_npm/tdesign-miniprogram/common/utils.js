@@ -1,5 +1,5 @@
 import { prefix } from './config';
-const systemInfo = wx.getSystemInfoSync();
+export const systemInfo = wx.getSystemInfoSync();
 export const debounce = function (func, wait = 500) {
     let timerId;
     return function (...rest) {
@@ -236,3 +236,10 @@ export const isOverSize = (size, sizeLimit) => {
     return size > computedSize;
 };
 export const rpx2px = (rpx) => Math.floor((systemInfo.windowWidth * rpx) / 750);
+export const nextTick = () => {
+    return new Promise((resolve) => {
+        wx.nextTick(() => {
+            resolve();
+        });
+    });
+};

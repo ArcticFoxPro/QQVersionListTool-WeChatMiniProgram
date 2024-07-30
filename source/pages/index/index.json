@@ -22,5 +22,5 @@
     "t-message": "tdesign-miniprogram/message/message",
     "t-notice-bar": "tdesign-miniprogram/notice-bar/notice-bar"
   },
-  "disableScroll":true
+  "disableScroll": true
 }

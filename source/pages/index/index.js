@@ -14,6 +14,7 @@
 
 import Message from 'tdesign-miniprogram/message/index';
 
+const util = require('../../utils/util.js')
 const QQVersionBean = require('./QQVersionBean.js');
 
 Page({
@@ -58,29 +59,33 @@ Page({
             qqVersionBig: wx.getStorageSync('qqVersionBig'),
             qqVersionSmall: wx.getStorageSync('qqVersionSmall')
         });
-        if (wx.getStorageSync('isQQTestOn') === false || wx.getStorageSync('isQQTestOn') === "") {
-            this.setData({
-                QQTestSwitch: false
-            })
-        } else if (wx.getStorageSync('isQQTestOn') === true) {
-            this.setData({
-                QQTestSwitch: true
-            })
-        }
-        if (wx.getStorageSync('isThrottleOn') === false) {
-            this.setData({
-                ThrottleSwitch: false
-            })
-        } else if (wx.getStorageSync('isThrottleOn') === "" || wx.getStorageSync('isThrottleOn') === true) {
-            this.setData({
-                ThrottleSwitch: true
-            })
-        }
-        if (wx.getStorageSync('guessTabDefault') !== '') {
-            this.setData({
-                guessTabDefault: wx.getStorageSync('guessTabDefault')
-            });
-        }
+        if (wx.getStorageSync('isQQTestOn') === false || wx.getStorageSync('isQQTestOn') === "") this.setData({
+            QQTestSwitch: false
+        }); else if (wx.getStorageSync('isQQTestOn') === true) this.setData({
+            QQTestSwitch: true
+        })
+
+        if (wx.getStorageSync('isThrottleOn') === false) this.setData({
+            ThrottleSwitch: false
+        }); else if (wx.getStorageSync('isThrottleOn') === "" || wx.getStorageSync('isThrottleOn') === true) this.setData({
+            ThrottleSwitch: true
+        })
+
+        if (wx.getStorageSync('guessTabDefault') !== "") this.setData({
+            guessTabDefault: wx.getStorageSync('guessTabDefault')
+        });
+
+        if (wx.getStorageSync('isExtendSuffixOn') === "" || wx.getStorageSync('isExtendSuffixOn') === false) this.setData({
+            ExtendSuffixSwitch: false
+        }); else if (wx.getStorageSync('isExtendSuffixOn') === true) this.setData({
+            ExtendSuffixSwitch: true
+        })
+
+        if (wx.getStorageSync('isNot5') === "" || wx.getStorageSync('isNot5') === false) this.setData({
+            Not5Switch: false
+        }); else if (wx.getStorageSync('isNot5') === true) this.setData({
+            Not5Switch: true
+        })
     }, onReady: async function () {
         const windowHeight = await new Promise((resolve) => {
             wx.getSystemInfo({
@@ -342,6 +347,14 @@ Page({
         this.setData({
             ThrottleSwitch: e.detail.value
         })
+    }, handleExtendSuffixChange(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        wx.setStorageSync('isExtendSuffixOn', e.detail.value);
+        this.setData({
+            ExtendSuffixSwitch: e.detail.value
+        })
     }, handleQQTestSwitchChange(e) {
         wx.vibrateShort({
             type: 'light',
@@ -349,6 +362,14 @@ Page({
         wx.setStorageSync('isQQTestOn', e.detail.value);
         this.setData({
             QQTestSwitch: e.detail.value
+        })
+    }, handleNot5Change(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        wx.setStorageSync('isNot5', e.detail.value);
+        this.setData({
+            Not5Switch: e.detail.value
         })
     }, onTabsChange(e) {
         this.setData({
@@ -410,7 +431,7 @@ Page({
             this.setData({
                 errorText: '存在未填写的参数，请检查内容是否填写完毕', errorVisible: true
             });
-        } else if (qqVersionSmall % 5 !== 0 && this.data.QQTestSwitch === true) {
+        } else if (qqVersionSmall % 5 !== 0 && this.data.QQTestSwitch === true && this.data.Not5Switch === false) {
             this.setData({
                 errorText: '小版本号需填写 5 的倍数。如需解除此限制，请等待后续 QQ 版本列表 Lite 版本更新或使用 QQ 版本列表实用工具 for Android。',
                 errorVisible: true
@@ -457,74 +478,96 @@ Page({
         });
         let timerId;
         const soList = ["_64", "_64_HB", "_64_HB1", "_64_HB2", "_64_HB3", "_HB_64", "_HB1_64", "_HB2_64", "_HB3_64", "_64_BBPJ", "_BBPJ_64"];
-        const stList = ["_64", "_64_HB", "_HB_64"];
+        const stList = ["_64", "_64_HB", "_64_HB1", "_64_HB2", "_64_HB3", "_64_HD", "_64_HD1", "_64_HD2", "_64_HD3", "_64_HD1HB", "_HB_64", "_HB1_64", "_HB2_64", "_HB3_64", "_HD_64", "_HD1_64", "_HD2_64", "_HD3_64", "_HD1HB_64"];
         let sIndex = 0;
 
         const guess = () => {
-            if (this.data.continueGuessing === 'STATUS_ONGOING') {
-                if (mode === 'WeChat') guessedLink = `https://dldir1.qq.com/weixin/android/weixin${versionBig}android${versionSuf}_0x${v16codeStr}_arm64.apk`; else if (mode === 'WeType') guessedLink = `https://download.z.weixin.qq.com/app/android/${versionBig}/wxkb_${vSuf}_32.apk`; else if (mode === 'QQOfficial') guessedLink = `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_${versionBig}${soList[sIndex]}.apk`; else if (mode === 'QQTest') guessedLink = `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_${versionBig}.${vSuf}${stList[sIndex]}.apk`;
+            switch (this.data.continueGuessing) {
+                case 'STATUS_ONGOING':
+                    if (mode === 'WeChat') guessedLink = `https://dldir1.qq.com/weixin/android/weixin${versionBig}android${versionSuf}_0x${v16codeStr}_arm64.apk`; else if (mode === 'WeType') guessedLink = `https://download.z.weixin.qq.com/app/android/${versionBig}/wxkb_${vSuf}_32.apk`; else if (mode === 'QQOfficial') guessedLink = `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_${versionBig}${soList[sIndex]}.apk`; else if (mode === 'QQTest') guessedLink = `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_${versionBig}.${vSuf}${stList[sIndex]}.apk`;
 
-                this.setData({
-                    loadingVisible: true,
-                    guessSuccessVisible: false,
-                    updateProgressDialogMessage: `正在猜测下载地址：${guessedLink}`
-                })
-                this.fetchLink(guessedLink).then(isSuccess => {
-                    if (isSuccess) {
-                        this.setData({
-                            successGuessedLink: guessedLink, guessSuccessVisible: true
-                        });
-                        if (mode === 'WeChat') v16codeStr = (parseInt(v16codeStr, 16) + 1).toString(16); else if (mode === 'WeType') vSuf = (Number(vSuf) + 1).toString(); else if (mode === 'QQOfficial') {
-                            if (sIndex >= soList.length - 1) this.setData({
-                                continueGuessing: 'STATUS_END'
-                            }); else sIndex++;
-                        } else if (mode === 'QQTest') {
-                            if (sIndex >= stList.length - 1) {
-                                vSuf = (Number(vSuf) + 5).toString();
-                                sIndex = 0;
-                            } else sIndex++;
-                        }
-                        timerId = setTimeout(guess, 100);
-                        this.setData({
-                            continueGuessing: 'STATUS_PAUSE'
-                        });
-                    } else {
-                        if (mode === 'WeChat') v16codeStr = (parseInt(v16codeStr, 16) + 1).toString(16); else if (mode === 'WeType') vSuf = (Number(vSuf) + 1).toString(); else if (mode === 'QQOfficial') {
-                            if (sIndex >= soList.length - 1) this.setData({
-                                continueGuessing: 'STATUS_END'
-                            }); else sIndex++;
-                        } else if (mode === 'QQTest') {
-                            if (sIndex >= stList.length - 1) {
-                                vSuf = (Number(vSuf) + 5).toString();
-                                sIndex = 0;
-                            } else sIndex++;
-                        }
-                        timerId = setTimeout(guess, 100);
-                    }
-                }).catch(err => {
-                    console.error(err);
-                    const errorMessage = err.errMsg;
                     this.setData({
-                        errorText: errorMessage, errorVisible: true
+                        loadingVisible: true,
+                        guessSuccessVisible: false,
+                        updateProgressDialogMessage: `正在猜测下载地址：${guessedLink}`
+                    })
+                    this.fetchLink(guessedLink).then(isSuccess => {
+                        if (isSuccess) {
+                            this.setData({
+                                successGuessedLink: guessedLink, guessSuccessVisible: true
+                            });
+                            switch (mode) {
+                                case 'WeChat':
+                                    v16codeStr = (parseInt(v16codeStr, 16) + 1).toString(16);
+                                    break;
+                                case 'WeType':
+                                    vSuf = (Number(vSuf) + 1).toString();
+                                    break;
+                                case 'QQOfficial':
+                                    if (sIndex >= soList.length - 1) this.setData({
+                                        continueGuessing: 'STATUS_END'
+                                    }); else sIndex++;
+                                    break;
+                                case 'QQTest':
+                                    if (sIndex >= stList.length - 1 || this.data.ExtendSuffixSwitch === false) {
+                                        if (this.data.Not5Switch) vSuf = (Number(vSuf) + 1).toString(); else vSuf = (Number(vSuf) + 5).toString();
+                                        sIndex = 0;
+                                    } else sIndex++;
+                                    break;
+                            }
+                            timerId = setTimeout(guess, 100);
+                            this.setData({
+                                continueGuessing: 'STATUS_PAUSE'
+                            });
+                        } else {
+                            switch (mode) {
+                                case 'WeChat':
+                                    v16codeStr = (parseInt(v16codeStr, 16) + 1).toString(16);
+                                    break;
+                                case 'WeType':
+                                    vSuf = (Number(vSuf) + 1).toString();
+                                    break;
+                                case 'QQOfficial':
+                                    if (sIndex >= soList.length - 1) this.setData({
+                                        continueGuessing: 'STATUS_END'
+                                    }); else sIndex++;
+                                    break;
+                                case 'QQTest':
+                                    if (sIndex >= stList.length - 1 || this.data.ExtendSuffixSwitch === false) {
+                                        if (this.data.Not5Switch) vSuf = (Number(vSuf) + 1).toString(); else vSuf = (Number(vSuf) + 5).toString();
+                                        sIndex = 0;
+                                    } else sIndex++;
+                                    break;
+                            }
+                            timerId = setTimeout(guess, 100);
+                        }
+                    }).catch(err => {
+                        console.error(err);
+                        const errorMessage = err.errMsg;
+                        this.setData({
+                            errorText: errorMessage, errorVisible: true
+                        });
                     });
-                });
-            } else if (this.data.continueGuessing === 'STATUS_PAUSE') {
-                timerId = setTimeout(guess, 100);
-            } else if (this.data.continueGuessing === 'STATUS_END') {
-                this.setData({
-                    loadingVisible: false, guessSuccessVisible: false
-                });
-                Message.info({
-                    context: this,
-                    offset: [90, 32],
-                    duration: 1500,
-                    icon: false,
-                    single: false,
-                    content: '已停止猜测',
-                    align: 'center'
-                });
-                clearTimeout(timerId);
-                timerId = null;
+                    break;
+                case 'STATUS_PAUSE':
+                    timerId = setTimeout(guess, 100);
+                    break;
+                case 'STATUS_END':
+                    this.setData({
+                        loadingVisible: false, guessSuccessVisible: false
+                    });
+                    Message.info({
+                        context: this,
+                        offset: [90, 32],
+                        duration: 1500,
+                        icon: false,
+                        single: false,
+                        content: '已停止猜测',
+                        align: 'center'
+                    });
+                    clearTimeout(timerId);
+                    timerId = null;
+                    break;
             }
         };
 

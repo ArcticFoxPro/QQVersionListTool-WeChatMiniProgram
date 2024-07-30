@@ -113,16 +113,17 @@
                 </t-notice-bar>
 
                 <t-input id="qq-official-version-big" label="主版本号" placeholder="点击以输入" value="{{qqVersionBig}}"
-                         tips="填写格式为 x.y.z" bind:change="onInputQQBig" type="digit" 
+                         tips="填写格式为 x.y.z" bind:change="onInputQQBig" type="digit"
                          confirm-type="{{QQTestSwitch ? 'next' : 'done'}}"/>
-                <t-input disabled="{{!QQTestSwitch}}" id="qq-official-version-big" label="小版本号" placeholder="点击以输入"
+                <t-input disabled="{{!QQTestSwitch}}" id="qq-official-version-big" label="小版本号"
+                         placeholder="点击以输入"
                          value="{{qqVersionSmall}}" tips="填写起始猜测小版本号，猜正式版时无需填写" type="number"
                          bind:change="onInputQQSmall" confirm-type="done"/>
                 <t-cell title="测试版猜版" description="此开关为关闭状态时将猜测正式版" bordered="{{false}}">
                     <t-switch style="margin: 0 0 0 48rpx;" value="{{QQTestSwitch}}" slot="note"
                               bind:change="handleQQTestSwitchChange"/>
                 </t-cell>
-                <view class="guess-button">
+                <view class="guess-button-top">
                     <t-button theme="primary" block size="large" bind:tap="startQQGuess">开始</t-button>
                 </view>
                 <view class="guess-button">
@@ -146,8 +147,8 @@
                          bind:change="onInputWeChatTrue" confirm-type="next"/>
                 <t-input id="wechat-version-16code" label="十六进制代码" placeholder="无需填写开头的“0x”"
                          value="{{wechatVersion16code}}" tips="填写十六进制代码，无需填写开头的“0x”"
-                         bind:change="onInputWeChat16code" confirm-type="done"/>
-                <view class="guess-button">
+                         bind:change="onInputWeChat16code" confirm-type="done" borderless/>
+                <view class="guess-button-top">
                     <t-button theme="primary" block size="large" bind:tap="startWeChatGuess">开始</t-button>
                 </view>
                 <view class="guess-button">
@@ -165,8 +166,8 @@
                          type="digit" value="{{wetypeVersionBig}}" confirm-type="next" bind:change="onInputWeTypeBig"/>
                 <t-input id="wetype-version-link" label="直链版本号" placeholder="点击以输入" tips="填写直链版本号"
                          type="number" value="{{wetypeVersionLink}}" confirm-type="done"
-                         bind:change="onInputWeTypeLink"/>
-                <view class="guess-button">
+                         bind:change="onInputWeTypeLink" borderless/>
+                <view class="guess-button-top">
                     <t-button theme="primary" block size="large" bind:tap="startWeTypeGuess">开始</t-button>
                 </view>
                 <view class="guess-button">
@@ -213,7 +214,7 @@
             <view class="guess-title" id="ability-jsonitem">JSON 详情</view>
         </view>
         <view style=" margin: 0 32rpx 16rpx 32rpx;">
-            <text user-select class="json-text" style="font-size:13px; " selectable="true">{{itemString}}</text>
+            <text user-select class="json-text" style="font-size:13px; " user-select="true">{{itemString}}</text>
         </view>
     </view>
     <t-footer text="— 可长按选择复制内容 —"></t-footer>
@@ -281,13 +282,21 @@
             <view class="setting-title" id="ability-setting">设置</view>
         </view>
         <t-cell title="高性能模式" description="开启后能更精确监听滚动事件以精准更改标题栏显示状态，但系统资源占用更高"
-                bordered="{{false}}">
+                bordered>
             <t-switch style="margin: 0 0 0 48rpx;" value="{{ThrottleSwitch}}" slot="note"
                       bind:change="handleThrottleChange"/>
         </t-cell>
-        <t-cell title="版本列表展示额定包大小占比历史最大包指示条" bordered="{{false}}">
+        <t-cell title="版本列表展示额定包大小占比历史最大包指示条" bordered>
             <t-switch style="margin: 0 0 0 48rpx;" value="{{PerProSwitch}}" slot="note"
                       bind:change="handlePerProChange"/>
+        </t-cell>
+        <t-cell title="扩展测试版猜版直链后缀" bordered>
+            <t-switch style="margin: 0 0 0 48rpx;" value="{{ExtendSuffixSwitch}}" slot="note"
+                      bind:change="handleExtendSuffixChange"/>
+        </t-cell>
+        <t-cell title="解除 QQ 测试版猜版小版本号遵循 5 的倍数限制" bordered="{{false}}">
+            <t-switch style="margin: 0 0 0 48rpx;" value="{{Not5Switch}}" slot="note"
+                      bind:change="handleNot5Change"/>
         </t-cell>
         <view class="setting-button">
             <t-button theme="light" block size="large" bind:tap="closeSettingPopup">确定</t-button>

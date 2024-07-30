@@ -1,5 +1,7 @@
 /// <reference types="miniprogram-api-typings" />
 /// <reference types="miniprogram-api-typings" />
+/// <reference types="miniprogram-api-typings" />
+export declare const systemInfo: WechatMiniprogram.SystemInfo;
 declare type Context = WechatMiniprogram.Page.TrivialInstance | WechatMiniprogram.Component.TrivialInstance;
 export declare const debounce: (func: any, wait?: number) => (...rest: any[]) => void;
 export declare const throttle: (func: any, wait?: number, options?: any) => (...args: any[]) => void;
@@ -31,4 +33,5 @@ export declare const uniqueFactory: (compName: any) => () => string;
 export declare const calcIcon: (icon: string | Record<string, any>, defaultIcon?: string) => string | Record<string, any>;
 export declare const isOverSize: (size: any, sizeLimit: any) => boolean;
 export declare const rpx2px: (rpx: any) => number;
+export declare const nextTick: () => Promise<void>;
 export {};

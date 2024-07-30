@@ -161,6 +161,9 @@ let Calendar = class Calendar extends SuperComponent {
                 }
                 return val.getTime();
             },
+            onScroll(e) {
+                this.triggerEvent('scroll', e.detail);
+            },
         };
     }
 };

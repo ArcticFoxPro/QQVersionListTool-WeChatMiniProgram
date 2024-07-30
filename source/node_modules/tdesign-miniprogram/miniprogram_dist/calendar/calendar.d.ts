@@ -43,5 +43,6 @@ export default class Calendar extends SuperComponent {
         handleSelect(e: any): void;
         onTplButtonTap(): void;
         toTime(val: any): any;
+        onScroll(e: any): void;
     };
 }

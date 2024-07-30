@@ -28,12 +28,14 @@ let NoticeBar = class NoticeBar extends SuperComponent {
         ];
         this.options = {
             multipleSlots: true,
+            pureDataPattern: /^__/,
         };
         this.properties = props;
         this.data = {
             prefix,
             classPrefix: name,
             loop: -1,
+            __ready: false,
         };
         this.observers = {
             marquee(val) {
@@ -48,6 +50,8 @@ let NoticeBar = class NoticeBar extends SuperComponent {
                 }
             },
             visible(visible) {
+                if (!this.data.__ready)
+                    return;
                 if (visible) {
                     this.show();
                 }
@@ -64,6 +68,8 @@ let NoticeBar = class NoticeBar extends SuperComponent {
                 });
             },
             content() {
+                if (!this.data.__ready)
+                    return;
                 this.clearNoticeBarAnimation();
                 this.initAnimation();
             },
@@ -80,6 +86,7 @@ let NoticeBar = class NoticeBar extends SuperComponent {
             },
             ready() {
                 this.show();
+                this.setData({ __ready: true });
             },
         };
         this.methods = {

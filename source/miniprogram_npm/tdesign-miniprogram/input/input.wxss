@@ -168,6 +168,9 @@
   color: var(--td-input-placeholder-text-color, var(--td-text-color-placeholder, var(--td-font-gray-3, rgba(0, 0, 0, 0.4))));
   font-size: var(--td-font-size-m, 32rpx);
 }
+.t-input__placeholder--disabled {
+  color: var(--td-input-disabled-text-color, var(--td-text-color-disabled, var(--td-font-gray-4, rgba(0, 0, 0, 0.26))));
+}
 .t-input__tips {
   font-size: var(--td-font-size-s, 24rpx);
   line-height: 40rpx;
