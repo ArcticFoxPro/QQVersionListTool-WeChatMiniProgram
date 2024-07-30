@@ -83,11 +83,11 @@ QQ 版本列表 Lite for WeChat MiniProgram 是一个使用 TDesign 组件库构
   - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>_BBPJ_64.apk`
 
 - 若“测试版猜版”开关为开时，则需要填写起始小版本号后才可开始猜版。
-  - 小版本号需填写 5 的倍数。如需解除此限制，请等待后续 QQ 版本列表 Lite 版本更新或使用 [QQ 版本列表实用工具 for Android](https://github.com/klxiaoniu/QQVersionList)。
-  - 默认情况下，软件将尝试访问以下链接：
+  - 默认情况下，软件将尝试访问 `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_64.apk` ，若当次访问未果，默认情况下将按照设置逻辑自动递增小版本号后再次尝试访问，直到访问成功为止。
+  - 在设置中打开扩展测试版猜版格式后，软件将尝试访问以下链接：
     <details>
     <summary>点击展开</summary>
-    
+
     - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_64.apk`
     - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_64_HB.apk`
     - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_64_HB1.apk`
@@ -137,9 +137,17 @@ QQ 版本列表 Lite for WeChat MiniProgram 是一个使用 TDesign 组件库构
 
 QQ 版本列表 Lite for WeChat MiniProgram 仅供学习交流使用，不提供任何形式的服务，也不提供任何形式的技术支持。因此，QQ 版本列表 Lite for WeChat MiniProgram 不会上架到微信。
 
+### 为什么默认添加了小版本号必须为 5 的倍数这项限制？
+
+基于对 Android QQ 长期以来的版本号发布规律进行深入观察和分析的结果，我们发现 Android QQ 小版本号更新通常遵循每增加一个有效版本即递增 5 的倍数这一特定模式。为了贴近这一潜在实际规范并确保 QQ 版本列表实用工具的快捷性，QQ 版本列表实用工具依据最佳实践原则，默认设置小版本号和猜版必须为 5 的倍数的限制规则。然而，对于用户而言，此项约束并非强制性，如有需要，用户可随时进入设置解除此限制选项，以便更加灵活地匹配各类版本信息。
+
 ### 版本列表中已经有新的版本号了，为什么我使用猜版却获取不到下载链接？
 
 即使版本列表已出现了新的版本号，也并不意味着 QQ 团队已经完成了新版本（含测试版）安装包在腾讯公网服务器的部署和发布。一种可能的情况是，QQ 团队正在进行新版本的内部测试阶段，因而尚未对外提供公网下载渠道。
+
+### 为什么不提供 Android 微信的版本列表？
+
+目前还没有找到来自官方的可靠且请求次数少而信息密度大的 Android 微信版本列表数据源，因此 QQ 版本列表实用工具无法提供 Android 微信的版本列表。如果您发现了可靠的 Android 微信版本列表数据源，欢迎提出 Issue(s) 或提交 PR。
 
 ## 其它
 

@@ -433,7 +433,7 @@ Page({
             });
         } else if (qqVersionSmall % 5 !== 0 && this.data.QQTestSwitch === true && this.data.Not5Switch === false) {
             this.setData({
-                errorText: '小版本号需填写 5 的倍数。如需解除此限制，请等待后续 QQ 版本列表 Lite 版本更新或使用 QQ 版本列表实用工具 for Android。',
+                errorText: '小版本号需填写 5 的倍数。如需解除此限制，请前往设置进行解除。',
                 errorVisible: true
             });
         } else {
