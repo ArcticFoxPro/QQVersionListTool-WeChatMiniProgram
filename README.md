@@ -2,6 +2,16 @@
 
 ![QQ 版本列表 Lite Banner](/QQVerLiteBanner.png)
 
+<div align="center">
+
+[注意事项](#注意事项) | [简介](#简介) | [如何获取](#如何获取) | [如何使用](#如何使用) | [常见问题](#常见问题) | [其它](#其它)
+
+[贡献成员](#贡献成员) | [开源相关](#开源相关) | [孪生项目](#孪生项目)
+
+</div> 
+
+<span id="注意事项"></span>
+
 ## 注意事项：使用前须知
 
 > [!WARNING]
@@ -18,6 +28,8 @@ QQ 版本列表 Lite for WeChat MiniProgram 是一个使用 TDesign 组件库构
 
 - [x] ~适配深色模式（跟随 TDesign 微信小程序组件库上游深色模式适配而更新）~（1.0.1 版本上线，采用 TDesign 微信小程序组件库 1.3.0）
 - [ ] 适配微信小程序 Skyline 渲染引擎（跟随 TDesign 微信小程序组件库上游 Skyline 适配而更新）
+
+<span id="如何获取"></span>
 
 ## 如何获取？
 
@@ -37,7 +49,9 @@ QQ 版本列表 Lite for WeChat MiniProgram 是一个使用 TDesign 组件库构
 
 ### 非微信小程序开发者
 
-由于微信公众平台限制，微信小程序体验版用户上限为 15 个，非微信小程序开发者用户无法使用 QQ 版本列表 Lite for WeChat MiniProgram，请谅解。
+由于微信公众平台限制，微信小程序个人开发者所拥有的体验版用户名额上限为 15 个，非微信小程序开发者用户无法使用 QQ 版本列表 Lite for WeChat MiniProgram，请谅解。
+
+<span id="如何使用"></span>
 
 ## 如何使用？
 
@@ -71,9 +85,28 @@ QQ 版本列表 Lite for WeChat MiniProgram 是一个使用 TDesign 组件库构
 - 若“测试版猜版”开关为开时，则需要填写起始小版本号后才可开始猜版。
   - 小版本号需填写 5 的倍数。如需解除此限制，请等待后续 QQ 版本列表 Lite 版本更新或使用 [QQ 版本列表实用工具 for Android](https://github.com/klxiaoniu/QQVersionList)。
   - 默认情况下，软件将尝试访问以下链接：
+    <details>
+    <summary>点击展开</summary>
     - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_64.apk`
     - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_64_HB.apk`
+    - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_64_HB1.apk`
+    - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_64_HB2.apk`
+    - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_64_HB3.apk`
     - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_HB_64.apk`
+    - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_HB1_64.apk`
+    - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_HB2_64.apk`
+    - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_HB3_64.apk`
+    - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_64_HD.apk`
+    - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_64_HD1.apk`
+    - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_64_HD2.apk`
+    - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_64_HD3.apk`
+    - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_HD_64.apk`
+    - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_HD1_64.apk`
+    - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_HD2_64.apk`
+    - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_HD3_64.apk`
+    - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_64_HD1HB.apk`
+    - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_HD1HB_64.apk`
+    </details>
 
     若当次访问未果，默认情况下将按照设置逻辑自动递增小版本号后再次尝试访问，直到访问成功为止。
 
