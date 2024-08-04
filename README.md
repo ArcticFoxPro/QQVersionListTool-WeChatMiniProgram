@@ -57,7 +57,7 @@ QQ 版本列表 Lite for WeChat MiniProgram 是一个使用 TDesign 组件库构
 
 ### 版本列表
 
-在进入 QQ 版本列表 Lite 时，您首先会看到一系列显示“版本：x.y.z 大小：xxx MB”的卡片，这些卡片组成的列表即为 Android QQ 的版本列表，卡片列表展示了已经或即将发布的 Android QQ 版本。版本信息来源：https://im.qq.com/rainbow/androidQQVersionList
+在进入 QQ 版本列表 Lite 时，您首先会看到一系列显示“版本：x.y.z 额定大小：xxx MB”的卡片，这些卡片组成的列表即为 Android QQ 的版本列表，卡片列表展示了已经或即将发布的 Android QQ 版本。版本信息来源：https://im.qq.com/rainbow/androidQQVersionList
 
 点击卡片将弹出弹出层，可查阅到更为详尽的信息和原始 JSON 字符串信息。
 
