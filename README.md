@@ -65,7 +65,7 @@ QQ 版本列表 Lite for WeChat MiniProgram 是一个使用 TDesign 组件库构
 
 在 Android QQ - 首页侧滑菜单 - 设置 - 关于QQ与帮助 中可得知，Android QQ 的版本号通常为 `x.y.z.nnnnn`。其中 `x.y.z` 在这里被称为“主版本号”，而 `nnnnn` 被称为“小版本号”。
 
-在 QQ 版本列表 Lite 界面，点击右下角放大镜图标浮动按钮即可进入“猜版 Extended for Android”对话框。
+在 QQ 版本列表 Lite 界面，点击右下角“猜版 Extd.”按钮即可进入“猜版 Extended for Android”对话框。
 
 对话框含有两个输入框和一个开关，分别是“主版本号”、“小版本号”和“测试版猜版”开关。“主版本号”已经预填入了版本列表显示的最新版本号，也可自行修改。
 
