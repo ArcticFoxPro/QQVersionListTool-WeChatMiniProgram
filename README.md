@@ -1,6 +1,6 @@
 # QQ 版本列表 Lite for WeChat MiniProgram
 
-![QQ 版本列表 Lite Banner](/QQVerLiteBanner.png)
+![QQ 版本列表 Lite Banner](https://raw.githubusercontent.com/ArcticFoxPro/QQVersionListTool-WeChatMiniProgram/main/QQVerLiteBanner.png)
 
 <div align="center">
 
@@ -15,7 +15,7 @@
 ## 注意事项：使用前须知
 
 > [!WARNING]
-> 请确保您在使用前充分审慎阅读了[用户协议](/UserAgreement.md)。
+> 请确保您在使用前充分审慎阅读了[用户协议](https://github.com/ArcticFoxPro/QQVersionListTool-WeChatMiniProgram/blob/main/UserAgreement.md)。
 
 > [!WARNING]
 > QQ 版本列表 Lite 提供的所有服务及内容均旨在促进合法的学习交流活动，严禁用户将其用于任何非法、违规或侵犯他人权益的目的。敬请所有用户严格遵守相关法律法规，在使用本应用的过程中秉持合法、正当与诚信原则，切勿涉足任何违法用途。如有违反，相关法律责任将由行为人自负，同时，本应用亦保留采取一切必要措施的权利，包括但不限于暂停或终止服务，并追究其法律责任。
@@ -168,7 +168,7 @@ QQ 版本列表 Lite for WeChat MiniProgram 仅供学习交流使用，不提供
 
 ## 开源相关
 
-QQ 版本列表 Lite 采用 [木兰公共许可证, 第2版](/LICENSE) 开源许可。
+QQ 版本列表 Lite 采用 [木兰公共许可证, 第2版](https://github.com/ArcticFoxPro/QQVersionListTool-WeChatMiniProgram/blob/main/LICENSE) 开源许可。
 
 QQ 版本列表 Lite 的诞生离不开以下开源项目，感谢以下开源项目的作者和贡献者：
 
