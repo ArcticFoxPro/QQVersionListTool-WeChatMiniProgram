@@ -260,7 +260,7 @@
     overflow: hidden;
 }
 
-.suffix-setting-button{
+.suffix-setting-button {
     margin: 16rpx 32rpx 32rpx;
     display: flex;
 }

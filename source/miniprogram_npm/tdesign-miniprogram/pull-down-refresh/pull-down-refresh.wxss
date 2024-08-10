@@ -49,6 +49,9 @@
   flex-direction: column;
   overflow: hidden;
 }
+.t-pull-down-refresh__tips--loosing {
+  transition: height ease 0.24s;
+}
 .t-pull-down-refresh__text {
   margin: 16rpx 0 0;
 }

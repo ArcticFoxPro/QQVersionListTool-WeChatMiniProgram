@@ -222,13 +222,12 @@ Page({
     }, guessPopupVisible(e) {
         this.setData({
             guessVisible: e.detail.visible,
-        }, () => {
-            const tabs = this.selectComponent('tabs');
-            tabs.setTrack();
         });
     }, handleGuessPopup() {
         this.setData({
             guessVisible: true
+        }, () => {
+            this.selectComponent('#tabs').setTrack();
         });
     }, closeGuessPopup() {
         this.setData({
@@ -433,8 +432,7 @@ Page({
             });
         } else if (qqVersionSmall % 5 !== 0 && this.data.QQTestSwitch === true && this.data.Not5Switch === false) {
             this.setData({
-                errorText: '小版本号需填写 5 的倍数。如需解除此限制，请前往设置进行解除。',
-                errorVisible: true
+                errorText: '小版本号需填写 5 的倍数。如需解除此限制，请前往设置进行解除。', errorVisible: true
             });
         } else {
             this.closeGuessPopup();

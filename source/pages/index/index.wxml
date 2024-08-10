@@ -74,7 +74,7 @@
             <view class="about-title" id="ability-about">关于</view>
         </view>
         <view class="about-text" style="margin: 0 48rpx 12rpx 48rpx;">QQ 版本列表 Lite for WeChat MiniProgram</view>
-        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">版本：1.1.1</view>
+        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">版本：1.1.2</view>
         <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">作者：快乐小牛、有鲫雪狐</view>
         <view class="about-text" style="margin: 12rpx; padding: 0 36rpx 12rpx 36rpx;">Since 2024.03.12</view>
         <view class="TD_and_MulanPubLv2">
@@ -214,7 +214,7 @@
             <view class="guess-title" id="ability-jsonitem">JSON 详情</view>
         </view>
         <view style=" margin: 0 32rpx 16rpx 32rpx;">
-            <text user-select class="json-text" style="font-size:13px; " user-select="true">{{itemString}}</text>
+            <text user-select class="json-text" style="font-size:13px; ">{{itemString}}</text>
         </view>
     </view>
     <t-footer text="— 可长按选择复制内容 —"></t-footer>
