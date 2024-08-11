@@ -26,7 +26,6 @@ Page({
         refreshIcon: "refresh",
         versionSmallVisible: wx.getStorage({
             key: "versionSelect", success(res) {
-                //console.log(res.data)
             }
         }),
         seeJson: "查看 JSON 字符串",
@@ -47,6 +46,7 @@ Page({
         successGuessedLink: "",
         guessSuccessVisible: false,
         QQTestSwitch: false,
+        suffixSettingVisible: false,
     }, onLoad: function () {
         this.setData({
             theme: wx.getSystemInfoSync().theme || 'light',
@@ -59,6 +59,12 @@ Page({
             qqVersionBig: wx.getStorageSync('qqVersionBig'),
             qqVersionSmall: wx.getStorageSync('qqVersionSmall')
         });
+
+        const suffixKeys = ['suffix64HB', 'suffixHB64', 'suffix64HB1', 'suffixHB164', 'suffix64HB2', 'suffixHB264', 'suffix64HB3', 'suffixHB364', 'suffix64HD', 'suffixHD64', 'suffix64HD1', 'suffixHD164', 'suffix64HD2', 'suffixHD264', 'suffix64HD3', 'suffixHD364', 'suffix64HD1HB', 'suffixHD1HB64', 'suffixTest'];
+        suffixKeys.forEach(suffixKey => {
+            if (wx.getStorageSync(suffixKey) === '') wx.setStorageSync(suffixKey, true);
+        });
+
         if (wx.getStorageSync('isQQTestOn') === false || wx.getStorageSync('isQQTestOn') === "") this.setData({
             QQTestSwitch: false
         }); else if (wx.getStorageSync('isQQTestOn') === true) this.setData({
@@ -85,6 +91,29 @@ Page({
             Not5Switch: false
         }); else if (wx.getStorageSync('isNot5') === true) this.setData({
             Not5Switch: true
+        })
+
+        this.setData({
+            suffix64HB: wx.getStorageSync('suffix64HB'),
+            suffixHB64: wx.getStorageSync('suffixHB64'),
+            suffix64HB1: wx.getStorageSync('suffix64HB1'),
+            suffixHB164: wx.getStorageSync('suffixHB164'),
+            suffix64HB2: wx.getStorageSync('suffix64HB2'),
+            suffixHB264: wx.getStorageSync('suffixHB264'),
+            suffix64HB3: wx.getStorageSync('suffix64HB3'),
+            suffixHB364: wx.getStorageSync('suffixHB364'),
+            suffix64HD: wx.getStorageSync('suffix64HD'),
+            suffixHD64: wx.getStorageSync('suffixHD64'),
+            suffix64HD1: wx.getStorageSync('suffix64HD1'),
+            suffixHD164: wx.getStorageSync('suffixHD164'),
+            suffix64HD2: wx.getStorageSync('suffix64HD2'),
+            suffixHD264: wx.getStorageSync('suffixHD264'),
+            suffix64HD3: wx.getStorageSync('suffix64HD3'),
+            suffixHD364: wx.getStorageSync('suffixHD364'),
+            suffix64HD1HB: wx.getStorageSync('suffix64HD1HB'),
+            suffixHD1HB64: wx.getStorageSync('suffixHD1HB64'),
+            suffixTest: wx.getStorageSync('suffixTest'),
+            customSuffix: wx.getStorageSync('customSuffix')
         })
     }, onReady: async function () {
         const windowHeight = await new Promise((resolve) => {
@@ -133,7 +162,7 @@ Page({
         }
 
         this.getData();
-    }, onunload: function () {
+    }, onUnload: function () {
         this.stopGuessing();
     }, refreshData: function () {
         this.getData();
@@ -150,7 +179,6 @@ Page({
             url: 'https://im.qq.com/rainbow/androidQQVersionList', method: 'GET', success: (res) => {
                 try {
                     let responseData = res.data;
-                    //console.log(responseData);
                     let start = responseData.indexOf("versions64\":[") + 12;
                     let end = responseData.indexOf(";\n" + "      typeof");
                     let totalJson = responseData.substring(start, end);
@@ -475,9 +503,36 @@ Page({
             continueGuessing: 'STATUS_ONGOING'
         });
         let timerId;
-        const soList = ["_64", "_64_HB", "_64_HB1", "_64_HB2", "_64_HB3", "_HB_64", "_HB1_64", "_HB2_64", "_HB3_64", "_64_BBPJ", "_BBPJ_64"];
-        const stList = ["_64", "_64_HB", "_64_HB1", "_64_HB2", "_64_HB3", "_64_HD", "_64_HD1", "_64_HD2", "_64_HD3", "_64_HD1HB", "_HB_64", "_HB1_64", "_HB2_64", "_HB3_64", "_HD_64", "_HD1_64", "_HD2_64", "_HD3_64", "_HD1HB_64", "_test"];
+        const isCustomSufEmpty = wx.getStorageSync('customSuffix') !== "";
+        const customSufList = isCustomSufEmpty ? wx.getStorageSync('customSuffix').split(', ') : [];
+        const soListPre = ["_64", "_64_HB", "_64_HB1", "_64_HB2", "_64_HB3", "_HB_64", "_HB1_64", "_HB2_64", "_HB3_64", "_64_BBPJ", "_BBPJ_64"];
+        const soList = soListPre.concat(customSufList);
+        const stListPre = ["_64"];
         let sIndex = 0;
+
+        // ["_64", "_64_HB", "_64_HB1", "_64_HB2", "_64_HB3", "_64_HD", "_64_HD1", "_64_HD2", "_64_HD3", "_64_HD1HB", "_HB_64", "_HB1_64", "_HB2_64", "_HB3_64", "_HD_64", "_HD1_64", "_HD2_64", "_HD3_64", "_HD1HB_64", "_test"]
+
+        const suf64hb = wx.getStorageSync('suffix64HB') ? ["_64_HB"] : [];
+        const suf64hb1 = wx.getStorageSync('suffix64HB1') ? ["_64_HB1"] : [];
+        const suf64hb2 = wx.getStorageSync('suffix64HB2') ? ["_64_HB2"] : [];
+        const suf64hb3 = wx.getStorageSync('suffix64HB3') ? ["_64_HB3"] : [];
+        const suf64hd = wx.getStorageSync('suffix64HD') ? ["_64_HD"] : [];
+        const suf64hd1 = wx.getStorageSync('suffix64HD1') ? ["_64_HD1"] : [];
+        const suf64hd2 = wx.getStorageSync('suffix64HD2') ? ["_64_HD2"] : [];
+        const suf64hd3 = wx.getStorageSync('suffix64HD3') ? ["_64_HD3"] : [];
+        const suf64hd1hb = wx.getStorageSync('suffix64HD1HB') ? ["_64_HD1HB"] : [];
+        const sufHb64 = wx.getStorageSync('suffixHB64') ? ["_HB_64"] : [];
+        const sufHb164 = wx.getStorageSync('suffixHB164') ? ["_HB1_64"] : [];
+        const sufHb264 = wx.getStorageSync('suffixHB264') ? ["_HB2_64"] : [];
+        const sufHb364 = wx.getStorageSync('suffixHB364') ? ["_HB3_64"] : [];
+        const sufHd64 = wx.getStorageSync('suffixHD64') ? ["_HD_64"] : [];
+        const sufHd164 = wx.getStorageSync('suffixHD164') ? ["_HD1_64"] : [];
+        const sufHd264 = wx.getStorageSync('suffixHD264') ? ["_HD2_64"] : [];
+        const sufHd364 = wx.getStorageSync('suffixHD364') ? ["_HD3_64"] : [];
+        const sufHd1hb64 = wx.getStorageSync('suffixHD1HB64') ? ["_HD1HB_64"] : [];
+        const sufTest = wx.getStorageSync('suffixTest') ? ["_test"] : [];
+        const stListPre2 = stListPre.concat(suf64hb, suf64hb1, suf64hb2, suf64hb3, suf64hd, suf64hd1, suf64hd2, suf64hd3, suf64hd1hb, sufHb64, sufHb164, sufHb264, sufHb364, sufHd64, sufHd164, sufHd264, sufHd364, sufHd1hb64, sufTest, customSufList);
+        const stList = stListPre2.flat(Infinity)
 
         const guess = () => {
             switch (this.data.continueGuessing) {
@@ -616,5 +671,227 @@ Page({
             }, fail: function (res) {
             }
         })
-    },
+    }, suffixSettingPopupVisible(e) {
+        this.setData({
+            suffixSettingVisible: e.detail.visible,
+        });
+    }, handleSuffixSetting() {
+        this.setData({
+            suffixSettingVisible: true,
+            suffix64HB: wx.getStorageSync('suffix64HB'),
+            suffixHB64: wx.getStorageSync('suffixHB64'),
+            suffix64HB1: wx.getStorageSync('suffix64HB1'),
+            suffixHB164: wx.getStorageSync('suffixHB164'),
+            suffix64HB2: wx.getStorageSync('suffix64HB2'),
+            suffixHB264: wx.getStorageSync('suffixHB264'),
+            suffix64HB3: wx.getStorageSync('suffix64HB3'),
+            suffixHB364: wx.getStorageSync('suffixHB364'),
+            suffix64HD: wx.getStorageSync('suffix64HD'),
+            suffixHD64: wx.getStorageSync('suffixHD64'),
+            suffix64HD1: wx.getStorageSync('suffix64HD1'),
+            suffixHD164: wx.getStorageSync('suffixHD164'),
+            suffix64HD2: wx.getStorageSync('suffix64HD2'),
+            suffixHD264: wx.getStorageSync('suffixHD264'),
+            suffix64HD3: wx.getStorageSync('suffix64HD3'),
+            suffixHD364: wx.getStorageSync('suffixHD364'),
+            suffix64HD1HB: wx.getStorageSync('suffix64HD1HB'),
+            suffixHD1HB64: wx.getStorageSync('suffixHD1HB64'),
+            suffixTest: wx.getStorageSync('suffixTest'),
+            customSuffix: wx.getStorageSync('customSuffix')
+        })
+    }, closeSuffixSettingPopup() {
+        this.setData({
+            suffixSettingVisible: false,
+            suffix64HB: wx.getStorageSync('suffix64HB'),
+            suffixHB64: wx.getStorageSync('suffixHB64'),
+            suffix64HB1: wx.getStorageSync('suffix64HB1'),
+            suffixHB164: wx.getStorageSync('suffixHB164'),
+            suffix64HB2: wx.getStorageSync('suffix64HB2'),
+            suffixHB264: wx.getStorageSync('suffixHB264'),
+            suffix64HB3: wx.getStorageSync('suffix64HB3'),
+            suffixHB364: wx.getStorageSync('suffixHB364'),
+            suffix64HD: wx.getStorageSync('suffix64HD'),
+            suffixHD64: wx.getStorageSync('suffixHD64'),
+            suffix64HD1: wx.getStorageSync('suffix64HD1'),
+            suffixHD164: wx.getStorageSync('suffixHD164'),
+            suffix64HD2: wx.getStorageSync('suffix64HD2'),
+            suffixHD264: wx.getStorageSync('suffixHD264'),
+            suffix64HD3: wx.getStorageSync('suffix64HD3'),
+            suffixHD364: wx.getStorageSync('suffixHD364'),
+            suffix64HD1HB: wx.getStorageSync('suffix64HD1HB'),
+            suffixHD1HB64: wx.getStorageSync('suffixHD1HB64'),
+            suffixTest: wx.getStorageSync('suffixTest'),
+            customSuffix: wx.getStorageSync('customSuffix')
+        })
+    }, suffix64HBChange(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        this.setData({
+            suffix64HB: e.detail.checked
+        })
+    }, suffixHB64Change(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        this.setData({
+            suffixHB64: e.detail.checked
+        })
+    }, suffix64HB1Change(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        this.setData({
+            suffix64HB1: e.detail.checked
+        })
+    }, suffixHB164Change(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        this.setData({
+            suffixHB164: e.detail.checked
+        })
+    }, suffix64HB2Change(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        this.setData({
+            suffix64HB2: e.detail.checked
+        })
+    }, suffixHB264Change(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        this.setData({
+            suffixHB264: e.detail.checked
+        })
+    }, suffix64HB3Change(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        this.setData({
+            suffix64HB3: e.detail.checked
+        })
+    }, suffixHB364Change(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        this.setData({
+            suffixHB364: e.detail.checked
+        })
+    }, suffix64HDChange(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        this.setData({
+            suffix64HD: e.detail.checked
+        })
+    }, suffixHD64Change(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        this.setData({
+            suffixHD64: e.detail.checked
+        })
+    }, suffix64HD1Change(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        this.setData({
+            suffix64HD1: e.detail.checked
+        })
+    }, suffixHD164Change(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        this.setData({
+            suffixHD164: e.detail.checked
+        })
+    }, suffix64HD2Change(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        this.setData({
+            suffix64HD2: e.detail.checked
+        })
+    }, suffixHD264Change(e) {
+        wx.vibrateShort({
+            type: 'light',
+        })
+        this.setData({
+            suffixHD264: e.detail.checked
+        })
+    }, suffix64HD3Change(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        this.setData({
+            suffix64HD3: e.detail.checked
+        })
+    }, suffixHD364Change(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        this.setData({
+            suffixHD364: e.detail.checked
+        })
+    }, suffix64HD1HBChange(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        this.setData({
+            suffix64HD1HB: e.detail.checked
+        })
+    }, suffixHD1HB64Change(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        this.setData({
+            suffixHD1HB64: e.detail.checked
+        })
+    }, suffixTestChange(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        this.setData({
+            suffixTest: e.detail.checked
+        })
+    }, changeCustomSuffix(e) {
+        this.setData({
+            customSuffix: e.detail.value
+        })
+    }, saveSuffixSetting() {
+        this.setData({
+            suffixSettingVisible: false
+        });
+        wx.setStorageSync('suffix64HB', this.data.suffix64HB);
+        wx.setStorageSync('suffixHB64', this.data.suffixHB64);
+        wx.setStorageSync('suffix64HB1', this.data.suffix64HB1);
+        wx.setStorageSync('suffixHB164', this.data.suffixHB164);
+        wx.setStorageSync('suffix64HB2', this.data.suffix64HB2);
+        wx.setStorageSync('suffixHB264', this.data.suffixHB264);
+        wx.setStorageSync('suffix64HB3', this.data.suffix64HB3);
+        wx.setStorageSync('suffixHB364', this.data.suffixHB364);
+        wx.setStorageSync('suffix64HD', this.data.suffix64HD);
+        wx.setStorageSync('suffixHD64', this.data.suffixHD64);
+        wx.setStorageSync('suffix64HD1', this.data.suffix64HD1);
+        wx.setStorageSync('suffixHD164', this.data.suffixHD164);
+        wx.setStorageSync('suffix64HD2', this.data.suffix64HD2);
+        wx.setStorageSync('suffixHD264', this.data.suffixHD264);
+        wx.setStorageSync('suffix64HD3', this.data.suffix64HD3);
+        wx.setStorageSync('suffixHD364', this.data.suffixHD364);
+        wx.setStorageSync('suffix64HD1HB', this.data.suffix64HD1HB);
+        wx.setStorageSync('suffixHD1HB64', this.data.suffixHD1HB64);
+        wx.setStorageSync('suffixTest', this.data.suffixTest);
+        wx.setStorageSync('customSuffix', this.data.customSuffix);
+        Message.info({
+            context: this,
+            offset: [90, 32],
+            duration: 1500,
+            icon: false,
+            single: false,
+            content: '已保存',
+            align: 'center'
+        });
+    }
 })

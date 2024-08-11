@@ -261,8 +261,22 @@
 }
 
 .suffix-setting-button {
-    margin: 16rpx 32rpx 32rpx;
+    margin: 32rpx;
     display: flex;
+}
+
+.chbox {
+    padding: 16rpx 32rpx;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--td-bg-color-container, #fff);
+}
+
+.chbox-top {
+    padding: 16rpx 32rpx;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--td-bg-color-container, #fff);
 }
 
 @media (prefers-color-scheme: dark) {
