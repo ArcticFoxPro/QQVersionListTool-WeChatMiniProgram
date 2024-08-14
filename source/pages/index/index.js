@@ -649,6 +649,10 @@ Page({
         this.setData({
             guessSuccessVisible: e.detail.visible,
         });
+    }, loadingPopupVisible(e) {
+        this.setData({
+            loadingVisible: e.detail.visible,
+        });
     }, copyUtil(copyData) {
         const that = this;
         wx.setClipboardData({
@@ -678,6 +682,7 @@ Page({
     }, handleSuffixSetting() {
         this.setData({
             suffixSettingVisible: true,
+            settingVisible: false,
             suffix64HB: wx.getStorageSync('suffix64HB'),
             suffixHB64: wx.getStorageSync('suffixHB64'),
             suffix64HB1: wx.getStorageSync('suffix64HB1'),
@@ -702,6 +707,7 @@ Page({
     }, closeSuffixSettingPopup() {
         this.setData({
             suffixSettingVisible: false,
+            settingVisible: true,
             suffix64HB: wx.getStorageSync('suffix64HB'),
             suffixHB64: wx.getStorageSync('suffixHB64'),
             suffix64HB1: wx.getStorageSync('suffix64HB1'),
@@ -862,7 +868,7 @@ Page({
         })
     }, saveSuffixSetting() {
         this.setData({
-            suffixSettingVisible: false
+            suffixSettingVisible: false, settingVisible: true
         });
         wx.setStorageSync('suffix64HB', this.data.suffix64HB);
         wx.setStorageSync('suffixHB64', this.data.suffixHB64);
