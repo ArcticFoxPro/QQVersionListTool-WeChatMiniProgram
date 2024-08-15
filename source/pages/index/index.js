@@ -18,7 +18,11 @@ const util = require('../../utils/util.js')
 const QQVersionBean = require('./QQVersionBean.js');
 
 Page({
-    options: {
+    properties: {
+        scrollTop: {
+            type: Number, value: 0
+        },
+    }, options: {
         styleIsolation: 'apply-shared',
     }, data: {
         qqVersions: [],
@@ -47,6 +51,8 @@ Page({
         guessSuccessVisible: false,
         QQTestSwitch: false,
         suffixSettingVisible: false,
+        scrollNumber: 0,
+        topNum: 0
     }, onLoad: function () {
         this.setData({
             theme: wx.getSystemInfoSync().theme || 'light',
@@ -309,7 +315,7 @@ Page({
         if (opa < 0) opa = 0; else if (opa > 1) opa = 1;
 
         this.setData({
-            titleOpacity: opa,
+            scrollNumber: e.detail.scrollTop, titleOpacity: opa,
         });
 
     }, errorPopupVisible(e) {
@@ -899,5 +905,9 @@ Page({
             content: '已保存',
             align: 'center'
         });
-    }
+    }, onToTop() {
+        this.setData({
+            topNum: 0
+        })
+    },
 })

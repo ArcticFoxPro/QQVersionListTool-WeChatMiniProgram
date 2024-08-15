@@ -29,8 +29,8 @@ See the Mulan PubL v2 for more details.
 
     <view class="recycle-view-container">
         <scroll-view bind:refresh="onRefresh" bindscroll="titleChange" class="qq-version-list" enable-passive enhanced
-                     scroll-y="{{true}}" style="height:{{heightRecycle+'px'}};" throttle="{{!ThrottleSwitch}}"
-                     type="list">
+                     scroll-top="{{topNum}}" scroll-with-animation scroll-y="{{true}}"
+                     style="height:{{heightRecycle+'px'}};" throttle="{{!ThrottleSwitch}}" type="list">
             <view class="header-title" id="titleTop2">QQ 版本列表 Lite</view>
             <view class="qq-version-item" style="width: 100%;" wx:for="{{qqVersions}}" wx:key="versions">
                 <t-cell-group theme="card">
@@ -65,6 +65,8 @@ See the Mulan PubL v2 for more details.
         </t-button>
     </view>
 
+    <t-back-top bind:to-top="onToTop" fixed scroll-top="{{scrollTop}}" style="position: fixed; bottom: 160rpx; right: -1rpx"
+                text="回到顶部" theme="half-round" visibility-height="0" wx:if="{{scrollNumber>=600}}"></t-back-top>
 </view>
 
 
