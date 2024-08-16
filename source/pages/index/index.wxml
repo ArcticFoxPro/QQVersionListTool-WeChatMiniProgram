@@ -65,8 +65,11 @@ See the Mulan PubL v2 for more details.
         </t-button>
     </view>
 
-    <t-back-top bind:to-top="onToTop" fixed scroll-top="{{scrollTop}}" style="position: fixed; bottom: 160rpx; right: -1rpx"
-                text="回到顶部" theme="half-round" visibility-height="0" wx:if="{{scrollNumber>=600}}"></t-back-top>
+    <view hidden="{{scrollNumber<=600}}">
+        <t-back-top bind:to-top="onToTop" fixed scroll-top="{{scrollTop}}"
+                    style="position: fixed; bottom: 160rpx; right: -1rpx" text="回到顶部" theme="half-round"
+                    visibility-height="0"></t-back-top>
+    </view>
 </view>
 
 
@@ -338,10 +341,15 @@ See the Mulan PubL v2 for more details.
             <view class="guess-success-title">猜版 Extended</view>
         </view>
         <view class="section__content">
-            <t-result description="{{successGuessedLink}}" theme="success" title="猜测成功"/>
+            <t-result description="{{successGuessedLink+succeedGuessedFileSizeShare}}" theme="success"
+                      title="猜测成功"/>
         </view>
-        <view class="guess-success-button">
-            <t-button bind:tap="copyGuessSuccess" block size="large" theme="primary">复制并停止</t-button>
+        <view class="about-link">
+            <t-link bind:tap="copyGuessSuccessShare" content="复制分享文案并停止" hover prefix-icon="share"
+                    size="medium" theme="primary"/>
+        </view>
+        <view class="guess-success-button-top">
+            <t-button bind:tap="copyGuessSuccess" block size="large" theme="primary">复制链接并停止</t-button>
         </view>
         <view class="guess-success-button">
             <t-button bind:tap="cancelGuess" block size="large" style="margin-right: 8px;" theme="light">仅停止

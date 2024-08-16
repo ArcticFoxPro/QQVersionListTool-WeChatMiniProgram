@@ -248,6 +248,11 @@
     display: flex;
 }
 
+.guess-success-button-top {
+    margin: 24rpx 32rpx 32rpx;
+    display: flex;
+}
+
 .TD_and_MulanPubLv2 {
     display: flex;
     justify-content: center;

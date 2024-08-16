@@ -495,7 +495,16 @@ Page({
         return new Promise((resolve, reject) => {
             wx.request({
                 url, method: 'HEAD', success: function (res) {
-                    resolve(res.statusCode === 200);
+                    if (res.header['Content-Type'] === 'application/octet-stream' || res.header['Content-Type'] === 'application/vnd.android.package-archive') {
+                        const resContentLength = res.header['Content-Length']
+                        const fileSizeInBytes = parseInt(resContentLength, 10);
+                        const fileSize = fileSizeInBytes / (1024 * 1024);
+                        resolve({
+                            exists: true, fileSize: fileSize.toFixed(2)
+                        });
+                    } else resolve({
+                        exists: false, fileSize: false
+                    });
                 }, fail: function (err) {
                     reject(err);
                 }
@@ -551,9 +560,14 @@ Page({
                         updateProgressDialogMessage: `正在猜测下载地址：${guessedLink}`
                     })
                     this.fetchLink(guessedLink).then(isSuccess => {
-                        if (isSuccess) {
+                        if (isSuccess.exists && isSuccess.fileSize !== false) {
                             this.setData({
-                                successGuessedLink: guessedLink, guessSuccessVisible: true
+                                successGuessedLink: guessedLink,
+                                guessSuccessVisible: true,
+                                successGuessedModeShare: mode === 'WeChat' ? '微信' : mode === 'WeType' ? '微信输入法' : 'QQ',
+                                succeedGuessedVersionShare: mode === 'WeChat' ? versionBig + `（${versionSuf}）` : mode === 'WeType' ? versionBig + `（${vSuf}）` : mode === 'QQOfficial' ? versionBig + ` 正式版` : versionBig + '.' + vSuf + ' 测试版',
+                                succeedGuessedFileSizeShare: `（大小：${isSuccess.fileSize} MB）`,
+                                successGuessedWarningShare: mode === 'QQTest' ? '鉴于 QQ 测试版可能存在不可预知的稳定性问题，您在下载及使用该测试版本之前，必须明确并确保自身具备足够的风险识别和承受能力。' : false
                             });
                             switch (mode) {
                                 case 'WeChat':
@@ -643,6 +657,16 @@ Page({
         });
     }, copyGuessSuccess() {
         this.copyUtil(this.data.successGuessedLink);
+        this.setData({
+            guessSuccessVisible: false
+        });
+        setTimeout(() => {
+            this.setData({
+                continueGuessing: 'STATUS_END'
+            });
+        }, 50)
+    }, copyGuessSuccessShare() {
+        this.copyUtil(`Android ${this.data.successGuessedModeShare} ${this.data.succeedGuessedVersionShare}${this.data.succeedGuessedFileSizeShare}\n\n下载地址：${this.data.successGuessedLink}${this.data.successGuessedWarningShare !== false ? '\n\n' + this.data.successGuessedWarningShare : ''}`);
         this.setData({
             guessSuccessVisible: false
         });
