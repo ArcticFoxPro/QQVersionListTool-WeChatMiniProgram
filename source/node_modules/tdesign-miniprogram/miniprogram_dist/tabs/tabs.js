@@ -150,6 +150,9 @@ let Tabs = class Tabs extends SuperComponent {
             calcScrollOffset(containerWidth, targetLeft, targetWidth, offset) {
                 return offset + targetLeft - (1 / 2) * containerWidth + targetWidth / 2;
             },
+            getTabHeight() {
+                return getRect(this, `.${name}`);
+            },
             getTrackSize() {
                 return new Promise((resolve, reject) => {
                     if (this.trackWidth) {

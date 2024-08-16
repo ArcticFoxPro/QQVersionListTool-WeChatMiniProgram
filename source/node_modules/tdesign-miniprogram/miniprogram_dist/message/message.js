@@ -27,7 +27,18 @@ let Message = class Message extends SuperComponent {
         this.index = 0;
         this.instances = [];
         this.gap = 12;
-        this.observers = {};
+        this.observers = {
+            visible(value) {
+                if (value) {
+                    this.setMessage(this.properties, this.properties.theme);
+                }
+                else {
+                    this.setData({
+                        messageList: [],
+                    });
+                }
+            },
+        };
         this.pageLifetimes = {
             show() {
                 this.hideAll();
@@ -152,6 +163,9 @@ let Message = class Message extends SuperComponent {
     }
     handleLinkClick() {
         this.triggerEvent('link-click');
+    }
+    handleDurationEnd() {
+        this.triggerEvent('duration-end');
     }
 };
 Message = __decorate([

@@ -1,16 +1,16 @@
 <!-- index.wxml -->
 
-        <!--
-        Copyright (c) 2024 ArcticFoxPro
-        QQ Ver. Lite is licensed under Mulan PubL v2.
-        You can use this software according to the terms and conditions of the Mulan PubL v2.
-        You may obtain a copy of Mulan PubL v2 at:
-                http://license.coscl.org.cn/MulanPubL-2.0
-        THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
-        EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
-        MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
-        See the Mulan PubL v2 for more details.
-        -->
+<!--
+Copyright (c) 2024 ArcticFoxPro
+QQ Ver. Lite is licensed under Mulan PubL v2.
+You can use this software according to the terms and conditions of the Mulan PubL v2.
+You may obtain a copy of Mulan PubL v2 at:
+        http://license.coscl.org.cn/MulanPubL-2.0
+THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
+EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
+MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
+See the Mulan PubL v2 for more details.
+-->
 
 <wxs module="format" src="./format.wxs"></wxs>
 
@@ -18,7 +18,7 @@
 
 <view class="page">
     <view id="titleTop1">
-        <t-navbar t-class-placeholder="t-navbar-placeholder" t-class-content="t-navbar-content"
+        <t-navbar t-class-content="t-navbar-content" t-class-placeholder="t-navbar-placeholder"
                   t-class-title="nav-title">
             <view id="smallTitle" slot="left"
                   style="width: 70vw; font-size: 36rpx; font-weight: 600;margin-left: 16rpx; opacity: {{titleOpacity}};">
@@ -28,158 +28,166 @@
     </view>
 
     <view class="recycle-view-container">
-        <scroll-view type="list" enable-passive scroll-y="{{true}}" style="height:{{heightRecycle+'px'}};"
-                     class="qq-version-list" bindscroll="titleChange" throttle="{{!ThrottleSwitch}}"
-                     bind:refresh="onRefresh" enhanced>
-            <view id="titleTop2" class="header-title">QQ 版本列表 Lite</view>
-            <view style="width: 100%;" wx:for="{{qqVersions}}" wx:key="versions" class="qq-version-item">
+        <scroll-view bind:refresh="onRefresh" bindscroll="titleChange" class="qq-version-list" enable-passive enhanced
+                     scroll-top="{{topNum}}" scroll-with-animation scroll-y="{{true}}"
+                     style="height:{{heightRecycle+'px'}};" throttle="{{!ThrottleSwitch}}" type="list">
+            <view class="header-title" id="titleTop2">QQ 版本列表 Lite</view>
+            <view class="qq-version-item" style="width: 100%;" wx:for="{{qqVersions}}" wx:key="versions">
                 <t-cell-group theme="card">
-                    <t-cell title="版本：{{item.versionNumber}}" description="额定大小：{{item.size}} MB" leftIcon=""
-                            hover arrow data-index="{{index}}" bind:tap="clickCell">
-                        <t-tag style="font-family: TCloudNumber, sans-serif;" variant="light" theme="primary"
-                               slot="note" wx:if="{{PerProSwitch}}">
+                    <t-cell arrow bind:tap="clickCell" data-index="{{index}}" description="额定大小：{{item.size}} MB"
+                            hover leftIcon="" title="版本：{{item.versionNumber}}">
+                        <t-tag slot="note" style="font-family: TCloudNumber, sans-serif;" theme="primary"
+                               variant="light" wx:if="{{PerProSwitch}}">
                             {{format.formatPercent(item.size, maxSize)}}
                         </t-tag>
                     </t-cell>
                 </t-cell-group>
             </view>
-            <view class="qq-version-item-bottom" style="width: 100%; padding: 24rpx" wx:key="lastItem"
-                  wx:if="{{qqVersions.length>=1}}"></view>
+            <view class="qq-version-item-bottom" style="width: 100%; padding: 24rpx" wx:if="{{qqVersions.length>=1}}"
+                  wx:key="lastItem"></view>
         </scroll-view>
     </view>
 
     <view class="bottom-button" id="bottomButton">
         <view class="gradient-layer"></view>
         <view class="icon-button">
-            <t-button theme="light" variant="outline" icon="info-circle" shape="square" size="large" class="about-home"
-                      aria-label="关于" bind:tap="handleAboutPopup" block></t-button>
-            <t-button theme="light" variant="outline" icon="setting" block shape="square" size="large"
-                      class="setting-home" aria-label="设置" bind:tap="handleSettingPopup"
-                      style="margin-left: 32rpx;margin-right: 32rpx;"></t-button>
-            <t-button theme="light" variant="outline" icon="{{refreshIcon}}" shape="square" size="large"
-                      class="refresh-home" aria-label="刷新" bind:tap="refreshData" block loading="{{onRefresh}}"
-                      disabled="{{onRefresh}}"></t-button>
+            <t-button aria-label="关于" bind:tap="handleAboutPopup" block class="about-home" icon="info-circle"
+                      shape="square" size="large" theme="light" variant="outline"></t-button>
+            <t-button aria-label="设置" bind:tap="handleSettingPopup" block class="setting-home" icon="setting"
+                      shape="square" size="large" style="margin-left: 32rpx;margin-right: 32rpx;" theme="light"
+                      variant="outline"></t-button>
+            <t-button aria-label="刷新" bind:tap="refreshData" block class="refresh-home" disabled="{{onRefresh}}"
+                      icon="{{refreshIcon}}" loading="{{onRefresh}}" shape="square" size="large" theme="light"
+                      variant="outline"></t-button>
         </view>
-        <t-button theme="primary" icon="search" block size="large" bind:tap="handleGuessPopup"
-                  class="text-button">猜版 Extd.
+        <t-button bind:tap="handleGuessPopup" block class="text-button" icon="search" size="large" theme="primary">猜版
+            Extd.
         </t-button>
     </view>
 
+    <view hidden="{{scrollNumber<=600}}">
+        <t-back-top bind:to-top="onToTop" fixed scroll-top="{{scrollTop}}"
+                    style="position: fixed; bottom: 160rpx; right: -1rpx" text="回到顶部" theme="half-round"
+                    visibility-height="0"></t-back-top>
+    </view>
 </view>
 
 
-<t-popup visible="{{aboutVisible}}" bind:visible-change="aboutPopupVisible" close-on-overlay-click placement="bottom">
+<t-popup bind:visible-change="aboutPopupVisible" close-on-overlay-click placement="bottom" visible="{{aboutVisible}}">
     <view class="block">
         <view class="about-header">
             <view class="about-title" id="ability-about">关于</view>
         </view>
         <view class="about-text" style="margin: 0 48rpx 12rpx 48rpx;">QQ 版本列表 Lite for WeChat MiniProgram</view>
-        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">版本：1.1.1</view>
+        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">版本：1.1.2</view>
         <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">作者：快乐小牛、有鲫雪狐</view>
         <view class="about-text" style="margin: 12rpx; padding: 0 36rpx 12rpx 36rpx;">Since 2024.03.12</view>
         <view class="TD_and_MulanPubLv2">
-            <image src="{{ theme === 'dark' ? '../../assets/Built-with-TDesign-Licensed-under-MulanPubLv2-dark.png' : '../../assets/Built-with-TDesign-Licensed-under-MulanPubLv2-light.png' }}"
-                   mode="widthFix" style="width: 75%; height: auto; align-self: center;"/>
+            <image mode="widthFix"
+                   src="{{ theme === 'dark' ? '../../assets/Built-with-TDesign-Licensed-under-MulanPubLv2-dark.png' : '../../assets/Built-with-TDesign-Licensed-under-MulanPubLv2-light.png' }}"
+                   style="width: 75%; height: auto; align-self: center;"/>
         </view>
         <view class="about-link">
-            <t-link size="small" theme="primary" prefix-icon="logo-github" content="GitHub 项目地址"
-                    bind:tap="copyOSLink" hover/>
+            <t-link bind:tap="copyOSLink" content="GitHub 项目地址" hover prefix-icon="logo-github" size="small"
+                    theme="primary"/>
         </view>
         <t-footer text="Copyright © 2024-Now QQ Ver. Lite. All Rights Reserved."/>
         <view class="about-button">
-            <t-button theme="primary" size="large" block bind:tap="closeAboutPopup">确定</t-button>
+            <t-button bind:tap="closeAboutPopup" block size="large" theme="primary">确定</t-button>
         </view>
         <view class="about-button">
-            <t-button theme="light" size="large" block bind:tap="recallUA">撤回同意用户协议</t-button>
+            <t-button bind:tap="recallUA" block size="large" theme="light">撤回同意用户协议</t-button>
         </view>
     </view>
 </t-popup>
 
-<t-popup visible="{{guessVisible}}" bind:visible-change="guessPopupVisible" close-on-overlay-click placement="bottom"
-         z-index="11001">
+<t-popup bind:visible-change="guessPopupVisible" close-on-overlay-click="{{false}}" placement="bottom"
+         visible="{{guessVisible}}" z-index="11001">
     <view class="block">
         <view class="guess-header">
             <view class="guess-title" id="ability-guess">猜版 Extended for Android</view>
         </view>
-        <t-tabs value="{{guessTabDefault}}" bind:change="onTabsChange" bind:click="onTabsClick" t-class="custom-tabs"
-                t-class-content="custom-panel" theme="tag" id="tabs">
+        <t-tabs bind:change="onTabsChange" bind:click="onTabsClick" id="tabs" t-class="custom-tabs"
+                t-class-content="custom-panel" theme="tag" value="{{guessTabDefault}}">
             <t-tab-panel label="QQ" value="0">
 
-                <t-notice-bar visible="{{QQTestSwitch}}" prefixIcon="{{false}}"
-                              content="鉴于 QQ 测试版可能存在不可预知的稳定性问题，您在下载及使用该测试版本之前，必须明确并确保自身具备足够的风险识别和承受能力。">
+                <t-notice-bar
+                        content="鉴于 QQ 测试版可能存在不可预知的稳定性问题，您在下载及使用该测试版本之前，必须明确并确保自身具备足够的风险识别和承受能力。"
+                        prefixIcon="{{false}}" visible="{{QQTestSwitch}}">
                     <view slot="prefix-icon">
                         <t-icon name="error-circle-filled"></t-icon>
                     </view>
                 </t-notice-bar>
 
-                <t-input id="qq-official-version-big" label="主版本号" placeholder="点击以输入" value="{{qqVersionBig}}"
-                         tips="填写格式为 x.y.z" bind:change="onInputQQBig" type="digit"
-                         confirm-type="{{QQTestSwitch ? 'next' : 'done'}}"/>
-                <t-input disabled="{{!QQTestSwitch}}" id="qq-official-version-big" label="小版本号"
-                         placeholder="点击以输入"
-                         value="{{qqVersionSmall}}" tips="填写起始猜测小版本号，猜正式版时无需填写" type="number"
-                         bind:change="onInputQQSmall" confirm-type="done"/>
-                <t-cell title="测试版猜版" description="此开关为关闭状态时将猜测正式版" bordered="{{false}}">
-                    <t-switch style="margin: 0 0 0 48rpx;" value="{{QQTestSwitch}}" slot="note"
-                              bind:change="handleQQTestSwitchChange"/>
+                <t-input bind:change="onInputQQBig" confirm-type="{{QQTestSwitch ? 'next' : 'done'}}"
+                         id="qq-official-version-big" label="主版本号" placeholder="点击以输入" tips="填写格式为 x.y.z"
+                         type="digit" value="{{qqVersionBig}}"/>
+                <t-input bind:change="onInputQQSmall" confirm-type="done" disabled="{{!QQTestSwitch}}"
+                         id="qq-official-version-big" label="小版本号"
+                         placeholder="{{QQTestSwitch ? '点击以输入' : '打开测试版猜版开关方可输入'}}"
+                         tips="填写起始猜测小版本号，猜正式版时无需填写" type="number" value="{{qqVersionSmall}}"/>
+                <t-cell bordered="{{false}}" description="此开关为关闭状态时将猜测正式版" title="测试版猜版">
+                    <t-switch bind:change="handleQQTestSwitchChange" slot="note" style="margin: 0 0 0 48rpx;"
+                              value="{{QQTestSwitch}}"/>
                 </t-cell>
                 <view class="guess-button-top">
-                    <t-button theme="primary" block size="large" bind:tap="startQQGuess">开始</t-button>
+                    <t-button bind:tap="startQQGuess" block size="large" theme="primary">开始</t-button>
                 </view>
                 <view class="guess-button">
-                    <t-button theme="light" block size="large" bind:tap="closeGuessPopup">取消</t-button>
+                    <t-button bind:tap="closeGuessPopup" block size="large" theme="light">取消</t-button>
                 </view>
 
             </t-tab-panel>
             <t-tab-panel label="微信" value="1">
-                <t-notice-bar visible="{{true}}" prefixIcon="{{false}}"
-                              content="微信猜版功能为 QQ 版本列表 Lite 附带的实验性功能，可能存在不可预知的稳定性问题。请明确并确保自身具备足够的风险识别和承受能力。">
+                <t-notice-bar
+                        content="微信猜版功能为 QQ 版本列表 Lite 附带的实验性功能，可能存在不可预知的稳定性问题。请明确并确保自身具备足够的风险识别和承受能力。"
+                        prefixIcon="{{false}}" visible="{{true}}">
                     <view slot="prefix-icon">
                         <t-icon name="error-circle-filled"></t-icon>
                     </view>
                 </t-notice-bar>
-                <t-input id="wechat-version-big" label="主版本号" placeholder="无需填写小数点"
-                         value="{{wechatVersionBig}}"
-                         tips="无需填写小数点，填写格式为 xyz" type="number" bind:change="onInputWeChatBig"
-                         confirm-type="next"/>
-                <t-input id="wechat-version-true" label="真实版本号" placeholder="点击以输入"
-                         value="{{wechatVersionTrue}}" tips="填写真实版本号（版本码）" type="number"
-                         bind:change="onInputWeChatTrue" confirm-type="next"/>
-                <t-input id="wechat-version-16code" label="十六进制代码" placeholder="无需填写开头的“0x”"
-                         value="{{wechatVersion16code}}" tips="填写十六进制代码，无需填写开头的“0x”"
-                         bind:change="onInputWeChat16code" confirm-type="done" borderless/>
+                <t-input bind:change="onInputWeChatBig" confirm-type="next" id="wechat-version-big" label="主版本号"
+                         placeholder="无需填写小数点" tips="无需填写小数点，填写格式为 xyz" type="number"
+                         value="{{wechatVersionBig}}"/>
+                <t-input bind:change="onInputWeChatTrue" confirm-type="next" id="wechat-version-true" label="真实版本号"
+                         placeholder="点击以输入" tips="填写真实版本号（版本码）" type="number"
+                         value="{{wechatVersionTrue}}"/>
+                <t-input bind:change="onInputWeChat16code" borderless confirm-type="done" id="wechat-version-16code"
+                         label="十六进制代码" placeholder="无需填写开头的“0x”"
+                         tips="填写十六进制代码，无需填写开头的“0x”" value="{{wechatVersion16code}}"/>
                 <view class="guess-button-top">
-                    <t-button theme="primary" block size="large" bind:tap="startWeChatGuess">开始</t-button>
+                    <t-button bind:tap="startWeChatGuess" block size="large" theme="primary">开始</t-button>
                 </view>
                 <view class="guess-button">
-                    <t-button theme="light" block size="large" bind:tap="closeGuessPopup">取消</t-button>
+                    <t-button bind:tap="closeGuessPopup" block size="large" theme="light">取消</t-button>
                 </view>
             </t-tab-panel>
             <t-tab-panel label="微信输入法" value="2">
-                <t-notice-bar visible="{{true}}" prefixIcon="{{false}}"
-                              content="微信输入法猜版功能为 QQ 版本列表 Lite 附带的实验性功能，可能存在不可预知的稳定性问题。请明确并确保自身具备足够的风险识别和承受能力。">
+                <t-notice-bar
+                        content="微信输入法猜版功能为 QQ 版本列表 Lite 附带的实验性功能，可能存在不可预知的稳定性问题。请明确并确保自身具备足够的风险识别和承受能力。"
+                        prefixIcon="{{false}}" visible="{{true}}">
                     <view slot="prefix-icon">
                         <t-icon name="error-circle-filled"></t-icon>
                     </view>
                 </t-notice-bar>
-                <t-input id="wetype-version-big" label="主版本号" placeholder="点击以输入" tips="填写格式为 x.y.z"
-                         type="digit" value="{{wetypeVersionBig}}" confirm-type="next" bind:change="onInputWeTypeBig"/>
-                <t-input id="wetype-version-link" label="直链版本号" placeholder="点击以输入" tips="填写直链版本号"
-                         type="number" value="{{wetypeVersionLink}}" confirm-type="done"
-                         bind:change="onInputWeTypeLink" borderless/>
+                <t-input bind:change="onInputWeTypeBig" confirm-type="next" id="wetype-version-big" label="主版本号"
+                         placeholder="点击以输入" tips="填写格式为 x.y.z" type="digit" value="{{wetypeVersionBig}}"/>
+                <t-input bind:change="onInputWeTypeLink" borderless confirm-type="done" id="wetype-version-link"
+                         label="直链版本号" placeholder="点击以输入" tips="填写直链版本号" type="number"
+                         value="{{wetypeVersionLink}}"/>
                 <view class="guess-button-top">
-                    <t-button theme="primary" block size="large" bind:tap="startWeTypeGuess">开始</t-button>
+                    <t-button bind:tap="startWeTypeGuess" block size="large" theme="primary">开始</t-button>
                 </view>
                 <view class="guess-button">
-                    <t-button theme="light" block size="large" bind:tap="closeGuessPopup">取消</t-button>
+                    <t-button bind:tap="closeGuessPopup" block size="large" theme="light">取消</t-button>
                 </view>
             </t-tab-panel>
         </t-tabs>
     </view>
 </t-popup>
 
-<t-popup visible="{{cellDetailVisible}}" bind:visible-change="cellDetialPopupVisible" close-on-overlay-click
-         placement="bottom">
+<t-popup bind:visible-change="cellDetialPopupVisible" close-on-overlay-click placement="bottom"
+         visible="{{cellDetailVisible}}">
     <view class="block">
         <view class="guess-header">
             <view class="guess-title" id="ability-cellitem">详情</view>
@@ -187,12 +195,14 @@
 
         <view class="guess-text" style="margin: 0 32rpx 16rpx 32rpx;">版本：{{itemVersion}}</view>
         <view class="guess-text" style=" margin: 0 32rpx 16rpx 32rpx;">额定大小：{{itemSize}} MB</view>
-        <view class="guess-text" style=" margin: 0 32rpx 6rpx 32rpx; " wx:if="{{PerProSwitch}}">占比历史最大包（{{maxSize}}
+        <view class="guess-text" style=" margin: 0 32rpx 6rpx 32rpx; " wx:if="{{PerProSwitch}}">
+            占比历史最大包（{{maxSize}}
             MB）：
         </view>
 
-        <t-progress style="margin: 0 32rpx 16rpx 32rpx; font-family: TCloudNumber, sans-serif;" theme="plump"
-                    wx:if="{{PerProSwitch}}" percentage="{{preSize}}" status="active"/>
+        <t-progress percentage="{{preSize}}" status="active"
+                    style="margin: 0 32rpx 16rpx 32rpx; font-family: TCloudNumber, sans-serif;" theme="plump"
+                    wx:if="{{PerProSwitch}}"/>
 
         <view class="guess-text" style=" margin: 0 32rpx 16rpx 32rpx;">{{itemFeatureTitle}}</view>
         <view wx:for="{{itemSummary}}">
@@ -200,64 +210,64 @@
         </view>
     </view>
     <view class="cell-detail-button">
-        <t-button theme="light" block size="large" bind:tap="displayJson" style="margin-right: 8px;">查看源 JSON
+        <t-button bind:tap="displayJson" block size="large" style="margin-right: 8px;" theme="light">查看源 JSON
         </t-button>
-        <t-button theme="primary" block size="large" bind:tap="closeCellDetailPopup" style="margin-left: 8px;">确定
+        <t-button bind:tap="closeCellDetailPopup" block size="large" style="margin-left: 8px;" theme="primary">确定
         </t-button>
     </view>
 </t-popup>
 
-<t-popup visible="{{cellJsonDetailVisible}}" bind:visible-change="cellJsonDetialPopupVisible" close-on-overlay-click
-         placement="bottom">
+<t-popup bind:visible-change="cellJsonDetialPopupVisible" close-on-overlay-click placement="bottom"
+         visible="{{cellJsonDetailVisible}}">
     <view class="block">
         <view class="guess-header">
             <view class="guess-title" id="ability-jsonitem">JSON 详情</view>
         </view>
         <view style=" margin: 0 32rpx 16rpx 32rpx;">
-            <text user-select class="json-text" style="font-size:13px; " user-select="true">{{itemString}}</text>
+            <text class="json-text" style="font-size:13px; " user-select>{{itemString}}</text>
         </view>
     </view>
     <t-footer text="— 可长按选择复制内容 —"></t-footer>
     <view class="json-detail-button">
-        <t-button theme="light" block size="large" bind:tap="copyCellJsonDetailPopup" style="margin-right: 8px;">
+        <t-button bind:tap="copyCellJsonDetailPopup" block size="large" style="margin-right: 8px;" theme="light">
             复制全部
         </t-button>
-        <t-button theme="primary" block size="large" bind:tap="closeCellJsonDetailPopup" style="margin-left: 8px;">
+        <t-button bind:tap="closeCellJsonDetailPopup" block size="large" style="margin-left: 8px;" theme="primary">
             确定
         </t-button>
     </view>
 </t-popup>
 
-<t-overlay visible="{{errorVisible}}" duration="{{500}}" z-index="11111"/>
+<t-overlay duration="{{300}}" visible="{{errorVisible}}" z-index="11111"/>
 
-<t-popup visible="{{errorVisible}}" show-overlay="{{false}}" bind:visible-change="errorPopupVisible"
-         close-on-overlay-click placement="bottom">
+<t-popup bind:visible-change="errorPopupVisible" close-on-overlay-click="{{false}}" placement="bottom"
+         show-overlay="{{false}}" visible="{{errorVisible}}">
     <view class="block">
         <view class="error-header">
             <view class="error-title" id="ability-error">错误</view>
         </view>
         <view class="section__content">
-            <t-result theme="error" title="发生错误" description="{{errorText}}"/>
+            <t-result description="{{errorText}}" theme="error" title="发生错误"/>
         </view>
         <view class="error-button">
-            <t-button theme="light" block size="large" bind:tap="copyError" style="margin-right: 8px;">复制错误信息
+            <t-button bind:tap="copyError" block size="large" style="margin-right: 8px;" theme="light">复制错误信息
             </t-button>
-            <t-button theme="light" block size="large" bind:tap="closeErrorPopup" style="margin-left: 8px;">确定
+            <t-button bind:tap="closeErrorPopup" block size="large" style="margin-left: 8px;" theme="light">确定
             </t-button>
         </view>
     </view>
 </t-popup>
 
-<t-popup visible="{{UAVisible}}" bind:visible-change="UAPopupVisible" close-on-overlay-click="{{false}}"
-         placement="bottom">
+<t-popup bind:visible-change="UAPopupVisible" close-on-overlay-click="{{false}}" placement="bottom"
+         visible="{{UAVisible}}">
     <view class="block">
         <view class="ua-header">
             <view class="ua-title" id="ability-ua">用户协议</view>
         </view>
 
-        <scroll-view type="list" scroll-y="{{true}}" style="height: {{(heightRecycle*3/4)+'px'}};"
-                     class="ua-license-recycle" enhanced>
-            <view style="width: 100%;" class="ua-license">
+        <scroll-view class="ua-license-recycle" enhanced scroll-y="{{true}}"
+                     style="height: {{(heightRecycle*3/4)+'px'}};" type="list">
+            <view class="ua-license" style="width: 100%;">
                 <view class="page-s">
                     <block>
                         <rich-text
@@ -268,78 +278,156 @@
         </scroll-view>
 
         <view class="ua-button">
-            <t-button theme="primary" block size="large" bind:tap="UAAgree">同意</t-button>
+            <t-button bind:tap="UAAgree" block size="large" theme="primary">同意</t-button>
         </view>
         <view class="error-button">
-            <t-button theme="danger" block size="large" bind:tap="UADisagree">{{UADisagreeText}}</t-button>
+            <t-button bind:tap="UADisagree" block size="large" theme="danger">{{UADisagreeText}}</t-button>
         </view>
     </view>
 </t-popup>
 
-<t-popup visible="{{settingVisible}}" bind:visible-change="settingPopupVisible" placement="bottom">
+<t-popup bind:visible-change="settingPopupVisible" placement="bottom" visible="{{settingVisible}}">
     <view class="block">
         <view class="setting-header">
             <view class="setting-title" id="ability-setting">设置</view>
         </view>
-        <t-cell title="高性能模式" description="开启后能更精确监听滚动事件以精准更改标题栏显示状态，但系统资源占用更高"
-                bordered>
-            <t-switch style="margin: 0 0 0 48rpx;" value="{{ThrottleSwitch}}" slot="note"
-                      bind:change="handleThrottleChange"/>
+        <t-cell bordered description="开启后能更精确监听滚动事件以精准更改标题栏显示状态，但系统资源占用更高"
+                title="高性能模式">
+            <t-switch bind:change="handleThrottleChange" slot="note" style="margin: 0 0 0 48rpx;"
+                      value="{{ThrottleSwitch}}"/>
         </t-cell>
-        <t-cell title="版本列表展示额定包大小占比历史最大包指示条" bordered>
-            <t-switch style="margin: 0 0 0 48rpx;" value="{{PerProSwitch}}" slot="note"
-                      bind:change="handlePerProChange"/>
+        <t-cell bordered title="版本列表展示额定包大小占比历史最大包指示条">
+            <t-switch bind:change="handlePerProChange" slot="note" style="margin: 0 0 0 48rpx;"
+                      value="{{PerProSwitch}}"/>
         </t-cell>
-        <t-cell title="扩展测试版猜版直链后缀" bordered>
-            <t-switch style="margin: 0 0 0 48rpx;" value="{{ExtendSuffixSwitch}}" slot="note"
-                      bind:change="handleExtendSuffixChange"/>
+        <t-cell bordered title="扩展测试版猜版直链后缀">
+            <t-switch bind:change="handleExtendSuffixChange" slot="note" style="margin: 0 0 0 48rpx;"
+                      value="{{ExtendSuffixSwitch}}"/>
         </t-cell>
-        <t-cell title="解除 QQ 测试版猜版小版本号遵循 5 的倍数限制" bordered="{{false}}">
-            <t-switch style="margin: 0 0 0 48rpx;" value="{{Not5Switch}}" slot="note"
-                      bind:change="handleNot5Change"/>
+        <t-cell arrow bind:tap="handleSuffixSetting" bordered hover title="猜版直链后缀设置"/>
+        <t-cell bordered="{{false}}" title="解除 QQ 测试版猜版小版本号遵循 5 的倍数限制">
+            <t-switch bind:change="handleNot5Change" slot="note" style="margin: 0 0 0 48rpx;" value="{{Not5Switch}}"/>
         </t-cell>
         <view class="setting-button">
-            <t-button theme="light" block size="large" bind:tap="closeSettingPopup">确定</t-button>
+            <t-button bind:tap="closeSettingPopup" block size="large" theme="light">确定</t-button>
         </view>
     </view>
 </t-popup>
 
-<t-overlay visible="{{loadingVisible}}" duration="{{500}}" z-index="11002"/>
+<t-overlay duration="{{300}}" visible="{{loadingVisible}}" z-index="11002"/>
 
-<t-popup visible="{{loadingVisible}}" z-index="11003" show-overlay="{{false}}" bind:visible-change="loadingPopupVisible"
-         placement="bottom" close-on-overlay-click>
+<t-popup bind:visible-change="loadingPopupVisible" close-on-overlay-click="{{false}}" placement="bottom"
+         show-overlay="{{false}}" visible="{{loadingVisible}}" z-index="11003">
     <view class="block">
         <view class="guess-header">
             <view class="guess-title">猜版 Extended</view>
         </view>
 
         <view class="guess-message-loading">
-            <t-loading align="center" theme="circular" size="68rpx" class="large"/>
+            <t-loading align="center" class="large" size="68rpx" theme="circular"/>
             <view class="message-container">{{updateProgressDialogMessage}}</view>
         </view>
 
         <view class="loading-button">
-            <t-button theme="light" size="large" block bind:tap="cancelGuess">取消</t-button>
+            <t-button bind:tap="cancelGuess" block size="large" theme="light">取消</t-button>
         </view>
     </view>
 </t-popup>
 
-<t-popup visible="{{guessSuccessVisible}}" bind:visible-change="guessSuccessPopupVisible" close-on-overlay-click
-         placement="bottom">
+<t-popup bind:visible-change="guessSuccessPopupVisible" close-on-overlay-click="{{false}}" placement="bottom"
+         visible="{{guessSuccessVisible}}">
     <view class="block">
         <view class="guess-success-header">
-            <view class="guess-success-title" id="ability-guess-success">猜版 Extended</view>
+            <view class="guess-success-title">猜版 Extended</view>
         </view>
         <view class="section__content">
-            <t-result theme="success" title="猜测成功" description="{{successGuessedLink}}"/>
+            <t-result description="{{successGuessedLink+succeedGuessedFileSizeShare}}" theme="success"
+                      title="猜测成功"/>
+        </view>
+        <view class="about-link">
+            <t-link bind:tap="copyGuessSuccessShare" content="复制分享文案并停止" hover prefix-icon="share"
+                    size="medium" theme="primary"/>
+        </view>
+        <view class="guess-success-button-top">
+            <t-button bind:tap="copyGuessSuccess" block size="large" theme="primary">复制链接并停止</t-button>
         </view>
         <view class="guess-success-button">
-            <t-button theme="primary" block size="large" bind:tap="copyGuessSuccess">复制并停止</t-button>
-        </view>
-        <view class="guess-success-button">
-            <t-button theme="light" block size="large" bind:tap="cancelGuess" style="margin-right: 8px;">仅停止
+            <t-button bind:tap="cancelGuess" block size="large" style="margin-right: 8px;" theme="light">仅停止
             </t-button>
-            <t-button theme="light" block size="large" bind:tap="continueGuess" style="margin-left: 8px;">跳过以继续
+            <t-button bind:tap="continueGuess" block size="large" style="margin-left: 8px;" theme="light">跳过以继续
+            </t-button>
+        </view>
+    </view>
+</t-popup>
+
+<t-overlay duration="{{300}}" visible="{{suffixSettingVisible}}" z-index="11501"/>
+
+<t-popup bind:visible-change="suffixSettingPopupVisible" close-on-overlay-click="{{false}}" placement="bottom"
+         show-overlay="{{false}}" visible="{{suffixSettingVisible}}" z-index="11502">
+    <view class="block">
+        <view class="guess-success-header">
+            <view class="guess-success-title" id="ability-guess-success">猜版直链后缀设置</view>
+        </view>
+        <view style="margin-bottom: 16rpx;">
+            <t-input bind:change="changeCustomSuffix" confirm-type="done" id="custom-suffix" label="自定义后缀"
+                     placeholder="输入自定义猜版后缀" tips="请使用“, ”（西文逗号+空格）分割" value="{{customSuffix}}"/>
+        </view>
+        <view class="chbox-top">
+            <t-checkbox bind:change="suffix64HBChange" block="{{false}}" borderless checked="{{suffix64HB}}"
+                        icon="rectangle" label="_64_HB"/>
+            <t-checkbox bind:change="suffixHB64Change" block="{{false}}" borderless checked="{{suffixHB64}}"
+                        icon="rectangle" label="_HB_64"/>
+            <t-checkbox bind:change="suffix64HB1Change" block="{{false}}" borderless checked="{{suffix64HB1}}"
+                        icon="rectangle" label="_64_HB1"/>
+        </view>
+        <view class="chbox">
+            <t-checkbox bind:change="suffixHB164Change" block="{{false}}" borderless checked="{{suffixHB164}}"
+                        icon="rectangle" label="_HB1_64"/>
+            <t-checkbox bind:change="suffix64HB2Change" block="{{false}}" borderless checked="{{suffix64HB2}}"
+                        icon="rectangle" label="_64_HB2"/>
+            <t-checkbox bind:change="suffixHB264Change" block="{{false}}" borderless checked="{{suffixHB264}}"
+                        icon="rectangle" label="_HB2_64"/>
+        </view>
+        <view class="chbox">
+            <t-checkbox bind:change="suffix64HB3Change" block="{{false}}" borderless checked="{{suffix64HB3}}"
+                        icon="rectangle" label="_64_HB3"/>
+            <t-checkbox bind:change="suffixHB364Change" block="{{false}}" borderless checked="{{suffixHB364}}"
+                        icon="rectangle" label="_HB3_64"/>
+            <t-checkbox bind:change="suffix64HDChange" block="{{false}}" borderless checked="{{suffix64HD}}"
+                        icon="rectangle" label="_64_HD"/>
+        </view>
+        <view class="chbox">
+            <t-checkbox bind:change="suffixHD64Change" block="{{false}}" borderless checked="{{suffixHD64}}"
+                        icon="rectangle" label="_HD_64"/>
+            <t-checkbox bind:change="suffix64HD1Change" block="{{false}}" borderless checked="{{suffix64HD1}}"
+                        icon="rectangle" label="_64_HD1"/>
+            <t-checkbox bind:change="suffixHD164Change" block="{{false}}" borderless checked="{{suffixHD164}}"
+                        icon="rectangle" label="_HD1_64"/>
+        </view>
+        <view class="chbox">
+            <t-checkbox bind:change="suffix64HD2Change" block="{{false}}" borderless checked="{{suffix64HD2}}"
+                        icon="rectangle" label="_64_HD2"/>
+            <t-checkbox bind:change="suffixHD264Change" block="{{false}}" borderless checked="{{suffixHD264}}"
+                        icon="rectangle" label="_HD2_64"/>
+            <t-checkbox bind:change="suffix64HD3Change" block="{{false}}" borderless checked="{{suffix64HD3}}"
+                        icon="rectangle" label="_64_HD3"/>
+        </view>
+        <view class="chbox">
+            <t-checkbox bind:change="suffixHD364Change" block="{{false}}" borderless checked="{{suffixHD364}}"
+                        icon="rectangle" label="_HD3_64"/>
+            <t-checkbox bind:change="suffix64HD1HBChange" block="{{false}}" borderless checked="{{suffix64HD1HB}}"
+                        icon="rectangle" label="_64_HD1HB"/>
+            <t-checkbox bind:change="suffixHD1HB64Change" block="{{false}}" borderless checked="{{suffixHD1HB64}}"
+                        icon="rectangle" label="_HD1HB_64"/>
+        </view>
+        <view class="chbox">
+            <t-checkbox bind:change="suffixTestChange" block="{{false}}" borderless checked="{{suffixTest}}"
+                        icon="rectangle" label="_test"/>
+        </view>
+        <view class="suffix-setting-button">
+            <t-button bind:tap="closeSuffixSettingPopup" block size="large" style="margin-right: 8px;" theme="light">返回
+            </t-button>
+            <t-button bind:tap="saveSuffixSetting" block size="large" style="margin-left: 8px;" theme="primary">保存
             </t-button>
         </view>
     </view>

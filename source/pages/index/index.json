@@ -20,7 +20,9 @@
     "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
     "t-input": "tdesign-miniprogram/input/input",
     "t-message": "tdesign-miniprogram/message/message",
-    "t-notice-bar": "tdesign-miniprogram/notice-bar/notice-bar"
+    "t-notice-bar": "tdesign-miniprogram/notice-bar/notice-bar",
+    "t-checkbox": "tdesign-miniprogram/checkbox/checkbox",
+    "t-back-top": "tdesign-miniprogram/back-top/back-top"
   },
   "disableScroll": true
 }

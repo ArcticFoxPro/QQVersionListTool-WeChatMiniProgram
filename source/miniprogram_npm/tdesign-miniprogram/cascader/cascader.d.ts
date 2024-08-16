@@ -11,6 +11,13 @@ export default class Cascader extends SuperComponent {
         key: string;
         event: string;
     }[];
+    state: {
+        contentHeight: number;
+        stepHeight: number;
+        tabsHeight: number;
+        subTitlesHeight: number;
+        stepsInitHeight: number;
+    };
     data: {
         prefix: string;
         name: string;
@@ -19,6 +26,7 @@ export default class Cascader extends SuperComponent {
         selectedValue: any[];
         scrollTopList: any[];
         steps: any[];
+        _optionsHeight: number;
     };
     observers: {
         visible(v: any): void;
@@ -28,6 +36,8 @@ export default class Cascader extends SuperComponent {
         stepIndex(): Promise<void>;
     };
     methods: {
+        updateOptionsHeight(steps: number): void;
+        initOptionsHeight(steps: number): Promise<void>;
         initWithValue(): void;
         getIndexesByValue(options: import("../common/common").TreeOptionData<string | number>[], value: any): any[];
         updateScrollTop(): void;

@@ -248,6 +248,11 @@
     display: flex;
 }
 
+.guess-success-button-top {
+    margin: 24rpx 32rpx 32rpx;
+    display: flex;
+}
+
 .TD_and_MulanPubLv2 {
     display: flex;
     justify-content: center;
@@ -260,9 +265,23 @@
     overflow: hidden;
 }
 
-.suffix-setting-button{
-    margin: 16rpx 32rpx 32rpx;
+.suffix-setting-button {
+    margin: 32rpx;
     display: flex;
+}
+
+.chbox {
+    padding: 16rpx 32rpx;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--td-bg-color-container, #fff);
+}
+
+.chbox-top {
+    padding: 16rpx 32rpx;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--td-bg-color-container, #fff);
 }
 
 @media (prefers-color-scheme: dark) {

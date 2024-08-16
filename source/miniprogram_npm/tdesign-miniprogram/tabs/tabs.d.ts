@@ -41,6 +41,7 @@ export default class Tabs extends SuperComponent {
         setCurrentIndex(index: number): void;
         getCurrentName(): any;
         calcScrollOffset(containerWidth: number, targetLeft: number, targetWidth: number, offset: number): number;
+        getTabHeight(): Promise<any>;
         getTrackSize(): Promise<number>;
         setTrack(): Promise<void>;
         onTabTap(event: any): void;

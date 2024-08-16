@@ -16,12 +16,12 @@ let PullDownRefresh = class PullDownRefresh extends SuperComponent {
         this.pixelRatio = 1;
         this.startPoint = null;
         this.isPulling = false;
-        this.loadingBarHeight = 100;
         this.maxRefreshAnimateTimeFlag = 0;
         this.closingAnimateTimeFlag = 0;
         this.externalClasses = [`${prefix}-class`, `${prefix}-class-loading`, `${prefix}-class-text`, `${prefix}-class-indicator`];
         this.options = {
             multipleSlots: true,
+            pureDataPattern: /^_/,
         };
         this.relations = {
             '../back-top/back-top': {
@@ -33,36 +33,26 @@ let PullDownRefresh = class PullDownRefresh extends SuperComponent {
             prefix,
             classPrefix: name,
             barHeight: 0,
+            tipsHeight: 0,
             refreshStatus: -1,
             loosing: false,
             enableToRefresh: true,
             scrollTop: 0,
+            _maxBarHeight: 0,
+            _loadingBarHeight: 0,
         };
         this.lifetimes = {
             attached() {
                 const { screenWidth } = wx.getSystemInfoSync();
-                const { loadingBarHeight, loadingTexts } = this.properties;
+                const { loadingTexts, maxBarHeight, loadingBarHeight } = this.properties;
                 this.setData({
+                    _maxBarHeight: unitConvert(maxBarHeight),
+                    _loadingBarHeight: unitConvert(loadingBarHeight),
                     loadingTexts: Array.isArray(loadingTexts) && loadingTexts.length >= 4
                         ? loadingTexts
                         : ['下拉刷新', '松手刷新', '正在刷新', '刷新完成'],
                 });
                 this.pixelRatio = 750 / screenWidth;
-                Object.defineProperty(this, 'maxBarHeight', {
-                    get() {
-                        return unitConvert(this.data.maxBarHeight);
-                    },
-                });
-                Object.defineProperty(this, 'loadingBarHeight', {
-                    get() {
-                        return unitConvert(this.data.loadingBarHeight);
-                    },
-                });
-                if (loadingBarHeight) {
-                    this.setData({
-                        computedLoadingBarHeight: unitConvert(loadingBarHeight),
-                    });
-                }
             },
             detached() {
                 clearTimeout(this.maxRefreshAnimateTimeFlag);
@@ -83,6 +73,15 @@ let PullDownRefresh = class PullDownRefresh extends SuperComponent {
                 else {
                     this.doRefresh();
                 }
+            },
+            barHeight(val) {
+                this.setData({ tipsHeight: Math.min(val, this.data._loadingBarHeight) });
+            },
+            maxBarHeight(v) {
+                this.setData({ _maxBarHeight: unitConvert(v) });
+            },
+            loadingBarHeight(v) {
+                this.setData({ _loadingBarHeight: unitConvert(v) });
             },
         };
         this.methods = {
@@ -135,7 +134,7 @@ let PullDownRefresh = class PullDownRefresh extends SuperComponent {
                 this.startPoint = null;
                 this.isPulling = false;
                 this.setData({ loosing: true });
-                if (barHeight > this.loadingBarHeight) {
+                if (barHeight > this.data._loadingBarHeight) {
                     this._trigger('change', { value: true });
                     this.triggerEvent('refresh');
                 }
@@ -165,7 +164,7 @@ let PullDownRefresh = class PullDownRefresh extends SuperComponent {
                 if (this.properties.disabled)
                     return;
                 this.setData({
-                    barHeight: this.loadingBarHeight,
+                    barHeight: this.data._loadingBarHeight,
                     refreshStatus: 2,
                     loosing: true,
                 });
@@ -178,9 +177,9 @@ let PullDownRefresh = class PullDownRefresh extends SuperComponent {
                 }, this.properties.refreshTimeout);
             },
             setRefreshBarHeight(value) {
-                const barHeight = Math.min(value, this.maxBarHeight);
+                const barHeight = Math.min(value, this.data._maxBarHeight);
                 const data = { barHeight };
-                if (barHeight >= this.loadingBarHeight) {
+                if (barHeight >= this.data._loadingBarHeight) {
                     data.refreshStatus = 1;
                 }
                 else {

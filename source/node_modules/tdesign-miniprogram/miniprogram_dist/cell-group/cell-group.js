@@ -19,6 +19,9 @@ let CellGroup = class CellGroup extends SuperComponent {
                 linked() {
                     this.updateLastChid();
                 },
+                unlinked() {
+                    this.updateLastChid();
+                },
             },
         };
         this.properties = props;

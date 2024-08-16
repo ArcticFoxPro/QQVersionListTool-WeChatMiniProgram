@@ -4,12 +4,12 @@
 
 dayjs@^1.10.7:
   version "1.11.12"
-  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.12.tgz#5245226cc7f40a15bf52e0b99fd2a04669ccac1d"
+  resolved "https://registry.npmjs.org/dayjs/-/dayjs-1.11.12.tgz"
   integrity sha512-Rt2g+nTbLlDWZTwwrIXjy9MeiZmSDI375FvZs72ngxx8PDC6YXOeR3q5LAuPzjZQxhiWdRKac7RKV+YyQYfYIg==
 
 tdesign-miniprogram@^1.5.1:
   version "1.5.1"
-  resolved "https://registry.yarnpkg.com/tdesign-miniprogram/-/tdesign-miniprogram-1.5.1.tgz#a63fadf836c5e5f9af7657a9ca28000fa4dd1423"
+  resolved "https://registry.npmjs.org/tdesign-miniprogram/-/tdesign-miniprogram-1.5.1.tgz"
   integrity sha512-QnZJk5WRWdiUHGcQZvl/p6z6KUJE6MWBNaeWnrW2MgYeCLVaUEAMZMyqiVCy/zNDF9GtjtDeimG856FGRu/pOA==
   dependencies:
     dayjs "^1.10.7"

@@ -42,6 +42,7 @@
   right: 0;
   padding: 20rpx;
   line-height: 1;
+  color: var(--td-popup-close-btn-color, var(--td-text-color-primary, var(--td-font-gray-1, rgba(0, 0, 0, 0.9))));
 }
 .t-popup--top {
   top: 0;

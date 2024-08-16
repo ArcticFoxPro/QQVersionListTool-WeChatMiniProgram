@@ -60,7 +60,7 @@
   padding-right: var(--td-navbar-right, 95px);
   padding-top: var(--td-navbar-padding-top, 20px);
   color: var(--td-navbar-color, var(--td-text-color-primary, var(--td-font-gray-1, rgba(0, 0, 0, 0.9))));
-  background: var(--td-navbar-bg-color, var(--td-bg-color-container, var(--td-font-white-1, #ffffff)));
+  background-color: var(--td-navbar-bg-color, var(--td-bg-color-container, var(--td-font-white-1, #ffffff)));
   display: flex;
   align-items: center;
   box-sizing: content-box;

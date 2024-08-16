@@ -12,7 +12,9 @@ export default class Message extends SuperComponent {
     index: number;
     instances: any[];
     gap: number;
-    observers: {};
+    observers: {
+        visible(value: any): void;
+    };
     pageLifetimes: {
         show(): void;
     };
@@ -31,4 +33,5 @@ export default class Message extends SuperComponent {
     removeMsg(id: any): void;
     handleClose(): void;
     handleLinkClick(): void;
+    handleDurationEnd(): void;
 }

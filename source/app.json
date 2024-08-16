@@ -7,7 +7,7 @@
 	"window": {
 		"navigationStyle": "custom",
 		"navigationBarTextStyle":"@navTxtStyle",
-		"navigationBarTitleText": "QQ Ver. Lite",
+		"navigationBarTitleText": "QQ 版本列表 Lite",
 		"navigationBarBackgroundColor": "#F6F6F6",
 		"backgroundColor": "#F6F6F6"
 	},
