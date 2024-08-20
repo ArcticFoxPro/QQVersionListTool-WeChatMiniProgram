@@ -169,7 +169,7 @@ Page({
 
         this.getData();
     }, onUnload: function () {
-        this.stopGuessing();
+        this.cancelGuess();
     }, refreshData: function () {
         this.getData();
     }, copyOSLink() {
