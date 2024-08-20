@@ -632,7 +632,7 @@ Page({
                     Message.info({
                         context: this,
                         offset: [90, 32],
-                        duration: 1500,
+                        duration: 3000,
                         icon: false,
                         single: false,
                         content: '已停止猜测',
@@ -696,7 +696,7 @@ Page({
                 Message.success({
                     context: that,
                     offset: [90, 32],
-                    duration: 1500,
+                    duration: 3000,
                     icon: false,
                     single: false,
                     content: `已复制：${copyData}`,
@@ -923,7 +923,7 @@ Page({
         Message.info({
             context: this,
             offset: [90, 32],
-            duration: 1500,
+            duration: 3000,
             icon: false,
             single: false,
             content: '已保存',

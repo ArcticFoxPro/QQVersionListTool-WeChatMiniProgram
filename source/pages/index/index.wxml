@@ -79,7 +79,7 @@ See the Mulan PubL v2 for more details.
             <view class="about-title" id="ability-about">关于</view>
         </view>
         <view class="about-text" style="margin: 0 48rpx 12rpx 48rpx;">QQ 版本列表 Lite for WeChat MiniProgram</view>
-        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">版本：1.1.2</view>
+        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">版本：1.1.3</view>
         <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">作者：快乐小牛、有鲫雪狐</view>
         <view class="about-text" style="margin: 12rpx; padding: 0 36rpx 12rpx 36rpx;">Since 2024.03.12</view>
         <view class="TD_and_MulanPubLv2">
