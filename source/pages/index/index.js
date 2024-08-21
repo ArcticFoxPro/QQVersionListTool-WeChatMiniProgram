@@ -495,7 +495,7 @@ Page({
         return new Promise((resolve, reject) => {
             wx.request({
                 url, method: 'HEAD', success: function (res) {
-                    if (res.header['Content-Type'] === 'application/octet-stream' || res.header['Content-Type'] === 'application/vnd.android.package-archive') {
+                    if (res.header['Content-Type'].startsWith('application/')) {
                         const resContentLength = res.header['Content-Length']
                         const fileSizeInBytes = parseInt(resContentLength, 10);
                         const fileSize = fileSizeInBytes / (1024 * 1024);
