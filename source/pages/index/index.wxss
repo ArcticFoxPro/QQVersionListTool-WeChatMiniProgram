@@ -31,8 +31,8 @@
 
 
 .qq-version-item {
-    padding-top: 28rpx;
-    padding-bottom: 4rpx;
+    padding-top: 32rpx;
+    padding-bottom: 0;
     background-color: #f6f6f6;
 }
 

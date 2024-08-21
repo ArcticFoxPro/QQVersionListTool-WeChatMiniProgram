@@ -29,7 +29,7 @@ See the Mulan PubL v2 for more details.
 
     <view class="recycle-view-container">
         <scroll-view bind:refresh="onRefresh" bindscroll="titleChange" class="qq-version-list" enable-passive enhanced
-                     scroll-top="{{topNum}}" scroll-with-animation scroll-y="{{true}}"
+                     scroll-top="{{topNum}}" scroll-with-animation scroll-y="{{true}}" show-scrollbar="{{false}}"
                      style="height:{{heightRecycle+'px'}};" throttle="{{!ThrottleSwitch}}" type="list">
             <view class="header-title" id="titleTop2">QQ 版本列表 Lite</view>
             <view class="qq-version-item" style="width: 100%;" wx:for="{{qqVersions}}" wx:key="versions">
@@ -43,7 +43,7 @@ See the Mulan PubL v2 for more details.
                     </t-cell>
                 </t-cell-group>
             </view>
-            <view class="qq-version-item-bottom" style="width: 100%; padding: 24rpx" wx:if="{{qqVersions.length>=1}}"
+            <view class="qq-version-item-bottom" style="width: 100%; padding: 64rpx" wx:if="{{qqVersions.length>=1}}"
                   wx:key="lastItem"></view>
         </scroll-view>
     </view>
@@ -79,7 +79,9 @@ See the Mulan PubL v2 for more details.
             <view class="about-title" id="ability-about">关于</view>
         </view>
         <view class="about-text" style="margin: 0 48rpx 12rpx 48rpx;">QQ 版本列表 Lite for WeChat MiniProgram</view>
-        <view class="about-text" style="margin: 24rpx; padding: 0 24rpx;">提供 Android QQ 版本列表的查看和对 Android QQ 下载链接的枚举法猜测。</view>
+        <view class="about-text" style="margin: 24rpx; padding: 0 24rpx;">提供 Android QQ 版本列表的查看和对 Android QQ
+            下载链接的枚举法猜测。
+        </view>
         <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">版本：1.1.3</view>
         <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">作者：快乐小牛、有鲫雪狐</view>
         <view class="about-text" style="margin: 12rpx; padding: 0 36rpx 12rpx 36rpx;">Since 2024.03.12</view>
