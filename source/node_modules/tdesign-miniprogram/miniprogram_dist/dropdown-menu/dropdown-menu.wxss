@@ -27,7 +27,7 @@
 }
 .t-dropdown-menu {
   display: flex;
-  height: 48px;
+  height: var(--td-dropdown-menu-height, 96rpx);
   background: var(--td-dropdown-menu-bg-colorm, var(--td-bg-color-container, var(--td-font-white-1, #ffffff)));
   position: relative;
 }
