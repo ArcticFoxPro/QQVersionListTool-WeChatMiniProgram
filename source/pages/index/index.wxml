@@ -12,7 +12,7 @@ MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
 See the Mulan PubL v2 for more details.
 -->
 
-<wxs module="format" src="./format.wxs"></wxs>
+<wxs module="indexUtil" src="./index.wxs"></wxs>
 
 <t-message id="t-message"/>
 
@@ -36,10 +36,14 @@ See the Mulan PubL v2 for more details.
                 <t-cell-group theme="card">
                     <t-cell arrow bind:tap="clickCell" data-index="{{index}}" description="额定大小：{{item.size}} MB"
                             hover leftIcon="" title="版本：{{item.versionNumber}}">
-                        <t-tag slot="note" style="font-family: TCloudNumber, sans-serif;" theme="primary"
-                               variant="light" wx:if="{{PerProSwitch}}">
-                            {{format.formatPercent(item.size, maxSize)}}
-                        </t-tag>
+                        <view slot="note">
+                            <t-tag style="font-family: TCloudNumber, sans-serif;" theme="primary"
+                                   variant="light" wx:if="{{PerProSwitch}}">
+                                {{indexUtil.formatPercent(item.size, maxSize)}}
+                            </t-tag>
+                            <t-tag icon="{{null}}" style="margin-left: 12rpx;" theme="primary" variant="light"
+                                   wx:if="{{item.isAccessibility}}">无障碍</t-tag>
+                        </view>
                     </t-cell>
                 </t-cell-group>
             </view>

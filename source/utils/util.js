@@ -10,6 +10,7 @@
     See the Mulan PubL v2 for more details.
 */
 
+const semver = require("semver");
 const formatTime = date => {
     const year = date.getFullYear()
     const month = date.getMonth() + 1

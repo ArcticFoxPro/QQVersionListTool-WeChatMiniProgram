@@ -13,9 +13,9 @@
 */
 
 import Message from 'tdesign-miniprogram/message/index';
+import semver from 'semver';
 
 const util = require('../../utils/util.js')
-const QQVersionBean = require('./QQVersionBean.js');
 
 Page({
     properties: {
@@ -197,6 +197,7 @@ Page({
                         let json = jsonStr.substring(pstart, pend);
 
                         let qqVersionBean = JSON.parse(json);
+                        qqVersionBean.isAccessibility = semver.gte(qqVersionBean.versionNumber, "9.0.85")
 
                         qqVersionList.push(qqVersionBean);
                     }
@@ -933,5 +934,5 @@ Page({
         this.setData({
             topNum: 0
         })
-    },
+    }
 })
