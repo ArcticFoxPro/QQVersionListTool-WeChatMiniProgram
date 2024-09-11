@@ -122,6 +122,7 @@ let Dialog = class Dialog extends SuperComponent {
             overlayClick() {
                 if (this.properties.closeOnOverlayClick) {
                     this.triggerEvent('close', { trigger: 'overlay' });
+                    this.close();
                 }
                 this.triggerEvent('overlay-click');
             },

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "semver": "^7.6.3",
     "tdesign-miniprogram": "^1.6.0"
   }
 }

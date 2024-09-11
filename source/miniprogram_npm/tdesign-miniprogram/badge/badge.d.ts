@@ -14,6 +14,8 @@ export default class Badge extends SuperComponent {
         value: string;
         labelID: string;
         descriptionID: string;
+        ribbonStyle: string;
+        ribbonOuterStyle: string;
     };
     lifetimes: {
         ready(): void;

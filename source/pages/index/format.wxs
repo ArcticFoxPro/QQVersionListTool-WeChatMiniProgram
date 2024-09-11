@@ -1,5 +1,0 @@
-module.exports= {
-    formatPercent:function (value, max) {
-        return (value / max * 100).toFixed(2) + '%';
-    }
-}

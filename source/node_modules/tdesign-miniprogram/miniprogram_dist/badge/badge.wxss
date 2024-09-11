@@ -27,8 +27,8 @@
 }
 .t-badge {
   position: relative;
-  display: inline-block;
-  vertical-align: top;
+  display: inline-flex;
+  align-items: start;
 }
 .t-badge--basic {
   z-index: 100;
@@ -58,30 +58,14 @@
 }
 .t-badge__ribbon-outer {
   position: absolute;
+  overflow: hidden;
   top: 0;
   right: 0;
-}
-.t-badge__ribbon--before,
-.t-badge__ribbon--after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 0;
-  bottom: 0;
-  border-bottom: var(--td-badge-basic-height, 32rpx) solid var(--td-badge-bg-color, var(--td-error-color, var(--td-error-color-6, #d54941)));
-}
-.t-badge__ribbon--before {
-  left: calc(-1 * var(--td-badge-basic-height, 32rpx) + 1rpx);
-  border-left: var(--td-badge-basic-height, 32rpx) solid transparent;
-}
-.t-badge__ribbon--after {
-  right: calc(-1 * var(--td-badge-basic-height, 32rpx) + 1rpx);
-  border-right: var(--td-badge-basic-height, 32rpx) solid transparent;
+  background-color: var(--td-badge-bg-color, var(--td-error-color, var(--td-error-color-6, #d54941)));
 }
 .t-badge--ribbon {
   display: inline-block;
-  transform: rotate(45deg);
-  transform-origin: center center;
+  transform-origin: top left;
   border-radius: 0;
 }
 .t-badge--bubble {

@@ -57,7 +57,9 @@ QQ 版本列表 Lite for WeChat MiniProgram 是一个使用 TDesign 组件库构
 
 ### 版本列表
 
-在进入 QQ 版本列表 Lite 时，您首先会看到一系列显示“版本：x.y.z 额定大小：xxx MB”的卡片，这些卡片组成的列表即为 Android QQ 的版本列表，卡片列表展示了已经或即将发布的 Android QQ 版本。版本信息来源：https://im.qq.com/rainbow/androidQQVersionList
+在进入 QQ 版本列表 Lite 时，您首先会看到一系列显示“版本：x.y.z 额定大小：xxx MB”的卡片，这些卡片组成的列表即为 Android QQ 的版本列表，卡片列表展示了已经或即将发布的 Android QQ 版本。QQ 版本信息来源：https://im.qq.com/rainbow/androidQQVersionList
+
+从右向左滑动版本列表，可切换到 TIM 版本列表。TIM 版本信息来源：https://im.qq.com/rainbow/TIMDownload
 
 点击卡片将弹出弹出层，可查阅到更为详尽的信息和原始 JSON 字符串信息。
 
@@ -174,7 +176,9 @@ QQ 版本列表 Lite 采用 [木兰公共许可证, 第2版](https://github.com/
 QQ 版本列表 Lite 的诞生离不开以下开源项目，感谢以下开源项目的作者和贡献者：
 
 - [TDesign WeChat MiniProgram（Tencent）](https://github.com/Tencent/tdesign-miniprogram)，Licensed under [MIT License](https://github.com/Tencent/tdesign-miniprogram/blob/develop/LICENSE)
-- [Node.js](https://github.com/nodejs/node)，Licensed under [MIT License](https://github.com/nodejs/node/blob/main/LICENSE)
+- [TDesign Icons（Tencent）](https://github.com/Tencent/tdesign-icons)，Licensed under [MIT License](https://github.com/Tencent/tdesign-icons/blob/develop/LICENSE)
+- [Node.js®（OpenJS Foundation）](https://nodejs.org/)，Licensed under [MIT License](https://github.com/nodejs/node/blob/main/LICENSE)
+- [Semver（npm）](https://github.com/npm/node-semver)，Licensed under [ISC License](https://github.com/npm/node-semver/blob/main/LICENSE)
 
 ## 孪生项目
 

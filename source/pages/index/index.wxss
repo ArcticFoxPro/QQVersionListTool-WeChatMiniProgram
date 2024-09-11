@@ -31,8 +31,8 @@
 
 
 .qq-version-item {
-    padding-top: 28rpx;
-    padding-bottom: 4rpx;
+    padding-top: 32rpx;
+    padding-bottom: 0;
     background-color: #f6f6f6;
 }
 
@@ -55,10 +55,7 @@
     bottom: 0;
     display: flex;
     justify-content: space-between;
-    padding-left: 32rpx;
-    padding-bottom: 32rpx;
-    padding-right: 32rpx;
-    padding-top: 16rpx;
+    padding: 16rpx 32rpx 32rpx;
     background-color: #f6f6f6;
 
 }
@@ -130,7 +127,7 @@
 }
 
 .section__content {
-    margin: 48rpx 32rpx 96rpx 32rpx;
+    margin: 80rpx 32rpx 96rpx 32rpx;
 }
 
 .cell-detail-button {
@@ -284,8 +281,52 @@
     background-color: var(--td-bg-color-container, #fff);
 }
 
-@media (prefers-color-scheme: dark) {
+.qqnt-logo-src {
+    /*
+    ** 专有代码声明 Ⅰ **
 
+    从此声明直到声明专有代码结束处所包含的矢量图片文件（无论其文件形式如何）
+    由 QQ 版本列表 Lite（以下简称“本项目”）根据 QQNT 标识临摹绘制，
+    文件所包含的 QQNT 标识商标（如有）和原创权利人为深圳市腾讯计算机系统有限公司和/或其关联公司。
+
+    QQ 版本列表 Lite 承诺不将此文件用于或授权任何非权利人用于任何形式的商业用途。
+
+    此矢量图片文件及其代码不受本项目 木兰公共许可证, 第2版 开源许可约束，
+    未经许可，不得用于任何形式的商业用途或其他未经授权的用途。
+
+    本项目对“QQ”、QQNT 标识、“QQNT”的使用旨在注明和指向对应主体，
+    并非表示对“QQ”、QQNT 标识、“QQNT”商标（如有）的注册和拥有。
+
+    此文本如有任何中英文版本之间的差异，以中文版本为准。
+
+    ** Proprietary Code Statement Ⅰ **
+
+    Starting from this declaration until the end of the dedicated code section, any vector image files contained herein, regardless of their file format,
+    was recreated by the QQ Ver. Lite (hereinafter referred to as "this project") based on the QQNT logo.
+    Any trademarks of QQNT logos contained in this file and their original rights belong to 深圳市腾讯计算机系统有限公司 and/or its affiliates.
+
+    The QQ Ver. Lite commits to not using this file for or authorizing any non-right holders to use it for any commercial purposes.
+
+    This vector image file and its code are not subject to the open-source license of this project, the Mulan Public License, Version 2.
+    Without permission, it shall not be used for any commercial purposes or other unauthorized uses.
+
+    The use of "QQ", the QQNT logo, and "QQNT" by this project is intended only to refer to the corresponding entities,
+    and does not imply registration or ownership of the trademarks "QQ", the QQNT logo, and "QQNT" (if any).
+
+    In case of any discrepancies between the Chinese and English versions of this text, the Chinese version shall prevail.
+    */
+    background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB3aWR0aD0iODg4IiBoZWlnaHQ9Ijg4OCIgdmlld0JveD0iMCAwIDg4OCA4ODgiIGZpbGw9InZhcigtLXRkLXByaW1hcnktY29sb3ItNywgIzAwNTJkOSkiIHN0cm9rZT0ibm9uZSIgdmVyc2lvbj0iMS4xIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxwYXRoIGlkPSJwYXRoXzEiIGQ9Ik04ODggMEw4ODggMEw4ODggODg4TDAgODg4TDAgMEw4ODggMFoiIC8+CiAgICA8cmVjdCBpZD0icmVjdF8yIiB4PSIwIiB5PSIwIiB3aWR0aD0iODg4IiBoZWlnaHQ9Ijg4OCIgLz4KICAgIDxjbGlwUGF0aCBpZD0iY2xpcF9wYXRoXzMiPgogICAgICA8dXNlIHhsaW5rOmhyZWY9IiNyZWN0XzIiIC8+CiAgICA8L2NsaXBQYXRoPgogIDwvZGVmcz4KICA8ZyBpZD0icXFudC1sb2dvLXBhbGxldCIgb3BhY2l0eT0iMSIgY2xpcC1wYXRoPSJ1cmwoI2NsaXBfcGF0aF8zKSI+CiAgICA8Zz4KICAgICAgPHVzZSB4bGluazpocmVmPSIjcGF0aF8xIiBzdHlsZT0iZmlsbDojRkZGRkZGO2ZpbGwtcnVsZTpldmVub2RkO2ZpbGwtb3BhY2l0eTowO21peC1ibGVuZC1tb2RlOm5vcm1hbDsiIC8+CiAgICAgIDxnPgogICAgICAgIDxwYXRoIGlkPSJxcW50LWxvZ28tY29udGVudCIgZD0iTTU5MC45MzMgNDY4LjQ3NkwzMDAuOTI1IDY5Ni4zOTJMMzAwLjcyMSA2OTYuMjMyTDMwMC4xMzQgNjk2LjY5NEwwIDQ2MC44ODJMMCAyMzYuMTc2TDEwLjEyNTQgMjI4LjIxOEwzMDAuMTM0IDAuMzAxMjdMMzAwLjMzNyAwLjQ2MTE4MkwzMDAuOTI1IDBMNjAxLjA1OSAyMzUuODEyTDYwMS4wNTkgNDYwLjUxOEw1OTAuOTMzIDQ2OC40NzZMNTkwLjkzMyA0NjguNDc2Wk0zMDAuMjA4IDQzMC42MUwyNjMuNzAxIDQwMy45MzJMMjcyLjA4NiAzNDIuMzg3TDE4My41NTkgNDEwLjY5NEwyMTIuNDgxIDQzMS45ODVMMjEyLjQwNCA0MzIuMDkxTDI0MC4wNjIgNDUyLjMwMUwyNDIuNjYyIDQ1NC4yMDFMMjU1LjU1OSA0NjMuNjk0TDI1NS41NjcgNDYzLjYzMUwyNzQuMzU5IDQ3Ny4zNjNMMjc0LjM1OSA2MDguMTUyTDY5Ljg3NzUgNDQ3LjYxMkwzMDAuODUgMjY2LjA4NEwzMzcuMzU4IDI5Mi43NjFMMzI4Ljk3MyAzNTQuMzA3TDQxNy41IDI4NS45OTlMMzg4LjU3NyAyNjQuNzA5TDM4OC42NTUgMjY0LjYwM0wzNjAuOTk3IDI0NC4zOTNMMzU4LjM5NiAyNDIuNDkyTDM0NS41IDIzMi45OTlMMzQ1LjQ5MSAyMzMuMDYyTDMyNi43IDIxOS4zMzFMMzI2LjcgODguNTQxNUw1MzEuMTgxIDI0OS4wODJMMzAwLjIwOCA0MzAuNjFMMzAwLjIwOCA0MzAuNjFaTTI3My43IDIyMC4wMTJMNTMuNTAwMyAzOTMuMDc0TDUzLjUwMDUgMjYxLjU4TDI3My43IDg4Ljc0NDlMMjczLjcgMjIwLjAxMkwyNzMuNyAyMjAuMDEyWk01NDcuNTU4IDQzNS4xMTRMNTQ3LjU1OCAzMDMuNjJMMzI3LjM1OSA0NzYuNjgxTDMyNy4zNTkgNjA3Ljk0OUw1NDcuNTU4IDQzNS4xMTRMNTQ3LjU1OCA0MzUuMTE0WiIgc3R5bGU9ImZpbGw6dmFyKC0tdGQtcHJpbWFyeS1jb2xvci03LCAjMDA1MmQ5KTtmaWxsLXJ1bGU6ZXZlbm9kZDttaXgtYmxlbmQtbW9kZTpub3JtYWw7IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNDMgOTUpIiAvPgogICAgICA8L2c+CiAgICA8L2c+CiAgPC9nPgo8L3N2Zz4=");
+    /*
+    ** 专有代码声明 Ⅰ 结束处 **
+    ** End of Proprietary Code Statement Ⅰ **
+    */
+    background-size: 100%;
+    width: 32rpx;
+    height: 32rpx;
+    color: aqua;
+}
+
+@media (prefers-color-scheme: dark) {
     .recycle-view-container {
         background-color: var(--td-bg-color-container);
     }
@@ -345,5 +386,49 @@
 
     .about-text {
         color: rgba(255, 255, 255, 0.9);
+    }
+
+    .qqnt-logo-src {
+        /*
+        ** 专有代码声明 Ⅱ **
+
+        从此声明直到声明专有代码结束处所包含的矢量图片文件（无论其文件形式如何）
+        由 QQ 版本列表 Lite（以下简称“本项目”）根据 QQNT 标识临摹绘制，
+        文件所包含的 QQNT 标识商标（如有）和原创权利人为深圳市腾讯计算机系统有限公司和/或其关联公司。
+
+        QQ 版本列表 Lite 承诺不将此文件用于或授权任何非权利人用于任何形式的商业用途。
+
+        此矢量图片文件及其代码不受本项目 木兰公共许可证, 第2版 开源许可约束，
+        未经许可，不得用于任何形式的商业用途或其他未经授权的用途。
+
+        本项目对“QQ”、QQNT 标识、“QQNT”的使用旨在注明和指向对应主体，
+        并非表示对“QQ”、QQNT 标识、“QQNT”商标（如有）的注册和拥有。
+
+        此文本如有任何中英文版本之间的差异，以中文版本为准。
+
+        ** Proprietary Code Statement Ⅱ **
+
+        Starting from this declaration until the end of the dedicated code section, any vector image files contained herein, regardless of their file format,
+        was recreated by the QQ Ver. Lite (hereinafter referred to as "this project") based on the QQNT logo.
+        Any trademarks of QQNT logos contained in this file and their original rights belong to 深圳市腾讯计算机系统有限公司 and/or its affiliates.
+
+        The QQ Ver. Lite commits to not using this file for or authorizing any non-right holders to use it for any commercial purposes.
+
+        This vector image file and its code are not subject to the open-source license of this project, the Mulan Public License, Version 2.
+        Without permission, it shall not be used for any commercial purposes or other unauthorized uses.
+
+        The use of "QQ", the QQNT logo, and "QQNT" by this project is intended only to refer to the corresponding entities,
+        and does not imply registration or ownership of the trademarks "QQ", the QQNT logo, and "QQNT" (if any).
+
+        In case of any discrepancies between the Chinese and English versions of this text, the Chinese version shall prevail.
+        */
+        background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB3aWR0aD0iODg4IiBoZWlnaHQ9Ijg4OCIgdmlld0JveD0iMCAwIDg4OCA4ODgiIGZpbGw9InZhcigtLXRkLXByaW1hcnktY29sb3ItNywgIzQ1ODJlNikiIHN0cm9rZT0ibm9uZSIgdmVyc2lvbj0iMS4xIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxwYXRoIGlkPSJwYXRoXzEiIGQ9Ik04ODggMEw4ODggMEw4ODggODg4TDAgODg4TDAgMEw4ODggMFoiIC8+CiAgICA8cmVjdCBpZD0icmVjdF8yIiB4PSIwIiB5PSIwIiB3aWR0aD0iODg4IiBoZWlnaHQ9Ijg4OCIgLz4KICAgIDxjbGlwUGF0aCBpZD0iY2xpcF9wYXRoXzMiPgogICAgICA8dXNlIHhsaW5rOmhyZWY9IiNyZWN0XzIiIC8+CiAgICA8L2NsaXBQYXRoPgogIDwvZGVmcz4KICA8ZyBpZD0icXFudC1sb2dvLXBhbGxldCIgb3BhY2l0eT0iMSIgY2xpcC1wYXRoPSJ1cmwoI2NsaXBfcGF0aF8zKSI+CiAgICA8Zz4KICAgICAgPHVzZSB4bGluazpocmVmPSIjcGF0aF8xIiBzdHlsZT0iZmlsbDojRkZGRkZGO2ZpbGwtcnVsZTpldmVub2RkO2ZpbGwtb3BhY2l0eTowO21peC1ibGVuZC1tb2RlOm5vcm1hbDsiIC8+CiAgICAgIDxnPgogICAgICAgIDxwYXRoIGlkPSJxcW50LWxvZ28tY29udGVudCIgZD0iTTU5MC45MzMgNDY4LjQ3NkwzMDAuOTI1IDY5Ni4zOTJMMzAwLjcyMSA2OTYuMjMyTDMwMC4xMzQgNjk2LjY5NEwwIDQ2MC44ODJMMCAyMzYuMTc2TDEwLjEyNTQgMjI4LjIxOEwzMDAuMTM0IDAuMzAxMjdMMzAwLjMzNyAwLjQ2MTE4MkwzMDAuOTI1IDBMNjAxLjA1OSAyMzUuODEyTDYwMS4wNTkgNDYwLjUxOEw1OTAuOTMzIDQ2OC40NzZMNTkwLjkzMyA0NjguNDc2Wk0zMDAuMjA4IDQzMC42MUwyNjMuNzAxIDQwMy45MzJMMjcyLjA4NiAzNDIuMzg3TDE4My41NTkgNDEwLjY5NEwyMTIuNDgxIDQzMS45ODVMMjEyLjQwNCA0MzIuMDkxTDI0MC4wNjIgNDUyLjMwMUwyNDIuNjYyIDQ1NC4yMDFMMjU1LjU1OSA0NjMuNjk0TDI1NS41NjcgNDYzLjYzMUwyNzQuMzU5IDQ3Ny4zNjNMMjc0LjM1OSA2MDguMTUyTDY5Ljg3NzUgNDQ3LjYxMkwzMDAuODUgMjY2LjA4NEwzMzcuMzU4IDI5Mi43NjFMMzI4Ljk3MyAzNTQuMzA3TDQxNy41IDI4NS45OTlMMzg4LjU3NyAyNjQuNzA5TDM4OC42NTUgMjY0LjYwM0wzNjAuOTk3IDI0NC4zOTNMMzU4LjM5NiAyNDIuNDkyTDM0NS41IDIzMi45OTlMMzQ1LjQ5MSAyMzMuMDYyTDMyNi43IDIxOS4zMzFMMzI2LjcgODguNTQxNUw1MzEuMTgxIDI0OS4wODJMMzAwLjIwOCA0MzAuNjFMMzAwLjIwOCA0MzAuNjFaTTI3My43IDIyMC4wMTJMNTMuNTAwMyAzOTMuMDc0TDUzLjUwMDUgMjYxLjU4TDI3My43IDg4Ljc0NDlMMjczLjcgMjIwLjAxMkwyNzMuNyAyMjAuMDEyWk01NDcuNTU4IDQzNS4xMTRMNTQ3LjU1OCAzMDMuNjJMMzI3LjM1OSA0NzYuNjgxTDMyNy4zNTkgNjA3Ljk0OUw1NDcuNTU4IDQzNS4xMTRMNTQ3LjU1OCA0MzUuMTE0WiIgc3R5bGU9ImZpbGw6dmFyKC0tdGQtcHJpbWFyeS1jb2xvci03LCAjNDU4MmU2KTtmaWxsLXJ1bGU6ZXZlbm9kZDttaXgtYmxlbmQtbW9kZTpub3JtYWw7IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNDMgOTUpIiAvPgogICAgICA8L2c+CiAgICA8L2c+CiAgPC9nPgo8L3N2Zz4=");
+        /*
+        ** 专有代码声明 Ⅱ 结束处 **
+        ** End of Proprietary Code Statement Ⅱ **
+        */
+        background-size: 100%;
+        width: 32rpx;
+        height: 32rpx;
     }
 }
