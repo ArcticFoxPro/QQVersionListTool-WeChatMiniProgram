@@ -22,34 +22,66 @@ See the Mulan PubL v2 for more details.
                   t-class-title="nav-title">
             <view id="smallTitle" slot="left"
                   style="width: 70vw; font-size: 36rpx; font-weight: 600;margin-left: 16rpx; opacity: {{titleOpacity}};">
-                QQ 版本列表 Lite
+                {{verListCurrent === 0 ? 'QQ 版本列表 Lite' : 'TIM 版本列表 Lite'}}
             </view>
         </t-navbar>
     </view>
 
     <view class="recycle-view-container">
-        <scroll-view bind:refresh="onRefresh" bindscroll="titleChange" class="qq-version-list" enable-passive enhanced
-                     scroll-top="{{topNum}}" scroll-with-animation scroll-y="{{true}}" show-scrollbar="{{false}}"
-                     style="height:{{heightRecycle+'px'}};" throttle="{{!ThrottleSwitch}}" type="list">
-            <view class="header-title" id="titleTop2">QQ 版本列表 Lite</view>
-            <view class="qq-version-item" style="width: 100%;" wx:for="{{qqVersions}}" wx:key="versions">
-                <t-cell-group theme="card">
-                    <t-cell arrow bind:tap="clickCell" data-index="{{index}}" description="额定大小：{{item.size}} MB"
-                            hover leftIcon="" title="版本：{{item.versionNumber}}">
-                        <view slot="note">
-                            <t-tag style="font-family: TCloudNumber, sans-serif;" theme="primary"
-                                   variant="light" wx:if="{{PerProSwitch}}">
-                                {{indexUtil.formatPercent(item.size, maxSize)}}
-                            </t-tag>
-                            <t-tag icon="{{null}}" style="margin-left: 12rpx;" theme="primary" variant="light"
-                                   wx:if="{{item.isAccessibility}}">无障碍</t-tag>
-                        </view>
-                    </t-cell>
-                </t-cell-group>
-            </view>
-            <view class="qq-version-item-bottom" style="width: 100%; padding: 64rpx" wx:if="{{qqVersions.length>=1}}"
-                  wx:key="lastItem"></view>
-        </scroll-view>
+        <swiper bind:change="swiperChange" current="{{verListCurrent}}" duration="250"
+                style="height:{{heightRecycle+'px'}};">
+            <swiper-item>
+                <scroll-view bind:refresh="onRefresh" bindscroll="titleChange" class="qq-version-list" enable-passive
+                             enhanced scroll-top="{{topNum}}" scroll-with-animation scroll-y="{{true}}"
+                             show-scrollbar="{{false}}" style="height:{{heightRecycle+'px'}};"
+                             throttle="{{!ThrottleSwitch}}" type="list">
+                    <view class="header-title" id="titleTop2">QQ 版本列表 Lite</view>
+                    <view class="qq-version-item" style="width: 100%;" wx:for="{{qqVersions}}" wx:key="versions">
+                        <t-cell-group theme="card">
+                            <t-cell arrow bind:tap="clickCell" data-index="{{index}}"
+                                    description="额定大小：{{item.size}} MB" hover leftIcon=""
+                                    title="版本：{{item.versionNumber}}">
+                                <view slot="note">
+                                    <t-tag icon="{{null}}" style="margin-right: 12rpx;" theme="primary" variant="light"
+                                           wx:if="{{item.isQQNTFramework}}">
+                                        <t-icon prefix="qqnt-logo-src" name="" size="32rpx" slot="icon"/>
+                                    </t-tag>
+                                    <t-tag icon="{{null}}" style="margin-right: 12rpx;" theme="primary" variant="light"
+                                           wx:if="{{item.isAccessibility}}">
+                                        <t-icon name="accessibility_new" prefix="material-symbols-outlined" size="28rpx"
+                                                slot="icon"/>
+                                    </t-tag>
+                                    <t-tag style="font-family: TCloudNumber, sans-serif;" theme="primary"
+                                           variant="light" wx:if="{{PerProSwitch}}">
+                                        {{indexUtil.formatPercent(item.size, maxSize)}}
+                                    </t-tag>
+                                </view>
+                            </t-cell>
+                        </t-cell-group>
+                    </view>
+                    <view class="qq-version-item-bottom" style="width: 100%; padding: 64rpx"
+                          wx:if="{{qqVersions.length>=1}}" wx:key="lastItem"></view>
+                </scroll-view>
+            </swiper-item>
+            <swiper-item>
+                <scroll-view bind:refresh="onRefresh" bindscroll="titleChange" class="qq-version-list" enable-passive
+                             enhanced scroll-top="{{topNum}}" scroll-with-animation scroll-y="{{true}}"
+                             show-scrollbar="{{false}}" style="height:{{heightRecycle+'px'}};"
+                             throttle="{{!ThrottleSwitch}}" type="list">
+                    <view class="header-title" id="titleTop3">TIM 版本列表 Lite</view>
+                    <view class="qq-version-item" style="width: 100%;" wx:for="{{timVersions}}" wx:key="version">
+                        <t-cell-group theme="card">
+                            <t-cell arrow bind:tap="clickTimCell" data-index="{{index}}"
+                                    description="发布日期：{{item.datetime}}" hover leftIcon=""
+                                    title="版本：{{item.version}}">
+                            </t-cell>
+                        </t-cell-group>
+                    </view>
+                    <view class="qq-version-item-bottom" style="width: 100%; padding: 64rpx"
+                          wx:if="{{qqVersions.length>=1}}" wx:key="lastItem"></view>
+                </scroll-view>
+            </swiper-item>
+        </swiper>
     </view>
 
     <view class="bottom-button" id="bottomButton">
@@ -114,8 +146,8 @@ See the Mulan PubL v2 for more details.
         <view class="guess-header">
             <view class="guess-title" id="ability-guess">猜版 Extended for Android</view>
         </view>
-        <t-tabs bind:change="onTabsChange" bind:click="onTabsClick" id="tabs" t-class="custom-tabs"
-                t-class-content="custom-panel" theme="tag" value="{{guessTabDefault}}">
+        <t-tabs bind:change="onTabsChange" bind:click="onTabsClick" id="tabs" swipeable="{{false}}"
+                t-class="custom-tabs" t-class-content="custom-panel" theme="tag" value="{{guessTabDefault}}">
             <t-tab-panel label="QQ" value="0">
 
                 <t-notice-bar
@@ -189,13 +221,22 @@ See the Mulan PubL v2 for more details.
                     <t-button bind:tap="closeGuessPopup" block size="large" theme="light">取消</t-button>
                 </view>
             </t-tab-panel>
+            <t-tab-panel label="敬请期待" value="3">
+                <view class="section__content">
+                    <t-result theme="default" title="敬请期待"
+                              description="请关注后续更新以了解后续猜版功能变更"/>
+                </view>
+                <view class="guess-button-top">
+                    <t-button theme="light" block size="large" bind:tap="closeGuessPopup">确定</t-button>
+                </view>
+            </t-tab-panel>
         </t-tabs>
     </view>
 </t-popup>
 
-<t-popup bind:visible-change="cellDetialPopupVisible" close-on-overlay-click placement="bottom"
+<t-popup bind:visible-change="cellDetailPopupVisible" close-on-overlay-click placement="bottom"
          visible="{{cellDetailVisible}}">
-    <view class="block">
+    <view class="block" wx:if="{{detailStatus==='QQDetail'}}">
         <view class="guess-header">
             <view class="guess-title" id="ability-cellitem">详情</view>
         </view>
@@ -203,8 +244,7 @@ See the Mulan PubL v2 for more details.
         <view class="guess-text" style="margin: 0 32rpx 16rpx 32rpx;">版本：{{itemVersion}}</view>
         <view class="guess-text" style=" margin: 0 32rpx 16rpx 32rpx;">额定大小：{{itemSize}} MB</view>
         <view class="guess-text" style=" margin: 0 32rpx 6rpx 32rpx; " wx:if="{{PerProSwitch}}">
-            占比历史最大包（{{maxSize}}
-            MB）：
+            占比历史最大包（{{maxSize}} MB）：
         </view>
 
         <t-progress percentage="{{preSize}}" status="active"
@@ -214,6 +254,17 @@ See the Mulan PubL v2 for more details.
         <view class="guess-text" style=" margin: 0 32rpx 16rpx 32rpx;">{{itemFeatureTitle}}</view>
         <view wx:for="{{itemSummary}}">
             <view class="guess-text" style="margin: 0 32rpx 16rpx 32rpx;">- {{item}}</view>
+        </view>
+    </view>
+    <view class="block" wx:if="{{detailStatus==='TIMDetail'}}">
+        <view class="guess-header">
+            <view class="guess-title" id="ability-cell-tim-item">详情</view>
+        </view>
+
+        <view class="guess-text" style="margin: 0 32rpx 16rpx 32rpx;">版本：{{itemTimVersion}}</view>
+        <view class="guess-text" style=" margin: 0 32rpx 16rpx 32rpx;">发布日期：{{itemTimDatetime}}</view>
+        <view wx:for="{{itemTimFix}}">
+            <view class="guess-text" style="margin: 0 32rpx 16rpx 32rpx;">{{item}}</view>
         </view>
     </view>
     <view class="cell-detail-button">

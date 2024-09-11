@@ -15,8 +15,6 @@
 import Message from 'tdesign-miniprogram/message/index';
 import semver from 'semver';
 
-const util = require('../../utils/util.js')
-
 Page({
     properties: {
         scrollTop: {
@@ -26,6 +24,11 @@ Page({
         styleIsolation: 'apply-shared',
     }, data: {
         qqVersions: [],
+        timVersions: [],
+        qqOpa: 0,
+        timOpa: 0,
+        qqScrollNumber: 0,
+        timScrollNumber: 0,
         onRefresh: false,
         refreshIcon: "refresh",
         versionSmallVisible: wx.getStorage({
@@ -52,10 +55,12 @@ Page({
         QQTestSwitch: false,
         suffixSettingVisible: false,
         scrollNumber: 0,
-        topNum: 0
+        topNum: 0,
+        verListCurrent: 0,
+        detailStatus: ''
     }, onLoad: function () {
         this.setData({
-            theme: wx.getSystemInfoSync().theme || 'light',
+            theme: wx.getAppBaseInfo().theme || 'light',
             PerProSwitch: wx.getStorageSync('isPerProOn'),
             wechatVersionBig: wx.getStorageSync('wechatVersionBig'),
             wechatVersionTrue: wx.getStorageSync('wechatVersionTrue'),
@@ -77,11 +82,23 @@ Page({
             QQTestSwitch: true
         })
 
-        if (wx.getStorageSync('isThrottleOn') === false) this.setData({
-            ThrottleSwitch: false
-        }); else if (wx.getStorageSync('isThrottleOn') === "" || wx.getStorageSync('isThrottleOn') === true) this.setData({
-            ThrottleSwitch: true
-        })
+        function setThrottleSwitch(isThrottleOn, benchmarkLevelConditionMet) {
+            if (isThrottleOn === false) this.setData({
+                ThrottleSwitch: false
+            }); else if (isThrottleOn === true) this.setData({
+                ThrottleSwitch: true
+            }); else if (isThrottleOn === "" || isThrottleOn === undefined) this.setData({
+                ThrottleSwitch: benchmarkLevelConditionMet
+            })
+        }
+
+        wx.getDeviceBenchmarkInfo({
+            success: function (res) {
+                setThrottleSwitch.call(this, wx.getStorageSync('isThrottleOn'), res.benchmarkLevel >= 29);
+            }.bind(this), fail: function () {
+                setThrottleSwitch(this, wx.getStorageSync('isThrottleOn'), false);
+            }.bind(this)
+        });
 
         if (wx.getStorageSync('guessTabDefault') !== "") this.setData({
             guessTabDefault: wx.getStorageSync('guessTabDefault')
@@ -181,6 +198,14 @@ Page({
         this.setData({
             onRefresh: true,
         });
+        let progressFlag = 0
+
+        function endProgress(that) {
+            if (progressFlag === 0) progressFlag = 1; else that.setData({
+                onRefresh: false, refreshIcon: "refresh"
+            });
+        }
+
         wx.request({
             url: 'https://im.qq.com/rainbow/androidQQVersionList', method: 'GET', success: (res) => {
                 try {
@@ -197,7 +222,9 @@ Page({
                         let json = jsonStr.substring(pstart, pend);
 
                         let qqVersionBean = JSON.parse(json);
-                        qqVersionBean.isAccessibility = semver.gte(qqVersionBean.versionNumber, "9.0.85")
+                        qqVersionBean.jsonString = JSON.parse(json)
+                        qqVersionBean.isAccessibility = false // semver.gte(qqVersionBean.versionNumber, getApp().globalData.EARLIEST_ACCESSIBILITY_VERSION)
+                        qqVersionBean.isQQNTFramework = semver.gte(qqVersionBean.versionNumber, getApp().globalData.EARLIEST_QQNT_FRAMEWORK_VERSION_STABLE)
 
                         qqVersionList.push(qqVersionBean);
                     }
@@ -206,31 +233,21 @@ Page({
                         qqVersions: qqVersionList, qqVersionBig: qqVersionList[0].versionNumber
                     });
                     wx.setStorageSync('qqVersionBig', qqVersionList[0].versionNumber);
-                    this.setData({
-                        onRefresh: false, refreshIcon: "refresh"
-                    });
-
                     let maxSizeInFloat = qqVersionList.map(qv => parseFloat(qv.size)).filter(isFinite).reduce((max, current) => Math.max(max, current), -Infinity);
-
-
                     this.setData({
                         maxSize: maxSizeInFloat, versionBig: qqVersionList[0].versionNumber
                     })
+
+                    endProgress(this)
                 } catch (e) {
-                    this.setData({
-                        onRefresh: false, refreshIcon: "refresh"
-                    });
-                    //console.error(e);
+                    endProgress(this)
                     const errorMessage = e.errMsg;
                     this.setData({
                         errorText: errorMessage, errorVisible: true
                     });
                 }
             }, fail: (err) => {
-                this.setData({
-                    onRefresh: false, refreshIcon: "refresh"
-                });
-                //console.error(err);
+                endProgress(this)
                 const errorMessage = err.errMsg;
                 this.setData({
                     errorText: errorMessage, errorVisible: true
@@ -238,6 +255,85 @@ Page({
 
             },
         });
+        wx.request({
+            url: 'https://im.qq.com/rainbow/TIMDownload/', method: 'GET', success: (res) => {
+                try {
+                    let responseData = res.data;
+                    const jsonString = responseData.substring(responseData.indexOf('var params= ') + 12, responseData.lastIndexOf(";\n" + "      typeof"));
+                    const jsonData = JSON.parse(jsonString);
+                    const timVersionList = [];
+                    timVersionList.push({
+                        version: jsonData.app.download.androidVersion,
+                        datetime: jsonData.app.download.androidDatetime,
+                        fix: "".split('<br/>'),
+                        new: "",
+                        jsonString: {
+                            version: jsonData.app.download.androidVersion,
+                            datetime: jsonData.app.download.androidDatetime,
+                            fix: "",
+                            new: ""
+                        }
+                    });
+
+                    // 从 latest 项中获取 Android 版本
+                    jsonData.app.latest.forEach(function (item) {
+                        if (item.platform === "Android") {
+                            timVersionList.push({
+                                version: item.version,
+                                datetime: item.datetime,
+                                fix: item.fix.split('<br/>'),
+                                new: item.new,
+                                jsonString: {
+                                    version: item.version, datetime: item.datetime, fix: item.fix, new: item.new
+                                }
+                            });
+                        }
+                    });
+
+                    // 从 history 项中获取 Android 版本
+                    jsonData.app.history.forEach(function (versionItem) {
+                        versionItem.logs.forEach(function (logItem) {
+                            if (logItem.platform === "Android") {
+                                timVersionList.push({
+                                    version: versionItem.version,
+                                    datetime: logItem.datetime,
+                                    fix: logItem.fix.split('<br/>'),
+                                    new: logItem.new,
+                                    jsonString: {
+                                        version: versionItem.version,
+                                        datetime: logItem.datetime,
+                                        fix: logItem.fix,
+                                        new: logItem.new
+                                    }
+                                });
+                            }
+                        });
+                    });
+
+                    // 去除重复的版本号
+                    const uniqueTIMVersionList = [...new Map(timVersionList.map(item => [item.jsonString, item])).values()];
+
+                    this.setData({
+                        timVersions: uniqueTIMVersionList
+                    });
+
+                    endProgress(this)
+
+                } catch (e) {
+                    endProgress(this)
+                    const errorMessage = e.errMsg;
+                    this.setData({
+                        errorText: errorMessage, errorVisible: true
+                    });
+                }
+            }, fail: (err) => {
+                endProgress(this)
+                const errorMessage = err.errMsg;
+                this.setData({
+                    errorText: errorMessage, errorVisible: true
+                });
+            },
+        })
     }, aboutPopupVisible(e) {
         this.setData({
             aboutVisible: e.detail.visible,
@@ -276,16 +372,28 @@ Page({
     }, clickCell(e) {
         const index = e.currentTarget.dataset.index;
         this.setData({
+            detailStatus: 'QQDetail',
             itemVersion: this.data.qqVersions[index].versionNumber,
             itemSize: this.data.qqVersions[index].size,
             itemFeatureTitle: this.data.qqVersions[index].featureTitle,
             itemSummary: this.data.qqVersions[index].summary,
-            itemString: JSON.stringify(this.data.qqVersions[index], null, 2),
+            itemString: JSON.stringify(this.data.qqVersions[index].jsonString, null, 2),
             cellDetailVisible: true
         });
         this.setData({
             preSize: ((parseFloat(this.data.itemSize) / parseFloat(this.data.maxSize)) * 100).toFixed(2)
-        }) // 需要单独 setData，否则可能传入 0
+        }) // 单独 setData，否则传入 0
+    }, clickTimCell(e) {
+        const index = e.currentTarget.dataset.index;
+        this.setData({
+            detailStatus: 'TIMDetail',
+            itemTimVersion: this.data.timVersions[index].version,
+            itemTimDatetime: this.data.timVersions[index].datetime,
+            itemTimFix: this.data.timVersions[index].fix,
+            itemTimNew: this.data.timVersions[index].new,
+            itemString: JSON.stringify(this.data.timVersions[index].jsonString, null, 2),
+            cellDetailVisible: true
+        });
     }, closeCellDetailPopup() {
         this.setData({
             cellDetailVisible: false
@@ -300,7 +408,7 @@ Page({
         });
     }, copyCellJsonDetailPopup() {
         this.copyUtil(this.data.itemString);
-    }, cellDetialPopupVisible(e) {
+    }, cellDetailPopupVisible(e) {
         this.setData({
             cellDetailVisible: e.detail.visible,
         });
@@ -314,6 +422,12 @@ Page({
             opa = (e.detail.scrollTop - this.data.largeTitleTopHeight / 2) * 2 / this.data.largeTitleTopHeight;
         }
         if (opa < 0) opa = 0; else if (opa > 1) opa = 1;
+
+        if (this.data.verListCurrent === 0) this.setData({
+            qqOpa: opa, qqScrollNumber: e.detail.scrollTop
+        }); else if (this.data.verListCurrent === 1) this.setData({
+            timOpa: opa, timScrollNumber: e.detail.scrollTop
+        })
 
         this.setData({
             scrollNumber: e.detail.scrollTop, titleOpacity: opa,
@@ -496,7 +610,7 @@ Page({
         return new Promise((resolve, reject) => {
             wx.request({
                 url, method: 'HEAD', success: function (res) {
-                    if (res.header['Content-Type'].startsWith('application/')) {
+                    if (res.statusCode >= 200 && res.statusCode < 300 && res.header['Content-Type'].startsWith('application/')) {
                         const resContentLength = res.header['Content-Length']
                         const fileSizeInBytes = parseInt(resContentLength, 10);
                         const fileSize = fileSizeInBytes / (1024 * 1024);
@@ -932,7 +1046,15 @@ Page({
         });
     }, onToTop() {
         this.setData({
-            topNum: 0
+            topNum: 0, qqOpa: 0, timOpa: 0
+        })
+    }, swiperChange(e) {
+        if (e.detail.source === "touch") this.setData({
+            verListCurrent: e.detail.current,
+
+            // 这里获取的还是更改前的 verListCurrent，所以 Opa 和 ScrollNumber 要取反逻辑
+            titleOpacity: this.data.verListCurrent === 1 ? this.data.qqOpa : this.data.timOpa,
+            scrollNumber: this.data.verListCurrent === 1 ? this.data.qqScrollNumber : this.data.timScrollNumber,
         })
     }
 })
