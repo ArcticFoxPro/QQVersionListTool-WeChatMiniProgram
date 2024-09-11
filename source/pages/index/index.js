@@ -311,7 +311,7 @@ Page({
                     });
 
                     // 去除重复的版本号
-                    const uniqueTIMVersionList = [...new Map(timVersionList.map(item => [item.jsonString, item])).values()];
+                    const uniqueTIMVersionList = [...new Map(timVersionList.map(item => [JSON.stringify(item.jsonString), item])).values()];
 
                     this.setData({
                         timVersions: uniqueTIMVersionList
