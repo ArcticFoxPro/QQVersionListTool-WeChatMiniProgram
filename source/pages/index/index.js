@@ -48,6 +48,8 @@ Page({
         wetypeVersionLink: "",
         qqVersionBig: "",
         qqVersionSmall: "",
+        timVersionBig: "",
+        timVersionSmall: "",
         loadingVisible: false,
         continueGuessing: false,
         successGuessedLink: "",
@@ -68,7 +70,9 @@ Page({
             wetypeVersionBig: wx.getStorageSync('wetypeVersionBig'),
             wetypeVersionLink: wx.getStorageSync('wetypeVersionLink'),
             qqVersionBig: wx.getStorageSync('qqVersionBig'),
-            qqVersionSmall: wx.getStorageSync('qqVersionSmall')
+            qqVersionSmall: wx.getStorageSync('qqVersionSmall'),
+            timVersionBig: wx.getStorageSync('timVersionBig'),
+            timVersionSmall: wx.getStorageSync('timVersionSmall')
         });
 
         const suffixKeys = ['suffix64HB', 'suffixHB64', 'suffix64HB1', 'suffixHB164', 'suffix64HB2', 'suffixHB264', 'suffix64HB3', 'suffixHB364', 'suffix64HD', 'suffixHD64', 'suffix64HD1', 'suffixHD164', 'suffix64HD2', 'suffixHD264', 'suffix64HD3', 'suffixHD364', 'suffix64HD1HB', 'suffixHD1HB64', 'suffixTest'];
@@ -316,6 +320,7 @@ Page({
                     this.setData({
                         timVersions: uniqueTIMVersionList
                     });
+                    wx.setStorageSync('timVersionBig', timVersionList[0].version);
 
                     endProgress(this)
 
@@ -556,15 +561,21 @@ Page({
         this.setData({
             qqVersionSmall: e.detail.value
         })
+    }, onInputTIMBig(e) {
+        this.setData({
+            timVersionBig: e.detail.value
+        })
+    }, onInputTIMSmall(e) {
+        this.setData({
+            timVersionSmall: e.detail.value
+        })
     }, startWeChatGuess() {
         const wechatVersionBig = this.data.wechatVersionBig;
         const wechatVersionTrue = this.data.wechatVersionTrue;
         const wechatVersion16code = this.data.wechatVersion16code;
-        if (wechatVersionBig === '' || wechatVersionTrue === '' || wechatVersion16code === '') {
-            this.setData({
-                errorText: '存在未填写的参数，请检查内容是否填写完毕', errorVisible: true
-            });
-        } else {
+        if (wechatVersionBig === '' || wechatVersionTrue === '' || wechatVersion16code === '') this.setData({
+            errorText: '存在未填写的参数，请检查内容是否填写完毕', errorVisible: true
+        }); else {
             this.closeGuessPopup();
             wx.setStorageSync('wechatVersionBig', wechatVersionBig);
             wx.setStorageSync('wechatVersionTrue', wechatVersionTrue);
@@ -575,15 +586,11 @@ Page({
     }, startQQGuess() {
         const qqVersionBig = this.data.qqVersionBig;
         const qqVersionSmall = this.data.qqVersionSmall;
-        if ((qqVersionBig === '' && (this.data.QQTestSwitch === false || this.data.QQTestSwitch === "")) || ((qqVersionBig === '' || qqVersionSmall === '') && this.data.QQTestSwitch === true)) {
-            this.setData({
-                errorText: '存在未填写的参数，请检查内容是否填写完毕', errorVisible: true
-            });
-        } else if (qqVersionSmall % 5 !== 0 && this.data.QQTestSwitch === true && this.data.Not5Switch === false) {
-            this.setData({
-                errorText: '小版本号需填写 5 的倍数。如需解除此限制，请前往设置进行解除。', errorVisible: true
-            });
-        } else {
+        if ((qqVersionBig === '' && (this.data.QQTestSwitch === false || this.data.QQTestSwitch === "")) || ((qqVersionBig === '' || qqVersionSmall === '') && this.data.QQTestSwitch === true)) this.setData({
+            errorText: '存在未填写的参数，请检查内容是否填写完毕', errorVisible: true
+        }); else if (qqVersionSmall % 5 !== 0 && this.data.QQTestSwitch === true && this.data.Not5Switch === false) this.setData({
+            errorText: '小版本号需填写 5 的倍数。如需解除此限制，请前往设置进行解除。', errorVisible: true
+        }); else {
             this.closeGuessPopup();
             if (this.data.QQTestSwitch === true) {
                 wx.setStorageSync('qqVersionSmall', qqVersionSmall);
@@ -592,14 +599,23 @@ Page({
             } else if (this.data.QQTestSwitch === false || this.data.QQTestSwitch === "") this.guessUrl(qqVersionBig, '', '', 'QQOfficial').then(r => {
             })
         }
+    }, startTIMGuess() {
+        const timVersionBig = this.data.timVersionBig;
+        const timVersionSmall = this.data.timVersionSmall;
+        if (timVersionBig === '' || timVersionSmall === '') this.setData({
+            errorText: '存在未填写的参数，请检查内容是否填写完毕', errorVisible: true
+        }); else {
+            this.closeGuessPopup();
+            wx.setStorageSync('timVersionSmall', timVersionSmall);
+            this.guessUrl(timVersionBig, timVersionSmall, '', 'TIM').then(r => {
+            })
+        }
     }, startWeTypeGuess() {
         const wetypeVersionBig = this.data.wetypeVersionBig;
         const wetypeVersionLink = this.data.wetypeVersionLink;
-        if (wetypeVersionBig === '' || wetypeVersionLink === '') {
-            this.setData({
-                errorText: '存在未填写的参数，请检查内容是否填写完毕', errorVisible: true
-            });
-        } else {
+        if (wetypeVersionBig === '' || wetypeVersionLink === '') this.setData({
+            errorText: '存在未填写的参数，请检查内容是否填写完毕', errorVisible: true
+        }); else {
             this.closeGuessPopup();
             wx.setStorageSync('wetypeVersionBig', wetypeVersionBig);
             wx.setStorageSync('wetypeVersionLink', wetypeVersionLink);
@@ -667,7 +683,7 @@ Page({
         const guess = () => {
             switch (this.data.continueGuessing) {
                 case 'STATUS_ONGOING':
-                    if (mode === 'WeChat') guessedLink = `https://dldir1.qq.com/weixin/android/weixin${versionBig}android${versionSuf}_0x${v16codeStr}_arm64.apk`; else if (mode === 'WeType') guessedLink = `https://download.z.weixin.qq.com/app/android/${versionBig}/wxkb_${vSuf}_32.apk`; else if (mode === 'QQOfficial') guessedLink = `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_${versionBig}${soList[sIndex]}.apk`; else if (mode === 'QQTest') guessedLink = `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_${versionBig}.${vSuf}${stList[sIndex]}.apk`;
+                    if (mode === 'WeChat') guessedLink = `https://dldir1.qq.com/weixin/android/weixin${versionBig}android${versionSuf}_0x${v16codeStr}_arm64.apk`; else if (mode === 'WeType') guessedLink = `https://download.z.weixin.qq.com/app/android/${versionBig}/wxkb_${vSuf}_32.apk`; else if (mode === 'QQOfficial') guessedLink = `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_${versionBig}${soList[sIndex]}.apk`; else if (mode === 'QQTest') guessedLink = `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_${versionBig}.${vSuf}${stList[sIndex]}.apk`; else if (mode === 'TIM') guessedLink = `https://downv6.qq.com/qqweb/QQ_1/android_apk/TIM_${versionBig}.${vSuf}${stList[sIndex]}.apk`;
 
                     this.setData({
                         loadingVisible: true,
@@ -679,8 +695,8 @@ Page({
                             this.setData({
                                 successGuessedLink: guessedLink,
                                 guessSuccessVisible: true,
-                                successGuessedModeShare: mode === 'WeChat' ? '微信' : mode === 'WeType' ? '微信输入法' : 'QQ',
-                                succeedGuessedVersionShare: mode === 'WeChat' ? versionBig + `（${versionSuf}）` : mode === 'WeType' ? versionBig + `（${vSuf}）` : mode === 'QQOfficial' ? versionBig + ` 正式版` : versionBig + '.' + vSuf + ' 测试版',
+                                successGuessedModeShare: mode === 'WeChat' ? '微信' : mode === 'WeType' ? '微信输入法' : mode === 'TIM' ? 'TIM' : 'QQ',
+                                succeedGuessedVersionShare: mode === 'WeChat' ? versionBig + `（${versionSuf}）` : mode === 'WeType' ? versionBig + `（${vSuf}）` : mode === 'QQOfficial' ? versionBig + ` 正式版` : mode === 'TIM' ? versionBig + '.' + vSuf : versionBig + '.' + vSuf + ' 测试版',
                                 succeedGuessedFileSizeShare: `（大小：${isSuccess.fileSize} MB）`,
                                 successGuessedWarningShare: mode === 'QQTest' ? '鉴于 QQ 测试版可能存在不可预知的稳定性问题，您在下载及使用该测试版本之前，必须明确并确保自身具备足够的风险识别和承受能力。' : false
                             });
@@ -699,6 +715,12 @@ Page({
                                 case 'QQTest':
                                     if (sIndex >= stList.length - 1 || this.data.ExtendSuffixSwitch === false) {
                                         if (this.data.Not5Switch) vSuf = (Number(vSuf) + 1).toString(); else vSuf = (Number(vSuf) + 5).toString();
+                                        sIndex = 0;
+                                    } else sIndex++;
+                                    break;
+                                case 'TIM':
+                                    if (sIndex >= stList.length - 1 || this.data.ExtendSuffixSwitch === false) {
+                                        vSuf = (Number(vSuf) + 1).toString()
                                         sIndex = 0;
                                     } else sIndex++;
                                     break;
@@ -723,6 +745,12 @@ Page({
                                 case 'QQTest':
                                     if (sIndex >= stList.length - 1 || this.data.ExtendSuffixSwitch === false) {
                                         if (this.data.Not5Switch) vSuf = (Number(vSuf) + 1).toString(); else vSuf = (Number(vSuf) + 5).toString();
+                                        sIndex = 0;
+                                    } else sIndex++;
+                                    break;
+                                case 'TIM':
+                                    if (sIndex >= stList.length - 1 || this.data.ExtendSuffixSwitch === false) {
+                                        vSuf = (Number(vSuf) + 1).toString()
                                         sIndex = 0;
                                     } else sIndex++;
                                     break;
