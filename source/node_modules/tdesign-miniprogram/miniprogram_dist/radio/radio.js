@@ -72,12 +72,14 @@ let Radio = class Radio extends SuperComponent {
                 this.doChange();
             },
             doChange() {
+                var _a;
                 const { value, checked, allowUncheck } = this.data;
+                const isAllowUncheck = Boolean(allowUncheck || ((_a = this.$parent) === null || _a === void 0 ? void 0 : _a.data.allowUncheck));
                 if (this.$parent) {
-                    this.$parent.updateValue(checked && allowUncheck ? null : value);
+                    this.$parent.updateValue(checked && isAllowUncheck ? null : value);
                 }
                 else {
-                    this._trigger('change', { checked: checked && allowUncheck ? false : !checked });
+                    this._trigger('change', { checked: isAllowUncheck ? !checked : true });
                 }
             },
             init() {

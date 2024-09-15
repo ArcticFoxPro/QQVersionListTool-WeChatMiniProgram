@@ -30,6 +30,7 @@ export interface TdSearchProps {
     cursor: {
         type: NumberConstructor;
         value?: number;
+        required?: boolean;
     };
     cursorSpacing?: {
         type: NumberConstructor;
@@ -70,6 +71,7 @@ export interface TdSearchProps {
     placeholderStyle: {
         type: StringConstructor;
         value?: string;
+        required?: boolean;
     };
     resultList?: {
         type: ArrayConstructor;

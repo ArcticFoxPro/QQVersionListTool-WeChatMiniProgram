@@ -7,10 +7,6 @@ export interface TdFooterProps {
         type: ObjectConstructor;
         value?: FooterLogo;
     };
-    style?: {
-        type: StringConstructor;
-        value?: string;
-    };
     text?: {
         type: StringConstructor;
         value?: string;
