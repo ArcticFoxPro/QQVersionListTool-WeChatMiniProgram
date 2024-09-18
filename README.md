@@ -1,6 +1,7 @@
 # QQ 版本列表 Lite for WeChat MiniProgram
 
 ![QQ 版本列表 Lite Banner](https://raw.githubusercontent.com/ArcticFoxPro/QQVersionListTool-WeChatMiniProgram/main/QQVerLiteBanner.png)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FArcticFoxPro%2FQQVersionListTool-WeChatMiniProgram.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FArcticFoxPro%2FQQVersionListTool-WeChatMiniProgram?ref=badge_shield)
 
 <div align="center">
 
@@ -185,3 +186,7 @@ QQ 版本列表 Lite 的诞生离不开以下开源项目，感谢以下开源�
 [QQ 版本列表实用工具 for Android](https://github.com/klxiaoniu/QQVersionList)，Licensed under [GNU Affero General Public License Version 3](https://github.com/klxiaoniu/QQVersionList/blob/master/LICENSE)
 
 [![QQ 版本列表实用工具 Banner](https://raw.githubusercontent.com/klxiaoniu/QQVersionList/master/QQVerToolBanner.png)](https://github.com/klxiaoniu/QQVersionList)
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FArcticFoxPro%2FQQVersionListTool-WeChatMiniProgram.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FArcticFoxPro%2FQQVersionListTool-WeChatMiniProgram?ref=badge_large)
