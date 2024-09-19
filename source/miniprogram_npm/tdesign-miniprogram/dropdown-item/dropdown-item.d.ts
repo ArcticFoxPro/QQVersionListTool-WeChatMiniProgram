@@ -5,10 +5,6 @@ export interface DropdownItemProps extends TdDropdownItemProps {
 export default class DropdownMenuItem extends SuperComponent {
     externalClasses: string[];
     properties: {
-        style?: {
-            type: StringConstructor;
-            value?: string;
-        };
         disabled?: {
             type: BooleanConstructor;
             value?: boolean;
@@ -36,10 +32,6 @@ export default class DropdownMenuItem extends SuperComponent {
         optionsColumns?: {
             type: null;
             value?: string | number;
-        };
-        optionsLayout?: {
-            type: StringConstructor;
-            value?: string;
         };
         value?: {
             type: null;

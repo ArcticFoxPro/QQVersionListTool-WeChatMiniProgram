@@ -388,7 +388,7 @@ let Slider = class Slider extends SuperComponent {
         }
     }
     onTouchEnd(e) {
-        this.triggerEvent('dragend', { e });
+        this.triggerEvent('dragend', { e, value: this.data._value });
         if (e.currentTarget.id === 'rightDot') {
             this.data.identifier[1] = -1;
         }

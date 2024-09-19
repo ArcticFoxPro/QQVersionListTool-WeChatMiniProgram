@@ -40,7 +40,7 @@ export default class Stepper extends SuperComponent {
         };
         theme?: {
             type: StringConstructor;
-            value?: "outline" | "normal" | "filled";
+            value?: "outline" | "filled" | "normal";
         };
         value?: {
             type: StringConstructor;

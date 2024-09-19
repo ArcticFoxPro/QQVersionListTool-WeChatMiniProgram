@@ -5,9 +5,8 @@ export interface TdFabProps {
         value?: ButtonProps;
     };
     draggable?: {
-        type: BooleanConstructor;
-        optionalTypes: Array<StringConstructor>;
-        value?: boolean | 'all' | 'vertical' | 'horizontal';
+        type: null;
+        value?: boolean | FabDirectionEnum;
     };
     icon?: {
         type: StringConstructor;
@@ -25,4 +24,9 @@ export interface TdFabProps {
         type: BooleanConstructor;
         value?: boolean;
     };
+    yBounds?: {
+        type: ArrayConstructor;
+        value?: Array<string | number>;
+    };
 }
+export declare type FabDirectionEnum = 'all' | 'vertical' | 'horizontal';

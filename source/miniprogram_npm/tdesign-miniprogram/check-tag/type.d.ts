@@ -20,10 +20,6 @@ export interface TdCheckTagProps {
         type: BooleanConstructor;
         value?: boolean;
     };
-    externalClasses?: {
-        type: ArrayConstructor;
-        value?: ['t-class'];
-    };
     icon?: {
         type: null;
         value?: string | object;

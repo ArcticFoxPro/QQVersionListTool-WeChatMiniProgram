@@ -18,9 +18,6 @@ const props = {
         type: Boolean,
         value: false,
     },
-    externalClasses: {
-        type: Array,
-    },
     icon: {
         type: null,
     },

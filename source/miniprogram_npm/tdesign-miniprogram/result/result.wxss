@@ -35,7 +35,7 @@
 }
 .t-result__title {
   line-height: var(--td-result-title-line-height, 56rpx);
-  font-size: var(--td-result-title-font-size, var(--td-font-size-l, 40rpx));
+  font-size: var(--td-result-title-font-size, var(--td-font-size-xl, 40rpx));
   font-weight: 700;
   color: var(--td-result-title-color, var(--td-text-color-primary, var(--td-font-gray-1, rgba(0, 0, 0, 0.9))));
 }

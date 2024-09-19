@@ -3,10 +3,6 @@ const props = {
         type: String,
         value: '',
     },
-    customStyle: {
-        type: String,
-        value: '',
-    },
     duration: {
         type: Number,
         value: 300,
@@ -14,10 +10,6 @@ const props = {
     preventScrollThrough: {
         type: Boolean,
         value: true,
-    },
-    style: {
-        type: String,
-        value: '',
     },
     zIndex: {
         type: Number,

@@ -23,8 +23,8 @@ export interface TdSkeletonProps {
 export declare type SkeletonRowCol = Array<Number | SkeletonRowColObj | Array<SkeletonRowColObj>>;
 export interface SkeletonRowColObj {
     width?: string;
-    height?: string;
     size?: string;
+    height?: string;
     marginRight?: string;
     marginLeft?: string;
     margin?: string;

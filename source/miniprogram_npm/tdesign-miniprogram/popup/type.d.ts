@@ -1,4 +1,4 @@
-import { TdOverlayProps as OverlayProps } from '../overlay/index';
+import { OverlayProps } from '../overlay/index';
 export interface TdPopupProps {
     closeBtn?: {
         type: BooleanConstructor;
@@ -52,7 +52,4 @@ export interface TdPopupProps {
         type: NumberConstructor;
         value?: number;
     };
-}
-export interface PopupVisibleChangeContext {
-    trigger: 'close-btn' | 'overlay';
 }

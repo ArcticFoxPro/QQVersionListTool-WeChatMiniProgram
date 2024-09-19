@@ -25,12 +25,16 @@
   bottom: 0;
   transform: scale(1.5);
 }
-:host {
-  position: relative;
-}
 .t-image {
+  position: relative;
+  display: inline-block;
+}
+.t-image__mask,
+.t-image__img {
   color: var(--td-image-color, var(--td-text-color-placeholder, var(--td-font-gray-3, rgba(0, 0, 0, 0.4))));
   vertical-align: top;
+  width: inherit;
+  height: inherit;
 }
 .t-image__mask {
   display: flex;
@@ -50,6 +54,7 @@
 .t-image--lazy {
   position: absolute;
   top: 0;
+  left: 0;
   z-index: -1;
 }
 .t-image--shape-circle {

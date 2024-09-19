@@ -29,6 +29,7 @@ const props = {
     },
     cursor: {
         type: Number,
+        required: true,
     },
     cursorSpacing: {
         type: Number,
@@ -68,6 +69,7 @@ const props = {
     placeholderStyle: {
         type: String,
         value: '',
+        required: true,
     },
     resultList: {
         type: Array,

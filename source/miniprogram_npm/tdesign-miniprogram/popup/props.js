@@ -32,13 +32,16 @@ const props = {
         type: Boolean,
         value: true,
     },
+    usingCustomNavbar: {
+        type: Boolean,
+        value: false,
+    },
     visible: {
         type: Boolean,
         value: null,
     },
     defaultVisible: {
         type: Boolean,
-        value: false,
     },
     zIndex: {
         type: Number,
