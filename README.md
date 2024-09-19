@@ -6,7 +6,7 @@
 
 [注意事项](#注意事项) | [简介](#简介) | [如何获取](#如何获取) | [如何使用](#如何使用) | [常见问题](#常见问题) | [其它](#其它)
 
-[贡献成员](#贡献成员) | [开源相关](#开源相关) | [孪生项目](#孪生项目)
+[贡献成员](#贡献成员) | [开源相关](#开源相关) | [星标趋势](#星标趋势) | [孪生项目](#孪生项目)
 
 </div> 
 
@@ -179,6 +179,10 @@ QQ 版本列表 Lite 的诞生离不开以下开源项目，感谢以下开源�
 - [TDesign Icons（Tencent）](https://github.com/Tencent/tdesign-icons)，Licensed under [MIT License](https://github.com/Tencent/tdesign-icons/blob/develop/LICENSE)
 - [Node.js®（OpenJS Foundation）](https://nodejs.org/)，Licensed under [MIT License](https://github.com/nodejs/node/blob/main/LICENSE)
 - [Semver（npm）](https://github.com/npm/node-semver)，Licensed under [ISC License](https://github.com/npm/node-semver/blob/main/LICENSE)
+
+## 星标趋势
+
+[![星标趋势](https://starchart.cc/ArcticFoxPro/QQVersionListTool-WeChatMiniProgram.svg?variant=adaptive)](https://starchart.cc/ArcticFoxPro/QQVersionListTool-WeChatMiniProgram)
 
 ## 孪生项目
 
