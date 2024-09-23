@@ -88,16 +88,20 @@ See the Mulan PubL v2 for more details.
         <view class="gradient-layer"></view>
         <view class="icon-button">
             <t-button aria-label="关于" bind:tap="handleAboutPopup" block class="about-home" icon="info-circle"
-                      shape="square" size="large" theme="light" variant="outline"></t-button>
+                      shape="square" size="large" style="margin-right: 12rpx;" theme="light"
+                      variant="outline"></t-button>
             <t-button aria-label="设置" bind:tap="handleSettingPopup" block class="setting-home" icon="setting"
-                      shape="square" size="large" style="margin-left: 32rpx;margin-right: 32rpx;" theme="light"
+                      shape="square" size="large" style="margin-left: 12rpx;margin-right: 12rpx;" theme="light"
                       variant="outline"></t-button>
             <t-button aria-label="刷新" bind:tap="refreshData" block class="refresh-home" disabled="{{onRefresh}}"
-                      icon="{{refreshIcon}}" loading="{{onRefresh}}" shape="square" size="large" theme="light"
-                      variant="outline"></t-button>
+                      icon="{{refreshIcon}}" loading="{{onRefresh}}" shape="square" size="large"
+                      style="margin-left: 12rpx;margin-right: 12rpx;" theme="light" variant="outline"></t-button>
+            <t-button aria-label="实验性功能" bind:tap="handleExpPopup" block class="beta-home" icon="beta"
+                      shape="square"
+                      size="large" style="margin-left: 12rpx;" theme="light" variant="outline"></t-button>
         </view>
-        <t-button bind:tap="handleGuessPopup" block class="text-button" icon="search" size="large" theme="primary">猜版
-            Extd.
+        <t-button bind:tap="handleGuessPopup" block class="text-button" icon="search" size="large" theme="primary">
+            猜版
         </t-button>
     </view>
 
@@ -302,10 +306,10 @@ See the Mulan PubL v2 for more details.
     </view>
 </t-popup>
 
-<t-overlay duration="{{300}}" visible="{{errorVisible}}" z-index="11111"/>
+<t-overlay duration="{{300}}" visible="{{errorVisible}}" z-index="14514"/>
 
 <t-popup bind:visible-change="errorPopupVisible" close-on-overlay-click="{{false}}" placement="bottom"
-         show-overlay="{{false}}" visible="{{errorVisible}}">
+         show-overlay="{{false}}" visible="{{errorVisible}}" z-index="14555">
     <view class="block">
         <view class="error-header">
             <view class="error-title" id="ability-error">错误</view>
@@ -493,6 +497,58 @@ See the Mulan PubL v2 for more details.
             </t-button>
             <t-button bind:tap="saveSuffixSetting" block size="large" style="margin-left: 8px;" theme="primary">保存
             </t-button>
+        </view>
+    </view>
+</t-popup>
+
+<t-popup bind:visible-change="expPopupVisible" placement="bottom" visible="{{expVisible}}">
+    <view class="block">
+        <view class="setting-header">
+            <view class="setting-title" id="ability-exp">实验性功能</view>
+        </view>
+        <t-cell arrow bind:tap="handleGetFromTencentAppStore" bordered="{{false}}" hover
+                title="腾讯应用宝更新获取（实验性）"/>
+        <view class="guess-success-button-top">
+            <t-button bind:tap="closeExpPopup" block size="large" theme="light">返回</t-button>
+        </view>
+    </view>
+</t-popup>
+
+<t-overlay duration="{{300}}" visible="{{getFromTencentAppStoreVisible}}" z-index="11501"/>
+
+<t-popup bind:visible-change="getFromTencentAppStorePopupVisible" placement="bottom" show-overlay="{{false}}"
+         visible="{{getFromTencentAppStoreVisible}}" z-index="11502">
+    <view class="block">
+        <view class="setting-header">
+            <view class="setting-title">腾讯应用宝更新获取（实验性）</view>
+        </view>
+        <view class="setting-button">
+            <t-button bind:tap="getQQLinkFromTencentAppStore" block disabled="{{onQQGet}}" loading="{{onQQGet}}"
+                      size="large" theme="light">获取 QQ 下载直链
+            </t-button>
+        </view>
+        <view class="setting-button">
+            <t-button bind:tap="getTIMLinkFromTencentAppStore" block disabled="{{onTIMGet}}" loading="{{onTIMGet}}"
+                      size="large" theme="light">获取 TIM 下载直链
+            </t-button>
+        </view>
+        <view class="setting-button">
+            <t-button bind:tap="getWeixinLinkFromTencentAppStore" block disabled="{{onWeixinGet}}"
+                      loading="{{onWeixinGet}}" size="large" theme="light">获取微信下载直链
+            </t-button>
+        </view>
+        <view class="setting-button">
+            <t-button bind:tap="getWeComLinkFromTencentAppStore" block disabled="{{onWeComGet}}"
+                      loading="{{onWeComGet}}" size="large" theme="light">获取企业微信下载直链
+            </t-button>
+        </view>
+        <view class="setting-button">
+            <t-button bind:tap="getWeTypeLinkFromTencentAppStore" block disabled="{{onWeTypeGet}}"
+                      loading="{{onWeTypeGet}}" size="large" theme="light">获取微信输入法下载直链
+            </t-button>
+        </view>
+        <view class="setting-button">
+            <t-button bind:tap="closeGetFromTencentAppStorePopup" block size="large" theme="light">返回</t-button>
         </view>
     </view>
 </t-popup>

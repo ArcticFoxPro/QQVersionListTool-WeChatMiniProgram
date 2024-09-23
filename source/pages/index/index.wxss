@@ -73,7 +73,7 @@
 .icon-button {
     display: flex;
     align-items: center;
-    margin-right: 32rpx;
+    margin-right: 24rpx;
 }
 
 .text-button {

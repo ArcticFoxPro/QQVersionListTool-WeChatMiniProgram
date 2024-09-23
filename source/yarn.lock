@@ -7,6 +7,11 @@ dayjs@^1.10.7:
   resolved "https://registry.npmjs.org/dayjs/-/dayjs-1.11.13.tgz"
   integrity sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==
 
+extract-urls@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/extract-urls/-/extract-urls-1.4.1.tgz#d45acd0cf9b4728cdb6605d8f0614b56ab02c2e1"
+  integrity sha512-SAzLx5yMh7Ocf09g7wyjZeS6mwiitUvMFeWmlll+vOOf4/iFnidXpCavBL2cYhaYci5gKG/ZYAC38zONlLFzBA==
+
 semver@^7.6.3:
   version "7.6.3"
   resolved "https://registry.npmjs.org/semver/-/semver-7.6.3.tgz"

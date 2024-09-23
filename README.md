@@ -179,6 +179,7 @@ QQ 版本列表 Lite 的诞生离不开以下开源项目，感谢以下开源�
 - [TDesign Icons（Tencent）](https://github.com/Tencent/tdesign-icons)，Licensed under [MIT License](https://github.com/Tencent/tdesign-icons/blob/develop/LICENSE)
 - [Node.js®（OpenJS Foundation）](https://nodejs.org/)，Licensed under [MIT License](https://github.com/nodejs/node/blob/main/LICENSE)
 - [Semver（npm）](https://github.com/npm/node-semver)，Licensed under [ISC License](https://github.com/npm/node-semver/blob/main/LICENSE)
+- [extract-urls（Max Ranauro）](https://github.com/huckbit/extract-urls)，Licensed under [MIT License](https://github.com/huckbit/extract-urls/blob/master/license)
 
 ## 星标趋势
 

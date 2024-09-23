@@ -73,13 +73,13 @@ let Navbar = class Navbar extends SuperComponent {
                     getRect(this, `.${this.data.classPrefix}__left`),
                     getRect(this, `.${this.data.classPrefix}__center`),
                 ]).then(([leftRect, centerRect]) => {
-                    if (leftRect.right / 2 > capsuleRect.left) {
+                    if (leftRect.right > capsuleRect.left) {
                         this.setData({
                             hideLeft: true,
                             hideCenter: true,
                         });
                     }
-                    else if (centerRect.right / 2 > capsuleRect.left) {
+                    else if (centerRect.right > capsuleRect.left) {
                         this.setData({
                             hideLeft: false,
                             hideCenter: true,

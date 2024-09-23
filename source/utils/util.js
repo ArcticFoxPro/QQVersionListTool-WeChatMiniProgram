@@ -10,7 +10,8 @@
     See the Mulan PubL v2 for more details.
 */
 
-const semver = require("semver");
+const extractUrls = require("extract-urls");
+
 const formatTime = date => {
     const year = date.getFullYear()
     const month = date.getMonth() + 1
@@ -43,7 +44,15 @@ const generateAESKey = () => {
     });
 };
 
+function getAllAPKUrl(str) {
+    const urls = extractUrls(str)
+    const apkUrls = Array.from(urls.filter(url => url.toLowerCase().endsWith('.apk')).reduce((uniqueUrls, url) => uniqueUrls.has(url) ? uniqueUrls : uniqueUrls.add(url), new Set()));
+    return apkUrls.length ? apkUrls : null;
+}
+
+module.exports = {getAllAPKUrl};
+
 module.exports = {
-    generateAESKey: generateAESKey
+    generateAESKey: generateAESKey, getAllAPKUrl: getAllAPKUrl,
 };
 
