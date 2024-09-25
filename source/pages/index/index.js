@@ -67,7 +67,9 @@ Page({
         onTIMGet: false,
         onWeixinGet: false,
         onWeComGet: false,
-        onWeTypeGet: false
+        onWeTypeGet: false,
+        tencentAppStoreBackLinks: [],
+        tencentAppStoreBackJson: ""
     }, onLoad: function () {
         this.setData({
             theme: wx.getAppBaseInfo().theme || 'light',
@@ -420,7 +422,7 @@ Page({
         this.setData({
             cellJsonDetailVisible: false
         });
-    }, copyCellJsonDetailPopup() {
+    }, copyCellJsonDetail() {
         this.copyUtil(this.data.itemString);
     }, cellDetailPopupVisible(e) {
         this.setData({
@@ -516,6 +518,18 @@ Page({
     }, closeGetFromTencentAppStorePopup() {
         this.setData({
             getFromTencentAppStoreVisible: false, expVisible: true
+        })
+    }, tencentAppStoreBackPopupVisible(e) {
+        this.setData({
+            tencentAppStoreBackVisible: e.detail.visible
+        })
+    }, closeTencentAppStoreBackPopup() {
+        this.setData({
+            tencentAppStoreBackVisible: false, getFromTencentAppStoreVisible: true
+        })
+    }, tencentAppStoreJsonBackPopupVisible(e) {
+        this.setData({
+            tencentAppStoreJsonBackVisible: e.detail.visible
         })
     }, handlePerProChange(e) {
         wx.vibrateShort({
@@ -1117,7 +1131,7 @@ Page({
             titleOpacity: this.data.verListCurrent === 1 ? this.data.qqOpa : this.data.timOpa,
             scrollNumber: this.data.verListCurrent === 1 ? this.data.qqScrollNumber : this.data.timScrollNumber,
         })
-    }, async getDownloadLinkFromTencentAppStore(jsonData) {
+    }, async fetchDownloadLinkFromTencentAppStore(jsonData) {
         return new Promise((resolve, reject) => {
             wx.request({
                 url: 'https://upage.html5.qq.com/wechat-apkinfo', method: 'POST', data: jsonData, header: {
@@ -1129,96 +1143,126 @@ Page({
                 }
             });
         })
+    }, async getDownloadLinkFromTencentAppStore(jsonData, type) {
+        switch (type) {
+            case 'QQ':
+                this.setData({
+                    onQQGet: true
+                });
+                break;
+            case 'TIM':
+                this.setData({
+                    onTIMGet: true
+                });
+                break;
+            case 'Weixin':
+                this.setData({
+                    onWeixinGet: true
+                });
+                break;
+            case 'WeCom':
+                this.setData({
+                    onWeComGet: true
+                });
+                break;
+            case 'WeType':
+                this.setData({
+                    onWeTypeGet: true
+                });
+                break;
+        }
+        try {
+            const allData = await this.fetchDownloadLinkFromTencentAppStore(jsonData);
+            console.log(allData);
+            const allDataJson = JSON.stringify(allData, null, 2)
+            console.log(allDataJson);
+            const link = util.getAllAPKUrl(allDataJson)
+            this.setData({
+                tencentAppStoreBackLinks: link, tencentAppStoreBackVisible: true, tencentAppStoreBackJson: allDataJson
+            });
+        } catch (err) {
+            console.error(err);
+            const errorMessage = err.errMsg;
+            this.setData({
+                errorText: errorMessage, errorVisible: true
+            });
+        } finally {
+            switch (type) {
+                case 'QQ':
+                    this.setData({
+                        onQQGet: false
+                    });
+                    break;
+                case 'TIM':
+                    this.setData({
+                        onTIMGet: false
+                    });
+                    break;
+                case 'Weixin':
+                    this.setData({
+                        onWeixinGet: false
+                    });
+                    break;
+                case 'WeCom':
+                    this.setData({
+                        onWeComGet: false
+                    });
+                    break;
+                case 'WeType':
+                    this.setData({
+                        onWeTypeGet: false
+                    });
+                    break;
+            }
+            this.setData({
+                getFromTencentAppStoreVisible: false,
+                tencentAppStoreJsonBackVisible: false,
+                expVisible: false
+            })
+        }
     }, async getQQLinkFromTencentAppStore() {
-        const jsonData = {"packagename": "com.tencent.mobileqq"}
-        this.setData({
-            onQQGet: true
-        })
-        try {
-            const allData = await this.getDownloadLinkFromTencentAppStore(jsonData)
-            const link = util.getAllAPKUrl(JSON.stringify(allData, null, 4).toString())
-        } catch (err) {
-            console.error(err);
-            const errorMessage = err.errMsg;
-            this.setData({
-                errorText: errorMessage, errorVisible: true
-            });
-        } finally {
-            this.setData({
-                onQQGet: false
-            })
+        const jsonData = {
+            "packagename": "com.tencent.mobileqq"
         }
+        await this.getDownloadLinkFromTencentAppStore(jsonData, 'QQ')
     }, async getTIMLinkFromTencentAppStore() {
-        const jsonData = {"packagename": "com.tencent.tim"}
-        this.setData({
-            onTIMGet: true
-        })
-        try {
-            const link = await this.getDownloadLinkFromTencentAppStore(jsonData)
-        } catch (err) {
-            console.error(err);
-            const errorMessage = err.errMsg;
-            this.setData({
-                errorText: errorMessage, errorVisible: true
-            });
-        } finally {
-            this.setData({
-                onTIMGet: false
-            })
+        const jsonData = {
+            "packagename": "com.tencent.tim"
         }
+        await this.getDownloadLinkFromTencentAppStore(jsonData, 'TIM')
     }, async getWeixinLinkFromTencentAppStore() {
-        const jsonData = {"packagename": "com.tencent.mm"}
-        this.setData({
-            onWeixinGet: true
-        })
-        try {
-            const link = await this.getDownloadLinkFromTencentAppStore(jsonData)
-        } catch (err) {
-            console.error(err);
-            const errorMessage = err.errMsg;
-            this.setData({
-                errorText: errorMessage, errorVisible: true
-            });
-        } finally {
-            this.setData({
-                onWeixinGet: false
-            })
+        const jsonData = {
+            "packagename": "com.tencent.mm"
         }
+        await this.getDownloadLinkFromTencentAppStore(jsonData, 'Weixin')
     }, async getWeComLinkFromTencentAppStore() {
-        const jsonData = {"packagename": "com.tencent.wework"}
-        this.setData({
-            onWeComGet: true
-        })
-        try {
-            const link = await this.getDownloadLinkFromTencentAppStore(jsonData)
-        } catch (err) {
-            console.error(err);
-            const errorMessage = err.errMsg;
-            this.setData({
-                errorText: errorMessage, errorVisible: true
-            });
-        } finally {
-            this.setData({
-                onWeComGet: false
-            })
+        const jsonData = {
+            "packagename": "com.tencent.wework"
         }
+        await this.getDownloadLinkFromTencentAppStore(jsonData, 'WeCom')
     }, async getWeTypeLinkFromTencentAppStore() {
-        const jsonData = {"packagename": "com.tencent.wetype"}
-        this.setData({
-            onWeTypeGet: true
-        })
-        try {
-            const link = await this.getDownloadLinkFromTencentAppStore(jsonData)
-        } catch (err) {
-            console.error(err);
-            const errorMessage = err.errMsg;
-            this.setData({
-                errorText: errorMessage, errorVisible: true
-            });
-        } finally {
-            this.setData({
-                onWeTypeGet: false
-            })
+        const jsonData = {
+            "packagename": "com.tencent.wetype"
         }
+        await this.getDownloadLinkFromTencentAppStore(jsonData, 'WeType')
+    }, copyTencentAppStoreBack(e) {
+        const index = e.currentTarget.dataset.index;
+        this.copyUtil(this.data.tencentAppStoreBackLinks[index])
+    }, handleTencentAppStoreJsonBack() {
+        this.setData({
+            tencentAppStoreBackVisible: false,
+            tencentAppStoreJsonBackVisible: true,
+            getFromTencentAppStoreVisible: false,
+            expVisible: false
+        });
+    }, closeTencentAppStoreJsonBackPopup() {
+        this.setData({
+            tencentAppStoreJsonBackVisible: false,
+            tencentAppStoreBackVisible: true,
+            getFromTencentAppStoreVisible: false,
+            expVisible: false
+        });
+    }, copyTencentAppStoreJsonBack() {
+        this.copyUtil(this.data.tencentAppStoreBackJson)
     }
 })

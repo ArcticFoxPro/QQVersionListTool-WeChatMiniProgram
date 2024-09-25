@@ -50,8 +50,6 @@ function getAllAPKUrl(str) {
     return apkUrls.length ? apkUrls : null;
 }
 
-module.exports = {getAllAPKUrl};
-
 module.exports = {
     generateAESKey: generateAESKey, getAllAPKUrl: getAllAPKUrl,
 };

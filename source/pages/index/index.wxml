@@ -97,8 +97,8 @@ See the Mulan PubL v2 for more details.
                       icon="{{refreshIcon}}" loading="{{onRefresh}}" shape="square" size="large"
                       style="margin-left: 12rpx;margin-right: 12rpx;" theme="light" variant="outline"></t-button>
             <t-button aria-label="实验性功能" bind:tap="handleExpPopup" block class="beta-home" icon="beta"
-                      shape="square"
-                      size="large" style="margin-left: 12rpx;" theme="light" variant="outline"></t-button>
+                      shape="square" size="large" style="margin-left: 12rpx;" theme="light"
+                      variant="outline"></t-button>
         </view>
         <t-button bind:tap="handleGuessPopup" block class="text-button" icon="search" size="large" theme="primary">
             猜版
@@ -297,7 +297,7 @@ See the Mulan PubL v2 for more details.
     </view>
     <t-footer text="— 可长按选择复制内容 —"></t-footer>
     <view class="json-detail-button">
-        <t-button bind:tap="copyCellJsonDetailPopup" block size="large" style="margin-right: 8px;" theme="light">
+        <t-button bind:tap="copyCellJsonDetail" block size="large" style="margin-right: 8px;" theme="light">
             复制全部
         </t-button>
         <t-button bind:tap="closeCellJsonDetailPopup" block size="large" style="margin-left: 8px;" theme="primary">
@@ -514,10 +514,11 @@ See the Mulan PubL v2 for more details.
     </view>
 </t-popup>
 
-<t-overlay duration="{{300}}" visible="{{getFromTencentAppStoreVisible}}" z-index="11501"/>
+<t-overlay bind:click="closeGetFromTencentAppStorePopup" duration="{{300}}" visible="{{getFromTencentAppStoreVisible}}"
+           z-index="11552"/>
 
 <t-popup bind:visible-change="getFromTencentAppStorePopupVisible" placement="bottom" show-overlay="{{false}}"
-         visible="{{getFromTencentAppStoreVisible}}" z-index="11502">
+         visible="{{getFromTencentAppStoreVisible}}" z-index="11555">
     <view class="block">
         <view class="setting-header">
             <view class="setting-title">腾讯应用宝更新获取（实验性）</view>
@@ -549,6 +550,69 @@ See the Mulan PubL v2 for more details.
         </view>
         <view class="setting-button">
             <t-button bind:tap="closeGetFromTencentAppStorePopup" block size="large" theme="light">返回</t-button>
+        </view>
+    </view>
+</t-popup>
+
+<t-overlay bind:click="closeTencentAppStoreBackPopup" duration="{{300}}" visible="{{tencentAppStoreBackVisible}}"
+           z-index="11557"/>
+
+<t-popup bind:visible-change="tencentAppStoreBackPopupVisible" placement="bottom" show-overlay="{{false}}"
+         visible="{{tencentAppStoreBackVisible}}" z-index="11560">
+    <view class="block">
+        <view class="setting-header">
+            <view class="setting-title">腾讯应用宝返回内容</view>
+        </view>
+        <t-cell bind:tap="copyTencentAppStoreBack" bordered="{{false}}"
+                borderless="{{index!==tencentAppStoreBackLinks.length-1}}"
+                data-index="{{index}}" hover leftIcon="link"
+                style="word-break:break-all; white-space: pre-wrap; overflow-wrap: normal;" title="{{item}}"
+                wx:for="{{tencentAppStoreBackLinks}}" wx:key="{{item}}"/>
+        <t-footer style="margin-top: 8rpx;" text="— 点击以复制链接 —"></t-footer>
+        <view class="guess-success-button-top">
+            <t-button bind:tap="handleTencentAppStoreJsonBack" block size="large" style="margin-right: 8px;"
+                      theme="light">查看源 JSON
+            </t-button>
+            <t-button bind:tap="closeTencentAppStoreBackPopup" block size="large" style="margin-left: 8px;"
+                      theme="light">返回
+            </t-button>
+        </view>
+    </view>
+</t-popup>
+
+<t-overlay bind:click="closeTencentAppStoreJsonBackPopup" duration="{{300}}"
+           visible="{{tencentAppStoreJsonBackVisible}}"
+           z-index="11562"/>
+
+<t-popup bind:visible-change="tencentAppStoreJsonBackPopupVisible" close-on-overlay-click="{{false}}" placement="bottom"
+         show-overlay="{{false}}" visible="{{tencentAppStoreJsonBackVisible}}" z-index="11565">
+    <view class="block">
+        <view class="setting-header">
+            <view class="setting-title">腾讯应用宝返回内容</view>
+        </view>
+
+        <scroll-view class="ua-license-recycle" enhanced scroll-y="{{true}}"
+                     style="height: {{(heightRecycle*3/4)+'px'}};" type="list">
+            <view class="ua-license" style="width: 100%;">
+                <view class="page-s">
+                    <view style="margin: 0 0 16rpx 0;">
+                        <text class="json-text"
+                              style="font-size:13px; word-break:break-all; white-space: pre-wrap; overflow-wrap: normal;"
+                              user-select>{{tencentAppStoreBackJson}}</text>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+        <t-footer style="margin-top: 8rpx;" text="— 可长按选择复制内容 —"></t-footer>
+        <view class="guess-success-button-top">
+            <t-button bind:tap="copyTencentAppStoreJsonBack" block size="large" style="margin-right: 8px;"
+                      theme="light">
+                复制全部
+            </t-button>
+            <t-button bind:tap="closeTencentAppStoreJsonBackPopup" block size="large" style="margin-left: 8px;"
+                      theme="light">
+                返回
+            </t-button>
         </view>
     </view>
 </t-popup>
