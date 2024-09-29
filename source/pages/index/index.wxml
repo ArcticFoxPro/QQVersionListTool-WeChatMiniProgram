@@ -226,7 +226,13 @@ See the Mulan PubL v2 for more details.
                 </view>
             </t-tab-panel>
             <t-tab-panel label="TIM" value="3">
-
+                <t-notice-bar
+                        content="TIM 猜版功能为 QQ 版本列表 Lite 附带的实验性功能，可能存在不可预知的稳定性问题。请明确并确保自身具备足够的风险识别和承受能力。"
+                        prefixIcon="{{false}}" visible="{{true}}">
+                    <view slot="prefix-icon">
+                        <t-icon name="error-circle-filled"></t-icon>
+                    </view>
+                </t-notice-bar>
                 <t-input bind:change="onInputTIMBig" confirm-type="next" id="tim-official-version-big" label="主版本号"
                          placeholder="点击以输入" tips="填写格式为 x.y.z" type="digit" value="{{timVersionBig}}"/>
                 <t-input bind:change="onInputTIMSmall" borderless confirm-type="done" id="tim-official-version-big"
@@ -523,6 +529,13 @@ See the Mulan PubL v2 for more details.
         <view class="setting-header">
             <view class="setting-title">腾讯应用宝更新获取（实验性）</view>
         </view>
+        <t-notice-bar style="margin-bottom: 32rpx;"
+                content="腾讯应用宝更新获取功能为 QQ 版本列表 Lite 附带的实验性功能，可能存在不可预知的稳定性问题。请明确并确保自身具备足够的风险识别和承受能力。"
+                prefixIcon="{{false}}" visible="{{true}}">
+            <view slot="prefix-icon">
+                <t-icon name="error-circle-filled"></t-icon>
+            </view>
+        </t-notice-bar>
         <view class="setting-button">
             <t-button bind:tap="getQQLinkFromTencentAppStore" block disabled="{{onQQGet}}" loading="{{onQQGet}}"
                       size="large" theme="light">获取 QQ 下载直链
