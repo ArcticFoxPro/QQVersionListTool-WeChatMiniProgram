@@ -19,7 +19,7 @@ semver@^7.6.3:
 
 tdesign-miniprogram@^1.6.1:
   version "1.6.1"
-  resolved "https://registry.npmjs.org/tdesign-miniprogram/-/tdesign-miniprogram-1.6.1.tgz"
+  resolved "https://registry.yarnpkg.com/tdesign-miniprogram/-/tdesign-miniprogram-1.6.1.tgz#08a6168176835261a60d5abc5adb57600dde5248"
   integrity sha512-APgNNRupNaZrOnta3WWTyDjnlsyg3gDiJO6FdXo9n4I8cVozInXbhMrqZ+6eqdOVowveI8wCaGYhBAsGe7NHGA==
   dependencies:
     dayjs "^1.10.7"
