@@ -192,12 +192,11 @@ Page({
             largeTitleTopHeight: elementHeight2
         });
 
-        if (wx.getStorageSync('UAAgreed') === "") {
+        if (!Number.isInteger(wx.getStorageSync('UAAgreed')) || wx.getStorageSync('UAAgreed') < getApp().globalData.UA_VERSION) {
             this.setData({
                 UAVisible: true
             });
         }
-
         this.getData();
     }, onUnload: function () {
         this.cancelGuess();
@@ -464,7 +463,7 @@ Page({
             UAVisible: e.detail.visible,
         });
     }, UAAgree() {
-        wx.setStorageSync('UAAgreed', true);
+        wx.setStorageSync('UAAgreed', getApp().globalData.UA_VERSION);
         this.setData({
             UAVisible: false
         })

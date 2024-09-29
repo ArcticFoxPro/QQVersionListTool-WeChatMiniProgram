@@ -41,9 +41,9 @@ QQ 版本列表 Lite for WeChat MiniProgram 是一个使用 TDesign 组件库构
 2. 下载仓库源代码，并解压到本地。
 3. [前往微信公众平台注册微信小程序开发者账号](https://mp.weixin.qq.com/cgi-bin/wx)，取得 `AppID`（小程序需配置域名白名单，测试号无法实现这一点）。
 4. 在 [微信公众平台](https://mp.weixin.qq.com/)-开发管理-服务器域名 中，将以下域名导入微信小程序 request 合法域名：
-  ```
-  https://dldir1.qq.com;https://download.z.weixin.qq.com;https://downv6.qq.com;https://im.qq.com;https://static.tdesign.tencent.com;https://tcb-api.tencentcloudapi.com;
-  ```
+    ```
+    https://csydown.ll.tcdnos.com;https://dldir1.qq.com;https://download.z.weixin.qq.com;https://downv6.qq.com;https://im.qq.com;https://imtt.dd.qq.com;https://static.tdesign.tencent.com;https://tcb-api.tencentcloudapi.com;https://upage.html5.qq.com;
+    ```
 5. 下载[微信小程序开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)，登录后点击“小程序”-“导入”，填入上一步取得的 `AppID`，将 `<仓库源代码解压目录>/source` 目录选中后导入。
 6. 点击微信小程序开发者工具上方“预览”按钮并使用手机扫码，即可使用 QQ 版本列表 Lite for WeChat MiniProgram。
 
@@ -114,6 +114,8 @@ QQ 版本列表 Lite for WeChat MiniProgram 是一个使用 TDesign 组件库构
 
     若当次访问未果，默认情况下将按照设置逻辑自动递增小版本号后再次尝试访问，直到访问成功为止。
 
+访问成功后，软件会弹出成功对话框，对话框下方提供了一系列动作按钮，分别是“仅停止”、“跳过以继续”和“复制并停止”。
+
 > [!TIP]
 > QQ 版本列表 Lite 自 1.1.0 版本起实验性支持了 Android 微信和 Android 微信输入法的猜版。
 > 
@@ -128,11 +130,31 @@ QQ 版本列表 Lite for WeChat MiniProgram 是一个使用 TDesign 组件库构
 > `https://download.z.weixin.qq.com/app/android/<主版本号>/wxkb_<直链版本号>_32.apk`
 > 
 > 填入相应输入框内容后，小程序将尝试访问上述链接。若当次访问未果，默认情况下将自动递增直链版本号后再次尝试访问，直到访问成功为止。
+
+> [!TIP]
+> QQ 版本列表 Lite 自 1.1.4 版本起实验性支持了 Android TIM 的猜版。
+>
+> 若选择 TIM 猜版，对应的直链为：
 > 
-> 访问成功后，软件会弹出成功对话框，对话框下方提供了一系列动作按钮，分别是“仅停止”、“跳过以继续”和“复制并停止”。
+> `https://downv6.qq.com/qqweb/QQ_1/android_apk/TIM_<主版本号>.<小版本号><自定义后缀>.apk`
+>
+> 填入相应输入框内容后，软件将尝试访问上述链接。若当次访问未果，默认情况下将自动递增小版本号后再次尝试访问，直到访问成功为止。
 
 > [!WARNING]
-> 微信猜版功能和微信输入法猜版功能为 QQ 版本列表 Lite 附带的实验性功能，可能存在不可预知的稳定性问题。请明确并确保自身具备足够的风险识别和承受能力。
+> 微信猜版功能、微信输入法猜版功能和 TIM 猜版功能为 QQ 版本列表 Lite 附带的实验性功能，可能存在不可预知的稳定性问题。请明确并确保自身具备足够的风险识别和承受能力。
+
+### 实验性功能
+
+> [!IMPORTANT]
+> QQ 版本列表 Lite 可能以软件实验形式提供一些尚不稳定的服务，此类服务会明确标注“实验性”（或其的其它语言形式）。您使用此类服务即代表您已明确并确保自身具备足够的风险识别和承受能力。因使用此类实验性服务而可能产生的任何直接或间接损失、损害以及其它不利后果，QQ 版本列表 Lite 不承担责任。
+
+在 QQ 版本列表 Lite 界面，点击底部锥形瓶按钮即可进入实验性功能对话框。
+
+#### 腾讯应用宝更新获取（实验性）
+
+QQ、TIM、微信、企业微信、微信输入法使用腾讯应用宝（[腾讯应用开放平台](https://app.open.qq.com/)）分发软件最新安装包。可使用 QQ 版本列表 Lite 提供的腾讯应用宝更新获取（实验性）获取 QQ、TIM、微信、企业微信、微信输入法最新腾讯应用宝上架版本安装包下载直链。
+
+在 QQ 版本列表 Lite 界面，点击底部三角旗按钮即可看到“腾讯应用宝更新获取（实验性）”选项，点击即可进入“腾讯应用宝更新获取（实验性）”对话框。之后按提示进行操作即可。
 
 ## 常见问题
 
