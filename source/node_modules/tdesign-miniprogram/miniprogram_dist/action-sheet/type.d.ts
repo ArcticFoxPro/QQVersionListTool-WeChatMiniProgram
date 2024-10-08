@@ -19,6 +19,7 @@ export interface TdActionSheetProps {
     items: {
         type: ArrayConstructor;
         value?: Array<string | ActionSheetItem>;
+        required?: boolean;
     };
     popupProps?: {
         type: ObjectConstructor;
@@ -43,10 +44,12 @@ export interface TdActionSheetProps {
     visible: {
         type: BooleanConstructor;
         value?: boolean;
+        required?: boolean;
     };
     defaultVisible: {
         type: BooleanConstructor;
         value?: boolean;
+        required?: boolean;
     };
 }
 export interface ActionSheetItem {

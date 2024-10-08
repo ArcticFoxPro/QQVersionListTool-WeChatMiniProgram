@@ -1,6 +1,9 @@
 import { SuperComponent } from '../common/src/index';
+import { TdOverlayProps } from './type';
+export interface OverlayProps extends TdOverlayProps {
+}
 export default class Overlay extends SuperComponent {
-    properties: import("./type").TdOverlayProps;
+    properties: TdOverlayProps;
     behaviors: string[];
     data: {
         prefix: string;

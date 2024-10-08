@@ -13,7 +13,7 @@ export interface TdProgressProps {
     };
     status?: {
         type: StringConstructor;
-        value?: StatusEnum;
+        value?: ProgressStatus;
     };
     strokeWidth?: {
         type: null;
@@ -25,12 +25,12 @@ export interface TdProgressProps {
     };
     theme?: {
         type: StringConstructor;
-        value?: ThemeEnum;
+        value?: ProgressTheme;
     };
     trackColor?: {
         type: StringConstructor;
         value?: string;
     };
 }
-export declare type StatusEnum = 'success' | 'error' | 'warning' | 'active';
-export declare type ThemeEnum = 'line' | 'plump' | 'circle';
+export declare type ProgressStatus = 'success' | 'error' | 'warning' | 'active';
+export declare type ProgressTheme = 'line' | 'plump' | 'circle';

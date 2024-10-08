@@ -18,6 +18,7 @@ export declare type TreeOptionData<T = string | number> = {
     content?: string;
 } & PlainObject;
 export declare type SizeEnum = 'small' | 'medium' | 'large';
+export declare type ShapeEnum = 'circle' | 'round';
 export declare type HorizontalAlignEnum = 'left' | 'center' | 'right';
 export declare type VerticalAlignEnum = 'top' | 'middle' | 'bottom';
 export declare type LayoutEnum = 'vertical' | 'horizontal';

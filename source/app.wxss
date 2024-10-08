@@ -50,8 +50,6 @@
     content: '\e92c';
 }
 
-
-
 .t-result__description {
     word-break: break-word;
 }

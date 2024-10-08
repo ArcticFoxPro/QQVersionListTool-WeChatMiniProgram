@@ -15,7 +15,6 @@ const props = {
     },
     overlayProps: {
         type: Object,
-        value: {},
     },
     placement: {
         type: String,
@@ -31,6 +30,10 @@ const props = {
     },
     theme: {
         type: String,
+    },
+    usingCustomNavbar: {
+        type: Boolean,
+        value: false,
     },
 };
 export default props;

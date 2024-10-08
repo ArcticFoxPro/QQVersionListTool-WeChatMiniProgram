@@ -1,7 +1,7 @@
 const props = {
     cancelBtn: {
         type: String,
-        value: '',
+        value: '取消',
     },
     confirmBtn: {
         type: String,

@@ -5,3 +5,4 @@ source/project.miniapp.json
 /source/.idea
 .DS_Store
 /source/.vscode
+/source/node_modules

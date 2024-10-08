@@ -3,10 +3,6 @@ export interface TdOverlayProps {
         type: StringConstructor;
         value?: string;
     };
-    customStyle?: {
-        type: StringConstructor;
-        value?: string;
-    };
     duration?: {
         type: NumberConstructor;
         value?: number;
@@ -14,10 +10,6 @@ export interface TdOverlayProps {
     preventScrollThrough?: {
         type: BooleanConstructor;
         value?: boolean;
-    };
-    style?: {
-        type: StringConstructor;
-        value?: string;
     };
     usingCustomNavbar?: {
         type: BooleanConstructor;

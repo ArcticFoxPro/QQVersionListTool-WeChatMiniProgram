@@ -30,6 +30,9 @@ let PickerItem = class PickerItem extends SuperComponent {
                 },
             },
         };
+        this.options = {
+            multipleSlots: true,
+        };
         this.externalClasses = [`${prefix}-class`];
         this.properties = props;
         this.observers = {

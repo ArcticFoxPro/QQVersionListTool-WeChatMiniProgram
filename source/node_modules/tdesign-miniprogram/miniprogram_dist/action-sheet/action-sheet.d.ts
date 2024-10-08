@@ -23,6 +23,7 @@ export default class ActionSheet extends SuperComponent {
         items: {
             type: ArrayConstructor;
             value?: (string | import("./type").ActionSheetItem)[];
+            required?: boolean;
         };
         popupProps?: {
             type: ObjectConstructor;
@@ -47,10 +48,12 @@ export default class ActionSheet extends SuperComponent {
         visible: {
             type: BooleanConstructor;
             value?: boolean;
+            required?: boolean;
         };
         defaultVisible: {
             type: BooleanConstructor;
             value?: boolean;
+            required?: boolean;
         };
     };
     data: {

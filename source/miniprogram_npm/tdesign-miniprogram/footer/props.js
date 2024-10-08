@@ -6,10 +6,6 @@ const props = {
     logo: {
         type: Object,
     },
-    style: {
-        type: String,
-        value: '',
-    },
     text: {
         type: String,
         value: '',

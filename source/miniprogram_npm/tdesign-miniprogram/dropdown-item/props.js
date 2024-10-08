@@ -25,10 +25,6 @@ const props = {
         type: null,
         value: 1,
     },
-    optionsLayout: {
-        type: String,
-        value: 'columns',
-    },
     value: {
         type: null,
         value: undefined,

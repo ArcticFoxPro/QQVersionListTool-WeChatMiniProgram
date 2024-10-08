@@ -3,8 +3,7 @@ const props = {
         type: Object,
     },
     draggable: {
-        type: Boolean,
-        optionalTypes: [String],
+        type: null,
         value: false,
     },
     icon: {
@@ -18,6 +17,13 @@ const props = {
     text: {
         type: String,
         value: '',
+    },
+    usingCustomNavbar: {
+        type: Boolean,
+        value: false,
+    },
+    yBounds: {
+        type: Array,
     },
 };
 export default props;

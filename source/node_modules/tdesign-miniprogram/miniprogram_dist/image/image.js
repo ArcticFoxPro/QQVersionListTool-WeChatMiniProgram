@@ -13,7 +13,7 @@ const name = `${prefix}-image`;
 let Image = class Image extends SuperComponent {
     constructor() {
         super(...arguments);
-        this.externalClasses = [`${prefix}-class`, `${prefix}-class-load`];
+        this.externalClasses = [`${prefix}-class`, `${prefix}-class-load`, `${prefix}-class-image`, `${prefix}-class-error`];
         this.options = {
             multipleSlots: true,
         };
@@ -46,7 +46,7 @@ let Image = class Image extends SuperComponent {
                     (versionArray[0] === 2 && versionArray[1] === 10 && versionArray[2] < 3);
                 if (mode === 'heightFix' && isInCompatible) {
                     const { height: picHeight, width: picWidth } = e.detail;
-                    getRect(this, `#${tId !== null && tId !== void 0 ? tId : 'image'}`).then((rect) => {
+                    getRect(this, `#${tId || 'image'}`).then((rect) => {
                         const { height } = rect;
                         const resultWidth = ((height / picHeight) * picWidth).toFixed(2);
                         this.setData({ innerStyle: `height: ${addUnit(height)}; width: ${resultWidth}px;` });

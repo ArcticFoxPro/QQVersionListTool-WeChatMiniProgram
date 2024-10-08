@@ -1,4 +1,4 @@
-import { TdOverlayProps as OverlayProps } from '../overlay/index';
+import { OverlayProps } from '../overlay/index';
 export interface TdToastProps {
     direction?: {
         type: StringConstructor;

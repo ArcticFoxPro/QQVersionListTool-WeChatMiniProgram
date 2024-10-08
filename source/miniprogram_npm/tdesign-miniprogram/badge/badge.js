@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { SuperComponent, wxComponent } from '../common/src/index';
 import config from '../common/config';
 import props from './props';
-import { getRect, uniqueFactory } from '../common/utils';
+import { uniqueFactory } from '../common/utils';
 const { prefix } = config;
 const name = `${prefix}-badge`;
 const getUniqueID = uniqueFactory('badge');
@@ -25,27 +25,10 @@ let Badge = class Badge extends SuperComponent {
             value: '',
             labelID: '',
             descriptionID: '',
-            ribbonStyle: '',
-            ribbonOuterStyle: '',
         };
         this.lifetimes = {
             ready() {
                 const uniqueID = getUniqueID();
-                if (this.properties.shape === 'ribbon') {
-                    getRect(this, `.${prefix}-badge--ribbon`).then((rect) => {
-                        const outerBoundingRect = rect.width / Math.SQRT2 + rect.height * Math.SQRT2;
-                        const translateX = rect.width - rect.width / Math.SQRT2 + outerBoundingRect - rect.width;
-                        const ribbonHeightHypotenuse = rect.height * Math.SQRT2;
-                        const ribbonWidthCatheti = rect.width / Math.SQRT2;
-                        this.setData({
-                            ribbonStyle: `transform: translateX(${translateX}px) rotate(45deg);`,
-                            ribbonOuterStyle: `width: ${outerBoundingRect}px; height: ${outerBoundingRect}px;
-              clip-path: polygon(0 0, ${ribbonHeightHypotenuse}px 0,
-              ${outerBoundingRect}px ${ribbonWidthCatheti}px,
-              ${outerBoundingRect}px ${ribbonWidthCatheti + ribbonHeightHypotenuse}px);`,
-                        });
-                    });
-                }
                 this.setData({
                     labelID: `${uniqueID}_label`,
                     descriptionID: `${uniqueID}_description`,

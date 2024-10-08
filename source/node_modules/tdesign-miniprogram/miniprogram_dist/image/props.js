@@ -1,14 +1,7 @@
 const props = {
-    tId: {
-        type: String,
-        value: null,
-    },
     error: {
         type: String,
         value: 'default',
-    },
-    externalClasses: {
-        type: Array,
     },
     height: {
         type: null,
@@ -34,6 +27,10 @@ const props = {
         value: false,
     },
     src: {
+        type: String,
+        value: '',
+    },
+    tId: {
         type: String,
         value: '',
     },

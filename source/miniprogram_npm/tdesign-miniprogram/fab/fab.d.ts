@@ -15,7 +15,7 @@ export default class Fab extends SuperComponent {
         moveStyle: any;
     };
     observers: {
-        'buttonProps.**, icon, text, ariaLabel'(): void;
+        'buttonProps.**, icon, text, ariaLabel, yBounds'(): void;
     };
     methods: {
         onTplButtonTap(e: any): void;

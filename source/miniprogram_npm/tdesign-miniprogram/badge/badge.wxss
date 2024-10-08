@@ -58,15 +58,33 @@
 }
 .t-badge__ribbon-outer {
   position: absolute;
-  overflow: hidden;
   top: 0;
   right: 0;
-  background-color: var(--td-badge-bg-color, var(--td-error-color, var(--td-error-color-6, #d54941)));
 }
 .t-badge--ribbon {
+  position: relative;
   display: inline-block;
-  transform-origin: top left;
+  transform-origin: center center;
+  transform: translate(calc(50% - var(--td-badge-basic-height, 32rpx) + 1rpx), calc(-50% + var(--td-badge-basic-height, 32rpx) - 1rpx)) rotate(45deg);
   border-radius: 0;
+}
+.t-badge--ribbon::before,
+.t-badge--ribbon::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  bottom: 0;
+  border-bottom: var(--td-badge-basic-height, 32rpx) solid var(--td-badge-bg-color, var(--td-error-color, var(--td-error-color-6, #d54941)));
+  font-size: 0;
+}
+.t-badge--ribbon::before {
+  left: calc(-1 * var(--td-badge-basic-height, 32rpx) + 1rpx);
+  border-left: var(--td-badge-basic-height, 32rpx) solid transparent;
+}
+.t-badge--ribbon::after {
+  right: calc(-1 * var(--td-badge-basic-height, 32rpx) + 1rpx);
+  border-right: var(--td-badge-basic-height, 32rpx) solid transparent;
 }
 .t-badge--bubble {
   border-radius: var(--td-badge-bubble-border-radius, 20rpx 20rpx 20rpx 1px);
@@ -82,6 +100,7 @@
   border-radius: calc(var(--td-badge-large-height, 40rpx) / 2);
 }
 .t-badge__content:not(:empty) + .t-has-count {
+  transform-origin: center center;
   transform: translate(-50%, -50%);
   position: absolute;
   left: 100%;

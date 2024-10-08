@@ -35,10 +35,12 @@ let ImageViewer = class ImageViewer extends SuperComponent {
             },
         ];
         this.observers = {
-            visible(value) {
-                this.setData({
-                    currentSwiperIndex: value ? this.properties.initialIndex : 0,
-                });
+            'visible,initialIndex,images'(visible, initialIndex, images) {
+                if (visible && (images === null || images === void 0 ? void 0 : images.length)) {
+                    this.setData({
+                        currentSwiperIndex: initialIndex >= images.length ? images.length - 1 : initialIndex,
+                    });
+                }
             },
             closeBtn(v) {
                 this.setData({
