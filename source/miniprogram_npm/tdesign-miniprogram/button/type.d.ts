@@ -13,8 +13,8 @@ export interface TdButtonProps {
         value?: string;
     };
     customDataset?: {
-        type: ObjectConstructor;
-        value?: any;
+        type: null;
+        value?: null;
     };
     disabled?: {
         type: BooleanConstructor;

@@ -41,7 +41,7 @@
   justify-content: center;
   flex-wrap: nowrap;
   font-size: var(--td-switch-label-font-size, 28rpx);
-  color: var(--td-switch-label-color, var(--td-text-color-disabled, var(--td-font-gray-4, rgba(0, 0, 0, 0.26))));
+  color: var(--td-switch-label-color, var(--td-bg-color-secondarycontainer-active, var(--td-gray-color-4, #dcdcdc)));
   overflow: hidden;
 }
 .t-switch__label--checked {

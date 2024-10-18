@@ -125,7 +125,7 @@ let Tabs = class Tabs extends SuperComponent {
                 const Labels = [];
                 this.children.forEach((child, idx) => {
                     const isActive = index === idx;
-                    if (isActive !== child.data.active) {
+                    if (isActive !== child.data.active || !child.initialized) {
                         child.render(isActive, this);
                     }
                     Labels.push(child.data.label);

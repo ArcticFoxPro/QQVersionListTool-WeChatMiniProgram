@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { SuperComponent, wxComponent } from '../common/src/index';
 import config from '../common/config';
 import props from './props';
-import { unitConvert } from '../common/utils';
+import { unitConvert, systemInfo } from '../common/utils';
 const { prefix } = config;
 const name = `${prefix}-pull-down-refresh`;
 let PullDownRefresh = class PullDownRefresh extends SuperComponent {
@@ -43,7 +43,7 @@ let PullDownRefresh = class PullDownRefresh extends SuperComponent {
         };
         this.lifetimes = {
             attached() {
-                const { screenWidth } = wx.getSystemInfoSync();
+                const { screenWidth } = systemInfo;
                 const { loadingTexts, maxBarHeight, loadingBarHeight } = this.properties;
                 this.setData({
                     _maxBarHeight: unitConvert(maxBarHeight),
@@ -143,20 +143,14 @@ let PullDownRefresh = class PullDownRefresh extends SuperComponent {
                 }
             },
             onDragStart(e) {
-                if (this.properties.disabled)
-                    return;
                 const { scrollTop, scrollLeft } = e.detail;
                 this.triggerEvent('dragstart', { scrollTop, scrollLeft });
             },
             onDragging(e) {
-                if (this.properties.disabled)
-                    return;
                 const { scrollTop, scrollLeft } = e.detail;
                 this.triggerEvent('dragging', { scrollTop, scrollLeft });
             },
             onDragEnd(e) {
-                if (this.properties.disabled)
-                    return;
                 const { scrollTop, scrollLeft } = e.detail;
                 this.triggerEvent('dragend', { scrollTop, scrollLeft });
             },

@@ -46,7 +46,7 @@ let CollapsePanel = class CollapsePanel extends SuperComponent {
         };
         this.methods = {
             updateExpanded(activeValues = []) {
-                if (!this.$parent || this.data.ultimateDisabled) {
+                if (!this.$parent) {
                     return;
                 }
                 const { value } = this.properties;
