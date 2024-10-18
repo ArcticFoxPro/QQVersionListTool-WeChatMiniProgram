@@ -8,8 +8,7 @@ import { SuperComponent, wxComponent } from '../common/src/index';
 import config from '../common/config';
 import props from './props';
 import useCustomNavbar from '../mixins/using-custom-navbar';
-import { unitConvert } from '../common/utils';
-const systemInfo = wx.getSystemInfoSync();
+import { unitConvert, systemInfo } from '../common/utils';
 const { prefix } = config;
 const name = `${prefix}-fab`;
 const baseButtonProps = {

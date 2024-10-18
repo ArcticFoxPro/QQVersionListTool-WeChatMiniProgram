@@ -11,7 +11,7 @@ const props = {
         type: String,
     },
     customDataset: {
-        type: Object,
+        type: null,
     },
     disabled: {
         type: null,

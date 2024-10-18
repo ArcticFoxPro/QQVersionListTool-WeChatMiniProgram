@@ -7,7 +7,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { SuperComponent, wxComponent } from '../common/src/index';
 import ImageProps from './props';
 import config from '../common/config';
-import { addUnit, getRect } from '../common/utils';
+import { addUnit, getRect, appBaseInfo } from '../common/utils';
+import { compareVersion } from '../common/version';
 const { prefix } = config;
 const name = `${prefix}-image`;
 let Image = class Image extends SuperComponent {
@@ -38,12 +39,9 @@ let Image = class Image extends SuperComponent {
         };
         this.methods = {
             onLoaded(e) {
-                const sdkVersion = wx.getSystemInfoSync().SDKVersion;
-                const versionArray = sdkVersion.split('.').map((v) => parseInt(v, 10));
+                const sdkVersion = appBaseInfo.SDKVersion;
                 const { mode, tId } = this.properties;
-                const isInCompatible = versionArray[0] < 2 ||
-                    (versionArray[0] === 2 && versionArray[1] < 10) ||
-                    (versionArray[0] === 2 && versionArray[1] === 10 && versionArray[2] < 3);
+                const isInCompatible = compareVersion(sdkVersion, '2.10.3') < 0;
                 if (mode === 'heightFix' && isInCompatible) {
                     const { height: picHeight, width: picWidth } = e.detail;
                     getRect(this, `#${tId || 'image'}`).then((rect) => {

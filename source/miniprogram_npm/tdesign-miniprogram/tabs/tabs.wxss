@@ -143,10 +143,12 @@
 .t-tabs__nav {
   position: relative;
   user-select: none;
-  width: 100%;
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
+}
+.t-tabs__nav.t-tabs__nav--evenly {
+  width: 100%;
 }
 .t-tabs__track {
   position: absolute;

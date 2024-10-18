@@ -39,7 +39,7 @@
 .t-tree-select__column--right {
   flex: 1;
 }
-.t-tree-select__column ::-webkit-scrollbar {
+.t-tree-select__column::-webkit-scrollbar {
   display: none;
   width: 0;
   height: 0;

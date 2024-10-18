@@ -1,7 +1,9 @@
 /// <reference types="miniprogram-api-typings" />
 /// <reference types="miniprogram-api-typings" />
 /// <reference types="miniprogram-api-typings" />
-export declare const systemInfo: WechatMiniprogram.SystemInfo;
+export declare const systemInfo: WechatMiniprogram.WindowInfo | WechatMiniprogram.SystemInfo;
+export declare const appBaseInfo: WechatMiniprogram.AppBaseInfo | WechatMiniprogram.SystemInfo;
+export declare const deviceInfo: WechatMiniprogram.DeviceInfo | WechatMiniprogram.SystemInfo;
 declare type Context = WechatMiniprogram.Page.TrivialInstance | WechatMiniprogram.Component.TrivialInstance;
 export declare const debounce: (func: any, wait?: number) => (...rest: any[]) => void;
 export declare const throttle: (func: any, wait?: number, options?: any) => (...args: any[]) => void;

@@ -54,6 +54,7 @@ let Dialog = class Dialog extends SuperComponent {
                         class: [...cls, `${classPrefix}__button--${key}`],
                         externalClass: [...externalCls, `${prefix}-class-${key}`],
                         variant: rect.buttonVariant,
+                        openType: '',
                     };
                     if (key === 'cancel' && rect.buttonVariant === 'base') {
                         base.theme = 'light';
@@ -88,7 +89,7 @@ let Dialog = class Dialog extends SuperComponent {
                         this.close();
                     }
                 }
-                const hasOpenType = 'openType' in button;
+                const hasOpenType = !!button.openType;
                 if (!hasOpenType && ['confirm', 'cancel'].includes(type)) {
                     (_a = this[toCamel(`on-${type}`)]) === null || _a === void 0 ? void 0 : _a.call(this, type);
                 }

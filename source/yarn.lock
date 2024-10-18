@@ -17,9 +17,9 @@ semver@^7.6.3:
   resolved "https://registry.npmjs.org/semver/-/semver-7.6.3.tgz"
   integrity sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==
 
-tdesign-miniprogram@^1.6.1:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/tdesign-miniprogram/-/tdesign-miniprogram-1.6.1.tgz#08a6168176835261a60d5abc5adb57600dde5248"
-  integrity sha512-APgNNRupNaZrOnta3WWTyDjnlsyg3gDiJO6FdXo9n4I8cVozInXbhMrqZ+6eqdOVowveI8wCaGYhBAsGe7NHGA==
+tdesign-miniprogram@^1.6.2:
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/tdesign-miniprogram/-/tdesign-miniprogram-1.6.2.tgz#8d7081b2c7e82772d2d55cbb7b4d304286009b49"
+  integrity sha512-Rxusw4LuHznulvuE5+I0poIH/FpCUsKnPg7CBMH4HMDux2ZPWTTX8FOCdftJCfm1Bkge6tnZd+TfpCuvDIE1Dw==
   dependencies:
     dayjs "^1.10.7"
