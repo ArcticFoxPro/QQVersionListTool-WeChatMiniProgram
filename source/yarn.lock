@@ -17,9 +17,15 @@ semver@^7.6.3:
   resolved "https://registry.npmjs.org/semver/-/semver-7.6.3.tgz"
   integrity sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==
 
-tdesign-miniprogram@^1.6.2:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/tdesign-miniprogram/-/tdesign-miniprogram-1.6.2.tgz#8d7081b2c7e82772d2d55cbb7b4d304286009b49"
-  integrity sha512-Rxusw4LuHznulvuE5+I0poIH/FpCUsKnPg7CBMH4HMDux2ZPWTTX8FOCdftJCfm1Bkge6tnZd+TfpCuvDIE1Dw==
+tdesign-miniprogram@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/tdesign-miniprogram/-/tdesign-miniprogram-1.7.0.tgz#8e23381788631168053e381df054e1823ce43bbb"
+  integrity sha512-aiGUzKJ6HvNjcwo0yLNjIum2URy87Xdrpr7VAvBO6Oe0SfSdWJMlAj3rEzjxlQFUnhlKMlkDZMtSklHTIOhz6w==
   dependencies:
     dayjs "^1.10.7"
+    tinycolor2 "^1.4.2"
+
+tinycolor2@^1.4.2:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/tinycolor2/-/tinycolor2-1.6.0.tgz#f98007460169b0263b97072c5ae92484ce02d09e"
+  integrity sha512-XPaBkWQJdsf3pLKJV9p4qN/S+fm2Oj8AIPo1BTUhg5oxkvm9+SVEGFdhyOz7tTdUTfvxMiAs4sp6/eZO2Ew+pw==
