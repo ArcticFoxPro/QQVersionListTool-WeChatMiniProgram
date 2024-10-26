@@ -17,6 +17,9 @@ const props = {
     externalClasses: {
         type: Array,
     },
+    filter: {
+        type: null,
+    },
     format: {
         type: String,
         value: 'YYYY-MM-DD HH:mm:ss',

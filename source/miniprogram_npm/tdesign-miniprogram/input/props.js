@@ -39,6 +39,10 @@ const props = {
         type: Number,
         required: true,
     },
+    cursorColor: {
+        type: String,
+        value: '',
+    },
     cursorSpacing: {
         type: Number,
         value: 0,

@@ -20,6 +20,10 @@ export interface TdDateTimePickerProps {
         type: ArrayConstructor;
         value?: ['t-class', 't-class-confirm', 't-class-cancel', 't-class-title'];
     };
+    filter?: {
+        type: undefined;
+        value?: null;
+    };
     format?: {
         type: StringConstructor;
         value?: string;

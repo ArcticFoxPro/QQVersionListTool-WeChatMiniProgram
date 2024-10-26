@@ -122,14 +122,14 @@
   color: var(--td-countdown-default-color, var(--td-text-color-primary, var(--td-font-gray-1, rgba(0, 0, 0, 0.9))));
 }
 .t-count-down--square {
-  color: var(--td-countdown-round-color, var(--td-font-white-1, #ffffff));
+  color: var(--td-countdown-round-color, var(--td-text-color-anti, var(--td-font-white-1, #ffffff)));
 }
 .t-count-down--square > .t-count-down__item {
   border-radius: var(--td-countdown-square-border-radius, var(--td-radius-small, 6rpx));
   background: var(--td-countdown-bg-color, var(--td-error-color-6, #d54941));
 }
 .t-count-down--round {
-  color: var(--td-countdown-round-color, var(--td-font-white-1, #ffffff));
+  color: var(--td-countdown-round-color, var(--td-text-color-anti, var(--td-font-white-1, #ffffff)));
 }
 .t-count-down--round > .t-count-down__item {
   border-radius: var(--td-countdown-round-border-radius, var(--td-radius-circle, 50%));

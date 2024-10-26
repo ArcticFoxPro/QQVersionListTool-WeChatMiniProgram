@@ -34,7 +34,7 @@
   z-index: 100;
   padding: 0 var(--td-badge-basic-padding, 8rpx);
   font-size: var(--td-badge-font-size, var(--td-font-size-xs, var(--td-font-size, 20rpx)));
-  color: var(--td-badge-text-color, var(--td-font-white-1, #ffffff));
+  color: var(--td-badge-text-color, var(--td-text-color-anti, var(--td-font-white-1, #ffffff)));
   background-color: var(--td-badge-bg-color, var(--td-error-color, var(--td-error-color-6, #d54941)));
   text-align: center;
   height: var(--td-badge-basic-height, 32rpx);

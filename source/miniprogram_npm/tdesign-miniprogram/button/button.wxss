@@ -91,7 +91,7 @@
   border-color: var(--td-button-default-disabled-border-color, var(--td-bg-color-component-disabled, var(--td-gray-color-2, #eeeeee)));
 }
 .t-button--primary {
-  color: var(--td-button-primary-color, var(--td-font-white-1, #ffffff));
+  color: var(--td-button-primary-color, var(--td-text-color-anti, var(--td-font-white-1, #ffffff)));
   background-color: var(--td-button-primary-bg-color, var(--td-brand-color, var(--td-primary-color-7, #0052d9)));
   border-color: var(--td-button-primary-border-color, var(--td-brand-color, var(--td-primary-color-7, #0052d9)));
 }
@@ -108,7 +108,7 @@
   border-color: var(--td-button-primary-active-border-color, var(--td-brand-color-active, var(--td-primary-color-8, #003cab)));
 }
 .t-button--primary.t-button--disabled {
-  color: var(--td-button-primary-disabled-color, var(--td-font-white-1, #ffffff));
+  color: var(--td-button-primary-disabled-color, var(--td-text-color-anti, var(--td-font-white-1, #ffffff)));
   background-color: var(--td-button-primary-disabled-bg, var(--td-brand-color-disabled, var(--td-primary-color-3, #b5c7ff)));
 }
 .t-button--primary.t-button--disabled,
@@ -141,7 +141,7 @@
   border-color: var(--td-button-light-disabled-border-color, var(--td-brand-color-light, var(--td-primary-color-1, #f2f3ff)));
 }
 .t-button--danger {
-  color: var(--td-button-danger-color, var(--td-font-white-1, #ffffff));
+  color: var(--td-button-danger-color, var(--td-text-color-anti, var(--td-font-white-1, #ffffff)));
   background-color: var(--td-button-danger-bg-color, var(--td-error-color, var(--td-error-color-6, #d54941)));
   border-color: var(--td-button-danger-border-color, var(--td-error-color, var(--td-error-color-6, #d54941)));
 }
@@ -370,11 +370,11 @@
 }
 .t-button--ghost {
   background-color: transparent;
-  color: var(--td-button-ghost-color, var(--td-bg-color-container, var(--td-font-white-1, #ffffff)));
+  color: var(--td-button-ghost-color, var(--td-text-color-anti, var(--td-font-white-1, #ffffff)));
 }
 .t-button--ghost,
 .t-button--ghost::after {
-  border-color: var(--td-button-ghost-border-color, var(--td-button-ghost-color, var(--td-bg-color-container, var(--td-font-white-1, #ffffff))));
+  border-color: var(--td-button-ghost-border-color, var(--td-button-ghost-color, var(--td-text-color-anti, var(--td-font-white-1, #ffffff))));
 }
 .t-button--ghost.t-button--default.t-button--hover {
   color: var(--td-button-ghost-hover-color, var(--td-font-white-2, rgba(255, 255, 255, 0.55)));

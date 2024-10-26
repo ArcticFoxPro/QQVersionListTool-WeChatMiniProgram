@@ -55,7 +55,7 @@
 }
 .t-back-top--round-dark,
 .t-back-top--half-round-dark {
-  color: var(--td-back-top-round-dark-color, var(--td-font-white-1, #ffffff));
+  color: var(--td-back-top-round-dark-color, var(--td-text-color-anti, var(--td-font-white-1, #ffffff)));
   background-color: var(--td-back-top-round-dark-bg-color, var(--td-gray-color-13, #242424));
 }
 .t-back-top--half-round,

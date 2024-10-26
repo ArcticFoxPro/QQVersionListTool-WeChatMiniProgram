@@ -18,7 +18,7 @@ export default class Navbar extends SuperComponent {
         hideLeft: boolean;
         hideCenter: boolean;
     };
-    attached(): void;
+    attached(): Promise<void>;
     detached(): void;
     methods: {
         queryElements(capsuleRect: any): void;

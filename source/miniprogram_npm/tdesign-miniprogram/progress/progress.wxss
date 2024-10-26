@@ -71,7 +71,7 @@
   position: absolute;
   top: 50%;
   right: var(--td-spacer, 16rpx);
-  color: var(--td-progress-info-light-color, var(--td-font-white-1, #ffffff));
+  color: var(--td-progress-info-light-color, var(--td-text-color-anti, var(--td-font-white-1, #ffffff)));
   transform: translateY(-50%);
 }
 .t-progress--under-ten .t-progress__info,
@@ -99,7 +99,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: var(--td-progress-circle-inner-bg-color, var(--td-font-white-1, #ffffff));
+  background-color: var(--td-progress-circle-inner-bg-color, var(--td-text-color-anti, var(--td-font-white-1, #ffffff)));
 }
 .t-progress__canvas--circle .t-progress__info {
   margin: 0;
