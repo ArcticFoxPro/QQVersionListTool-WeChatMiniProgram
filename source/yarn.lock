@@ -17,10 +17,10 @@ semver@^7.6.3:
   resolved "https://registry.npmjs.org/semver/-/semver-7.6.3.tgz"
   integrity sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==
 
-tdesign-miniprogram@^1.7.1:
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/tdesign-miniprogram/-/tdesign-miniprogram-1.7.1.tgz#bf612808965e846557c51c7986d89120418f34c9"
-  integrity sha512-r4+VuotHBWwUWZ1RkAtm6Lr21/4dITwvWOGX0F3V91eVWQHR+bjlGwERZtZKOFdEz0eP2R2FU4zVAAVe+HY6YQ==
+tdesign-miniprogram@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/tdesign-miniprogram/-/tdesign-miniprogram-1.8.0.tgz#3cd4d77af96345d072bfbb5b0f93aed2de955601"
+  integrity sha512-/ecDMkcrA6J1ocJ30N4AAxdPTbRz2gpigW1NEHu1TwTXHx0STG0FOpgJGoU1WYCyJRPv72kgYfF9VgZjZqxJMg==
   dependencies:
     dayjs "^1.10.7"
     tinycolor2 "^1.4.2"
