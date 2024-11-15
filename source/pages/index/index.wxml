@@ -523,7 +523,9 @@ See the Mulan PubL v2 for more details.
         </view>
         <t-cell arrow bind:tap="handleGetFromWeixinAlphaConfig" bordered="{{false}}" hover
                 title="从腾讯服务器配置拉取微信最新测试版下载直链">
-            <t-loading slot="note" wx:if="{{getFromWeixinAlphaConfigLoading}}"/>
+            <view slot="note" hidden="{{!getFromWeixinAlphaConfigLoading}}">
+                <t-loading/>
+            </view>
         </t-cell>
         <t-cell arrow bind:tap="handleGetFromTencentAppStore" bordered="{{false}}" hover
                 title="腾讯应用宝更新获取（实验性）"/>
