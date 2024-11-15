@@ -14,6 +14,9 @@ const props = {
     format: {
         type: null,
     },
+    localeText: {
+        type: Object,
+    },
     maxDate: {
         type: Number,
     },
@@ -22,7 +25,6 @@ const props = {
     },
     title: {
         type: String,
-        value: '请选择日期',
     },
     type: {
         type: String,

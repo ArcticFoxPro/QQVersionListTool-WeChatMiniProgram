@@ -11,6 +11,7 @@ export default class Input extends SuperComponent {
         classPrefix: string;
         classBasePrefix: string;
         showClearIcon: boolean;
+        defaultCursorColor: string;
     };
     lifetimes: {
         ready(): void;
@@ -19,7 +20,7 @@ export default class Input extends SuperComponent {
         prefixIcon(v: any): void;
         suffixIcon(v: any): void;
         clearable(v: any): void;
-        clearTrigger(): void;
+        'clearTrigger, clearable, disabled, readonly'(): void;
     };
     methods: {
         updateValue(value: any): void;

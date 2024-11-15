@@ -1,4 +1,8 @@
 const props = {
+    autoClose: {
+        type: Boolean,
+        value: false,
+    },
     cancelBtn: {
         type: String,
         value: '取消',

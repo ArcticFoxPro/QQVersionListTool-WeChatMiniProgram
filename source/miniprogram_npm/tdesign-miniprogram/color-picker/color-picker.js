@@ -12,18 +12,13 @@ import { getRect } from '../common/utils';
 import { Color, getColorObject } from './utils';
 const { prefix } = config;
 const name = `${prefix}-color-picker`;
-const getCoordinate = (e, left, top) => {
-    const { pageX, pageY } = e.changedTouches[0] || {};
-    let { offsetLeft, offsetTop } = e.currentTarget;
-    if (top !== undefined) {
-        offsetTop = top;
-    }
-    if (left !== undefined) {
-        offsetLeft = left;
-    }
+const getCoordinate = (e, react, isPopup) => {
+    var _a;
+    const { pageX, pageY, clientY } = e.changedTouches[0] || {};
+    const offsetY = isPopup ? react.top : (_a = e.currentTarget) === null || _a === void 0 ? void 0 : _a.offsetTop;
     return {
-        x: pageX - offsetLeft,
-        y: pageY - offsetTop,
+        x: Math.min(Math.max(0, pageX - react.left), react.width),
+        y: Math.min(Math.max(0, (isPopup ? clientY : pageY) - offsetY), react.height),
     };
 };
 const getFormatList = (format, color) => {
@@ -72,6 +67,16 @@ let ColorPicker = class ColorPicker extends SuperComponent {
                     isMultiple: value === 'multiple',
                 });
             },
+            'usePopup, visible'(usePopup, visible) {
+                if (this.timer) {
+                    clearTimeout(this.timer);
+                }
+                if (usePopup && visible) {
+                    this.timer = setTimeout(() => {
+                        this.getEleReact();
+                    }, 350);
+                }
+            },
         };
         this.color = new Color(props.defaultValue.value || props.value.value || DEFAULT_COLOR);
         this.data = {
@@ -108,9 +113,18 @@ let ColorPicker = class ColorPicker extends SuperComponent {
             formatList: getFormatList(props.format.value, this.color),
             innerSwatchList: genSwatchList(props.swatchColors.value),
             isMultiple: props.type.value === 'multiple',
+            defaultOverlayProps: {},
         };
         this.lifetimes = {
             ready() {
+                this.init();
+            },
+            detached() {
+                clearTimeout(this.timer);
+            },
+        };
+        this.methods = {
+            init() {
                 const { value, defaultValue } = this.properties;
                 const innerValue = value || defaultValue;
                 if (innerValue) {
@@ -120,11 +134,16 @@ let ColorPicker = class ColorPicker extends SuperComponent {
                 }
                 this.color = new Color(innerValue || DEFAULT_COLOR);
                 this.updateColor();
+                this.getEleReact();
+            },
+            getEleReact() {
                 Promise.all([getRect(this, `.${name}__saturation`), getRect(this, `.${name}__slider`)]).then(([saturationRect, sliderRect]) => {
                     this.setData({
                         panelRect: {
                             width: saturationRect.width || SATURATION_PANEL_DEFAULT_WIDTH,
                             height: saturationRect.height || SATURATION_PANEL_DEFAULT_HEIGHT,
+                            left: saturationRect.left || 0,
+                            top: saturationRect.top || 0,
                         },
                         sliderRect: {
                             left: sliderRect.left || 0,
@@ -135,8 +154,6 @@ let ColorPicker = class ColorPicker extends SuperComponent {
                     });
                 });
             },
-        };
-        this.methods = {
             clickSwatch(e) {
                 const swatch = e.currentTarget.dataset.value;
                 this.color.update(swatch);
@@ -253,13 +270,13 @@ let ColorPicker = class ColorPicker extends SuperComponent {
                 this.setCoreStyle();
             },
             handleSaturationDrag(e) {
-                const coordinate = getCoordinate(e);
+                const coordinate = getCoordinate(e, this.data.panelRect, this.properties.usePopup);
                 const { saturation, value } = this.getSaturationAndValueByCoordinate(coordinate);
                 this.onChangeSaturation({ saturation, value });
             },
             handleSliderDrag(e, isAlpha = false) {
-                const { width, left } = this.data.sliderRect;
-                const coordinate = getCoordinate(e, left);
+                const { width } = this.data.sliderRect;
+                const coordinate = getCoordinate(e, this.data.sliderRect);
                 const { x } = coordinate;
                 const maxValue = isAlpha ? ALPHA_MAX : HUE_MAX;
                 let value = Math.round((x / width) * maxValue * 100) / 100;
@@ -295,6 +312,15 @@ let ColorPicker = class ColorPicker extends SuperComponent {
                 wx.nextTick(() => {
                     this.handleDiffDrag(e);
                 });
+            },
+            close(trigger) {
+                if (this.properties.autoClose) {
+                    this.setData({ visible: false });
+                }
+                this.triggerEvent('close', { trigger });
+            },
+            onVisibleChange() {
+                this.close('overlay');
             },
         };
     }

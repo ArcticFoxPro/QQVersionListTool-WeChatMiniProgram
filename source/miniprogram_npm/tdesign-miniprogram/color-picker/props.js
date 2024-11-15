@@ -1,4 +1,8 @@
 const props = {
+    autoClose: {
+        type: Boolean,
+        value: true,
+    },
     enableAlpha: {
         type: Boolean,
         value: false,
@@ -7,12 +11,20 @@ const props = {
         type: String,
         value: 'RGB',
     },
+    popupProps: {
+        type: Object,
+        value: {},
+    },
     swatchColors: {
         type: Array,
     },
     type: {
         type: String,
         value: 'base',
+    },
+    usePopup: {
+        type: Boolean,
+        value: false,
     },
     value: {
         type: String,
@@ -21,6 +33,10 @@ const props = {
     defaultValue: {
         type: String,
         value: '',
+    },
+    visible: {
+        type: Boolean,
+        value: false,
     },
 };
 export default props;

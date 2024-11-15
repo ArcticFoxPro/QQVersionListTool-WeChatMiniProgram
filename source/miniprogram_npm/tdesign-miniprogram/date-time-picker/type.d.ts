@@ -1,5 +1,9 @@
 import { PopupProps } from '../popup/index';
 export interface TdDateTimePickerProps {
+    autoClose?: {
+        type: BooleanConstructor;
+        value?: boolean;
+    };
     cancelBtn?: {
         type: StringConstructor;
         value?: string;
@@ -22,7 +26,7 @@ export interface TdDateTimePickerProps {
     };
     filter?: {
         type: undefined;
-        value?: null;
+        value?: (type: TimeModeValues, columns: DateTimePickerColumn) => DateTimePickerColumn;
     };
     format?: {
         type: StringConstructor;
@@ -72,6 +76,11 @@ export interface TdDateTimePickerProps {
         type: BooleanConstructor;
         value?: boolean;
     };
+}
+export declare type DateTimePickerColumn = DateTimePickerColumnItem[];
+export interface DateTimePickerColumnItem {
+    label: string;
+    value: string;
 }
 export declare type DateTimePickerMode = TimeModeValues | Array<TimeModeValues>;
 export declare type TimeModeValues = 'year' | 'month' | 'date' | 'hour' | 'minute' | 'second';

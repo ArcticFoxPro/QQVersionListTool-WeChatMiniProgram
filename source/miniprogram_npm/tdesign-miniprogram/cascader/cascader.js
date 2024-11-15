@@ -99,7 +99,7 @@ let Cascader = class Cascader extends SuperComponent {
                     selectedValue,
                     stepIndex: items.length - 1,
                 };
-                if (items.length > this.data.items.length) {
+                if (JSON.stringify(items) !== JSON.stringify(this.data.items)) {
                     Object.assign(setData, { items });
                 }
                 this.setData(setData);

@@ -1,4 +1,9 @@
+import { PopupProps } from '../popup/index';
 export interface TdColorPickerProps {
+    autoClose?: {
+        type: BooleanConstructor;
+        value?: boolean;
+    };
     enableAlpha?: {
         type: BooleanConstructor;
         value?: boolean;
@@ -6,6 +11,10 @@ export interface TdColorPickerProps {
     format?: {
         type: StringConstructor;
         value?: 'RGB' | 'RGBA' | 'HSL' | 'HSLA' | 'HSB' | 'HSV' | 'HSVA' | 'HEX' | 'CMYK' | 'CSS';
+    };
+    popupProps?: {
+        type: ObjectConstructor;
+        value?: PopupProps;
     };
     swatchColors?: {
         type: ArrayConstructor;
@@ -15,6 +24,10 @@ export interface TdColorPickerProps {
         type: StringConstructor;
         value?: TypeEnum;
     };
+    usePopup?: {
+        type: BooleanConstructor;
+        value?: boolean;
+    };
     value?: {
         type: StringConstructor;
         value?: string;
@@ -23,10 +36,9 @@ export interface TdColorPickerProps {
         type: StringConstructor;
         value?: string;
     };
+    visible?: {
+        type: BooleanConstructor;
+        value?: boolean;
+    };
 }
 export declare type TypeEnum = 'base' | 'multiple';
-export interface Coordinate {
-    x: number;
-    y: number;
-}
-export declare type ColorPickerChangeTrigger = 'palette-saturation-brightness' | 'palette-saturation' | 'palette-brightness' | 'palette-hue-bar' | 'palette-alpha-bar' | 'preset';

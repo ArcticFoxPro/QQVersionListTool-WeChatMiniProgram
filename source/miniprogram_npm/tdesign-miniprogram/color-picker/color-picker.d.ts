@@ -1,5 +1,5 @@
 import { SuperComponent } from '../common/src/index';
-import type { Coordinate } from './type';
+import type { Coordinate } from './interfaces';
 import { Color } from './utils';
 export default class ColorPicker extends SuperComponent {
     properties: import("./type").TdColorPickerProps;
@@ -7,6 +7,7 @@ export default class ColorPicker extends SuperComponent {
         format(): void;
         swatchColors(value: any): void;
         type(value: any): void;
+        'usePopup, visible'(usePopup: boolean, visible: boolean): void;
     };
     color: Color;
     data: {
@@ -43,11 +44,15 @@ export default class ColorPicker extends SuperComponent {
         formatList: any[];
         innerSwatchList: any;
         isMultiple: boolean;
+        defaultOverlayProps: {};
     };
     lifetimes: {
         ready(): void;
+        detached(): void;
     };
     methods: {
+        init(): void;
+        getEleReact(): void;
         clickSwatch(e: any): void;
         setCoreStyle(): void;
         emitColorChange(trigger: any): void;
@@ -87,5 +92,7 @@ export default class ColorPicker extends SuperComponent {
         onTouchStart(e: any): void;
         onTouchMove(e: any): void;
         onTouchEnd(e: any): void;
+        close(trigger: string): void;
+        onVisibleChange(): void;
     };
 }

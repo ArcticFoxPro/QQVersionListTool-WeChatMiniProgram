@@ -7,20 +7,30 @@ dayjs@^1.10.7:
   resolved "https://registry.npmjs.org/dayjs/-/dayjs-1.11.13.tgz"
   integrity sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==
 
+dayjs@^1.11.13:
+  version "1.11.13"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.13.tgz#92430b0139055c3ebb60150aa13e860a4b5a366c"
+  integrity sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==
+
 extract-urls@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/extract-urls/-/extract-urls-1.4.1.tgz#d45acd0cf9b4728cdb6605d8f0614b56ab02c2e1"
   integrity sha512-SAzLx5yMh7Ocf09g7wyjZeS6mwiitUvMFeWmlll+vOOf4/iFnidXpCavBL2cYhaYci5gKG/ZYAC38zONlLFzBA==
+
+json5@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/json5/-/json5-2.2.3.tgz#78cd6f1a19bdc12b73db5ad0c61efd66c1e29283"
+  integrity sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==
 
 semver@^7.6.3:
   version "7.6.3"
   resolved "https://registry.npmjs.org/semver/-/semver-7.6.3.tgz"
   integrity sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==
 
-tdesign-miniprogram@^1.7.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/tdesign-miniprogram/-/tdesign-miniprogram-1.7.0.tgz#8e23381788631168053e381df054e1823ce43bbb"
-  integrity sha512-aiGUzKJ6HvNjcwo0yLNjIum2URy87Xdrpr7VAvBO6Oe0SfSdWJMlAj3rEzjxlQFUnhlKMlkDZMtSklHTIOhz6w==
+tdesign-miniprogram@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/tdesign-miniprogram/-/tdesign-miniprogram-1.8.0.tgz#3cd4d77af96345d072bfbb5b0f93aed2de955601"
+  integrity sha512-/ecDMkcrA6J1ocJ30N4AAxdPTbRz2gpigW1NEHu1TwTXHx0STG0FOpgJGoU1WYCyJRPv72kgYfF9VgZjZqxJMg==
   dependencies:
     dayjs "^1.10.7"
     tinycolor2 "^1.4.2"

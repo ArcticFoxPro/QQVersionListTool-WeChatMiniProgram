@@ -158,7 +158,7 @@
   border-color: var(--td-button-danger-active-border-color, var(--td-error-color-7, #ad352f));
 }
 .t-button--danger.t-button--disabled {
-  color: var(--td-button-danger-disabled-color, var(--td-error-color-disabled, var(--td-error-color-3, #ffb9b0)));
+  color: var(--td-button-danger-disabled-color, var(--td-font-white-1, #ffffff));
   background-color: var(--td-button-danger-disabled-bg, var(--td-error-color-3, #ffb9b0));
 }
 .t-button--danger.t-button--disabled,
@@ -224,7 +224,7 @@
   background-color: var(--td-button-danger-text-active-bg-color, var(--td-bg-color-container-active, var(--td-gray-color-3, #e7e7e7)));
 }
 .t-button--text.t-button--danger.t-button--disabled {
-  color: var(--td-button-danger-text-disabled-color, var(--td-button-danger-disabled-color, var(--td-error-color-disabled, var(--td-error-color-3, #ffb9b0))));
+  color: var(--td-button-danger-text-disabled-color, var(--td-button-danger-disabled-color, var(--td-font-white-1, #ffffff)));
   background-color: var(--td-bg-color-container, var(--td-font-white-1, #ffffff));
 }
 .t-button--text.t-button--light {
@@ -363,10 +363,10 @@
 }
 .t-button--dashed.t-button--danger.t-button--disabled {
   background-color: transparent;
-  color: var(--td-button-danger-dashed-disabled-color, var(--td-button-danger-disabled-color, var(--td-error-color-disabled, var(--td-error-color-3, #ffb9b0))));
+  color: var(--td-button-danger-dashed-disabled-color, var(--td-button-danger-disabled-color, var(--td-font-white-1, #ffffff)));
 }
 .t-button--dashed.t-button--danger.t-button--disabled::after {
-  border-color: var(--td-button-danger-dashed-disabled-color, var(--td-button-danger-disabled-color, var(--td-error-color-disabled, var(--td-error-color-3, #ffb9b0))));
+  border-color: var(--td-button-danger-dashed-disabled-color, var(--td-button-danger-disabled-color, var(--td-font-white-1, #ffffff)));
 }
 .t-button--ghost {
   background-color: transparent;

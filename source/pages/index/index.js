@@ -15,6 +15,7 @@
 import Message from 'tdesign-miniprogram/message/index';
 import semver from 'semver';
 import util from '../../utils/util.js';
+import dayjs from 'dayjs';
 
 Page({
     properties: {
@@ -68,8 +69,8 @@ Page({
         onWeixinGet: false,
         onWeComGet: false,
         onWeTypeGet: false,
-        tencentAppStoreBackLinks: [],
-        tencentAppStoreBackJson: ""
+        expBackLinks: [],
+        expBackJson: ""
     }, onLoad: function () {
         this.setData({
             theme: wx.getAppBaseInfo().theme || 'light',
@@ -153,6 +154,10 @@ Page({
             customSuffix: wx.getStorageSync('customSuffix')
         })
     }, onReady: async function () {
+        this.setData({
+            yearNow: dayjs().year()
+        })
+
         const windowHeight = await new Promise((resolve) => {
             wx.getSystemInfo({
                 success: (res) => {
@@ -206,10 +211,7 @@ Page({
         this.copyUtil('https://github.com/ArcticFoxPro/QQVersionListTool-WeChatMiniProgram');
     }, getData: function () {
         this.setData({
-            refreshIcon: null,
-        });
-        this.setData({
-            onRefresh: true,
+            refreshIcon: null, onRefresh: true, yearNow: dayjs().year()
         });
         let progressFlag = 0
 
@@ -236,8 +238,8 @@ Page({
 
                         let qqVersionBean = JSON.parse(json);
                         qqVersionBean.jsonString = JSON.parse(json)
-                        qqVersionBean.isAccessibility = false // semver.gte(qqVersionBean.versionNumber, getApp().globalData.EARLIEST_ACCESSIBILITY_VERSION)
-                        qqVersionBean.isQQNTFramework = semver.gte(qqVersionBean.versionNumber, getApp().globalData.EARLIEST_QQNT_FRAMEWORK_VERSION_STABLE)
+                        qqVersionBean.isAccessibility = false // semver.gte(qqVersionBean.versionNumber, getApp().EARLIEST_ACCESSIBILITY_QQ_VERSION)
+                        qqVersionBean.isQQNTFramework = semver.gte(qqVersionBean.versionNumber, getApp().globalData.EARLIEST_QQNT_FRAMEWORK_QQ_VERSION_STABLE)
 
                         qqVersionList.push(qqVersionBean);
                     }
@@ -280,6 +282,8 @@ Page({
                         datetime: jsonData.app.download.androidDatetime,
                         fix: "".split('<br/>'),
                         new: "",
+                        isAccessibility: false,
+                        isQQNTFramework: semver.gte(jsonData.app.download.androidVersion, getApp().globalData.EARLIEST_QQNT_FRAMEWORK_TIM_VERSION_STABLE),
                         jsonString: {
                             version: jsonData.app.download.androidVersion,
                             datetime: jsonData.app.download.androidDatetime,
@@ -296,6 +300,8 @@ Page({
                                 datetime: item.datetime,
                                 fix: item.fix.split('<br/>'),
                                 new: item.new,
+                                isAccessibility: false,
+                                isQQNTFramework: semver.gte(item.version, getApp().globalData.EARLIEST_QQNT_FRAMEWORK_TIM_VERSION_STABLE),
                                 jsonString: {
                                     version: item.version, datetime: item.datetime, fix: item.fix, new: item.new
                                 }
@@ -312,6 +318,8 @@ Page({
                                     datetime: logItem.datetime,
                                     fix: logItem.fix.split('<br/>'),
                                     new: logItem.new,
+                                    isAccessibility: false,
+                                    isQQNTFramework: semver.gte(versionItem.version, getApp().globalData.EARLIEST_QQNT_FRAMEWORK_TIM_VERSION_STABLE),
                                     jsonString: {
                                         version: versionItem.version,
                                         datetime: logItem.datetime,
@@ -518,17 +526,17 @@ Page({
         this.setData({
             getFromTencentAppStoreVisible: false, expVisible: true
         })
-    }, tencentAppStoreBackPopupVisible(e) {
+    }, expBackPopupVisible(e) {
         this.setData({
-            tencentAppStoreBackVisible: e.detail.visible
+            expBackVisible: e.detail.visible
         })
-    }, closeTencentAppStoreBackPopup() {
+    }, closeExpBackPopup() {
         this.setData({
-            tencentAppStoreBackVisible: false, getFromTencentAppStoreVisible: true
+            expBackVisible: false
         })
-    }, tencentAppStoreJsonBackPopupVisible(e) {
+    }, expJsonBackPopupVisible(e) {
         this.setData({
-            tencentAppStoreJsonBackVisible: e.detail.visible
+            expJsonBackVisible: e.detail.visible
         })
     }, handlePerProChange(e) {
         wx.vibrateShort({
@@ -1142,7 +1150,8 @@ Page({
                 }
             });
         })
-    }, async getDownloadLinkFromTencentAppStore(jsonData, type) {
+    }, async getDownloadLinkFromTencentAppStore(packageName, type) {
+        const jsonData = {"packagename": packageName}
         switch (type) {
             case 'QQ':
                 this.setData({
@@ -1169,16 +1178,32 @@ Page({
                     onWeTypeGet: true
                 });
                 break;
+            case 'Qidian':
+                this.setData({
+                    onQidianGet: true
+                });
+                break;
         }
         try {
             const allData = await this.fetchDownloadLinkFromTencentAppStore(jsonData);
-            console.log(allData);
+            const appAllData = allData["app_detail_records"][packageName]["apk_all_data"]
+            const appName = appAllData["name"]
+            const appVersionName = appAllData["version_name"]
+            const appUrl = appAllData["url"]
+            const appSize = (parseInt(appAllData["size_byte"]) / (1024 * 1024)).toFixed(2)
             const allDataJson = JSON.stringify(allData, null, 2)
-            console.log(allDataJson);
-            const link = util.getAllAPKUrl(allDataJson)
             this.setData({
-                tencentAppStoreBackLinks: link, tencentAppStoreBackVisible: true, tencentAppStoreBackJson: allDataJson
+                successExpBackLink: appUrl,
+                expBackVisible: true,
+                expBackJson: allDataJson,
+                expJsonBackTitle: "腾讯应用宝返回内容",
+                expJsonBackResultTitle: "获取成功",
+                succeedExpBackFileSizeShare: `（大小：${appSize} MB）`,
+                expBackStatus: "success"
             });
+            this.setData({
+                expShareText: `Android ${appName} ${appVersionName}${this.data.succeedExpBackFileSizeShare}\n\n下载地址：${appUrl}\n\n来自腾讯应用宝`
+            })
         } catch (err) {
             console.error(err);
             const errorMessage = err.errMsg;
@@ -1212,56 +1237,113 @@ Page({
                         onWeTypeGet: false
                     });
                     break;
+                case 'Qidian':
+                    this.setData({
+                        onQidianGet: false
+                    });
+                    break;
             }
             this.setData({
-                getFromTencentAppStoreVisible: false,
-                tencentAppStoreJsonBackVisible: false,
-                expVisible: false
+                getFromTencentAppStoreVisible: false, expJsonBackVisible: false, expVisible: false
             })
         }
     }, async getQQLinkFromTencentAppStore() {
-        const jsonData = {
-            "packagename": "com.tencent.mobileqq"
-        }
-        await this.getDownloadLinkFromTencentAppStore(jsonData, 'QQ')
+        const data = "com.tencent.mobileqq"
+        await this.getDownloadLinkFromTencentAppStore(data, 'QQ')
     }, async getTIMLinkFromTencentAppStore() {
-        const jsonData = {
-            "packagename": "com.tencent.tim"
-        }
-        await this.getDownloadLinkFromTencentAppStore(jsonData, 'TIM')
+        const data = "com.tencent.tim"
+        await this.getDownloadLinkFromTencentAppStore(data, 'TIM')
     }, async getWeixinLinkFromTencentAppStore() {
-        const jsonData = {
-            "packagename": "com.tencent.mm"
-        }
-        await this.getDownloadLinkFromTencentAppStore(jsonData, 'Weixin')
+        const data = "com.tencent.mm"
+        await this.getDownloadLinkFromTencentAppStore(data, 'Weixin')
     }, async getWeComLinkFromTencentAppStore() {
-        const jsonData = {
-            "packagename": "com.tencent.wework"
-        }
-        await this.getDownloadLinkFromTencentAppStore(jsonData, 'WeCom')
+        const data = "com.tencent.wework"
+        await this.getDownloadLinkFromTencentAppStore(data, 'WeCom')
     }, async getWeTypeLinkFromTencentAppStore() {
-        const jsonData = {
-            "packagename": "com.tencent.wetype"
-        }
-        await this.getDownloadLinkFromTencentAppStore(jsonData, 'WeType')
-    }, copyTencentAppStoreBack(e) {
+        const data = "com.tencent.wetype"
+        await this.getDownloadLinkFromTencentAppStore(data, 'WeType')
+    }, async getQidianLinkFromTencentAppStore() {
+        const data = "com.tencent.qidian"
+        await this.getDownloadLinkFromTencentAppStore(data, 'Qidian')
+    }, copyExpBack(e) {
         const index = e.currentTarget.dataset.index;
-        this.copyUtil(this.data.tencentAppStoreBackLinks[index])
-    }, handleTencentAppStoreJsonBack() {
+        this.copyUtil(this.data.expBackLinks[index])
+    }, handleExpJsonBack() {
         this.setData({
-            tencentAppStoreBackVisible: false,
-            tencentAppStoreJsonBackVisible: true,
-            getFromTencentAppStoreVisible: false,
-            expVisible: false
+            expBackVisible: false, expJsonBackVisible: true, getFromTencentAppStoreVisible: false, expVisible: false
         });
-    }, closeTencentAppStoreJsonBackPopup() {
+    }, closeExpJsonBackPopup() {
         this.setData({
-            tencentAppStoreJsonBackVisible: false,
-            tencentAppStoreBackVisible: true,
-            getFromTencentAppStoreVisible: false,
-            expVisible: false
+            expJsonBackVisible: false, expBackVisible: true, getFromTencentAppStoreVisible: false, expVisible: false
         });
-    }, copyTencentAppStoreJsonBack() {
-        this.copyUtil(this.data.tencentAppStoreBackJson)
+    }, copyExpJsonBack() {
+        this.copyUtil(this.data.expBackJson)
+    }, handleGetFromWeixinAlphaConfig() {
+        this.setData({getFromWeixinAlphaConfigLoading: true})
+        wx.request({
+            url: 'https://dldir1.qq.com/weixin/android/weixin_android_alpha_config.json',
+            method: 'GET',
+            success: (res) => {
+                try {
+                    if (res.statusCode >= 200 && res.statusCode < 300) {
+                        let responseData = res.data;
+                        let start = responseData.indexOf("cb(") + 3;
+                        let end = responseData.indexOf(")");
+                        let totalJson = responseData.substring(start, end);
+                        let map = util.resolveWeixinAlphaConfig(totalJson)
+                        let mapJson = JSON.stringify(map, null, 2)
+
+                        this.fetchLink(map.url.replace("http://", "https://")).then(isSuccess => {
+                            if (isSuccess.exists && isSuccess.fileSize !== false) this.setData({
+                                successExpBackLink: map.url,
+                                succeedExpBackFileSizeShare: `（大小：${isSuccess.fileSize} MB）`,
+                                expVisible: false,
+                                expBackVisible: true,
+                                expBackJson: mapJson,
+                                expJsonBackTitle: "腾讯服务器微信测试版拉取结果",
+                                expJsonBackResultTitle: "获取成功",
+                                expBackStatus: "success"
+                            }); else this.setData({
+                                successExpBackLink: map.url,
+                                succeedExpBackFileSizeShare: "（似乎未成功访问此下载地址，可能是微信当前测试版已撤包。）",
+                                expVisible: false,
+                                expBackVisible: true,
+                                expBackJson: mapJson,
+                                expJsonBackTitle: "腾讯服务器微信测试版拉取结果",
+                                expJsonBackResultTitle: "疑似撤包",
+                                expBackStatus: "default"
+                            });
+                            this.setData({
+                                expShareText: `Android 微信测试版 ${map.versionName}${this.data.succeedExpBackFileSizeShare}\n\n下载地址：${this.data.successExpBackLink}\n\n鉴于微信测试版可能存在不可预知的稳定性问题，您在下载及使用该测试版本之前，必须明确并确保自身具备足够的风险识别和承受能力。`
+                            })
+                        }).catch(err => {
+                            console.error(err);
+                            const errorMessage = err.errMsg;
+                            this.setData({
+                                errorText: errorMessage, errorVisible: true
+                            });
+                        });
+                    } else this.setData({
+                        errorText: "似乎未成功访问腾讯服务器配置文件，可能是微信当前没有测试版或测试版已撤包。",
+                        errorVisible: true
+                    });
+                } catch (e) {
+                    const errorMessage = e.errMsg;
+                    this.setData({
+                        errorText: errorMessage, errorVisible: true
+                    });
+                } finally {
+                    this.setData({getFromWeixinAlphaConfigLoading: false})
+                }
+            },
+            fail: (err) => {
+                const errorMessage = err.errMsg;
+                this.setData({
+                    errorText: errorMessage, errorVisible: true, getFromWeixinAlphaConfigLoading: false
+                });
+            },
+        });
+    }, copyExpBackShare() {
+        this.copyUtil(this.data.expShareText)
     }
 })

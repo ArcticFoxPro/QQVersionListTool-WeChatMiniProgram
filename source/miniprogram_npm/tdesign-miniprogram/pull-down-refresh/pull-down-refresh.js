@@ -18,6 +18,7 @@ let PullDownRefresh = class PullDownRefresh extends SuperComponent {
         this.isPulling = false;
         this.maxRefreshAnimateTimeFlag = 0;
         this.closingAnimateTimeFlag = 0;
+        this.refreshStatusTimer = null;
         this.externalClasses = [`${prefix}-class`, `${prefix}-class-loading`, `${prefix}-class-text`, `${prefix}-class-indicator`];
         this.options = {
             multipleSlots: true,
@@ -57,6 +58,7 @@ let PullDownRefresh = class PullDownRefresh extends SuperComponent {
             detached() {
                 clearTimeout(this.maxRefreshAnimateTimeFlag);
                 clearTimeout(this.closingAnimateTimeFlag);
+                this.resetTimer();
             },
         };
         this.observers = {
@@ -75,6 +77,12 @@ let PullDownRefresh = class PullDownRefresh extends SuperComponent {
                 }
             },
             barHeight(val) {
+                this.resetTimer();
+                if (val === 0 && this.data.refreshStatus !== -1) {
+                    this.refreshStatusTimer = setTimeout(() => {
+                        this.setData({ refreshStatus: -1 });
+                    }, 240);
+                }
                 this.setData({ tipsHeight: Math.min(val, this.data._loadingBarHeight) });
             },
             maxBarHeight(v) {
@@ -85,6 +93,12 @@ let PullDownRefresh = class PullDownRefresh extends SuperComponent {
             },
         };
         this.methods = {
+            resetTimer() {
+                if (this.refreshStatusTimer) {
+                    clearTimeout(this.refreshStatusTimer);
+                    this.refreshStatusTimer = null;
+                }
+            },
             onScrollToBottom() {
                 this.triggerEvent('scrolltolower');
             },

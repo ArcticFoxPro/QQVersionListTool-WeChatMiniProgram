@@ -8,11 +8,12 @@ name | type | default | description | required
 -- | -- | -- | -- | --
 style | Object | - | CSS(Cascading Style Sheets) | N
 custom-style | Object | - | CSS(Cascading Style Sheets)，used to set style on virtual component | N
+auto-close | Boolean | false | \- | N
 cancel-btn | String | 取消 | \- | N
 confirm-btn | String | - | \- | N
 custom-locale | String | zh | \- | N
 end | String / Number | - | \- | N
-filter | Function | - | \- | N
+filter | Function | - | Typescript：`(type: TimeModeValues, columns: DateTimePickerColumn) => DateTimePickerColumn` `type DateTimePickerColumn = DateTimePickerColumnItem[]` `interface DateTimePickerColumnItem { label: string,value: string}`。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/tree/develop/src/date-time-picker/type.ts) | N
 footer | Slot | - | [see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/src/common/common.ts) | N
 format | String | 'YYYY-MM-DD HH:mm:ss' | \- | N
 header | Boolean / Slot | true | [see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/src/common/common.ts) | N
