@@ -1211,7 +1211,9 @@ Page({
             });
         })
     }, async getDownloadLinkFromTencentAppStore(packageName, type) {
-        const jsonData = {"packagename": packageName}
+        const jsonData = {
+            "packagename": packageName
+        }
         switch (type) {
             case 'QQ':
                 this.setData({
@@ -1339,7 +1341,9 @@ Page({
     }, copyExpJsonBack() {
         this.copyUtil(this.data.expBackJson)
     }, handleGetFromWeixinAlphaConfig() {
-        this.setData({getFromWeixinAlphaConfigLoading: true})
+        this.setData({
+            getFromWeixinAlphaConfigLoading: true
+        })
         wx.request({
             url: 'https://dldir1.qq.com/weixin/android/weixin_android_alpha_config.json',
             method: 'GET',
@@ -1392,16 +1396,19 @@ Page({
                     this.setData({
                         errorText: errorMessage, errorVisible: true
                     });
-                } finally {
-                    this.setData({getFromWeixinAlphaConfigLoading: false})
                 }
             },
             fail: (err) => {
                 const errorMessage = err.errMsg;
                 this.setData({
-                    errorText: errorMessage, errorVisible: true, getFromWeixinAlphaConfigLoading: false
+                    errorText: errorMessage, errorVisible: true
                 });
             },
+            complete: () => {
+                this.setData({
+                    getFromWeixinAlphaConfigLoading: false
+                })
+            }
         });
     }, copyExpBackShare() {
         this.copyUtil(this.data.expShareText)
