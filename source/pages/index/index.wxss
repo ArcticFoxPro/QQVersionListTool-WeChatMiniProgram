@@ -2,7 +2,7 @@
 
 /*
     Copyright (c) 2024 ArcticFoxPro
-    QQ Ver. Lite is licensed under Mulan PubL v2.
+    Qverbow Vigor is licensed under Mulan PubL v2.
     You can use this software according to the terms and conditions of the Mulan PubL v2.
     You may obtain a copy of Mulan PubL v2 at:
              http://license.coscl.org.cn/MulanPubL-2.0
@@ -302,10 +302,10 @@
     ** Proprietary Code Statement Ⅰ **
 
     Starting from this declaration until the end of the dedicated code section, any vector image files contained herein, regardless of their file format,
-    was recreated by the QQ Ver. Lite (hereinafter referred to as "this project") based on the QQNT logo.
+    was recreated by the Qverbow Vigor (hereinafter referred to as "this project") based on the QQNT logo.
     Any trademarks of QQNT logos contained in this file and their original rights belong to 深圳市腾讯计算机系统有限公司 and/or its affiliates.
 
-    The QQ Ver. Lite commits to not using this file for or authorizing any non-right holders to use it for any commercial purposes.
+    The Qverbow Vigor commits to not using this file for or authorizing any non-right holders to use it for any commercial purposes.
 
     This vector image file and its code are not subject to the open-source license of this project, the Mulan Public License, Version 2.
     Without permission, it shall not be used for any commercial purposes or other unauthorized uses.
@@ -323,7 +323,18 @@
     background-size: 100%;
     width: 32rpx;
     height: 32rpx;
-    color: aqua;
+}
+
+.ue-logo-src {
+    /*
+    https://www.unrealengine.com/branding
+    Unreal® 及其徽标是 Epic Games, Inc. 在美国及其他国家或地区的商标或注册商标。
+    Unreal® and its logo are trademarks or registered trademarks of Epic Games, Inc. in the United States and elsewhere.
+    */
+    background-image: url("data:image/svg+xml;charset=utf-8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI3LjguMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IlVFLUljb24tMjAyMyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IgoJIHk9IjBweCIgdmlld0JveD0iMCAwIDEyODAgMTI4MCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTI4MCAxMjgwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGwtcnVsZTpldmVub2RkO2NsaXAtcnVsZTpldmVub2RkO2ZpbGw6IzAwNTJkOTt9Cjwvc3R5bGU+CjxnPgoJPGc+CgkJPGc+CgkJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik02NDAsMTI4MGMzNTMuNDYsMCw2NDAtMjg2LjU0LDY0MC02NDBTOTkzLjQ2LDAsNjQwLDBTMCwyODYuNTQsMCw2NDBTMjg2LjU0LDEyODAsNjQwLDEyODB6IE04MDMuNyw5OTUuODEKCQkJCWMxNTYuNS03My45MiwyMDUuNTYtMjEwLjQzLDIxNi42LTI2My42MWMtNTcuMjIsNTguNi0xMjAuNTMsMTE4LTE2My4xMSw3Ni44OGMwLDAtMi4zMy0yMTkuNDUtMi4zMy0zMDkuNDMKCQkJCWMwLTEyMSwxMTQuNzUtMjExLjE4LDExNC43NS0yMTEuMThjLTYzLjExLDExLjI0LTEzOC44OSwzMy43MS0yMTkuMzMsMTEyLjY1Yy03LjI2LDcuMi0xNC4xNCwxNC43Ni0yMC42MiwyMi42NwoJCQkJYy0zNC40Ny0yNi4zOS03OS4xNC0xOC40OC03OS4xNC0xOC40OGMyNC4xNCwxMy4yNiw0OC4yMyw1MS44OCw0OC4yMyw4My44NXYzMTQuMjZjMCwwLTUyLjYzLDQ2LjMtOTMuMTksNDYuMwoJCQkJYy05LjE0LDAuMDctMTguMTctMi4wNS0yNi4zMy02LjE4Yy04LjE2LTQuMTMtMTUuMjEtMTAuMTUtMjAuNTYtMTcuNTZjLTMuMjEtNC4xOS01Ljg3LTguNzgtNy45MS0xMy42NVY0MjQuMDcKCQkJCWMtMTEuOTksOS44OS01Mi41MSwxOC4wNC01Mi41MS00OS4yMmMwLTQxLjc5LDMwLjExLTkxLjYsODMuNzMtMTIyLjE1Yy03My42MywxMS4yMy0xNDIuNTksNDMuMDQtMTk4LjkyLDkxLjc2CgkJCQljLTQyLjgsMzYuOTgtNzcuMDMsODIuODUtMTAwLjMxLDEzNC40Yy0yMy4yOCw1MS41NS0zNS4wNiwxMDcuNTUtMzQuNTEsMTY0LjEyYzAsMCwzOS4yMS0xMjIuNTEsODguMzItMTMzLjgzCgkJCQljNy4xNS0xLjg4LDE0LjY1LTIuMDcsMjEuODktMC41NGM3LjI0LDEuNTMsMTQuMDIsNC43MiwxOS44MSw5LjM0YzUuNzksNC42MSwxMC40MSwxMC41MSwxMy41MSwxNy4yMwoJCQkJYzMuMSw2LjcyLDQuNTksMTQuMDcsNC4zNCwyMS40NlY4NDQuM2MwLDI5LjE2LTE4LjgsMzUuNTMtMzYuMTcsMzUuMjJjLTExLjc3LTAuODMtMjMuNC0zLjAyLTM0LjY2LTYuNTMKCQkJCWMzNS44Niw0OC41Myw4Mi40Niw4OC4xMiwxMzYuMTUsMTE1LjY2YzUzLjY5LDI3LjU0LDExMy4wMyw0Mi4yOSwxNzMuMzcsNDMuMWwxMDYuMDUtMTA2LjZMODAzLjcsOTk1LjgxeiIvPgoJCTwvZz4KCTwvZz4KPC9nPgo8L3N2Zz4K");
+    background-size: 100%;
+    width: 28rpx;
+    height: 28rpx;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -409,10 +420,10 @@
         ** Proprietary Code Statement Ⅱ **
 
         Starting from this declaration until the end of the dedicated code section, any vector image files contained herein, regardless of their file format,
-        was recreated by the QQ Ver. Lite (hereinafter referred to as "this project") based on the QQNT logo.
+        was recreated by the Qverbow Vigor (hereinafter referred to as "this project") based on the QQNT logo.
         Any trademarks of QQNT logos contained in this file and their original rights belong to 深圳市腾讯计算机系统有限公司 and/or its affiliates.
 
-        The QQ Ver. Lite commits to not using this file for or authorizing any non-right holders to use it for any commercial purposes.
+        The Qverbow Vigor commits to not using this file for or authorizing any non-right holders to use it for any commercial purposes.
 
         This vector image file and its code are not subject to the open-source license of this project, the Mulan Public License, Version 2.
         Without permission, it shall not be used for any commercial purposes or other unauthorized uses.
@@ -430,5 +441,17 @@
         background-size: 100%;
         width: 32rpx;
         height: 32rpx;
+    }
+
+    .ue-logo-src {
+        /*
+        https://www.unrealengine.com/branding
+        Unreal® 及其徽标是 Epic Games, Inc. 在美国及其他国家或地区的商标或注册商标。
+        Unreal® and its logo are trademarks or registered trademarks of Epic Games, Inc. in the United States and elsewhere.
+        */
+        background-image: url("data:image/svg+xml;charset=utf-8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI3LjguMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IlVFLUljb24tMjAyMyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IgoJIHk9IjBweCIgdmlld0JveD0iMCAwIDEyODAgMTI4MCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTI4MCAxMjgwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGwtcnVsZTpldmVub2RkO2NsaXAtcnVsZTpldmVub2RkO2ZpbGw6IzQ1ODJlNjt9Cjwvc3R5bGU+CjxnPgoJPGc+CgkJPGc+CgkJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik02NDAsMTI4MGMzNTMuNDYsMCw2NDAtMjg2LjU0LDY0MC02NDBTOTkzLjQ2LDAsNjQwLDBTMCwyODYuNTQsMCw2NDBTMjg2LjU0LDEyODAsNjQwLDEyODB6IE04MDMuNyw5OTUuODEKCQkJCWMxNTYuNS03My45MiwyMDUuNTYtMjEwLjQzLDIxNi42LTI2My42MWMtNTcuMjIsNTguNi0xMjAuNTMsMTE4LTE2My4xMSw3Ni44OGMwLDAtMi4zMy0yMTkuNDUtMi4zMy0zMDkuNDMKCQkJCWMwLTEyMSwxMTQuNzUtMjExLjE4LDExNC43NS0yMTEuMThjLTYzLjExLDExLjI0LTEzOC44OSwzMy43MS0yMTkuMzMsMTEyLjY1Yy03LjI2LDcuMi0xNC4xNCwxNC43Ni0yMC42MiwyMi42NwoJCQkJYy0zNC40Ny0yNi4zOS03OS4xNC0xOC40OC03OS4xNC0xOC40OGMyNC4xNCwxMy4yNiw0OC4yMyw1MS44OCw0OC4yMyw4My44NXYzMTQuMjZjMCwwLTUyLjYzLDQ2LjMtOTMuMTksNDYuMwoJCQkJYy05LjE0LDAuMDctMTguMTctMi4wNS0yNi4zMy02LjE4Yy04LjE2LTQuMTMtMTUuMjEtMTAuMTUtMjAuNTYtMTcuNTZjLTMuMjEtNC4xOS01Ljg3LTguNzgtNy45MS0xMy42NVY0MjQuMDcKCQkJCWMtMTEuOTksOS44OS01Mi41MSwxOC4wNC01Mi41MS00OS4yMmMwLTQxLjc5LDMwLjExLTkxLjYsODMuNzMtMTIyLjE1Yy03My42MywxMS4yMy0xNDIuNTksNDMuMDQtMTk4LjkyLDkxLjc2CgkJCQljLTQyLjgsMzYuOTgtNzcuMDMsODIuODUtMTAwLjMxLDEzNC40Yy0yMy4yOCw1MS41NS0zNS4wNiwxMDcuNTUtMzQuNTEsMTY0LjEyYzAsMCwzOS4yMS0xMjIuNTEsODguMzItMTMzLjgzCgkJCQljNy4xNS0xLjg4LDE0LjY1LTIuMDcsMjEuODktMC41NGM3LjI0LDEuNTMsMTQuMDIsNC43MiwxOS44MSw5LjM0YzUuNzksNC42MSwxMC40MSwxMC41MSwxMy41MSwxNy4yMwoJCQkJYzMuMSw2LjcyLDQuNTksMTQuMDcsNC4zNCwyMS40NlY4NDQuM2MwLDI5LjE2LTE4LjgsMzUuNTMtMzYuMTcsMzUuMjJjLTExLjc3LTAuODMtMjMuNC0zLjAyLTM0LjY2LTYuNTMKCQkJCWMzNS44Niw0OC41Myw4Mi40Niw4OC4xMiwxMzYuMTUsMTE1LjY2YzUzLjY5LDI3LjU0LDExMy4wMyw0Mi4yOSwxNzMuMzcsNDMuMWwxMDYuMDUtMTA2LjZMODAzLjcsOTk1LjgxeiIvPgoJCTwvZz4KCTwvZz4KPC9nPgo8L3N2Zz4K");
+        background-size: 100%;
+        width: 28rpx;
+        height: 28rpx;
     }
 }

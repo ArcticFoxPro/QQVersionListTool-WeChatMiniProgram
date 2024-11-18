@@ -2,7 +2,7 @@
 
 /*
     Copyright (c) 2024 ArcticFoxPro
-    QQ Ver. Lite is licensed under Mulan PubL v2.
+    Qverbow Vigor is licensed under Mulan PubL v2.
     You can use this software according to the terms and conditions of the Mulan PubL v2.
     You may obtain a copy of Mulan PubL v2 at:
              http://license.coscl.org.cn/MulanPubL-2.0
@@ -95,6 +95,12 @@ Page({
             QQTestSwitch: false
         }); else if (wx.getStorageSync('isQQTestOn') === true) this.setData({
             QQTestSwitch: true
+        })
+
+        if (wx.getStorageSync('isUEOn') === false || wx.getStorageSync('isUEOn') === "") this.setData({
+            UESwitch: false
+        }); else if (wx.getStorageSync('isUEOn') === true) this.setData({
+            UESwitch: true
         })
 
         function setThrottleSwitch(isThrottleOn, benchmarkLevelConditionMet) {
@@ -240,6 +246,7 @@ Page({
                         qqVersionBean.jsonString = JSON.parse(json)
                         qqVersionBean.isAccessibility = false // semver.gte(qqVersionBean.versionNumber, getApp().EARLIEST_ACCESSIBILITY_QQ_VERSION)
                         qqVersionBean.isQQNTFramework = semver.gte(qqVersionBean.versionNumber, getApp().globalData.EARLIEST_QQNT_FRAMEWORK_QQ_VERSION_STABLE)
+                        qqVersionBean.isUnrealEngine = semver.gte(qqVersionBean.versionNumber, getApp().globalData.EARLIEST_UNREAL_ENGINE_QQ_VERSION_STABLE)
 
                         qqVersionList.push(qqVersionBean);
                     }
@@ -546,6 +553,14 @@ Page({
         this.setData({
             PerProSwitch: e.detail.value
         })
+    }, handleUEChange(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        wx.setStorageSync('isUEOn', e.detail.value);
+        this.setData({
+            UESwitch: e.detail.value
+        })
     }, handleThrottleChange(e) {
         wx.vibrateShort({
             type: 'light',
@@ -734,15 +749,36 @@ Page({
         const stListPre2 = stListPre.concat(suf64hb, suf64hb1, suf64hb2, suf64hb3, suf64hd, suf64hd1, suf64hd2, suf64hd3, suf64hd1hb, sufHb64, sufHb164, sufHb264, sufHb364, sufHd64, sufHd164, sufHd264, sufHd364, sufHd1hb64, sufTest, customSufList);
         const stList = stListPre2.flat(Infinity)
 
+        const wxSoListPre = ["", "_1"]
+        const wetypeSoListPre = ["", "_32"]
+        const wxSoList = wxSoListPre.concat(customSufList).flat(Infinity)
+        const wetypeSoList = wetypeSoListPre.concat(customSufList).flat(Infinity)
+
         const guess = () => {
             switch (this.data.continueGuessing) {
                 case 'STATUS_ONGOING':
-                    if (mode === 'WeChat') guessedLink = `https://dldir1.qq.com/weixin/android/weixin${versionBig}android${versionSuf}_0x${v16codeStr}_arm64.apk`; else if (mode === 'WeType') guessedLink = `https://download.z.weixin.qq.com/app/android/${versionBig}/wxkb_${vSuf}_32.apk`; else if (mode === 'QQOfficial') guessedLink = `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_${versionBig}${soList[sIndex]}.apk`; else if (mode === 'QQTest') guessedLink = `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_${versionBig}.${vSuf}${stList[sIndex]}.apk`; else if (mode === 'TIM') guessedLink = `https://downv6.qq.com/qqweb/QQ_1/android_apk/TIM_${versionBig}.${vSuf}${stList[sIndex]}.apk`;
+                    switch (mode) {
+                        case 'WeChat':
+                            guessedLink = `https://dldir1.qq.com/weixin/android/weixin${versionBig}android${versionSuf}_0x${v16codeStr}_arm64${wxSoList[sIndex]}.apk`;
+                            break;
+                        case 'WeType':
+                            guessedLink = `https://download.z.weixin.qq.com/app/android/${versionBig}/wxkb_${vSuf}${wetypeSoList[sIndex]}.apk`;
+                            break;
+                        case 'QQOfficial':
+                            guessedLink = `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_${versionBig}${soList[sIndex]}.apk`;
+                            break;
+                        case 'QQTest':
+                            guessedLink = `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_${versionBig}.${vSuf}${stList[sIndex]}.apk`;
+                            break;
+                        case 'TIM':
+                            guessedLink = `https://downv6.qq.com/qqweb/QQ_1/android_apk/TIM_${versionBig}.${vSuf}${stList[sIndex]}.apk`;
+                            break;
+                    }
 
                     this.setData({
                         loadingVisible: true,
                         guessSuccessVisible: false,
-                        updateProgressDialogMessage: `正在猜测下载地址：${guessedLink}`
+                        updateProgressDialogMessage: `正在扫描下载地址：${guessedLink}`
                     })
                     this.fetchLink(guessedLink).then(isSuccess => {
                         if (isSuccess.exists && isSuccess.fileSize !== false) {
@@ -756,10 +792,22 @@ Page({
                             });
                             switch (mode) {
                                 case 'WeChat':
-                                    v16codeStr = (parseInt(v16codeStr, 16) + 1).toString(16);
+                                    if (sIndex >= wxSoList.length - 1 && this.data.ExtendSuffixSwitch === true) {
+                                        v16codeStr = (parseInt(v16codeStr, 16) + 1).toString(16);
+                                        sIndex = 0;
+                                    } else if (sIndex >= wxSoListPre.length - 1 && this.data.ExtendSuffixSwitch === false) {
+                                        v16codeStr = (parseInt(v16codeStr, 16) + 1).toString(16);
+                                        sIndex = 0;
+                                    } else sIndex++;
                                     break;
                                 case 'WeType':
-                                    vSuf = (Number(vSuf) + 1).toString();
+                                    if (sIndex >= wetypeSoList.length - 1 && this.data.ExtendSuffixSwitch === true) {
+                                        vSuf = (Number(vSuf) + 1).toString();
+                                        sIndex = 0;
+                                    } else if (sIndex >= wetypeSoListPre.length - 1 && this.data.ExtendSuffixSwitch === false) {
+                                        vSuf = (Number(vSuf) + 1).toString();
+                                        sIndex = 0;
+                                    } else sIndex++;
                                     break;
                                 case 'QQOfficial':
                                     if (sIndex >= soList.length - 1) this.setData({
@@ -786,10 +834,22 @@ Page({
                         } else {
                             switch (mode) {
                                 case 'WeChat':
-                                    v16codeStr = (parseInt(v16codeStr, 16) + 1).toString(16);
+                                    if (sIndex >= wxSoList.length - 1 && this.data.ExtendSuffixSwitch === true) {
+                                        v16codeStr = (parseInt(v16codeStr, 16) + 1).toString(16);
+                                        sIndex = 0;
+                                    } else if (sIndex >= wxSoListPre.length - 1 && this.data.ExtendSuffixSwitch === false) {
+                                        v16codeStr = (parseInt(v16codeStr, 16) + 1).toString(16);
+                                        sIndex = 0;
+                                    } else sIndex++;
                                     break;
                                 case 'WeType':
-                                    vSuf = (Number(vSuf) + 1).toString();
+                                    if (sIndex >= wetypeSoList.length - 1 && this.data.ExtendSuffixSwitch === true) {
+                                        vSuf = (Number(vSuf) + 1).toString();
+                                        sIndex = 0;
+                                    } else if (sIndex >= wetypeSoListPre.length - 1 && this.data.ExtendSuffixSwitch === false) {
+                                        vSuf = (Number(vSuf) + 1).toString();
+                                        sIndex = 0;
+                                    } else sIndex++;
                                     break;
                                 case 'QQOfficial':
                                     if (sIndex >= soList.length - 1) this.setData({
@@ -832,7 +892,7 @@ Page({
                         duration: 3000,
                         icon: false,
                         single: false,
-                        content: '已停止猜测',
+                        content: '已停止扫描',
                         align: 'center'
                     });
                     clearTimeout(timerId);
