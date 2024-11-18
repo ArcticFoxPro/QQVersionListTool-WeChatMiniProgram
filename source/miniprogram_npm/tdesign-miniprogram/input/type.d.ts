@@ -40,6 +40,10 @@ export interface TdInputProps {
         value?: number;
         required?: boolean;
     };
+    cursorColor?: {
+        type: StringConstructor;
+        value?: string;
+    };
     cursorSpacing?: {
         type: NumberConstructor;
         value?: number;

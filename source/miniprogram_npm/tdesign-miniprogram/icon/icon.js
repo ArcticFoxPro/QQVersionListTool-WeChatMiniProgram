@@ -40,24 +40,21 @@ let Icon = class Icon extends SuperComponent {
                 this.triggerEvent('click', event.detail);
             },
             setIconStyle() {
-                return __awaiter(this, void 0, void 0, function* () {
-                    const { name, color, size, classPrefix } = this.data;
-                    const isImage = name.indexOf('/') !== -1;
-                    const sizeValue = addUnit(size);
-                    const colorStyle = color ? { color: color } : {};
-                    const fontStyle = size ? { 'font-size': sizeValue } : {};
-                    const iconStyle = Object.assign(Object.assign({}, colorStyle), fontStyle);
+                const { name, color, size, classPrefix } = this.data;
+                const isImage = name.indexOf('/') !== -1;
+                const sizeValue = addUnit(size);
+                const colorStyle = color ? { color: color } : {};
+                const fontStyle = size ? { 'font-size': sizeValue } : {};
+                const iconStyle = Object.assign(Object.assign({}, colorStyle), fontStyle);
+                this.setData({ isImage }, () => __awaiter(this, void 0, void 0, function* () {
                     if (isImage) {
                         const { height } = yield getRect(this, `.${classPrefix}`);
                         const iconSize = sizeValue || addUnit(height);
                         iconStyle.width = iconSize;
                         iconStyle.height = iconSize;
                     }
-                    this.setData({
-                        isImage,
-                        iconStyle: `${styles(iconStyle)}`,
-                    });
-                });
+                    this.setData({ iconStyle: `${styles(iconStyle)}` });
+                }));
             },
         };
     }

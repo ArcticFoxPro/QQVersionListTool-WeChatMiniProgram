@@ -2,7 +2,7 @@
 
 /*
     Copyright (c) 2024 ArcticFoxPro
-    QQ Ver. Lite is licensed under Mulan PubL v2.
+    Qverbow Vigor is licensed under Mulan PubL v2.
     You can use this software according to the terms and conditions of the Mulan PubL v2.
     You may obtain a copy of Mulan PubL v2 at:
              http://license.coscl.org.cn/MulanPubL-2.0
@@ -15,6 +15,11 @@
 App({
     onLaunch() {
     }, globalData: {
-        UA_VERSION: 2, EARLIEST_ACCESSIBILITY_VERSION: false, EARLIEST_QQNT_FRAMEWORK_VERSION_STABLE: "8.9.63"
+        UA_VERSION: 3, // 用户协议 2024.11.18 第三版
+        EARLIEST_ACCESSIBILITY_QQ_VERSION: false,
+        EARLIEST_ACCESSIBILITY_TIM_VERSION: false,
+        EARLIEST_QQNT_FRAMEWORK_QQ_VERSION_STABLE: "8.9.63",
+        EARLIEST_QQNT_FRAMEWORK_TIM_VERSION_STABLE: "4.0.0",
+        EARLIEST_UNREAL_ENGINE_QQ_VERSION_STABLE: "8.8.55"
     }
 })

@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { SuperComponent, wxComponent } from '../common/src/index';
 import config from '../common/config';
 import props from './props';
-import { getCharacterLength, calcIcon, isDef } from '../common/utils';
+import { getCharacterLength, calcIcon, isDef, isIOS } from '../common/utils';
 const { prefix } = config;
 const name = `${prefix}-input`;
 let Input = class Input extends SuperComponent {
@@ -33,6 +33,7 @@ let Input = class Input extends SuperComponent {
             classPrefix: name,
             classBasePrefix: prefix,
             showClearIcon: true,
+            defaultCursorColor: isIOS() ? '#0052d9' : 'default',
         };
         this.lifetimes = {
             ready() {
@@ -57,7 +58,7 @@ let Input = class Input extends SuperComponent {
                     _clearIcon: calcIcon(v, 'close-circle-filled'),
                 });
             },
-            clearTrigger() {
+            'clearTrigger, clearable, disabled, readonly'() {
                 this.updateClearIconVisible();
             },
         };
@@ -86,7 +87,11 @@ let Input = class Input extends SuperComponent {
                 }
             },
             updateClearIconVisible(value = false) {
-                const { clearTrigger } = this.properties;
+                const { clearTrigger, disabled, readonly } = this.properties;
+                if (disabled || readonly) {
+                    this.setData({ showClearIcon: false });
+                    return;
+                }
                 this.setData({ showClearIcon: value || clearTrigger === 'always' });
             },
             onInput(e) {
@@ -100,6 +105,12 @@ let Input = class Input extends SuperComponent {
             },
             onBlur(e) {
                 this.updateClearIconVisible();
+                if (typeof this.properties.format === 'function') {
+                    const v = this.properties.format(e.detail.value);
+                    this.updateValue(v);
+                    this.triggerEvent('blur', { value: this.data.value, cursor: this.data.count });
+                    return;
+                }
                 this.triggerEvent('blur', e.detail);
             },
             onConfirm(e) {

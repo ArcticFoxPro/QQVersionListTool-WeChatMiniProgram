@@ -131,7 +131,7 @@
 .t-calendar__dates-item-suffix--selected,
 .t-calendar__dates-item-suffix--start,
 .t-calendar__dates-item-suffix--end {
-  color: var(--td-calendar-selected-color, var(--td-font-white-1, #ffffff));
+  color: var(--td-calendar-selected-color, var(--td-text-color-anti, var(--td-font-white-1, #ffffff)));
 }
 .t-calendar__dates-item-suffix--disabled {
   color: var(--td-calendar-item-disabled-color, var(--td-text-color-disabled, var(--td-font-gray-4, rgba(0, 0, 0, 0.26))));
@@ -140,7 +140,7 @@
 .t-calendar__dates-item--start,
 .t-calendar__dates-item--end {
   background: var(--td-calendar-active-color, var(--td-brand-color, var(--td-primary-color-7, #0052d9)));
-  color: var(--td-calendar-selected-color, var(--td-font-white-1, #ffffff));
+  color: var(--td-calendar-selected-color, var(--td-text-color-anti, var(--td-font-white-1, #ffffff)));
   border-radius: 8rpx;
 }
 .t-calendar__dates-item--start {

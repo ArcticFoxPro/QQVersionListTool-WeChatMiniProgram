@@ -13,9 +13,8 @@ export default class Calendar extends SuperComponent {
         classPrefix: string;
         months: any[];
         scrollIntoView: string;
-        innerConfirmBtn: {
-            content: string;
-        };
+        innerConfirmBtn: {};
+        realLocalText: {};
     };
     controlledProps: {
         key: string;

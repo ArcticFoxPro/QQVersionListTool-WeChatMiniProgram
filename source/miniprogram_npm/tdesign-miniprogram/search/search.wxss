@@ -67,10 +67,12 @@
 }
 .t-search__input-box .t-icon {
   color: var(--td-search-icon-color, var(--td-text-color-placeholder, var(--td-font-gray-3, rgba(0, 0, 0, 0.4))));
+  font-size: var(--td-search-icon-font-size, 48rpx);
 }
 .t-search__clear {
   position: relative;
   margin-left: 10px;
+  font-size: var(--td-search-clear-icon-font-size, 48rpx);
   color: var(--td-search-clear-icon-color, var(--td-text-color-placeholder, var(--td-font-gray-3, rgba(0, 0, 0, 0.4))));
 }
 .t-search__clear.relative {

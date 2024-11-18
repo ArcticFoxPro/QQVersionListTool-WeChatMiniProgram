@@ -96,9 +96,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   border-radius: var(--td-upload-radius, var(--td-radius-default, 12rpx));
-  color: var(--td-font-white-1, #ffffff);
+  color: var(--td-text-color-anti, var(--td-font-white-1, #ffffff));
   padding: 32rpx 0;
+  box-sizing: border-box;
 }
 .t-upload__progress-text {
   font-size: 24rpx;

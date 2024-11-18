@@ -1,4 +1,8 @@
 const props = {
+    autoClose: {
+        type: Boolean,
+        value: false,
+    },
     cancelBtn: {
         type: String,
         value: '取消',
@@ -16,6 +20,9 @@ const props = {
     },
     externalClasses: {
         type: Array,
+    },
+    filter: {
+        type: null,
     },
     format: {
         type: String,

@@ -15,6 +15,7 @@ export declare const isNumber: (value: any) => boolean;
 export declare const isNull: (value: any) => boolean;
 export declare const isUndefined: (value: any) => boolean;
 export declare const isDef: (value: any) => boolean;
+export declare const isIOS: () => boolean;
 export declare const addUnit: (value?: string | number) => string | undefined;
 export declare const getCharacterLength: (type: string, char: string | number, max?: number) => {
     length: number;

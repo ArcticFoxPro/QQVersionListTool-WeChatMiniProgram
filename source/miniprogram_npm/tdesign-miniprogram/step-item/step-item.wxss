@@ -46,7 +46,7 @@
   background-color: var(--td-step-item-default-dot-border-color, var(--td-component-border, var(--td-gray-color-4, #dcdcdc)));
 }
 .t-steps-item__circle--process {
-  color: var(--td-step-item-process-circle-color, var(--td-font-white-1, #ffffff));
+  color: var(--td-step-item-process-circle-color, var(--td-text-color-anti, var(--td-font-white-1, #ffffff)));
   background-color: var(--td-step-item-process-circle-bg, var(--td-brand-color, var(--td-primary-color-7, #0052d9)));
 }
 .t-steps-item__title--process {

@@ -45,7 +45,8 @@
   border-radius: var(--td-radius-round, 999px);
 }
 .t-progress__info {
-  margin-left: var(--td-spacer, 16rpx);
+  padding-left: var(--td-spacer, 16rpx);
+  box-sizing: border-box;
   color: var(--td-progress-info-dark-color, var(--td-text-color-primary, var(--td-font-gray-1, rgba(0, 0, 0, 0.9))));
   white-space: nowrap;
   display: inline-flex;
@@ -71,7 +72,7 @@
   position: absolute;
   top: 50%;
   right: var(--td-spacer, 16rpx);
-  color: var(--td-progress-info-light-color, var(--td-font-white-1, #ffffff));
+  color: var(--td-progress-info-light-color, var(--td-text-color-anti, var(--td-font-white-1, #ffffff)));
   transform: translateY(-50%);
 }
 .t-progress--under-ten .t-progress__info,
@@ -99,7 +100,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: var(--td-progress-circle-inner-bg-color, var(--td-font-white-1, #ffffff));
+  background-color: var(--td-progress-circle-inner-bg-color, var(--td-text-color-anti, var(--td-font-white-1, #ffffff)));
 }
 .t-progress__canvas--circle .t-progress__info {
   margin: 0;

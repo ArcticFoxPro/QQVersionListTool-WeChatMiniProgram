@@ -1,6 +1,6 @@
 /*
     Copyright (c) 2024 ArcticFoxPro
-    QQ Ver. Lite is licensed under Mulan PubL v2.
+    Qverbow Vigor is licensed under Mulan PubL v2.
     You can use this software according to the terms and conditions of the Mulan PubL v2.
     You may obtain a copy of Mulan PubL v2 at:
              http://license.coscl.org.cn/MulanPubL-2.0
@@ -11,6 +11,7 @@
 */
 
 const extractUrls = require("extract-urls");
+const JSON5 = require('json5');
 
 const formatTime = date => {
     const year = date.getFullYear()
@@ -50,7 +51,31 @@ function getAllAPKUrl(str) {
     return apkUrls.length ? apkUrls : null;
 }
 
+function resolveWeixinAlphaConfig(jsonString) {
+    const jsonData = JSON5.parse(jsonString);
+    const arm64 = jsonData["arm64"];
+
+    const url = arm64["url"];
+    const md5 = arm64["md5"];
+    const versionName = arm64["versionName"];
+    const version = arm64["version"];
+    const direct = arm64["direct"];
+    const textList = arm64["textList"]
+    const recentList = arm64["recentList"]
+
+    return {
+        url: url,
+        md5: md5,
+        versionName: versionName,
+        version: version,
+        direct: direct,
+        textList: textList.map(item => item.toString()),
+        recentList: recentList.map(item => item.toString())
+    };
+
+}
+
 module.exports = {
-    generateAESKey: generateAESKey, getAllAPKUrl: getAllAPKUrl,
+    generateAESKey: generateAESKey, getAllAPKUrl: getAllAPKUrl, resolveWeixinAlphaConfig: resolveWeixinAlphaConfig
 };
 

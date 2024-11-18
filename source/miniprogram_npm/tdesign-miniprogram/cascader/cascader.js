@@ -99,7 +99,7 @@ let Cascader = class Cascader extends SuperComponent {
                     selectedValue,
                     stepIndex: items.length - 1,
                 };
-                if (items.length > this.data.items.length) {
+                if (JSON.stringify(items) !== JSON.stringify(this.data.items)) {
                     Object.assign(setData, { items });
                 }
                 this.setData(setData);
@@ -234,7 +234,7 @@ let Cascader = class Cascader extends SuperComponent {
                 };
             },
             handleSelect(e) {
-                var _a, _b, _c, _d;
+                var _a, _b, _c, _d, _e;
                 const { level } = e.target.dataset;
                 const { value } = e.detail;
                 const { selectedIndexes, items, keys, options } = this.data;
@@ -257,9 +257,14 @@ let Cascader = class Cascader extends SuperComponent {
                 }
                 selectedIndexes[level] = index;
                 selectedIndexes.length = level + 1;
-                this.triggerEvent('pick', { value: item[(_b = keys === null || keys === void 0 ? void 0 : keys.value) !== null && _b !== void 0 ? _b : 'value'], index, level });
+                this.triggerEvent('pick', {
+                    value: item[(_b = keys === null || keys === void 0 ? void 0 : keys.value) !== null && _b !== void 0 ? _b : 'value'],
+                    label: item[(_c = keys === null || keys === void 0 ? void 0 : keys.label) !== null && _c !== void 0 ? _c : 'label'],
+                    index,
+                    level,
+                });
                 const { items: newItems } = this.genItems();
-                if ((_d = item === null || item === void 0 ? void 0 : item[(_c = keys === null || keys === void 0 ? void 0 : keys.children) !== null && _c !== void 0 ? _c : 'children']) === null || _d === void 0 ? void 0 : _d.length) {
+                if ((_e = item === null || item === void 0 ? void 0 : item[(_d = keys === null || keys === void 0 ? void 0 : keys.children) !== null && _d !== void 0 ? _d : 'children']) === null || _e === void 0 ? void 0 : _e.length) {
                     this.setData({
                         selectedIndexes,
                         [`items[${level + 1}]`]: newItems[level + 1],

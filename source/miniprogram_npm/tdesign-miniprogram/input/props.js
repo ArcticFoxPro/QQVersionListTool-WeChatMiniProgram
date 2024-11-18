@@ -39,13 +39,17 @@ const props = {
         type: Number,
         required: true,
     },
+    cursorColor: {
+        type: String,
+        value: '',
+    },
     cursorSpacing: {
         type: Number,
         value: 0,
     },
     disabled: {
-        type: Boolean,
-        value: false,
+        type: null,
+        value: undefined,
     },
     focus: {
         type: Boolean,
@@ -89,8 +93,8 @@ const props = {
         type: null,
     },
     readonly: {
-        type: Boolean,
-        value: false,
+        type: null,
+        value: undefined,
     },
     safePasswordCertPath: {
         type: String,

@@ -103,6 +103,10 @@ export const isUndefined = (value) => typeof value === 'undefined';
 export const isDef = function (value) {
     return !isUndefined(value) && !isNull(value);
 };
+export const isIOS = function () {
+    var _a;
+    return !!(((_a = deviceInfo === null || deviceInfo === void 0 ? void 0 : deviceInfo.system) === null || _a === void 0 ? void 0 : _a.toLowerCase().search('ios')) + 1);
+};
 export const addUnit = function (value) {
     if (!isDef(value)) {
         return undefined;

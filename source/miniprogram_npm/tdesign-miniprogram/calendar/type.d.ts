@@ -16,6 +16,10 @@ export interface TdCalendarProps {
         type: undefined;
         value?: CalendarFormatType;
     };
+    localeText?: {
+        type: ObjectConstructor;
+        value?: CalendarLocaleText;
+    };
     maxDate?: {
         type: NumberConstructor;
         value?: number;
@@ -62,4 +66,11 @@ export interface TDate {
     className?: string;
     prefix?: string;
     suffix?: string;
+}
+export interface CalendarLocaleText {
+    title?: string;
+    weekdays?: string[];
+    monthTitle?: string;
+    months?: string[];
+    confirm?: string;
 }

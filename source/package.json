@@ -1,6 +1,8 @@
 {
   "dependencies": {
+    "dayjs": "^1.11.13",
     "extract-urls": "^1.4.1",
+    "json5": "^2.2.3",
     "semver": "^7.6.3",
     "tdesign-miniprogram": "^1.8.0"
   }
