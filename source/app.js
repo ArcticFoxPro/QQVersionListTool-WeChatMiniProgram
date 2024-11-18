@@ -15,7 +15,7 @@
 App({
     onLaunch() {
     }, globalData: {
-        UA_VERSION: 2,
+        UA_VERSION: 3, // 用户协议 2024.11.18 第三版
         EARLIEST_ACCESSIBILITY_QQ_VERSION: false,
         EARLIEST_ACCESSIBILITY_TIM_VERSION: false,
         EARLIEST_QQNT_FRAMEWORK_QQ_VERSION_STABLE: "8.9.63",
