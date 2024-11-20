@@ -14,9 +14,6 @@
 	"componentFramework": "glass-easel",
 	"sitemapLocation": "sitemap.json",
 	"lazyCodeLoading": "requiredComponents",
-	"miniApp": {
-		"useAuthorizePage": true
-	},
 	"renderer": "skyline",
 	"rendererOptions": {
 		"skyline": {

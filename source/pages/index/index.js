@@ -1327,9 +1327,8 @@ Page({
     }, async getQidianLinkFromTencentAppStore() {
         const data = "com.tencent.qidian"
         await this.getDownloadLinkFromTencentAppStore(data, 'Qidian')
-    }, copyExpBack(e) {
-        const index = e.currentTarget.dataset.index;
-        this.copyUtil(this.data.expBackLinks[index])
+    }, copyExpBack() {
+        this.copyUtil(this.data.successExpBackLink)
     }, handleExpJsonBack() {
         this.setData({
             expBackVisible: false, expJsonBackVisible: true, getFromTencentAppStoreVisible: false, expVisible: false
@@ -1412,5 +1411,64 @@ Page({
         });
     }, copyExpBackShare() {
         this.copyUtil(this.data.expShareText)
-    }
+    }, handleGetFromWeTypeLatestChannel() {
+        this.setData({
+            getFromWeTypeLatestChannelLoading: true
+        })
+        wx.request({
+            url: 'https://z.weixin.qq.com/android/download?channel=latest',
+            method: 'GET',
+            redirect: 'manual',
+            fail: (err) => {
+                const errorMessage = err.errMsg;
+                this.setData({
+                    errorText: errorMessage, errorVisible: true
+                });
+            },
+            complete: () => {
+                this.setData({})
+            }
+        }).onHeadersReceived(res => {
+            const url = res.header.Location;
+            this.fetchLink(url).then(isSuccess => {
+                if (isSuccess.exists && isSuccess.fileSize !== false) this.setData({
+                    successExpBackLink: url,
+                    succeedExpBackFileSizeShare: `（大小：${isSuccess.fileSize} MB）`,
+                    expVisible: false,
+                    expBackWithUrlOnlyVisible: true,
+                    expJsonBackTitle: "微信输入法测试通道获取结果",
+                    expJsonBackResultTitle: "获取成功",
+                    expBackStatus: "success",
+                    getFromWeTypeLatestChannelLoading: false
+                }); else this.setData({
+                    successExpBackLink: url,
+                    succeedExpBackFileSizeShare: "（似乎未成功访问此下载地址，可能是微信输入法当前测试版已撤包。）",
+                    expVisible: false,
+                    expBackWithUrlOnlyVisible: true,
+                    expJsonBackTitle: "微信输入法测试通道获取结果",
+                    expJsonBackResultTitle: "疑似撤包",
+                    expBackStatus: "default",
+                    getFromWeTypeLatestChannelLoading: false
+                });
+            }).catch(err => {
+                console.error(err);
+                const errorMessage = err.errMsg;
+                this.setData({
+                    errorText: errorMessage, errorVisible: true, getFromWeTypeLatestChannelLoading: false
+                });
+            });
+        })
+    }, closeExpBackPopupWithUrlOnly() {
+        this.setData({
+            expJsonBackVisible: false,
+            expBackVisible: false,
+            getFromTencentAppStoreVisible: false,
+            expVisible: false,
+            expBackWithUrlOnlyVisible: false
+        });
+    }, expBackPopupWithUrlOnlyVisible(e) {
+        this.setData({
+            expBackWithUrlOnlyVisible: e.detail.visible
+        })
+    },
 })
