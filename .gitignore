@@ -6,3 +6,4 @@ source/project.miniapp.json
 .DS_Store
 /source/.vscode
 source/node_modules
+/source/yarn.lock
