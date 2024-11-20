@@ -72,7 +72,6 @@ function resolveWeixinAlphaConfig(jsonString) {
         textList: textList.map(item => item.toString()),
         recentList: recentList.map(item => item.toString())
     };
-
 }
 
 module.exports = {

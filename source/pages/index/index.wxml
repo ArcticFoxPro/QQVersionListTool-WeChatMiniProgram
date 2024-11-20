@@ -56,8 +56,7 @@ See the Mulan PubL v2 for more details.
                                         <t-icon name="" prefix="ue-logo-src" size="28rpx" slot="icon"/>
                                     </t-tag>
                                     <t-tag style="font-family: TCloudNumber, sans-serif;margin-left: 12rpx;"
-                                           theme="primary"
-                                           variant="light" wx:if="{{PerProSwitch}}">
+                                           theme="primary" variant="light" wx:if="{{PerProSwitch}}">
                                         {{indexUtil.formatPercent(item.size, maxSize)}}
                                     </t-tag>
                                 </view>
@@ -135,7 +134,7 @@ See the Mulan PubL v2 for more details.
             <view class="about-title" id="ability-about">关于</view>
         </view>
         <view class="about-text" style="margin: 0 48rpx 12rpx 48rpx;">QQ 版本列表 Vigor for WeChat MiniProgram</view>
-        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">版本：1.1.5</view>
+        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">版本：1.1.6</view>
         <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">作者：快乐小牛、有鲫雪狐</view>
         <view class="about-text" style="margin: 12rpx; padding: 0 36rpx 12rpx 36rpx;">Since 2024.03.12</view>
         <view class="TD_and_MulanPubLv2">
@@ -388,8 +387,7 @@ See the Mulan PubL v2 for more details.
                       value="{{PerProSwitch}}"/>
         </t-cell>
         <t-cell bordered description="虚幻引擎内置情况以 QQ 正式版为判断来源" title="版本卡片显示匹配的虚幻引擎标识">
-            <t-switch bind:change="handleUEChange" slot="note" style="margin: 0 0 0 48rpx;"
-                      value="{{UESwitch}}"/>
+            <t-switch bind:change="handleUEChange" slot="note" style="margin: 0 0 0 48rpx;" value="{{UESwitch}}"/>
         </t-cell>
         <t-cell bordered title="扩展测试版扫版直链后缀">
             <t-switch bind:change="handleExtendSuffixChange" slot="note" style="margin: 0 0 0 48rpx;"
@@ -535,6 +533,12 @@ See the Mulan PubL v2 for more details.
                 <t-loading/>
             </view>
         </t-cell>
+        <t-cell arrow bind:tap="handleGetFromWeTypeLatestChannel" bordered="{{false}}" hover
+                title="从微信输入法测试通道获取微信输入法最新下载直链">
+            <view hidden="{{!getFromWeTypeLatestChannelLoading}}" slot="note">
+                <t-loading/>
+            </view>
+        </t-cell>
         <t-cell arrow bind:tap="handleGetFromTencentAppStore" bordered="{{false}}" hover
                 title="腾讯应用宝更新获取（实验性）"/>
         <view class="guess-success-button-top">
@@ -554,8 +558,7 @@ See the Mulan PubL v2 for more details.
         </view>
         <t-notice-bar
                 content="腾讯应用宝更新获取功能为 QQ 版本列表 Vigor 附带的实验性功能，可能存在不可预知的稳定性问题。请明确并确保自身具备足够的风险识别和承受能力。"
-                prefixIcon="{{false}}"
-                style="margin-bottom: 32rpx;" visible="{{true}}">
+                prefixIcon="{{false}}" style="margin-bottom: 32rpx;" visible="{{true}}">
             <view slot="prefix-icon">
                 <t-icon name="error-circle-filled"></t-icon>
             </view>
@@ -596,8 +599,7 @@ See the Mulan PubL v2 for more details.
     </view>
 </t-popup>
 
-<t-overlay bind:click="closeExpBackPopup" duration="{{300}}" visible="{{expBackVisible}}"
-           z-index="11557"/>
+<t-overlay bind:click="closeExpBackPopup" duration="{{300}}" visible="{{expBackVisible}}" z-index="11557"/>
 
 <t-popup bind:visible-change="expBackPopupVisible" placement="bottom" show-overlay="{{false}}"
          visible="{{expBackVisible}}" z-index="11560">
@@ -610,8 +612,8 @@ See the Mulan PubL v2 for more details.
                       title="{{expJsonBackResultTitle}}"/>
         </view>
         <view class="about-link">
-            <t-link bind:tap="copyExpBackShare" content="复制分享文案" hover prefix-icon="share"
-                    size="medium" theme="primary"/>
+            <t-link bind:tap="copyExpBackShare" content="复制分享文案" hover prefix-icon="share" size="medium"
+                    theme="primary"/>
         </view>
         <view class="guess-success-button-top">
             <t-button bind:tap="copyExpBack" block size="large" theme="primary">复制链接</t-button>
@@ -626,9 +628,7 @@ See the Mulan PubL v2 for more details.
     </view>
 </t-popup>
 
-<t-overlay bind:click="closeExpJsonBackPopup" duration="{{300}}"
-           visible="{{expJsonBackVisible}}"
-           z-index="11562"/>
+<t-overlay bind:click="closeExpJsonBackPopup" duration="{{300}}" visible="{{expJsonBackVisible}}" z-index="11562"/>
 
 <t-popup bind:visible-change="expJsonBackPopupVisible" close-on-overlay-click="{{false}}" placement="bottom"
          show-overlay="{{false}}" visible="{{expJsonBackVisible}}" z-index="11565">
@@ -651,14 +651,32 @@ See the Mulan PubL v2 for more details.
         </scroll-view>
         <t-footer style="margin-top: 8rpx;" text="— 可长按选择复制内容 —"></t-footer>
         <view class="guess-success-button-top">
-            <t-button bind:tap="copyExpJsonBack" block size="large" style="margin-right: 8px;"
-                      theme="light">
-                复制全部
+            <t-button bind:tap="copyExpJsonBack" block size="large" style="margin-right: 8px;" theme="light">复制全部
             </t-button>
-            <t-button bind:tap="closeExpJsonBackPopup" block size="large" style="margin-left: 8px;"
-                      theme="light">
-                返回
+            <t-button bind:tap="closeExpJsonBackPopup" block size="large" style="margin-left: 8px;" theme="light">返回
             </t-button>
+        </view>
+    </view>
+</t-popup>
+
+<t-overlay bind:click="closeExpBackPopupWithUrlOnly" duration="{{300}}" visible="{{expBackWithUrlOnlyVisible}}"
+           z-index="11557"/>
+
+<t-popup bind:visible-change="expBackPopupWithUrlOnlyVisible" placement="bottom" show-overlay="{{false}}"
+         visible="{{expBackWithUrlOnlyVisible}}" z-index="11560">
+    <view class="block">
+        <view class="setting-header">
+            <view class="setting-title">{{expJsonBackTitle}}</view>
+        </view>
+        <view class="section__content">
+            <t-result description="{{successExpBackLink+succeedExpBackFileSizeShare}}" theme="{{expBackStatus}}"
+                      title="{{expJsonBackResultTitle}}"/>
+        </view>
+        <view class="guess-success-button-top">
+            <t-button bind:tap="copyExpBack" block size="large" theme="primary">复制链接</t-button>
+        </view>
+        <view class="guess-success-button">
+            <t-button bind:tap="closeExpBackPopupWithUrlOnly" block size="large" theme="light">返回</t-button>
         </view>
     </view>
 </t-popup>
