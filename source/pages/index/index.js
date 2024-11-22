@@ -288,7 +288,7 @@ Page({
                         version: jsonData.app.download.androidVersion,
                         datetime: jsonData.app.download.androidDatetime,
                         fix: "".split('<br/>'),
-                        new: "",
+                        new: "".split('<br/>'),
                         isAccessibility: false,
                         isQQNTFramework: semver.gte(jsonData.app.download.androidVersion, getApp().globalData.EARLIEST_QQNT_FRAMEWORK_TIM_VERSION_STABLE),
                         jsonString: {
@@ -306,7 +306,7 @@ Page({
                                 version: item.version,
                                 datetime: item.datetime,
                                 fix: item.fix.split('<br/>'),
-                                new: item.new,
+                                new: item.new.split('<br/>'),
                                 isAccessibility: false,
                                 isQQNTFramework: semver.gte(item.version, getApp().globalData.EARLIEST_QQNT_FRAMEWORK_TIM_VERSION_STABLE),
                                 jsonString: {
@@ -324,7 +324,7 @@ Page({
                                     version: versionItem.version,
                                     datetime: logItem.datetime,
                                     fix: logItem.fix.split('<br/>'),
-                                    new: logItem.new,
+                                    new: logItem.new.split('<br/>'),
                                     isAccessibility: false,
                                     isQQNTFramework: semver.gte(versionItem.version, getApp().globalData.EARLIEST_QQNT_FRAMEWORK_TIM_VERSION_STABLE),
                                     jsonString: {
@@ -340,7 +340,7 @@ Page({
 
                     // 去除重复的版本号
                     const uniqueTIMVersionList = [...new Map(timVersionList.map(item => [JSON.stringify(item.jsonString), item])).values()];
-                    if (uniqueTIMVersionList[0].version === uniqueTIMVersionList[1].version && uniqueTIMVersionList[0].fix === "") uniqueTIMVersionList.shift()
+                    if (uniqueTIMVersionList[0].version === uniqueTIMVersionList[1].version) uniqueTIMVersionList.shift()
 
                     this.setData({
                         timVersions: uniqueTIMVersionList
