@@ -14,8 +14,9 @@
 
 import Message from 'tdesign-miniprogram/message/index';
 import semver from 'semver';
-import util from '../../utils/util.js';
 import dayjs from 'dayjs';
+
+const util = require('../../utils/util.js');
 
 Page({
     properties: {
@@ -70,7 +71,8 @@ Page({
         onWeComGet: false,
         onWeTypeGet: false,
         expBackLinks: [],
-        expBackJson: ""
+        expBackJson: "",
+        fontHeavySliderMarks: {0: 'Light', 1: 'Regular', 2: 'Bold'}
     }, onLoad: function () {
         this.setData({
             theme: wx.getAppBaseInfo().theme || 'light',
@@ -101,6 +103,20 @@ Page({
             UESwitch: false
         }); else if (wx.getStorageSync('isUEOn') === true) this.setData({
             UESwitch: true
+        })
+
+        if (wx.getStorageSync('TCloudNumberSwitch') === false) this.setData({
+            TCloudNumberSwitch: false
+        }); else this.setData({
+            TCloudNumberSwitch: true
+        })
+
+        if (wx.getStorageSync('TCloudNumberHeavy')===1) this.setData({
+            TCloudNumberHeavy: 1
+        }); else if (wx.getStorageSync('TCloudNumberHeavy')===2) this.setData({
+            TCloudNumberHeavy: 2
+        }); else this.setData({
+            TCloudNumberHeavy: 0
         })
 
         function setThrottleSwitch(isThrottleOn, benchmarkLevelConditionMet) {
@@ -962,7 +978,35 @@ Page({
             }, fail: function (res) {
             }
         })
-    }, suffixSettingPopupVisible(e) {
+    }, suffixPersonalizationPopupVisible(e) {
+        this.setData({
+            suffixPersonalizationVisible: e.detail.visible,
+        });
+    }, handlePersonalizationSetting() {
+        this.setData({
+            suffixPersonalizationVisible: true, settingVisible: false
+        })
+    }, closePersonalizationSetting() {
+        this.setData({
+            suffixPersonalizationVisible: false, settingVisible: true
+        })
+    }, handleTCloudNumberChange(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        this.setData({
+            TCloudNumberSwitch: e.detail.value
+        })
+        wx.setStorageSync('TCloudNumberSwitch', this.data.TCloudNumberSwitch)
+    }, handleTCloudNumberHeavyChange(e){
+        wx.vibrateShort({
+            type: 'light',
+        });
+        this.setData({
+            TCloudNumberHeavy: e.detail.value
+        })
+        wx.setStorageSync('TCloudNumberHeavy', this.data.TCloudNumberHeavy)
+    },suffixSettingPopupVisible(e) {
         this.setData({
             suffixSettingVisible: e.detail.visible,
         });

@@ -20,6 +20,7 @@
     "t-popup": "tdesign-miniprogram/popup/popup",
     "t-progress": "tdesign-miniprogram/progress/progress",
     "t-result": "tdesign-miniprogram/result/result",
+    "t-slider": "tdesign-miniprogram/slider/slider",
     "t-switch": "tdesign-miniprogram/switch/switch",
     "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
     "t-tabs": "tdesign-miniprogram/tabs/tabs",

@@ -38,25 +38,26 @@ See the Mulan PubL v2 for more details.
                     <view class="header-title" id="titleTop2">QQ 版本列表 Vigor</view>
                     <view class="qq-version-item" style="width: 100%;" wx:for="{{qqVersions}}" wx:key="versions">
                         <t-cell-group theme="card">
-                            <t-cell arrow bind:tap="clickCell" data-index="{{index}}"
-                                    description="额定大小：{{item.size}} MB" hover leftIcon=""
-                                    title="版本：{{item.versionNumber}}">
+                            <t-cell arrow bind:tap="clickCell" data-index="{{index}}" hover leftIcon="">
+                                <view slot="title"
+                                      style="font-family: {{TCloudNumberSwitch?'TCloudNumber-'+(TCloudNumberHeavy===2?'Bold':(TCloudNumberHeavy===1?'Regular':'Light'))+',':''}} sans-serif; font-size: 56rpx; display: flex;justify-content: center;align-items: center">
+                                    {{item.versionNumber}}
+                                    <t-icon name="" prefix="ue-logo-src" size="32rpx" slot="icon"
+                                            style="margin-left: 12rpx;" wx:if="{{item.isUnrealEngine&&UESwitch}}"/>
+                                    <t-icon name="" prefix="qqnt-logo-src" size="42rpx" slot="icon"
+                                            style="margin-left: 6rpx;" wx:if="{{item.isQQNTFramework}}"/>
+                                </view>
                                 <view slot="note">
-                                    <t-tag icon="{{null}}" style="margin-left: 12rpx;" theme="primary" variant="light"
-                                           wx:if="{{item.isQQNTFramework}}">
-                                        <t-icon name="" prefix="qqnt-logo-src" size="32rpx" slot="icon"/>
-                                    </t-tag>
-                                    <t-tag icon="{{null}}" style="margin-left: 12rpx;" theme="primary" variant="light"
-                                           wx:if="{{item.isAccessibility}}">
+                                    <t-tag icon="{{null}}" size="small" style="margin-left: 12rpx;" theme="primary"
+                                           variant="light" wx:if="{{item.isAccessibility}}">
                                         <t-icon name="accessibility_new" prefix="material-symbols-outlined" size="28rpx"
                                                 slot="icon"/>
                                     </t-tag>
-                                    <t-tag icon="{{null}}" style="margin-left: 12rpx;" theme="primary" variant="light"
-                                           wx:if="{{item.isUnrealEngine&&UESwitch}}">
-                                        <t-icon name="" prefix="ue-logo-src" size="28rpx" slot="icon"/>
+                                    <t-tag size="small" style="margin-left: 12rpx;" theme="primary" variant="light">
+                                        {{item.size}} MB
                                     </t-tag>
-                                    <t-tag style="font-family: TCloudNumber, sans-serif;margin-left: 12rpx;"
-                                           theme="primary" variant="light" wx:if="{{PerProSwitch}}">
+                                    <t-tag size="small" style="margin-left: 12rpx;" theme="primary" variant="light"
+                                           wx:if="{{PerProSwitch}}">
                                         {{indexUtil.formatPercent(item.size, maxSize)}}
                                     </t-tag>
                                 </view>
@@ -75,16 +76,16 @@ See the Mulan PubL v2 for more details.
                     <view class="header-title" id="titleTop3">TIM 版本列表 Vigor</view>
                     <view class="qq-version-item" style="width: 100%;" wx:for="{{timVersions}}" wx:key="version">
                         <t-cell-group theme="card">
-                            <t-cell arrow bind:tap="clickTimCell" data-index="{{index}}"
-                                    description="发布日期：{{item.datetime}}" hover leftIcon=""
-                                    title="版本：{{item.version}}">
+                            <t-cell arrow bind:tap="clickTimCell" data-index="{{index}}" hover leftIcon="">
+                                <view slot="title"
+                                      style="font-family: {{TCloudNumberSwitch?'TCloudNumber-'+(TCloudNumberHeavy===2?'Bold':(TCloudNumberHeavy===1?'Regular':'Light'))+',':''}} sans-serif; font-size: 56rpx; display: flex;justify-content: center;align-items: center">
+                                    {{item.version}}
+                                    <t-icon name="" prefix="qqnt-logo-src" size="42rpx" slot="icon"
+                                            style="margin-left: 6rpx;" wx:if="{{item.isQQNTFramework}}"/>
+                                </view>
                                 <view slot="note">
-                                    <t-tag icon="{{null}}" style="margin-left: 12rpx;" theme="primary" variant="light"
-                                           wx:if="{{item.isQQNTFramework}}">
-                                        <t-icon name="" prefix="qqnt-logo-src" size="32rpx" slot="icon"/>
-                                    </t-tag>
-                                    <t-tag icon="{{null}}" style="margin-left: 12rpx;" theme="primary" variant="light"
-                                           wx:if="{{item.isAccessibility}}">
+                                    <t-tag icon="{{null}}" size="small" style="margin-left: 12rpx;" theme="primary"
+                                           variant="light" wx:if="{{item.isAccessibility}}">
                                         <t-icon name="accessibility_new" prefix="material-symbols-outlined" size="28rpx"
                                                 slot="icon"/>
                                     </t-tag>
@@ -387,13 +388,7 @@ See the Mulan PubL v2 for more details.
             <t-switch bind:change="handleThrottleChange" slot="note" style="margin: 0 0 0 48rpx;"
                       value="{{ThrottleSwitch}}"/>
         </t-cell>
-        <t-cell bordered title="QQ 版本卡片展示额定包大小占比历史最大包指示条">
-            <t-switch bind:change="handlePerProChange" slot="note" style="margin: 0 0 0 48rpx;"
-                      value="{{PerProSwitch}}"/>
-        </t-cell>
-        <t-cell bordered description="虚幻引擎内置情况以 QQ 正式版为判断来源" title="版本卡片显示匹配的虚幻引擎标识">
-            <t-switch bind:change="handleUEChange" slot="note" style="margin: 0 0 0 48rpx;" value="{{UESwitch}}"/>
-        </t-cell>
+        <t-cell arrow bind:tap="handlePersonalizationSetting" bordered hover title="个性化"/>
         <t-cell bordered title="扩展测试版扫版直链后缀">
             <t-switch bind:change="handleExtendSuffixChange" slot="note" style="margin: 0 0 0 48rpx;"
                       value="{{ExtendSuffixSwitch}}"/>
@@ -528,18 +523,49 @@ See the Mulan PubL v2 for more details.
     </view>
 </t-popup>
 
+<t-overlay duration="{{300}}" visible="{{suffixPersonalizationVisible}}" z-index="11501"/>
+
+<t-popup bind:visible-change="suffixPersonalizationPopupVisible" close-on-overlay-click="{{false}}" placement="bottom"
+         show-overlay="{{false}}" visible="{{suffixPersonalizationVisible}}" z-index="11502">
+    <view class="block">
+        <view class="guess-success-header">
+            <view class="guess-success-title" id="ability-personalization">个性化</view>
+        </view>
+        <t-cell bordered description="虚幻引擎内置情况以 QQ 正式版为判断来源" title="版本卡片显示匹配的虚幻引擎标识">
+            <t-switch bind:change="handleUEChange" slot="note" style="margin: 0 0 0 48rpx;" value="{{UESwitch}}"/>
+        </t-cell>
+        <t-cell bordered title="QQ 版本卡片展示额定包大小占比历史最大包指示条">
+            <t-switch bind:change="handlePerProChange" slot="note" style="margin: 0 0 0 48rpx;"
+                      value="{{PerProSwitch}}"/>
+        </t-cell>
+        <t-cell bordered="{{false}}" title="版本号字体使用 TCloudNumber">
+            <t-switch bind:change="handleTCloudNumberChange" slot="note" style="margin: 0 0 0 48rpx;"
+                      value="{{TCloudNumberSwitch}}"/>
+        </t-cell>
+        <view style="margin: 16rpx 48rpx">
+            <t-slider bind:change="handleTCloudNumberHeavyChange" disabled="{{!TCloudNumberSwitch}}"
+                      marks="{{fontHeavySliderMarks}}" max="2" min="0" step="{{1}}" value="{{TCloudNumberHeavy}}"
+                      wx:if="{{suffixPersonalizationVisible}}"/>
+        </view>
+        <view class="suffix-setting-button">
+            <t-button bind:tap="closePersonalizationSetting" block size="large" theme="light">返回
+            </t-button>
+        </view>
+    </view>
+</t-popup>
+
 <t-popup bind:visible-change="expPopupVisible" placement="bottom" visible="{{expVisible}}">
     <view class="block">
         <view class="setting-header">
             <view class="setting-title" id="ability-exp">实验性功能</view>
         </view>
-        <t-cell arrow bind:tap="handleGetFromWeixinAlphaConfig" bordered="{{false}}" hover
+        <t-cell arrow bind:tap="handleGetFromWeixinAlphaConfig" bordered hover
                 title="从腾讯服务器配置拉取微信最新测试版下载直链">
             <view hidden="{{!getFromWeixinAlphaConfigLoading}}" slot="note">
                 <t-loading/>
             </view>
         </t-cell>
-        <t-cell arrow bind:tap="handleGetFromWeTypeLatestChannel" bordered="{{false}}" hover
+        <t-cell arrow bind:tap="handleGetFromWeTypeLatestChannel" bordered hover
                 title="从微信输入法测试通道获取微信输入法最新下载直链">
             <view hidden="{{!getFromWeTypeLatestChannelLoading}}" slot="note">
                 <t-loading/>
