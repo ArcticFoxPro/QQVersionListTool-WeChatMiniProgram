@@ -105,6 +105,12 @@ Page({
             UESwitch: true
         })
 
+        if (wx.getStorageSync('isKuiklyOn') === false) this.setData({
+            KuiklySwitch: false
+        }); else this.setData({
+            KuiklySwitch: true
+        })
+
         if (wx.getStorageSync('TCloudNumberSwitch') === false) this.setData({
             TCloudNumberSwitch: false
         }); else this.setData({
@@ -263,6 +269,7 @@ Page({
                         qqVersionBean.isAccessibility = false // semver.gte(qqVersionBean.versionNumber, getApp().EARLIEST_ACCESSIBILITY_QQ_VERSION)
                         qqVersionBean.isQQNTFramework = semver.gte(qqVersionBean.versionNumber, getApp().globalData.EARLIEST_QQNT_FRAMEWORK_QQ_VERSION_STABLE)
                         qqVersionBean.isUnrealEngine = semver.gte(qqVersionBean.versionNumber, getApp().globalData.EARLIEST_UNREAL_ENGINE_QQ_VERSION_STABLE)
+                        qqVersionBean.isKuiklyInside = semver.gte(qqVersionBean.versionNumber, getApp().globalData.EARLIEST_KUIKLY_FRAMEWORK_QQ_VERSION_STABLE)
 
                         qqVersionList.push(qqVersionBean);
                     }
@@ -307,6 +314,7 @@ Page({
                         new: "".split('<br/>'),
                         isAccessibility: false,
                         isQQNTFramework: semver.gte(jsonData.app.download.androidVersion, getApp().globalData.EARLIEST_QQNT_FRAMEWORK_TIM_VERSION_STABLE),
+                        isKuiklyInside: semver.gte(jsonData.app.download.androidVersion, getApp().globalData.EARLIEST_KUIKLY_FRAMEWORK_TIM_VERSION_STABLE),
                         jsonString: {
                             version: jsonData.app.download.androidVersion,
                             datetime: jsonData.app.download.androidDatetime,
@@ -325,6 +333,7 @@ Page({
                                 new: item.new.split('<br/>'),
                                 isAccessibility: false,
                                 isQQNTFramework: semver.gte(item.version, getApp().globalData.EARLIEST_QQNT_FRAMEWORK_TIM_VERSION_STABLE),
+                                isKuiklyInside: semver.gte(item.version, getApp().globalData.EARLIEST_KUIKLY_FRAMEWORK_TIM_VERSION_STABLE),
                                 jsonString: {
                                     version: item.version, datetime: item.datetime, fix: item.fix, new: item.new
                                 }
@@ -343,6 +352,7 @@ Page({
                                     new: logItem.new.split('<br/>'),
                                     isAccessibility: false,
                                     isQQNTFramework: semver.gte(versionItem.version, getApp().globalData.EARLIEST_QQNT_FRAMEWORK_TIM_VERSION_STABLE),
+                                    isKuiklyInside: semver.gte(versionItem.version, getApp().globalData.EARLIEST_KUIKLY_FRAMEWORK_TIM_VERSION_STABLE),
                                     jsonString: {
                                         version: versionItem.version,
                                         datetime: logItem.datetime,
@@ -569,7 +579,15 @@ Page({
         this.setData({
             PerProSwitch: e.detail.value
         })
-    }, handleUEChange(e) {
+    }, handleKuiklyChange(e){
+        wx.vibrateShort({
+            type: 'light',
+        });
+        wx.setStorageSync('isKuiklyOn', e.detail.value);
+        this.setData({
+            KuiklySwitch: e.detail.value
+        })
+    },handleUEChange(e) {
         wx.vibrateShort({
             type: 'light',
         });

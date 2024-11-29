@@ -353,6 +353,50 @@
     height: 32rpx;
 }
 
+.kuikly-logo-src {
+    /*
+    ** 专有代码声明 Ⅲ **
+
+    从此声明直到声明专有代码结束处所包含的矢量图片文件（无论其文件形式如何）
+    由 QQ 版本列表 Vigor（以下简称“本项目”）根据 Kuikly 标识临摹绘制，
+    文件所包含的 Kuikly 标识商标（如有）和原创权利人为深圳市腾讯计算机系统有限公司和/或其关联公司。
+
+    QQ 版本列表 Vigor 承诺不将此文件用于或授权任何非权利人用于任何形式的商业用途。
+
+    此矢量图片文件及其代码不受本项目 木兰公共许可证, 第2版 开源许可约束，
+    未经许可，不得用于任何形式的商业用途或其他未经授权的用途。
+
+    本项目对“QQ”、Kuikly 标识、“Kuikly”的使用旨在注明和指向对应主体，
+    并非表示对“QQ”、Kuikly 标识、“Kuikly”商标（如有）的注册和拥有。
+
+    此文本如有任何中英文版本之间的差异，以中文版本为准。
+
+    ** Proprietary Code Statement Ⅲ **
+
+    Starting from this declaration until the end of the dedicated code section, any vector image files contained herein, regardless of their file format,
+    was recreated by the Qverbow Vigor (hereinafter referred to as "this project") based on the Kuikly logo.
+    Any trademarks of Kuikly logos contained in this file and their original rights belong to 深圳市腾讯计算机系统有限公司 and/or its affiliates.
+
+    The Qverbow Vigor commits to not using this file for or authorizing any non-right holders to use it for any commercial purposes.
+
+    This vector image file and its code are not subject to the open-source license of this project, the Mulan Public License, Version 2.
+    Without permission, it shall not be used for any commercial purposes or other unauthorized uses.
+
+    The use of "QQ", the Kuikly logo, and "Kuikly" by this project is intended only to refer to the corresponding entities,
+    and does not imply registration or ownership of the trademarks "QQ", the Kuikly logo, and "Kuikly" (if any).
+
+    In case of any discrepancies between the Chinese and English versions of this text, the Chinese version shall prevail.
+    */
+    background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB3aWR0aD0iNzIzLjIxMSIgaGVpZ2h0PSI3MjYuMjM0IiB2aWV3Qm94PSIwIDAgNzIzLjIxMSA3MjYuMjM0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxnPgogICAgPHBhdGggZD0iTTQ2OC40MzkgMjU1LjgzOEwyNTYuMDcyIDQ2OC4yMDVDMTk3LjQ4NiA1MjYuNzkxIDE5Ny40ODYgNjIxLjc1IDI1Ni4wNzIgNjgwLjMzNkw0My45Mzk1IDQ2OC4yMDVDLTE0LjY0NjUgNDA5LjYxNyAtMTQuNjQ2NSAzMTQuNjU4IDQzLjkzOTUgMjU2LjA3MkwyNTYuMDcyIDQzLjkzOTRDMzE0LjY2IC0xNC42NDY1IDQwOS42MTkgLTE0LjY0NjUgNDY4LjIwNSA0My45Mzk0QzUyNi43MTUgMTAyLjQ0OSA1MjYuNzkzIDE5Ny4yMzIgNDY4LjQzOSAyNTUuODM4TDQ2OC40MzkgMjU1LjgzOFpNNDY3LjEzOSA2ODIuMjk1QzQxMy45NTkgNzM1LjQ3MyAzMzAuODEzIDc0MC4zODMgMjcyLjEwMiA2OTcuMDJDMjI4Ljc0IDYzOC4zMDkgMjMzLjY0OCA1NTUuMTYgMjg2LjgyNiA1MDEuOTgyTDQ5OS4xOTMgMjg5LjYxNUM1MTkuNTggMjY5LjEzOSA1MzIuODM2IDI0NC4yNDggNTM4Ljk1NyAyMTguMDMxQzU4Ny43ODEgMjA2LjYyOSA2NDEuMjAzIDIxOS45NjEgNjc5LjI3MSAyNTguMDI5QzczNy44NTcgMzE2LjYxNSA3MzcuODU3IDQxMS41NzQgNjc5LjI3MSA0NzAuMTYyTDQ2Ny4xMzkgNjgyLjI5NUw0NjcuMTM5IDY4Mi4yOTVaIiBmaWxsPSIjMDA1MmQ5IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIC8+CiAgPC9nPgo8L3N2Zz4=");
+    /*
+    ** 专有代码声明 Ⅲ 结束处 **
+    ** End of Proprietary Code Statement Ⅲ **
+    */
+    background-size: 100%;
+    width: 30rpx;
+    height: 30rpx;
+}
+
 @media (prefers-color-scheme: dark) {
     .recycle-view-container {
         background-color: var(--td-bg-color-container);
@@ -469,5 +513,49 @@
         background-size: 100%;
         width: 32rpx;
         height: 32rpx;
+    }
+
+    .kuikly-logo-src {
+        /*
+        ** 专有代码声明 Ⅳ **
+
+        从此声明直到声明专有代码结束处所包含的矢量图片文件（无论其文件形式如何）
+        由 QQ 版本列表 Vigor（以下简称“本项目”）根据 Kuikly 标识临摹绘制，
+        文件所包含的 Kuikly 标识商标（如有）和原创权利人为深圳市腾讯计算机系统有限公司和/或其关联公司。
+
+        QQ 版本列表 Vigor 承诺不将此文件用于或授权任何非权利人用于任何形式的商业用途。
+
+        此矢量图片文件及其代码不受本项目 木兰公共许可证, 第2版 开源许可约束，
+        未经许可，不得用于任何形式的商业用途或其他未经授权的用途。
+
+        本项目对“QQ”、Kuikly 标识、“Kuikly”的使用旨在注明和指向对应主体，
+        并非表示对“QQ”、Kuikly 标识、“Kuikly”商标（如有）的注册和拥有。
+
+        此文本如有任何中英文版本之间的差异，以中文版本为准。
+
+        ** Proprietary Code Statement Ⅳ **
+
+        Starting from this declaration until the end of the dedicated code section, any vector image files contained herein, regardless of their file format,
+        was recreated by the Qverbow Vigor (hereinafter referred to as "this project") based on the Kuikly logo.
+        Any trademarks of Kuikly logos contained in this file and their original rights belong to 深圳市腾讯计算机系统有限公司 and/or its affiliates.
+
+        The Qverbow Vigor commits to not using this file for or authorizing any non-right holders to use it for any commercial purposes.
+
+        This vector image file and its code are not subject to the open-source license of this project, the Mulan Public License, Version 2.
+        Without permission, it shall not be used for any commercial purposes or other unauthorized uses.
+
+        The use of "QQ", the Kuikly logo, and "Kuikly" by this project is intended only to refer to the corresponding entities,
+        and does not imply registration or ownership of the trademarks "QQ", the Kuikly logo, and "Kuikly" (if any).
+
+        In case of any discrepancies between the Chinese and English versions of this text, the Chinese version shall prevail.
+        */
+        background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB3aWR0aD0iNzIzLjIxMSIgaGVpZ2h0PSI3MjYuMjM0IiB2aWV3Qm94PSIwIDAgNzIzLjIxMSA3MjYuMjM0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxnPgogICAgPHBhdGggZD0iTTQ2OC40MzkgMjU1LjgzOEwyNTYuMDcyIDQ2OC4yMDVDMTk3LjQ4NiA1MjYuNzkxIDE5Ny40ODYgNjIxLjc1IDI1Ni4wNzIgNjgwLjMzNkw0My45Mzk1IDQ2OC4yMDVDLTE0LjY0NjUgNDA5LjYxNyAtMTQuNjQ2NSAzMTQuNjU4IDQzLjkzOTUgMjU2LjA3MkwyNTYuMDcyIDQzLjkzOTRDMzE0LjY2IC0xNC42NDY1IDQwOS42MTkgLTE0LjY0NjUgNDY4LjIwNSA0My45Mzk0QzUyNi43MTUgMTAyLjQ0OSA1MjYuNzkzIDE5Ny4yMzIgNDY4LjQzOSAyNTUuODM4TDQ2OC40MzkgMjU1LjgzOFpNNDY3LjEzOSA2ODIuMjk1QzQxMy45NTkgNzM1LjQ3MyAzMzAuODEzIDc0MC4zODMgMjcyLjEwMiA2OTcuMDJDMjI4Ljc0IDYzOC4zMDkgMjMzLjY0OCA1NTUuMTYgMjg2LjgyNiA1MDEuOTgyTDQ5OS4xOTMgMjg5LjYxNUM1MTkuNTggMjY5LjEzOSA1MzIuODM2IDI0NC4yNDggNTM4Ljk1NyAyMTguMDMxQzU4Ny43ODEgMjA2LjYyOSA2NDEuMjAzIDIxOS45NjEgNjc5LjI3MSAyNTguMDI5QzczNy44NTcgMzE2LjYxNSA3MzcuODU3IDQxMS41NzQgNjc5LjI3MSA0NzAuMTYyTDQ2Ny4xMzkgNjgyLjI5NUw0NjcuMTM5IDY4Mi4yOTVaIiBmaWxsPSIjNDU4MkU2IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIC8+CiAgPC9nPgo8L3N2Zz4=");
+        /*
+        ** 专有代码声明 Ⅳ 结束处 **
+        ** End of Proprietary Code Statement Ⅳ **
+        */
+        background-size: 100%;
+        width: 30rpx;
+        height: 30rpx;
     }
 }
