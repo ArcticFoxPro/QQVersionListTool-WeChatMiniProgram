@@ -117,9 +117,9 @@ Page({
             TCloudNumberSwitch: true
         })
 
-        if (wx.getStorageSync('TCloudNumberHeavy')===1) this.setData({
+        if (wx.getStorageSync('TCloudNumberHeavy') === 1) this.setData({
             TCloudNumberHeavy: 1
-        }); else if (wx.getStorageSync('TCloudNumberHeavy')===2) this.setData({
+        }); else if (wx.getStorageSync('TCloudNumberHeavy') === 2) this.setData({
             TCloudNumberHeavy: 2
         }); else this.setData({
             TCloudNumberHeavy: 0
@@ -579,7 +579,7 @@ Page({
         this.setData({
             PerProSwitch: e.detail.value
         })
-    }, handleKuiklyChange(e){
+    }, handleKuiklyChange(e) {
         wx.vibrateShort({
             type: 'light',
         });
@@ -587,7 +587,7 @@ Page({
         this.setData({
             KuiklySwitch: e.detail.value
         })
-    },handleUEChange(e) {
+    }, handleUEChange(e) {
         wx.vibrateShort({
             type: 'light',
         });
@@ -1016,7 +1016,7 @@ Page({
             TCloudNumberSwitch: e.detail.value
         })
         wx.setStorageSync('TCloudNumberSwitch', this.data.TCloudNumberSwitch)
-    }, handleTCloudNumberHeavyChange(e){
+    }, handleTCloudNumberHeavyChange(e) {
         wx.vibrateShort({
             type: 'light',
         });
@@ -1024,7 +1024,7 @@ Page({
             TCloudNumberHeavy: e.detail.value
         })
         wx.setStorageSync('TCloudNumberHeavy', this.data.TCloudNumberHeavy)
-    },suffixSettingPopupVisible(e) {
+    }, suffixSettingPopupVisible(e) {
         this.setData({
             suffixSettingVisible: e.detail.visible,
         });

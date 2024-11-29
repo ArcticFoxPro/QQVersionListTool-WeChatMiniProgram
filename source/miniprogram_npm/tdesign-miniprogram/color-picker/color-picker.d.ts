@@ -2,6 +2,9 @@ import { SuperComponent } from '../common/src/index';
 import type { Coordinate } from './interfaces';
 import { Color } from './utils';
 export default class ColorPicker extends SuperComponent {
+    options: {
+        multipleSlots: boolean;
+    };
     properties: import("./type").TdColorPickerProps;
     observers: {
         format(): void;
