@@ -33,18 +33,6 @@ module.exports = {
     formatTime
 }
 
-const generateAESKey = () => {
-    return new Promise((resolve, reject) => {
-        wx.getRandomValues({
-            length: 16, success: res => {
-                resolve(res.randomValues);
-            }, fail: err => {
-                reject(err);
-            }
-        });
-    });
-};
-
 function getAllAPKUrl(str) {
     const urls = extractUrls(str)
     const apkUrls = Array.from(urls.filter(url => url.toLowerCase().endsWith('.apk')).reduce((uniqueUrls, url) => uniqueUrls.has(url) ? uniqueUrls : uniqueUrls.add(url), new Set()));
@@ -75,6 +63,7 @@ function resolveWeixinAlphaConfig(jsonString) {
 }
 
 module.exports = {
-    generateAESKey: generateAESKey, getAllAPKUrl: getAllAPKUrl, resolveWeixinAlphaConfig: resolveWeixinAlphaConfig
+    getAllAPKUrl: getAllAPKUrl,
+    resolveWeixinAlphaConfig: resolveWeixinAlphaConfig
 };
 

@@ -17,10 +17,19 @@ export default class Navbar extends SuperComponent {
         showTitle: string;
         hideLeft: boolean;
         hideCenter: boolean;
+        _menuRect: any;
+        _leftRect: any;
+        _boxStyle: {};
     };
-    attached(): Promise<void>;
+    attached(): void;
     detached(): void;
     methods: {
+        initStyle(): void;
+        calcCenterStyle(leftRect: WechatMiniprogram.BoundingClientRectResult, menuRect: WechatMiniprogram.BoundingClientRectResult, defaultStyle: object): void;
+        getLeftRect(): void;
+        getMenuRect(): void;
+        onMenuButtonBoundingClientRectWeightChange(): void;
+        offMenuButtonBoundingClientRectWeightChange(): void;
         queryElements(capsuleRect: any): void;
         goBack(): void;
     };

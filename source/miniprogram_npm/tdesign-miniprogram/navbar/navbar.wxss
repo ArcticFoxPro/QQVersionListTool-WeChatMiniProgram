@@ -68,6 +68,8 @@
 .t-navbar__left {
   position: relative;
   box-sizing: border-box;
+  max-width: var(--td-navbar-left-max-width);
+  overflow: hidden;
   display: flex;
   align-items: center;
   margin-left: var(--td-spacer-1, 24rpx);

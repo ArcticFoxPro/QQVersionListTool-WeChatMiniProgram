@@ -14,8 +14,9 @@
 
 import Message from 'tdesign-miniprogram/message/index';
 import semver from 'semver';
-import util from '../../utils/util.js';
 import dayjs from 'dayjs';
+
+const util = require('../../utils/util.js');
 
 Page({
     properties: {
@@ -70,7 +71,8 @@ Page({
         onWeComGet: false,
         onWeTypeGet: false,
         expBackLinks: [],
-        expBackJson: ""
+        expBackJson: "",
+        fontHeavySliderMarks: {0: 'Light', 1: 'Regular', 2: 'Bold'}
     }, onLoad: function () {
         this.setData({
             theme: wx.getAppBaseInfo().theme || 'light',
@@ -101,6 +103,26 @@ Page({
             UESwitch: false
         }); else if (wx.getStorageSync('isUEOn') === true) this.setData({
             UESwitch: true
+        })
+
+        if (wx.getStorageSync('isKuiklyOn') === false) this.setData({
+            KuiklySwitch: false
+        }); else this.setData({
+            KuiklySwitch: true
+        })
+
+        if (wx.getStorageSync('TCloudNumberSwitch') === false) this.setData({
+            TCloudNumberSwitch: false
+        }); else this.setData({
+            TCloudNumberSwitch: true
+        })
+
+        if (wx.getStorageSync('TCloudNumberHeavy') === 1) this.setData({
+            TCloudNumberHeavy: 1
+        }); else if (wx.getStorageSync('TCloudNumberHeavy') === 2) this.setData({
+            TCloudNumberHeavy: 2
+        }); else this.setData({
+            TCloudNumberHeavy: 0
         })
 
         function setThrottleSwitch(isThrottleOn, benchmarkLevelConditionMet) {
@@ -247,6 +269,7 @@ Page({
                         qqVersionBean.isAccessibility = false // semver.gte(qqVersionBean.versionNumber, getApp().EARLIEST_ACCESSIBILITY_QQ_VERSION)
                         qqVersionBean.isQQNTFramework = semver.gte(qqVersionBean.versionNumber, getApp().globalData.EARLIEST_QQNT_FRAMEWORK_QQ_VERSION_STABLE)
                         qqVersionBean.isUnrealEngine = semver.gte(qqVersionBean.versionNumber, getApp().globalData.EARLIEST_UNREAL_ENGINE_QQ_VERSION_STABLE)
+                        qqVersionBean.isKuiklyInside = semver.gte(qqVersionBean.versionNumber, getApp().globalData.EARLIEST_KUIKLY_FRAMEWORK_QQ_VERSION_STABLE)
 
                         qqVersionList.push(qqVersionBean);
                     }
@@ -288,9 +311,10 @@ Page({
                         version: jsonData.app.download.androidVersion,
                         datetime: jsonData.app.download.androidDatetime,
                         fix: "".split('<br/>'),
-                        new: "",
+                        new: "".split('<br/>'),
                         isAccessibility: false,
                         isQQNTFramework: semver.gte(jsonData.app.download.androidVersion, getApp().globalData.EARLIEST_QQNT_FRAMEWORK_TIM_VERSION_STABLE),
+                        isKuiklyInside: semver.gte(jsonData.app.download.androidVersion, getApp().globalData.EARLIEST_KUIKLY_FRAMEWORK_TIM_VERSION_STABLE),
                         jsonString: {
                             version: jsonData.app.download.androidVersion,
                             datetime: jsonData.app.download.androidDatetime,
@@ -306,9 +330,10 @@ Page({
                                 version: item.version,
                                 datetime: item.datetime,
                                 fix: item.fix.split('<br/>'),
-                                new: item.new,
+                                new: item.new.split('<br/>'),
                                 isAccessibility: false,
                                 isQQNTFramework: semver.gte(item.version, getApp().globalData.EARLIEST_QQNT_FRAMEWORK_TIM_VERSION_STABLE),
+                                isKuiklyInside: semver.gte(item.version, getApp().globalData.EARLIEST_KUIKLY_FRAMEWORK_TIM_VERSION_STABLE),
                                 jsonString: {
                                     version: item.version, datetime: item.datetime, fix: item.fix, new: item.new
                                 }
@@ -324,9 +349,10 @@ Page({
                                     version: versionItem.version,
                                     datetime: logItem.datetime,
                                     fix: logItem.fix.split('<br/>'),
-                                    new: logItem.new,
+                                    new: logItem.new.split('<br/>'),
                                     isAccessibility: false,
                                     isQQNTFramework: semver.gte(versionItem.version, getApp().globalData.EARLIEST_QQNT_FRAMEWORK_TIM_VERSION_STABLE),
+                                    isKuiklyInside: semver.gte(versionItem.version, getApp().globalData.EARLIEST_KUIKLY_FRAMEWORK_TIM_VERSION_STABLE),
                                     jsonString: {
                                         version: versionItem.version,
                                         datetime: logItem.datetime,
@@ -340,7 +366,7 @@ Page({
 
                     // 去除重复的版本号
                     const uniqueTIMVersionList = [...new Map(timVersionList.map(item => [JSON.stringify(item.jsonString), item])).values()];
-                    if (uniqueTIMVersionList[0].version === uniqueTIMVersionList[1].version && uniqueTIMVersionList[0].fix === "") uniqueTIMVersionList.shift()
+                    if (uniqueTIMVersionList[0].version === uniqueTIMVersionList[1].version) uniqueTIMVersionList.shift()
 
                     this.setData({
                         timVersions: uniqueTIMVersionList
@@ -552,6 +578,14 @@ Page({
         wx.setStorageSync('isPerProOn', e.detail.value);
         this.setData({
             PerProSwitch: e.detail.value
+        })
+    }, handleKuiklyChange(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        wx.setStorageSync('isKuiklyOn', e.detail.value);
+        this.setData({
+            KuiklySwitch: e.detail.value
         })
     }, handleUEChange(e) {
         wx.vibrateShort({
@@ -962,6 +996,34 @@ Page({
             }, fail: function (res) {
             }
         })
+    }, suffixPersonalizationPopupVisible(e) {
+        this.setData({
+            suffixPersonalizationVisible: e.detail.visible,
+        });
+    }, handlePersonalizationSetting() {
+        this.setData({
+            suffixPersonalizationVisible: true, settingVisible: false
+        })
+    }, closePersonalizationSetting() {
+        this.setData({
+            suffixPersonalizationVisible: false, settingVisible: true
+        })
+    }, handleTCloudNumberChange(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        this.setData({
+            TCloudNumberSwitch: e.detail.value
+        })
+        wx.setStorageSync('TCloudNumberSwitch', this.data.TCloudNumberSwitch)
+    }, handleTCloudNumberHeavyChange(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        this.setData({
+            TCloudNumberHeavy: e.detail.value
+        })
+        wx.setStorageSync('TCloudNumberHeavy', this.data.TCloudNumberHeavy)
     }, suffixSettingPopupVisible(e) {
         this.setData({
             suffixSettingVisible: e.detail.visible,

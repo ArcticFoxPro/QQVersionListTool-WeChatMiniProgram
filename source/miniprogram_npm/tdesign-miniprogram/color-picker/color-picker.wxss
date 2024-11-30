@@ -187,7 +187,7 @@
   text-align: center;
   line-height: 56rpx;
   height: 56rpx;
-  margin: 40rpx 0 56rpx 0;
+  margin-top: 40rpx;
 }
 .t-color-picker__format-item {
   background: var(--td-color-picker-format-background-color, var(--td-gray-color-1, #f3f3f3));
@@ -231,6 +231,7 @@
   flex-basis: 133rpx;
 }
 .t-color-picker__swatches-wrap {
+  margin-top: 56rpx;
   position: relative;
 }
 .t-color-picker__swatches + .t-color-picker__swatches {

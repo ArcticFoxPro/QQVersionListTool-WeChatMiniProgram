@@ -28,9 +28,10 @@
 .t-input {
   background-color: var(--td-input-bg-color, var(--td-bg-color-container, var(--td-font-white-1, #ffffff)));
   display: flex;
-  align-items: center;
+  align-items: var(--td-input-align-items, center);
   flex: 1;
   padding: var(--td-input-vertical-padding, 32rpx);
+  overflow: hidden;
 }
 .t-input--border {
   position: relative;

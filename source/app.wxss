@@ -83,6 +83,7 @@
 page {
     background-color: #f3f3f3;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", "Fira Sans", "Droid Sans", "Microsoft YaHei", "PingFang SC", "HarmonyOS Sans SC", "MiSans SC", "HONOR Sans CN", "OPPO Sans", "Hiragino Sans GB", "Arial", sans-serif;
+    --td-input-align-items: start;
 }
 
 @media (prefers-color-scheme: dark) {

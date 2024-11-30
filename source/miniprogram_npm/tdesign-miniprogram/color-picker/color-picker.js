@@ -52,6 +52,9 @@ const genSwatchList = (prop) => {
 let ColorPicker = class ColorPicker extends SuperComponent {
     constructor() {
         super(...arguments);
+        this.options = {
+            multipleSlots: true,
+        };
         this.properties = props;
         this.observers = {
             format() {
