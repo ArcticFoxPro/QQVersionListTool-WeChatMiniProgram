@@ -72,7 +72,8 @@ Page({
         onWeTypeGet: false,
         expBackLinks: [],
         expBackJson: "",
-        fontHeavySliderMarks: {0: 'Light', 1: 'Regular', 2: 'Bold'}
+        fontHeavySliderMarks: {0: 'Light', 1: 'Regular', 2: 'Bold'},
+        getTimNewestLinkLoading: false,
     }, onLoad: function () {
         this.setData({
             theme: wx.getAppBaseInfo().theme || 'light',
@@ -306,6 +307,7 @@ Page({
                     let responseData = res.data;
                     const jsonString = responseData.substring(responseData.indexOf('var params= ') + 12, responseData.lastIndexOf(";\n" + "      typeof"));
                     const jsonData = JSON.parse(jsonString);
+                    const androidLink = jsonData.app.download.androidLink;
                     const timVersionList = [];
                     timVersionList.push({
                         version: jsonData.app.download.androidVersion,
@@ -320,7 +322,8 @@ Page({
                             datetime: jsonData.app.download.androidDatetime,
                             fix: "",
                             new: ""
-                        }
+                        },
+                        link: ""
                     });
 
                     // 从 latest 项中获取 Android 版本
@@ -336,7 +339,8 @@ Page({
                                 isKuiklyInside: semver.gte(item.version, getApp().globalData.EARLIEST_KUIKLY_FRAMEWORK_TIM_VERSION_STABLE),
                                 jsonString: {
                                     version: item.version, datetime: item.datetime, fix: item.fix, new: item.new
-                                }
+                                },
+                                link: ""
                             });
                         }
                     });
@@ -358,7 +362,8 @@ Page({
                                         datetime: logItem.datetime,
                                         fix: logItem.fix,
                                         new: logItem.new
-                                    }
+                                    },
+                                    link: ""
                                 });
                             }
                         });
@@ -367,6 +372,16 @@ Page({
                     // 去除重复的版本号
                     const uniqueTIMVersionList = [...new Map(timVersionList.map(item => [JSON.stringify(item.jsonString), item])).values()];
                     if (uniqueTIMVersionList[0].version === uniqueTIMVersionList[1].version) uniqueTIMVersionList.shift()
+
+                    uniqueTIMVersionList[0].link = androidLink
+                    const parsedJson = JSON.parse(JSON.stringify(uniqueTIMVersionList[0].jsonString));
+                    uniqueTIMVersionList[0].jsonString = {
+                        version: parsedJson.version,
+                        datetime: parsedJson.datetime,
+                        fix: parsedJson.fix,
+                        new: parsedJson.new,
+                        link: androidLink
+                    };
 
                     this.setData({
                         timVersions: uniqueTIMVersionList
@@ -1501,7 +1516,8 @@ Page({
                     expJsonBackTitle: "微信输入法测试通道获取结果",
                     expJsonBackResultTitle: "获取成功",
                     expBackStatus: "success",
-                    getFromWeTypeLatestChannelLoading: false
+                    getFromWeTypeLatestChannelLoading: false,
+                    expShareText: ""
                 }); else this.setData({
                     successExpBackLink: url,
                     succeedExpBackFileSizeShare: "（似乎未成功访问此下载地址，可能是微信输入法当前测试版已撤包。）",
@@ -1510,7 +1526,8 @@ Page({
                     expJsonBackTitle: "微信输入法测试通道获取结果",
                     expJsonBackResultTitle: "疑似撤包",
                     expBackStatus: "default",
-                    getFromWeTypeLatestChannelLoading: false
+                    getFromWeTypeLatestChannelLoading: false,
+                    expShareText: ""
                 });
             }).catch(err => {
                 console.error(err);
@@ -1532,5 +1549,47 @@ Page({
         this.setData({
             expBackWithUrlOnlyVisible: e.detail.visible
         })
-    },
+    }, getTimNewestLink() {
+        const url = this.data.timVersions[0].link
+        this.setData({
+            getTimNewestLinkLoading: true
+        });
+        this.fetchLink(url).then(isSuccess => {
+            if (isSuccess.exists && isSuccess.fileSize !== false) {
+                this.setData({
+                    successExpBackLink: url,
+                    succeedExpBackFileSizeShare: `（大小：${isSuccess.fileSize} MB）`,
+                    expVisible: false,
+                    expBackWithUrlOnlyVisible: true,
+                    expJsonBackTitle: `TIM ${this.data.timVersions[0].version} 正式版`,
+                    expJsonBackResultTitle: "获取成功",
+                    expBackStatus: "success",
+                    getTimNewestLinkLoading: false
+                });
+                this.setData({
+                    expShareText: `Android TIM ${this.data.timVersions[0].version} 正式版${this.data.succeedExpBackFileSizeShare}\n\n下载地址：${url}`
+                })
+            } else {
+                this.setData({
+                    successExpBackLink: url,
+                    succeedExpBackFileSizeShare: "",
+                    expVisible: false,
+                    expBackWithUrlOnlyVisible: true,
+                    expJsonBackTitle: `TIM ${this.data.timVersions[0].version} 正式版`,
+                    expJsonBackResultTitle: "获取成功",
+                    expBackStatus: "success",
+                    getTimNewestLinkLoading: false
+                });
+                this.setData({
+                    expShareText: `Android TIM ${this.data.timVersions[0].version} 正式版\n\n下载地址：${url}`
+                })
+            }
+        }).catch(err => {
+            console.error(err);
+            const errorMessage = err.errMsg;
+            this.setData({
+                errorText: errorMessage, errorVisible: true, getTimNewestLinkLoading: false
+            });
+        });
+    }
 })

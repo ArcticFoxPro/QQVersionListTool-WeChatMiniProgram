@@ -51,7 +51,8 @@
 }
 
 .t-result__description {
-    word-break: break-word;
+    white-space: pre-wrap;
+    word-break: break-all;
 }
 
 .t-message__text {
@@ -91,4 +92,3 @@ page {
         background-color: #181818;
     }
 }
-
