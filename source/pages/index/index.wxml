@@ -40,17 +40,17 @@ See the Mulan PubL v2 for more details.
                         <t-cell-group theme="card">
                             <t-cell arrow bind:tap="clickCell" data-index="{{index}}" hover leftIcon="">
                                 <view slot="title"
-                                      style="font-family: {{TCloudNumberSwitch?'TCloudNumber-'+(TCloudNumberHeavy===2?'Bold':(TCloudNumberHeavy===1?'Regular':'Light'))+',':''}} sans-serif; font-size: 56rpx; display: flex;justify-content: center;align-items: center">
+                                      style="font-family: {{TCloudNumberSwitch?'TCloudNumber-'+(TCloudNumberHeavy===2?'Bold':(TCloudNumberHeavy===1?'Regular':'Light'))+',':''}} sans-serif; font-size: 60rpx; display: flex;justify-content: center;align-items: center">
                                     {{item.versionNumber}}
-                                    <t-icon name="" prefix="ue-logo-src" size="32rpx" slot="icon"
+                                    <t-icon name="" prefix="ue-logo-src" size="34rpx" slot="icon"
                                             style="margin-left: 12rpx;" wx:if="{{item.isUnrealEngine&&UESwitch}}"/>
-                                    <t-icon name="" prefix="qqnt-logo-src" size="42rpx" slot="icon"
+                                    <t-icon name="" prefix="qqnt-logo-src" size="44rpx" slot="icon"
                                             style="margin-left: 6rpx;" wx:if="{{item.isQQNTFramework}}"/>
-                                    <t-icon name="" prefix="kuikly-logo-src" size="30rpx" slot="icon"
+                                    <t-icon name="" prefix="kuikly-logo-src" size="32rpx" slot="icon"
                                             style="margin-left: 6rpx;" wx:if="{{item.isKuiklyInside&&KuiklySwitch}}"/>
                                 </view>
                                 <view slot="note" style="display: flex;justify-content: center;align-items: center">
-                                    <t-button icon="link" shape="square" size="small" style="visibility: hidden"
+                                    <t-button icon="link" shape="square" size="medium" style="visibility: hidden"
                                               theme="light"/>
                                     <t-tag icon="{{null}}" size="small" style="margin-left: 12rpx;" theme="primary"
                                            variant="light" wx:if="{{item.isAccessibility}}">
@@ -82,17 +82,18 @@ See the Mulan PubL v2 for more details.
                         <t-cell-group theme="card">
                             <t-cell arrow bind:tap="clickTimCell" data-index="{{index}}" hover leftIcon="">
                                 <view slot="title"
-                                      style="font-family: {{TCloudNumberSwitch?'TCloudNumber-'+(TCloudNumberHeavy===2?'Bold':(TCloudNumberHeavy===1?'Regular':'Light'))+',':''}} sans-serif; font-size: 56rpx; display: flex;justify-content: center;align-items: center">
+                                      style="font-family: {{TCloudNumberSwitch?'TCloudNumber-'+(TCloudNumberHeavy===2?'Bold':(TCloudNumberHeavy===1?'Regular':'Light'))+',':''}} sans-serif; font-size: 60rpx; display: flex;justify-content: center;align-items: center">
                                     {{item.version}}
-                                    <t-icon name="" prefix="qqnt-logo-src" size="42rpx" slot="icon"
+                                    <t-icon name="" prefix="qqnt-logo-src" size="44rpx" slot="icon"
                                             style="margin-left: 6rpx;" wx:if="{{item.isQQNTFramework}}"/>
-                                    <t-icon name="" prefix="kuikly-logo-src" size="30rpx" slot="icon"
+                                    <t-icon name="" prefix="kuikly-logo-src" size="32rpx" slot="icon"
                                             style="margin-left: 6rpx;" wx:if="{{item.isKuiklyInside&&KuiklySwitch}}"/>
                                 </view>
                                 <view slot="note" style="display: flex;justify-content: center;align-items: center">
-                                    <t-button bind:tap="getTimNewestLink" disabled="{{getTimNewestLinkLoading===true}}" icon="link" shape="square"
-                                              size="small"
-                                              style="visibility: {{item.link===''?'hidden':'visible'}}" theme="light"/>
+                                    <t-button bind:tap="getTimNewestLink" disabled="{{getTimNewestLinkLoading===true}}"
+                                              icon="link" shape="square" size="medium"
+                                              style="visibility: {{item.link===''?'hidden':'visible'}}" theme="light"
+                                              variant="outline"/>
                                     <t-tag icon="{{null}}" size="small" style="margin-left: 12rpx;" theme="primary"
                                            variant="light" wx:if="{{item.isAccessibility}}">
                                         <t-icon name="accessibility_new" prefix="material-symbols-outlined" size="28rpx"
@@ -125,7 +126,7 @@ See the Mulan PubL v2 for more details.
                       shape="square" size="large" style="margin-left: 12rpx;" theme="light"
                       variant="outline"></t-button>
         </view>
-        <t-button bind:tap="handleGuessPopup" block class="text-button" icon="search" size="large" theme="primary">
+        <t-button bind:tap="handleGuessPopup" block class="text-button" icon="radar" size="large" theme="primary">
             扫版
         </t-button>
     </view>
