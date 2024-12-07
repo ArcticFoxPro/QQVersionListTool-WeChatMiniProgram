@@ -50,8 +50,8 @@ See the Mulan PubL v2 for more details.
                                             style="margin-left: 6rpx;" wx:if="{{item.isKuiklyInside&&KuiklySwitch}}"/>
                                 </view>
                                 <view slot="note" style="display: flex;justify-content: center;align-items: center">
-                                    <t-button icon="link" shape="square" size="medium" style="visibility: hidden"
-                                              theme="light"/>
+                                    <t-button icon="link" shape="square" size="medium"
+                                              style="margin-right:16rpx;visibility: hidden" theme="light"/>
                                     <t-tag icon="{{null}}" size="small" style="margin-left: 12rpx;" theme="primary"
                                            variant="light" wx:if="{{item.isAccessibility}}">
                                         <t-icon name="accessibility_new" prefix="material-symbols-outlined" size="28rpx"
@@ -92,7 +92,8 @@ See the Mulan PubL v2 for more details.
                                 <view slot="note" style="display: flex;justify-content: center;align-items: center">
                                     <t-button bind:tap="getTimNewestLink" disabled="{{getTimNewestLinkLoading===true}}"
                                               icon="link" shape="square" size="medium"
-                                              style="visibility: {{item.link===''?'hidden':'visible'}}" theme="light"
+                                              style="margin-right:16rpx;visibility: {{item.link===''?'hidden':'visible'}}"
+                                              theme="light"
                                               variant="outline"/>
                                     <t-tag icon="{{null}}" size="small" style="margin-left: 12rpx;" theme="primary"
                                            variant="light" wx:if="{{item.isAccessibility}}">
@@ -110,7 +111,7 @@ See the Mulan PubL v2 for more details.
         </swiper>
     </view>
 
-    <view class="bottom-button" id="bottomButton">
+    <view class="bottom-button" id="bottomButton" style="padding-bottom: {{safeBottomPadding}}px" hidden="{{safeBottomPadding===0}}">
         <view class="gradient-layer"></view>
         <view class="icon-button">
             <t-button aria-label="关于" bind:tap="handleAboutPopup" block class="about-home" icon="info-circle"
@@ -133,7 +134,7 @@ See the Mulan PubL v2 for more details.
 
     <view hidden="{{scrollNumber<=600}}">
         <t-back-top bind:to-top="onToTop" fixed scroll-top="{{scrollTop}}"
-                    style="position: fixed; bottom: 160rpx; right: -1rpx" text="回到顶部" theme="half-round"
+                    style="position: fixed; bottom: {{safeBottomPaddingBackTop}}px; right: -1rpx" text="回到顶部" theme="half-round"
                     visibility-height="0"></t-back-top>
     </view>
 </view>
@@ -289,7 +290,7 @@ See the Mulan PubL v2 for more details.
         </view>
 
         <t-progress percentage="{{preSize}}" status="active"
-                    style="margin: 0 32rpx 16rpx 32rpx; font-family: TCloudNumber, sans-serif;" theme="plump"
+                    style="margin: 0 32rpx 16rpx 32rpx; font-family: TCloudNumber-Regular, sans-serif;" theme="plump"
                     wx:if="{{PerProSwitch}}"/>
 
         <view class="guess-text" style=" margin: 0 32rpx 16rpx 32rpx;">{{itemFeatureTitle}}</view>

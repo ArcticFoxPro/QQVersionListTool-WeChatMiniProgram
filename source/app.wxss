@@ -56,19 +56,7 @@
 }
 
 .t-message__text {
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
     white-space: nowrap;
-    word-break: normal;
-}
-
-.t-message__text-wrap {
-    overflow: hidden;
-}
-
-.t-message__text-nowrap {
-    overflow: hidden;
 }
 
 .container {

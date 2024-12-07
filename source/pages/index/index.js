@@ -74,6 +74,7 @@ Page({
         expBackJson: "",
         fontHeavySliderMarks: {0: 'Light', 1: 'Regular', 2: 'Bold'},
         getTimNewestLinkLoading: false,
+        safeBottomPadding: 0
     }, onLoad: function () {
         this.setData({
             theme: wx.getAppBaseInfo().theme || 'light',
@@ -187,12 +188,12 @@ Page({
             yearNow: dayjs().year()
         })
 
-        const windowHeight = await new Promise((resolve) => {
-            wx.getSystemInfo({
-                success: (res) => {
-                    resolve(res.windowHeight);
-                },
-            });
+        const windowHeight = wx.getWindowInfo().windowHeight
+        const safeBottomPadding = wx.getWindowInfo().screenHeight - wx.getWindowInfo().safeArea.bottom
+
+        this.setData({
+            safeBottomPadding: safeBottomPadding + (32 / 750 * wx.getSystemInfoSync().windowWidth),
+            safeBottomPaddingBackTop: safeBottomPadding + (160 / 750 * wx.getSystemInfoSync().windowWidth)
         });
 
         let elementHeight1, elementHeight2, elementHeight3;
@@ -217,6 +218,7 @@ Page({
         elementHeight1 = await getElementHeight('#titleTop1');
         elementHeight2 = await getElementHeight('#titleTop2');
         elementHeight3 = await getElementHeight('#bottomButton');
+
 
         this.setData({
             heightRecycle: windowHeight - elementHeight1 - elementHeight3
@@ -1434,28 +1436,35 @@ Page({
                         let mapJson = JSON.stringify(map, null, 2)
 
                         this.fetchLink(map.url.replace("http://", "https://")).then(isSuccess => {
-                            if (isSuccess.exists && isSuccess.fileSize !== false) this.setData({
-                                successExpBackLink: map.url,
-                                succeedExpBackFileSizeShare: `（大小：${isSuccess.fileSize} MB）`,
-                                expVisible: false,
-                                expBackVisible: true,
-                                expBackJson: mapJson,
-                                expJsonBackTitle: "腾讯服务器微信测试版拉取结果",
-                                expJsonBackResultTitle: "获取成功",
-                                expBackStatus: "success"
-                            }); else this.setData({
-                                successExpBackLink: map.url,
-                                succeedExpBackFileSizeShare: "（似乎未成功访问此下载地址，可能是微信当前测试版已撤包。）",
-                                expVisible: false,
-                                expBackVisible: true,
-                                expBackJson: mapJson,
-                                expJsonBackTitle: "腾讯服务器微信测试版拉取结果",
-                                expJsonBackResultTitle: "疑似撤包",
-                                expBackStatus: "default"
-                            });
-                            this.setData({
-                                expShareText: `Android 微信测试版 ${map.versionName}${this.data.succeedExpBackFileSizeShare}\n\n下载地址：${this.data.successExpBackLink}\n\n鉴于微信测试版可能存在不可预知的稳定性问题，您在下载及使用该测试版本之前，必须明确并确保自身具备足够的风险识别和承受能力。`
-                            })
+                            if (isSuccess.exists && isSuccess.fileSize !== false) {
+                                this.setData({
+                                    successExpBackLink: map.url,
+                                    succeedExpBackFileSizeShare: `（大小：${isSuccess.fileSize} MB）`,
+                                    expVisible: false,
+                                    expBackVisible: true,
+                                    expBackJson: mapJson,
+                                    expJsonBackTitle: "腾讯服务器微信测试版拉取结果",
+                                    expJsonBackResultTitle: "获取成功",
+                                    expBackStatus: "success"
+                                });
+                                this.setData({
+                                    expShareText: `Android 微信 ${map.versionName} 测试版${this.data.succeedExpBackFileSizeShare}\n\n下载地址：${this.data.successExpBackLink}\n\n鉴于微信测试版可能存在不可预知的稳定性问题，您在下载及使用该测试版本之前，必须明确并确保自身具备足够的风险识别和承受能力。`
+                                })
+                            } else {
+                                this.setData({
+                                    successExpBackLink: map.url,
+                                    succeedExpBackFileSizeShare: "（似乎未成功访问此下载地址，可能是微信当前测试版已撤包。）",
+                                    expVisible: false,
+                                    expBackVisible: true,
+                                    expBackJson: mapJson,
+                                    expJsonBackTitle: "腾讯服务器微信测试版拉取结果",
+                                    expJsonBackResultTitle: "疑似撤包",
+                                    expBackStatus: "default"
+                                });
+                                this.setData({
+                                    expShareText: `Android 微信 ${map.versionName} 测试版\n\n下载地址：${this.data.successExpBackLink}\n\n鉴于微信测试版可能存在不可预知的稳定性问题，您在下载及使用该测试版本之前，必须明确并确保自身具备足够的风险识别和承受能力。`
+                                })
+                            }
                         }).catch(err => {
                             console.error(err);
                             const errorMessage = err.errMsg;
