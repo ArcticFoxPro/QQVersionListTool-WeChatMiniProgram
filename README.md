@@ -42,7 +42,7 @@ QQ 版本列表 Vigor for WeChat MiniProgram 是一个使用 TDesign 组件库�
 3. [前往微信公众平台注册微信小程序开发者账号](https://mp.weixin.qq.com/cgi-bin/wx)，取得 `AppID`（小程序需配置域名白名单，测试号无法实现这一点）。
 4. 在 [微信公众平台](https://mp.weixin.qq.com/)-开发管理-服务器域名 中，将以下域名导入微信小程序 request 合法域名：
     ```
-    https://csydown.ll.tcdnos.com;https://dldir1.qq.com;https://download.z.weixin.qq.com;https://downv6.qq.com;https://im.qq.com;https://imtt.dd.qq.com;https://static.tdesign.tencent.com;https://tcb-api.tencentcloudapi.com;https://upage.html5.qq.com;https://z.weixin.qq.com;
+    https://csydown.ll.tcdnos.com;https://dldir1.qq.com;https://dldir1v6.qq.com;https://download.z.weixin.qq.com;https://downv6.qq.com;https://im.qq.com;https://imtt.dd.qq.com;https://jsonschema.qpic.cn;https://qq-gray-1258344701.shiply-cdn.qq.com;https://shiply-cdn.qq.com;https://shiply-demo-1258344701.file.myqcloud.com;https://static.tdesign.tencent.com;https://tcb-api.tencentcloudapi.com;https://tim-1258344701.shiply-cdn.qq.com;https://tim.qq.com;https://upage.html5.qq.com;https://z.weixin.qq.com;
     ```
 5. 下载[微信小程序开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)，登录后点击“小程序”-“导入”，填入上一步取得的 `AppID`，将 `<仓库源代码解压目录>/source` 目录选中后导入。
 6. 点击微信小程序开发者工具上方“预览”按钮并使用手机扫码，即可使用 QQ 版本列表 Vigor for WeChat MiniProgram。
