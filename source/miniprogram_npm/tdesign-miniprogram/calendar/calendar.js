@@ -9,6 +9,7 @@ import config from '../common/config';
 import props from './props';
 import TCalendar from '../common/shared/calendar/index';
 import useCustomNavbar from '../mixins/using-custom-navbar';
+import { getPrevMonth, getPrevYear, getNextMonth, getNextYear } from './utils';
 const { prefix } = config;
 const name = `${prefix}-calendar`;
 const defaultLocaleText = {
@@ -34,6 +35,13 @@ let Calendar = class Calendar extends SuperComponent {
             scrollIntoView: '',
             innerConfirmBtn: {},
             realLocalText: {},
+            currentMonth: {},
+            actionButtons: {
+                preYearBtnDisable: false,
+                prevMonthBtnDisable: false,
+                nextMonthBtnDisable: false,
+                nextYearBtnDisable: false,
+            },
         };
         this.controlledProps = [
             {
@@ -57,6 +65,9 @@ let Calendar = class Calendar extends SuperComponent {
                     realLocalText,
                 });
                 this.calcMonths();
+                if (this.data.switchMode !== 'none') {
+                    this.calcCurrentMonth();
+                }
                 if (!this.data.usePopup) {
                     this.scrollIntoView();
                 }
@@ -126,6 +137,41 @@ let Calendar = class Calendar extends SuperComponent {
                     });
                 }
             },
+            getCurrentYearAndMonth(v) {
+                const date = new Date(v);
+                return { year: date.getFullYear(), month: date.getMonth() };
+            },
+            updateActionButton(value) {
+                const _min = this.getCurrentYearAndMonth(this.base.minDate);
+                const _max = this.getCurrentYearAndMonth(this.base.maxDate);
+                const _minTimestamp = new Date(_min.year, _min.month, 1).getTime();
+                const _maxTimestamp = new Date(_max.year, _max.month, 1).getTime();
+                const _prevYearTimestamp = getPrevYear(value).getTime();
+                const _prevMonthTimestamp = getPrevMonth(value).getTime();
+                const _nextMonthTimestamp = getNextMonth(value).getTime();
+                const _nextYearTimestamp = getNextYear(value).getTime();
+                const preYearBtnDisable = _prevYearTimestamp < _minTimestamp || _prevMonthTimestamp < _minTimestamp;
+                const prevMonthBtnDisable = _prevMonthTimestamp < _minTimestamp;
+                const nextYearBtnDisable = _nextMonthTimestamp >= _maxTimestamp || _nextYearTimestamp >= _maxTimestamp;
+                const nextMonthBtnDisable = _nextMonthTimestamp >= _maxTimestamp;
+                this.setData({
+                    actionButtons: {
+                        preYearBtnDisable,
+                        prevMonthBtnDisable,
+                        nextYearBtnDisable,
+                        nextMonthBtnDisable,
+                    },
+                });
+            },
+            calcCurrentMonth(newValue) {
+                const date = newValue || this.getCurrentDate();
+                const { year, month } = this.getCurrentYearAndMonth(date);
+                const currentMonth = this.data.months.filter((item) => item.year === year && item.month === month);
+                this.updateActionButton(date);
+                this.setData({
+                    currentMonth,
+                });
+            },
             calcMonths() {
                 const months = this.base.getMonths();
                 this.setData({
@@ -151,6 +197,10 @@ let Calendar = class Calendar extends SuperComponent {
                 const rawValue = this.base.select({ cellType: date.type, year, month, date: date.day });
                 const value = this.toTime(rawValue);
                 this.calcMonths();
+                if (this.data.switchMode !== 'none') {
+                    const date = this.getCurrentDate();
+                    this.calcCurrentMonth(date);
+                }
                 if (this.data.confirmBtn == null) {
                     if (this.data.type === 'single' || rawValue.length === 2) {
                         this.setData({ visible: false });
@@ -173,6 +223,32 @@ let Calendar = class Calendar extends SuperComponent {
             },
             onScroll(e) {
                 this.triggerEvent('scroll', e.detail);
+            },
+            getCurrentDate() {
+                var _a, _b;
+                let time = Array.isArray(this.base.value) ? this.base.value[0] : this.base.value;
+                if (this.data.currentMonth.length > 0) {
+                    const year = (_a = this.data.currentMonth[0]) === null || _a === void 0 ? void 0 : _a.year;
+                    const month = (_b = this.data.currentMonth[0]) === null || _b === void 0 ? void 0 : _b.month;
+                    time = new Date(year, month, 1).getTime();
+                }
+                return time;
+            },
+            handleSwitchModeChange(e) {
+                const { type, disabled } = e.currentTarget.dataset;
+                if (disabled)
+                    return;
+                const date = this.getCurrentDate();
+                const funcMap = {
+                    'pre-year': () => getPrevYear(date),
+                    'pre-month': () => getPrevMonth(date),
+                    'next-month': () => getNextMonth(date),
+                    'next-year': () => getNextYear(date),
+                };
+                const newValue = funcMap[type]();
+                if (!newValue)
+                    return;
+                this.calcCurrentMonth(newValue);
             },
         };
     }

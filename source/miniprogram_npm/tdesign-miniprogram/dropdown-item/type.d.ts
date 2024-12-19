@@ -35,6 +35,10 @@ export interface TdDropdownItemProps {
         type: null;
         value?: string | number;
     };
+    placement?: {
+        type: StringConstructor;
+        value?: 'left' | 'right';
+    };
     value?: {
         type: null;
         value?: DropdownValue;

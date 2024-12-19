@@ -80,6 +80,9 @@
 .t-tab-bar-item__content--tag.t-tab-bar-item__content--checked {
   background-color: var(--td-tab-bar-active-bg, var(--td-brand-color-light, var(--td-primary-color-1, #f2f3ff)));
 }
+.t-tab-bar-item__icon {
+  display: contents;
+}
 .t-tab-bar-item__icon:empty {
   display: none;
 }

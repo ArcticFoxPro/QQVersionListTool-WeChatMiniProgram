@@ -83,7 +83,7 @@ See the Mulan PubL v2 for more details.
                             <t-cell arrow bind:tap="clickTimCell" data-index="{{index}}" hover leftIcon="">
                                 <view slot="title"
                                       style="font-family: {{TCloudNumberSwitch?'TCloudNumber-'+(TCloudNumberHeavy===2?'Bold':(TCloudNumberHeavy===1?'Regular':'Light'))+',':''}} sans-serif; font-size: 60rpx; display: flex;justify-content: center;align-items: center">
-                                    {{item.version}}
+                                    {{item.version_code}}
                                     <t-icon name="" prefix="qqnt-logo-src" size="44rpx" slot="icon"
                                             style="margin-left: 6rpx;" wx:if="{{item.isQQNTFramework}}"/>
                                     <t-icon name="" prefix="kuikly-logo-src" size="32rpx" slot="icon"
@@ -306,10 +306,10 @@ See the Mulan PubL v2 for more details.
         <view class="guess-text" style="margin: 0 32rpx 16rpx 32rpx;">版本：{{itemTimVersion}}</view>
         <view class="guess-text" style=" margin: 0 32rpx 16rpx 32rpx;">发布日期：{{itemTimDatetime}}</view>
         <view wx:for="{{itemTimNew}}">
-            <view class="guess-text" style="margin: 0 32rpx 16rpx 32rpx;">{{item}}</view>
+            <view class="guess-text" style="margin: 0 32rpx 16rpx 32rpx;">- {{item}}</view>
         </view>
         <view wx:for="{{itemTimFix}}">
-            <view class="guess-text" style="margin: 0 32rpx 16rpx 32rpx;">{{item}}</view>
+            <view class="guess-text" style="margin: 0 32rpx 16rpx 32rpx;">- {{item}}</view>
         </view>
     </view>
     <view class="cell-detail-button">

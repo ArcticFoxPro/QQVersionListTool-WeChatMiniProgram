@@ -303,95 +303,80 @@ Page({
 
             },
         });
+
         wx.request({
-            url: 'https://im.qq.com/rainbow/TIMDownload/', method: 'GET', success: (res) => {
+            url: 'https://tim.qq.com/support.html', method: 'GET', success: (res) => {
                 try {
-                    let responseData = res.data;
-                    const jsonString = responseData.substring(responseData.indexOf('var params= ') + 12, responseData.lastIndexOf(";\n" + "      typeof"));
-                    const jsonData = JSON.parse(jsonString);
-                    const androidLink = jsonData.app.download.androidLink;
-                    const timVersionList = [];
-                    timVersionList.push({
-                        version: jsonData.app.download.androidVersion,
-                        datetime: jsonData.app.download.androidDatetime,
-                        fix: "".split('<br/>'),
-                        new: "".split('<br/>'),
-                        isAccessibility: false,
-                        isQQNTFramework: semver.gte(jsonData.app.download.androidVersion, getApp().globalData.EARLIEST_QQNT_FRAMEWORK_TIM_VERSION_STABLE),
-                        isKuiklyInside: semver.gte(jsonData.app.download.androidVersion, getApp().globalData.EARLIEST_KUIKLY_FRAMEWORK_TIM_VERSION_STABLE),
-                        jsonString: {
-                            version: jsonData.app.download.androidVersion,
-                            datetime: jsonData.app.download.androidDatetime,
-                            fix: "",
-                            new: ""
-                        },
-                        link: ""
-                    });
+                    const htmlData = res.data;
+                    const regex = /jQuery\.ajax\(\{\s*url:\s*'([^']+)'\s*}\)\.done\(function \(versionData\)/;
+                    const match = htmlData.match(regex);
+                    if (match && match[1] && (match[1].startsWith('https://') || match[1].startsWith('http://'))) {
+                        wx.request({
+                            // https://im.qq.com/rainbow/TIMDownload/ 被弃用
+                            url: match[1].replace('http://', 'https://'), method: 'GET', success: (res) => {
+                                try {
+                                    const jsonData = JSON.parse(JSON.stringify(res.data));
+                                    const androidLink = jsonData['download_link']['android']
+                                    const timVersionList = [];
 
-                    // 从 latest 项中获取 Android 版本
-                    jsonData.app.latest.forEach(function (item) {
-                        if (item.platform === "Android") {
-                            timVersionList.push({
-                                version: item.version,
-                                datetime: item.datetime,
-                                fix: item.fix.split('<br/>'),
-                                new: item.new.split('<br/>'),
-                                isAccessibility: false,
-                                isQQNTFramework: semver.gte(item.version, getApp().globalData.EARLIEST_QQNT_FRAMEWORK_TIM_VERSION_STABLE),
-                                isKuiklyInside: semver.gte(item.version, getApp().globalData.EARLIEST_KUIKLY_FRAMEWORK_TIM_VERSION_STABLE),
-                                jsonString: {
-                                    version: item.version, datetime: item.datetime, fix: item.fix, new: item.new
-                                },
-                                link: ""
-                            });
-                        }
-                    });
+                                    // 从 `version_history` 项中获取 Android 版本
+                                    jsonData['version_history'].forEach(function (versionItem) {
+                                        versionItem.logs.forEach(function (logItem) {
+                                            if (logItem.platform === "android") {
+                                                timVersionList.push({
+                                                    version_code: versionItem['version_code'],
+                                                    datetime: logItem.datetime,
+                                                    fix: logItem.fix,
+                                                    feature: logItem.feature,
+                                                    isAccessibility: false,
+                                                    isQQNTFramework: semver.gte(versionItem['version_code'], getApp().globalData.EARLIEST_QQNT_FRAMEWORK_TIM_VERSION_STABLE),
+                                                    isKuiklyInside: semver.gte(versionItem['version_code'], getApp().globalData.EARLIEST_KUIKLY_FRAMEWORK_TIM_VERSION_STABLE),
+                                                    jsonString: {
+                                                        version_code: versionItem['version_code'],
+                                                        datetime: logItem.datetime,
+                                                        fix: logItem.fix,
+                                                        feature: logItem.feature
+                                                    },
+                                                    link: ""
+                                                });
+                                            }
+                                        });
+                                    });
 
-                    // 从 history 项中获取 Android 版本
-                    jsonData.app.history.forEach(function (versionItem) {
-                        versionItem.logs.forEach(function (logItem) {
-                            if (logItem.platform === "Android") {
-                                timVersionList.push({
-                                    version: versionItem.version,
-                                    datetime: logItem.datetime,
-                                    fix: logItem.fix.split('<br/>'),
-                                    new: logItem.new.split('<br/>'),
-                                    isAccessibility: false,
-                                    isQQNTFramework: semver.gte(versionItem.version, getApp().globalData.EARLIEST_QQNT_FRAMEWORK_TIM_VERSION_STABLE),
-                                    isKuiklyInside: semver.gte(versionItem.version, getApp().globalData.EARLIEST_KUIKLY_FRAMEWORK_TIM_VERSION_STABLE),
-                                    jsonString: {
-                                        version: versionItem.version,
-                                        datetime: logItem.datetime,
-                                        fix: logItem.fix,
-                                        new: logItem.new
-                                    },
-                                    link: ""
+                                    const uniqueTIMVersionList = [...new Map(timVersionList.map(item => [JSON.stringify(item.jsonString), item])).values()];
+                                    uniqueTIMVersionList[0].link = androidLink
+                                    const parsedJson = JSON.parse(JSON.stringify(uniqueTIMVersionList[0].jsonString));
+                                    uniqueTIMVersionList[0].jsonString = {
+                                        version_code: parsedJson.version_code,
+                                        datetime: parsedJson.datetime,
+                                        fix: parsedJson.fix,
+                                        feature: parsedJson.feature,
+                                        link: androidLink
+                                    };
+
+                                    this.setData({
+                                        timVersions: uniqueTIMVersionList
+                                    });
+                                    wx.setStorageSync('timVersionBig', timVersionList[0].version);
+
+                                    endProgress(this)
+
+                                } catch (e) {
+                                    endProgress(this)
+                                    const errorMessage = e.errMsg;
+                                    this.setData({
+                                        errorText: errorMessage, errorVisible: true
+                                    });
+                                }
+                            }, fail: (err) => {
+                                endProgress(this)
+                                const errorMessage = err.errMsg;
+                                this.setData({
+                                    errorText: errorMessage, errorVisible: true
                                 });
-                            }
-                        });
-                    });
-
-                    // 去除重复的版本号
-                    const uniqueTIMVersionList = [...new Map(timVersionList.map(item => [JSON.stringify(item.jsonString), item])).values()];
-                    if (uniqueTIMVersionList[0].version === uniqueTIMVersionList[1].version) uniqueTIMVersionList.shift()
-
-                    uniqueTIMVersionList[0].link = androidLink
-                    const parsedJson = JSON.parse(JSON.stringify(uniqueTIMVersionList[0].jsonString));
-                    uniqueTIMVersionList[0].jsonString = {
-                        version: parsedJson.version,
-                        datetime: parsedJson.datetime,
-                        fix: parsedJson.fix,
-                        new: parsedJson.new,
-                        link: androidLink
-                    };
-
-                    this.setData({
-                        timVersions: uniqueTIMVersionList
-                    });
-                    wx.setStorageSync('timVersionBig', timVersionList[0].version);
-
-                    endProgress(this)
-
+                            },
+                        })
+                    }
                 } catch (e) {
                     endProgress(this)
                     const errorMessage = e.errMsg;
@@ -405,8 +390,8 @@ Page({
                 this.setData({
                     errorText: errorMessage, errorVisible: true
                 });
-            },
-        })
+            }
+        });
     }, aboutPopupVisible(e) {
         this.setData({
             aboutVisible: e.detail.visible,
@@ -460,10 +445,10 @@ Page({
         const index = e.currentTarget.dataset.index;
         this.setData({
             detailStatus: 'TIMDetail',
-            itemTimVersion: this.data.timVersions[index].version,
+            itemTimVersion: this.data.timVersions[index].version_code,
             itemTimDatetime: this.data.timVersions[index].datetime,
             itemTimFix: this.data.timVersions[index].fix,
-            itemTimNew: this.data.timVersions[index].new,
+            itemTimNew: this.data.timVersions[index].feature,
             itemString: JSON.stringify(this.data.timVersions[index].jsonString, null, 2),
             cellDetailVisible: true
         });

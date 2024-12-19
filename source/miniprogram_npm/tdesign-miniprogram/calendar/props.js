@@ -23,6 +23,10 @@ const props = {
     minDate: {
         type: Number,
     },
+    switchMode: {
+        type: String,
+        value: 'none',
+    },
     title: {
         type: String,
     },

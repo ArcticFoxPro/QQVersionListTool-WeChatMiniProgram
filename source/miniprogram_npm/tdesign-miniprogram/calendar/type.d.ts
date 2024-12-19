@@ -28,6 +28,10 @@ export interface TdCalendarProps {
         type: NumberConstructor;
         value?: number;
     };
+    switchMode?: {
+        type: StringConstructor;
+        value?: 'none' | 'month' | 'year-month';
+    };
     title?: {
         type: StringConstructor;
         value?: string;

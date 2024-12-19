@@ -54,5 +54,6 @@ export default class Cascader extends SuperComponent {
             }[][];
         };
         handleSelect(e: any): void;
+        triggerChange(): void;
     };
 }

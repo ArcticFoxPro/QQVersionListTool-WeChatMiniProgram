@@ -25,7 +25,7 @@ let DropdownMenuItem = class DropdownMenuItem extends SuperComponent {
             `${prefix}-class-column-item-label`,
             `${prefix}-class-footer`,
         ];
-        this.properties = Object.assign({}, props);
+        this.properties = props;
         this.data = {
             prefix,
             classPrefix: name,

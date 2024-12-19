@@ -109,7 +109,7 @@
 }
 .t-cell--required {
   font-size: var(--td-cell-required-font-size, var(--td-font-size-m, 32rpx));
-  color: var(--td-cell-required-color, var(--td-error-color-6, #d54941));
+  color: var(--td-cell-required-color, var(--td-error-color, var(--td-error-color-6, #d54941)));
 }
 .t-cell--middle {
   align-items: center;

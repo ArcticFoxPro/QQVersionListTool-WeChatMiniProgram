@@ -193,6 +193,9 @@ let Cascader = class Cascader extends SuperComponent {
                 this.hide('overlay');
             },
             onClose() {
+                if (this.data.checkStrictly) {
+                    this.triggerChange();
+                }
                 this.hide('close-btn');
             },
             onStepClick(e) {
@@ -237,7 +240,8 @@ let Cascader = class Cascader extends SuperComponent {
                 var _a, _b, _c, _d, _e;
                 const { level } = e.target.dataset;
                 const { value } = e.detail;
-                const { selectedIndexes, items, keys, options } = this.data;
+                const { checkStrictly } = this.properties;
+                const { selectedIndexes, items, keys, options, selectedValue } = this.data;
                 const index = items[level].findIndex((item) => { var _a; return item[(_a = keys === null || keys === void 0 ? void 0 : keys.value) !== null && _a !== void 0 ? _a : 'value'] === value; });
                 let item = selectedIndexes.slice(0, level).reduce((acc, item, index) => {
                     var _a;
@@ -255,14 +259,19 @@ let Cascader = class Cascader extends SuperComponent {
                 if (item.disabled) {
                     return;
                 }
-                selectedIndexes[level] = index;
-                selectedIndexes.length = level + 1;
                 this.triggerEvent('pick', {
                     value: item[(_b = keys === null || keys === void 0 ? void 0 : keys.value) !== null && _b !== void 0 ? _b : 'value'],
                     label: item[(_c = keys === null || keys === void 0 ? void 0 : keys.label) !== null && _c !== void 0 ? _c : 'label'],
                     index,
                     level,
                 });
+                selectedIndexes[level] = index;
+                if (checkStrictly && selectedValue.includes(String(value))) {
+                    selectedIndexes.length = level;
+                    this.setData({ selectedIndexes });
+                    return;
+                }
+                selectedIndexes.length = level + 1;
                 const { items: newItems } = this.genItems();
                 if ((_e = item === null || item === void 0 ? void 0 : item[(_d = keys === null || keys === void 0 ? void 0 : keys.children) !== null && _d !== void 0 ? _d : 'children']) === null || _e === void 0 ? void 0 : _e.length) {
                     this.setData({
@@ -273,16 +282,17 @@ let Cascader = class Cascader extends SuperComponent {
                 else {
                     this.setData({
                         selectedIndexes,
-                    }, () => {
-                        var _a;
-                        const { items } = this.data;
-                        this._trigger('change', {
-                            value: item[(_a = keys === null || keys === void 0 ? void 0 : keys.value) !== null && _a !== void 0 ? _a : 'value'],
-                            selectedOptions: items.map((item, index) => item[selectedIndexes[index]]),
-                        });
-                    });
+                    }, this.triggerChange);
                     this.hide('finish');
                 }
+            },
+            triggerChange() {
+                var _a;
+                const { items, selectedValue, selectedIndexes } = this.data;
+                this._trigger('change', {
+                    value: (_a = selectedValue[selectedValue.length - 1]) !== null && _a !== void 0 ? _a : '',
+                    selectedOptions: items.map((item, index) => item[selectedIndexes[index]]).filter(Boolean),
+                });
             },
         };
     }

@@ -97,7 +97,7 @@ let NoticeBar = class NoticeBar extends SuperComponent {
                     Promise.all([getRect(this, nodeID), getRect(this, warpID)])
                         .then(([nodeRect, wrapRect]) => {
                         const { marquee } = this.properties;
-                        if (nodeRect == null || wrapRect == null || !nodeRect.width || !wrapRect.width) {
+                        if (nodeRect == null || wrapRect == null || !nodeRect.width || !wrapRect.width || marquee === false) {
                             return;
                         }
                         if (marquee || wrapRect.width < nodeRect.width) {

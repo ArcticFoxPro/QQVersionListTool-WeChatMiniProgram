@@ -7,44 +7,7 @@ export default class DropdownMenuItem extends SuperComponent {
         multipleSlots: boolean;
     };
     externalClasses: string[];
-    properties: {
-        disabled?: {
-            type: BooleanConstructor;
-            value?: boolean;
-        };
-        externalClasses?: {
-            type: ArrayConstructor;
-            value?: ["t-class", "t-class-content", "t-class-column", "t-class-column-item", "t-class-column-item-label", "t-class-footer"];
-        };
-        keys?: {
-            type: ObjectConstructor;
-            value?: import("../common/common").KeysType;
-        };
-        label?: {
-            type: StringConstructor;
-            value?: string;
-        };
-        multiple?: {
-            type: BooleanConstructor;
-            value?: boolean;
-        };
-        options?: {
-            type: ArrayConstructor;
-            value?: import("./type").DropdownOption[];
-        };
-        optionsColumns?: {
-            type: null;
-            value?: string | number;
-        };
-        value?: {
-            type: null;
-            value?: import("./type").DropdownValue;
-        };
-        defaultValue?: {
-            type: null;
-            value?: import("./type").DropdownValue;
-        };
-    };
+    properties: TdDropdownItemProps;
     data: {
         prefix: string;
         classPrefix: string;

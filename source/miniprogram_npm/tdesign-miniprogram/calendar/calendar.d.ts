@@ -15,6 +15,13 @@ export default class Calendar extends SuperComponent {
         scrollIntoView: string;
         innerConfirmBtn: {};
         realLocalText: {};
+        currentMonth: {};
+        actionButtons: {
+            preYearBtnDisable: boolean;
+            prevMonthBtnDisable: boolean;
+            nextMonthBtnDisable: boolean;
+            nextYearBtnDisable: boolean;
+        };
     };
     controlledProps: {
         key: string;
@@ -35,6 +42,12 @@ export default class Calendar extends SuperComponent {
     methods: {
         initialValue(): void;
         scrollIntoView(): void;
+        getCurrentYearAndMonth(v: Date): {
+            year: number;
+            month: number;
+        };
+        updateActionButton(value: Date): void;
+        calcCurrentMonth(newValue?: any): void;
         calcMonths(): void;
         close(trigger: any): void;
         onVisibleChange(): void;
@@ -43,5 +56,7 @@ export default class Calendar extends SuperComponent {
         onTplButtonTap(): void;
         toTime(val: any): any;
         onScroll(e: any): void;
+        getCurrentDate(): any;
+        handleSwitchModeChange(e: any): void;
     };
 }

@@ -112,7 +112,7 @@
 }
 .t-count-down--square > .t-count-down__split--dot,
 .t-count-down--round > .t-count-down__split--dot {
-  color: var(--td-error-color-6, #d54941);
+  color: var(--td-error-color, var(--td-error-color-6, #d54941));
 }
 .t-count-down--square > .t-count-down__split--text,
 .t-count-down--round > .t-count-down__split--text {
@@ -126,12 +126,12 @@
 }
 .t-count-down--square > .t-count-down__item {
   border-radius: var(--td-countdown-square-border-radius, var(--td-radius-small, 6rpx));
-  background: var(--td-countdown-bg-color, var(--td-error-color-6, #d54941));
+  background: var(--td-countdown-bg-color, var(--td-error-color, var(--td-error-color-6, #d54941)));
 }
 .t-count-down--round {
   color: var(--td-countdown-round-color, var(--td-text-color-anti, var(--td-font-white-1, #ffffff)));
 }
 .t-count-down--round > .t-count-down__item {
   border-radius: var(--td-countdown-round-border-radius, var(--td-radius-circle, 50%));
-  background: var(--td-countdown-bg-color, var(--td-error-color-6, #d54941));
+  background: var(--td-countdown-bg-color, var(--td-error-color, var(--td-error-color-6, #d54941)));
 }

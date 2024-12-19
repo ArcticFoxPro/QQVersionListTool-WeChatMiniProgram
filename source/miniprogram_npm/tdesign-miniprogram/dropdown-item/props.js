@@ -25,6 +25,10 @@ const props = {
         type: null,
         value: 1,
     },
+    placement: {
+        type: String,
+        value: 'left',
+    },
     value: {
         type: null,
         value: undefined,

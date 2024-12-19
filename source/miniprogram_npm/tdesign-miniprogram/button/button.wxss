@@ -154,8 +154,8 @@
 }
 .t-button--danger.t-button--hover,
 .t-button--danger.t-button--hover::after {
-  background-color: var(--td-button-danger-active-bg-color, var(--td-error-color-7, #ad352f));
-  border-color: var(--td-button-danger-active-border-color, var(--td-error-color-7, #ad352f));
+  background-color: var(--td-button-danger-active-bg-color, var(--td-error-color-active, var(--td-error-color-7, #ad352f)));
+  border-color: var(--td-button-danger-active-border-color, var(--td-error-color-active, var(--td-error-color-7, #ad352f)));
 }
 .t-button--danger.t-button--disabled {
   color: var(--td-button-danger-disabled-color, var(--td-font-white-1, #ffffff));
@@ -288,11 +288,11 @@
   border-color: var(--td-button-danger-outline-border-color, var(--td-button-danger-outline-color, var(--td-error-color, var(--td-error-color-6, #d54941))));
 }
 .t-button--outline.t-button--danger.t-button--hover {
-  color: var(--td-button-danger-outline-active-border-color, var(--td-error-color-7, #ad352f));
+  color: var(--td-button-danger-outline-active-border-color, var(--td-error-color-active, var(--td-error-color-7, #ad352f)));
 }
 .t-button--outline.t-button--danger.t-button--hover::after {
   background-color: var(--td-button-danger-outline-active-bg-color, var(--td-bg-color-container-active, var(--td-gray-color-3, #e7e7e7)));
-  border-color: var(--td-button-danger-outline-active-border-color, var(--td-error-color-7, #ad352f));
+  border-color: var(--td-button-danger-outline-active-border-color, var(--td-error-color-active, var(--td-error-color-7, #ad352f)));
 }
 .t-button--outline.t-button--danger.t-button--disabled {
   background-color: var(--td-bg-color-container, var(--td-font-white-1, #ffffff));
