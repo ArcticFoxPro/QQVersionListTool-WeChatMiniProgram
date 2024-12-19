@@ -1555,13 +1555,13 @@ Page({
                     succeedExpBackFileSizeShare: `（大小：${isSuccess.fileSize} MB）`,
                     expVisible: false,
                     expBackWithUrlOnlyVisible: true,
-                    expJsonBackTitle: `TIM ${this.data.timVersions[0].version} 正式版`,
+                    expJsonBackTitle: `TIM ${this.data.timVersions[0].version_code} 正式版`,
                     expJsonBackResultTitle: "获取成功",
                     expBackStatus: "success",
                     getTimNewestLinkLoading: false
                 });
                 this.setData({
-                    expShareText: `Android TIM ${this.data.timVersions[0].version} 正式版${this.data.succeedExpBackFileSizeShare}\n\n下载地址：${url}`
+                    expShareText: `Android TIM ${this.data.timVersions[0].version_code} 正式版${this.data.succeedExpBackFileSizeShare}\n\n下载地址：${url}`
                 })
             } else {
                 this.setData({
@@ -1569,13 +1569,13 @@ Page({
                     succeedExpBackFileSizeShare: "",
                     expVisible: false,
                     expBackWithUrlOnlyVisible: true,
-                    expJsonBackTitle: `TIM ${this.data.timVersions[0].version} 正式版`,
+                    expJsonBackTitle: `TIM ${this.data.timVersions[0].version_code} 正式版`,
                     expJsonBackResultTitle: "获取成功",
                     expBackStatus: "success",
                     getTimNewestLinkLoading: false
                 });
                 this.setData({
-                    expShareText: `Android TIM ${this.data.timVersions[0].version} 正式版\n\n下载地址：${url}`
+                    expShareText: `Android TIM ${this.data.timVersions[0].version_code} 正式版\n\n下载地址：${url}`
                 })
             }
         }).catch(err => {
