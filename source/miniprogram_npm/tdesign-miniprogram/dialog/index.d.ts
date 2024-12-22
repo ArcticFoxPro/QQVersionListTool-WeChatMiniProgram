@@ -12,6 +12,9 @@ interface DialogAlertOptionsType {
     textAlign?: string;
     cancelBtn?: string | object;
     confirmBtn?: string | object;
+    showOverlay?: boolean;
+    closeOnOverlayClick?: boolean;
+    preventScrollThrough?: boolean;
 }
 interface DialogConfirmOptionsType extends DialogAlertOptionsType {
     cancelButtonText?: string;

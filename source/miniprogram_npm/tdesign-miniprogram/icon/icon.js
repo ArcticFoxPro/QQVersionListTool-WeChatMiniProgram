@@ -48,8 +48,14 @@ let Icon = class Icon extends SuperComponent {
                 const iconStyle = Object.assign(Object.assign({}, colorStyle), fontStyle);
                 this.setData({ isImage }, () => __awaiter(this, void 0, void 0, function* () {
                     if (isImage) {
-                        const { height } = yield getRect(this, `.${classPrefix}`);
-                        const iconSize = sizeValue || addUnit(height);
+                        let iconSize = sizeValue;
+                        if (!iconSize) {
+                            yield getRect(this, `.${classPrefix}`)
+                                .then((res) => {
+                                iconSize = addUnit(res === null || res === void 0 ? void 0 : res.height);
+                            })
+                                .catch(() => { });
+                        }
                         iconStyle.width = iconSize;
                         iconStyle.height = iconSize;
                     }

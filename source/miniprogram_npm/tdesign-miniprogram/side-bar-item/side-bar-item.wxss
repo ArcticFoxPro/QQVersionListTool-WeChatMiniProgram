@@ -28,7 +28,6 @@
 .t-side-bar-item {
   display: flex;
   align-items: center;
-  justify-content: center;
   position: relative;
   padding: 32rpx;
   font-size: var(--td-side-bar-font-size, 32rpx);
@@ -42,6 +41,7 @@
 .t-side-bar-item--active {
   font-weight: 600;
   background: var(--td-bg-color-container, var(--td-font-white-1, #ffffff));
+  color: var(--td-side-bar-active-color, var(--td-brand-color, var(--td-primary-color-7, #0052d9)));
   --td-badge-content-text-color: var(--td-side-bar-active-color, var(--td-brand-color, var(--td-primary-color-7, #0052d9)));
 }
 .t-side-bar-item__icon {

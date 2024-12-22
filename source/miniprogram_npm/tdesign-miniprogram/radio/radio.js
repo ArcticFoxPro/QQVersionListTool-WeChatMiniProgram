@@ -41,6 +41,8 @@ let Radio = class Radio extends SuperComponent {
         this.properties = Object.assign(Object.assign({}, Props), { borderless: {
                 type: Boolean,
                 value: false,
+            }, tId: {
+                type: String,
             } });
         this.controlledProps = [
             {

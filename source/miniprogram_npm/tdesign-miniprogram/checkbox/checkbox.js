@@ -50,6 +50,8 @@ let CheckBox = class CheckBox extends SuperComponent {
         this.properties = Object.assign(Object.assign({}, Props), { theme: {
                 type: String,
                 value: 'default',
+            }, tId: {
+                type: String,
             } });
         this.data = {
             prefix,

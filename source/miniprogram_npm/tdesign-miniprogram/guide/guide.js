@@ -137,7 +137,7 @@ let Guide = class Guide extends SuperComponent {
                 var _a, _b, _c, _d;
                 let skipButton = (_a = step.skipButtonProps) !== null && _a !== void 0 ? _a : this.data.skipButtonProps;
                 const size = mode === 'popover' ? 'extra-small' : 'medium';
-                skipButton = Object.assign(Object.assign({ theme: 'light', content: '跳过', size }, skipButton), { class: `${prefix}-class-skip ${name}__button ${step.hideSkip ? `${name}__button--hidden` : ''} ${(skipButton === null || skipButton === void 0 ? void 0 : skipButton.class) || ''}`, type: 'skip' });
+                skipButton = Object.assign(Object.assign({ theme: 'light', content: '跳过', size }, skipButton), { class: `${prefix}-class-skip ${name}__button ${(skipButton === null || skipButton === void 0 ? void 0 : skipButton.class) || ''}`, type: 'skip' });
                 let nextButton = (_b = step.nextButtonProps) !== null && _b !== void 0 ? _b : this.data.nextButtonProps;
                 nextButton = Object.assign(Object.assign({ theme: 'primary', content: '下一步', size }, nextButton), { class: `${prefix}-class-next ${name}__button ${(nextButton === null || nextButton === void 0 ? void 0 : nextButton.class) || ''}`, type: 'next' });
                 nextButton = Object.assign(Object.assign({}, nextButton), { content: this.buttonContent(nextButton) });

@@ -19,6 +19,7 @@ let TreeSelect = class TreeSelect extends SuperComponent {
         this.data = {
             prefix,
             classPrefix: name,
+            scrollIntoView: null,
         };
         this.properties = props;
         this.controlledProps = [
@@ -30,6 +31,11 @@ let TreeSelect = class TreeSelect extends SuperComponent {
         this.observers = {
             'value, options, keys, multiple'() {
                 this.buildTreeOptions();
+            },
+        };
+        this.lifetimes = {
+            ready() {
+                this.getScrollIntoView('init');
             },
         };
         this.methods = {
@@ -70,9 +76,30 @@ let TreeSelect = class TreeSelect extends SuperComponent {
                     treeOptions,
                 });
             },
+            getScrollIntoView(status) {
+                const { value, scrollIntoView } = this.data;
+                if (status === 'init') {
+                    const scrollIntoView = Array.isArray(value)
+                        ? value.map((item) => {
+                            return Array.isArray(item) ? item[0] : item;
+                        })
+                        : [value];
+                    this.setData({
+                        scrollIntoView,
+                    });
+                }
+                else {
+                    if (scrollIntoView === null)
+                        return;
+                    this.setData({
+                        scrollIntoView: null,
+                    });
+                }
+            },
             onRootChange(e) {
                 const { value } = this.data;
                 const { value: itemValue } = e.detail;
+                this.getScrollIntoView('none');
                 value[0] = itemValue;
                 this._trigger('change', { value, level: 0 });
             },
@@ -80,6 +107,7 @@ let TreeSelect = class TreeSelect extends SuperComponent {
                 const { level, value: itemValue } = e.currentTarget.dataset;
                 const { value } = this.data;
                 value[level] = itemValue;
+                this.getScrollIntoView('none');
                 this._trigger('change', { value, level: 1 });
             },
             handleRadioChange(e) {
@@ -87,6 +115,7 @@ let TreeSelect = class TreeSelect extends SuperComponent {
                 const { value: itemValue } = e.detail;
                 const { level } = e.target.dataset;
                 value[level] = itemValue;
+                this.getScrollIntoView('none');
                 this._trigger('change', { value, level });
             },
         };

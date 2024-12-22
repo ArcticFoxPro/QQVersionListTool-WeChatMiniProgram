@@ -90,9 +90,6 @@
 .t-guide__footer .t-guide__button + .t-guide__button {
   margin-left: var(--td-guide-footer-button-space, var(--td-spacer-1, 24rpx));
 }
-.t-guide__footer .t-guide__button--hidden {
-  display: none;
-}
 .t-guide__footer--dialog {
   display: flex;
   padding: var(--td-guide-dialog-footer-button-padding, 0 var(--td-spacer-3, 48rpx));

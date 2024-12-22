@@ -14,6 +14,9 @@ export default class Radio extends SuperComponent {
             type: BooleanConstructor;
             value: boolean;
         };
+        tId: {
+            type: StringConstructor;
+        };
         allowUncheck?: {
             type: BooleanConstructor;
             value?: boolean;
