@@ -52,6 +52,10 @@ export interface TdPullDownRefreshProps {
         type: null;
         value?: string | number;
     };
+    usingCustomNavbar?: {
+        type: BooleanConstructor;
+        value?: boolean;
+    };
     value?: {
         type: BooleanConstructor;
         value?: boolean;

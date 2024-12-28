@@ -49,6 +49,10 @@ const props = {
         type: null,
         value: 50,
     },
+    usingCustomNavbar: {
+        type: Boolean,
+        value: false,
+    },
     value: {
         type: Boolean,
         value: null,

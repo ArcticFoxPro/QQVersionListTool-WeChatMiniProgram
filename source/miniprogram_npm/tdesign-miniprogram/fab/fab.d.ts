@@ -19,7 +19,9 @@ export default class Fab extends SuperComponent {
     };
     methods: {
         onTplButtonTap(e: any): void;
+        onStart(e: any): void;
         onMove(e: any): void;
+        onEnd(e: any): void;
         computedSize(): void;
     };
 }

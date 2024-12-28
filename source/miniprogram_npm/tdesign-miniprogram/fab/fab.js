@@ -41,6 +41,9 @@ let Fab = class Fab extends SuperComponent {
             onTplButtonTap(e) {
                 this.triggerEvent('click', e);
             },
+            onStart(e) {
+                this.triggerEvent('dragstart', e.detail.e);
+            },
             onMove(e) {
                 const { yBounds } = this.properties;
                 const { distanceTop } = this.data;
@@ -52,6 +55,9 @@ let Fab = class Fab extends SuperComponent {
                 this.setData({
                     moveStyle: `right: ${right}px; bottom: ${bottom}px;`,
                 });
+            },
+            onEnd(e) {
+                this.triggerEvent('dragend', e.detail.e);
             },
             computedSize() {
                 var _a, _b;

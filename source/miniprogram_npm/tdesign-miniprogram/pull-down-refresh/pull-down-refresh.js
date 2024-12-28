@@ -8,6 +8,7 @@ import { SuperComponent, wxComponent } from '../common/src/index';
 import config from '../common/config';
 import props from './props';
 import { unitConvert, systemInfo } from '../common/utils';
+import useCustomNavbar from '../mixins/using-custom-navbar';
 const { prefix } = config;
 const name = `${prefix}-pull-down-refresh`;
 let PullDownRefresh = class PullDownRefresh extends SuperComponent {
@@ -30,6 +31,7 @@ let PullDownRefresh = class PullDownRefresh extends SuperComponent {
             },
         };
         this.properties = props;
+        this.behaviors = [useCustomNavbar];
         this.data = {
             prefix,
             classPrefix: name,

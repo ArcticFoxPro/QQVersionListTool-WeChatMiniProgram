@@ -9,6 +9,7 @@ export default class Avatar extends SuperComponent {
         classPrefix: string;
         isShow: boolean;
         zIndex: number;
+        systemInfo: WechatMiniprogram.WindowInfo | WechatMiniprogram.SystemInfo;
     };
     relations: RelationsOptions;
     observers: {

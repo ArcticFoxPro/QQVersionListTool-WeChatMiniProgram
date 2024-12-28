@@ -16,6 +16,7 @@ export default class PullDownRefresh extends SuperComponent {
     };
     relations: RelationsOptions;
     properties: import("./type").TdPullDownRefreshProps;
+    behaviors: string[];
     data: {
         prefix: string;
         classPrefix: string;

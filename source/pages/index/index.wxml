@@ -111,7 +111,8 @@ See the Mulan PubL v2 for more details.
         </swiper>
     </view>
 
-    <view class="bottom-button" id="bottomButton" style="padding-bottom: {{safeBottomPadding}}px" hidden="{{safeBottomPadding===0}}">
+    <view class="bottom-button" hidden="{{safeBottomPadding===0}}" id="bottomButton"
+          style="padding-bottom: {{safeBottomPadding}}px">
         <view class="gradient-layer"></view>
         <view class="icon-button">
             <t-button aria-label="关于" bind:tap="handleAboutPopup" block class="about-home" icon="info-circle"
@@ -134,7 +135,8 @@ See the Mulan PubL v2 for more details.
 
     <view hidden="{{scrollNumber<=600}}">
         <t-back-top bind:to-top="onToTop" fixed scroll-top="{{scrollTop}}"
-                    style="position: fixed; bottom: {{safeBottomPaddingBackTop}}px; right: -1rpx" text="回到顶部" theme="half-round"
+                    style="position: fixed; bottom: {{safeBottomPaddingBackTop}}px; right: -1rpx" text="回到顶部"
+                    theme="half-round"
                     visibility-height="0"></t-back-top>
     </view>
 </view>
@@ -574,15 +576,17 @@ See the Mulan PubL v2 for more details.
         <view class="setting-header">
             <view class="setting-title" id="ability-exp">实验性功能</view>
         </view>
-        <t-cell arrow bind:tap="handleGetFromWeixinAlphaConfig" bordered hover
-                title="从腾讯服务器配置拉取微信最新测试版下载直链">
-            <view hidden="{{!getFromWeixinAlphaConfigLoading}}" slot="note">
+        <t-cell arrow bind:tap="handleGetFromWeixinAlphaConfig" bordered
+                description="从腾讯服务器配置拉取微信最新测试版下载直链" hover title="获取微信测试版">
+            <view slot="note"
+                  style="margin-left: 4rpx;visibility: {{getFromWeixinAlphaConfigLoading?'visible':'hidden'}}">
                 <t-loading/>
             </view>
         </t-cell>
-        <t-cell arrow bind:tap="handleGetFromWeTypeLatestChannel" bordered hover
-                title="从微信输入法测试通道获取微信输入法最新下载直链">
-            <view hidden="{{!getFromWeTypeLatestChannelLoading}}" slot="note">
+        <t-cell arrow bind:tap="handleGetFromWeTypeLatestChannel" bordered
+                description="从微信输入法测试通道获取微信输入法最新下载直链" hover title="获取微信输入法测试版">
+            <view slot="note"
+                  style="margin-left: 4rpx;visibility: {{getFromWeTypeLatestChannelLoading?'visible':'hidden'}}">
                 <t-loading/>
             </view>
         </t-cell>

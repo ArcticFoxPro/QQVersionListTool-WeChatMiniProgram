@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { SuperComponent, wxComponent } from '../common/src/index';
 import config from '../common/config';
 import avatarProps from './props';
-import { setIcon } from '../common/utils';
+import { setIcon, systemInfo } from '../common/utils';
 const { prefix } = config;
 const name = `${prefix}-avatar`;
 let Avatar = class Avatar extends SuperComponent {
@@ -29,6 +29,7 @@ let Avatar = class Avatar extends SuperComponent {
             classPrefix: name,
             isShow: true,
             zIndex: 0,
+            systemInfo,
         };
         this.relations = {
             '../avatar-group/avatar-group': {
