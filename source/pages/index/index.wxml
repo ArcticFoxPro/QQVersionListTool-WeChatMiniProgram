@@ -128,7 +128,7 @@ See the Mulan PubL v2 for more details.
                       shape="square" size="large" style="margin-left: 12rpx;" theme="light"
                       variant="outline"></t-button>
         </view>
-        <t-button bind:tap="handleGuessPopup" block class="text-button" icon="radar" size="large" theme="primary">
+        <t-button bind:tap="handleGuessPopup" block class="text-button" icon="radar" size="large" variant="outline">
             扫版
         </t-button>
     </view>
@@ -174,12 +174,18 @@ See the Mulan PubL v2 for more details.
          visible="{{guessVisible}}" z-index="11001">
     <view class="block">
         <view class="guess-header">
-            <view class="guess-title" id="ability-guess">扫版 Extended for Android</view>
+            <view class="guess-title" id="ability-guess">扫版（维护模式）</view>
         </view>
+        <t-notice-bar
+                content="扫版功能已进入维护模式。您仍可以继续使用现有扫版功能，但 QQ 版本列表 Vigor 不再对相关功能及其任何后果作出任何可靠性保证。请明确并确保自身具备足够的风险识别和承受能力。"
+                prefixIcon="{{false}}" theme="warning" visible="{{true}}">
+            <view slot="prefix-icon">
+                <t-icon name="error-circle-filled"></t-icon>
+            </view>
+        </t-notice-bar>
         <t-tabs bind:change="onTabsChange" bind:click="onTabsClick" id="tabs" swipeable="{{false}}"
                 t-class="custom-tabs" t-class-content="custom-panel" theme="tag" value="{{guessTabDefault}}">
             <t-tab-panel label="QQ" value="0">
-
                 <t-notice-bar
                         content="鉴于 QQ 测试版可能存在不可预知的稳定性问题，您在下载及使用该测试版本之前，必须明确并确保自身具备足够的风险识别和承受能力。"
                         prefixIcon="{{false}}" visible="{{QQTestSwitch}}">
@@ -205,9 +211,23 @@ See the Mulan PubL v2 for more details.
                 <view class="guess-button">
                     <t-button bind:tap="closeGuessPopup" block size="large" theme="light">取消</t-button>
                 </view>
+            </t-tab-panel>
+            <t-tab-panel label="TIM" value="1">
+                <t-input bind:change="onInputTIMBig" confirm-type="next" cursor-spacing="30"
+                         id="tim-official-version-big" label="主版本号" placeholder="点击以输入" tips="填写格式为 x.y.z"
+                         type="digit" value="{{timVersionBig}}"/>
+                <t-input bind:change="onInputTIMSmall" borderless confirm-type="done" cursor-spacing="30"
+                         id="tim-official-version-big" label="小版本号" placeholder="点击以输入"
+                         tips="填写起始扫描小版本号" type="number" value="{{timVersionSmall}}"/>
+                <view class="guess-button-top">
+                    <t-button bind:tap="startTIMGuess" block size="large" theme="primary">开始</t-button>
+                </view>
+                <view class="guess-button">
+                    <t-button bind:tap="closeGuessPopup" block size="large" theme="light">取消</t-button>
+                </view>
 
             </t-tab-panel>
-            <t-tab-panel label="微信" value="1">
+            <t-tab-panel label="微信" value="2">
                 <t-notice-bar
                         content="微信扫版功能为 QQ 版本列表 Vigor 附带的实验性功能，可能存在不可预知的稳定性问题。请明确并确保自身具备足够的风险识别和承受能力。"
                         prefixIcon="{{false}}" visible="{{true}}">
@@ -231,7 +251,7 @@ See the Mulan PubL v2 for more details.
                     <t-button bind:tap="closeGuessPopup" block size="large" theme="light">取消</t-button>
                 </view>
             </t-tab-panel>
-            <t-tab-panel label="微信输入法" value="2">
+            <t-tab-panel label="微信输入法" value="3">
                 <t-notice-bar
                         content="微信输入法扫版功能为 QQ 版本列表 Vigor 附带的实验性功能，可能存在不可预知的稳定性问题。请明确并确保自身具备足够的风险识别和承受能力。"
                         prefixIcon="{{false}}" visible="{{true}}">
@@ -251,28 +271,6 @@ See the Mulan PubL v2 for more details.
                 <view class="guess-button">
                     <t-button bind:tap="closeGuessPopup" block size="large" theme="light">取消</t-button>
                 </view>
-            </t-tab-panel>
-            <t-tab-panel label="TIM" value="3">
-                <t-notice-bar
-                        content="TIM 扫版功能为 QQ 版本列表 Vigor 附带的实验性功能，可能存在不可预知的稳定性问题。请明确并确保自身具备足够的风险识别和承受能力。"
-                        prefixIcon="{{false}}" visible="{{true}}">
-                    <view slot="prefix-icon">
-                        <t-icon name="error-circle-filled"></t-icon>
-                    </view>
-                </t-notice-bar>
-                <t-input bind:change="onInputTIMBig" confirm-type="next" cursor-spacing="30"
-                         id="tim-official-version-big" label="主版本号" placeholder="点击以输入" tips="填写格式为 x.y.z"
-                         type="digit" value="{{timVersionBig}}"/>
-                <t-input bind:change="onInputTIMSmall" borderless confirm-type="done" cursor-spacing="30"
-                         id="tim-official-version-big" label="小版本号" placeholder="点击以输入"
-                         tips="填写起始扫描小版本号" type="number" value="{{timVersionSmall}}"/>
-                <view class="guess-button-top">
-                    <t-button bind:tap="startTIMGuess" block size="large" theme="primary">开始</t-button>
-                </view>
-                <view class="guess-button">
-                    <t-button bind:tap="closeGuessPopup" block size="large" theme="light">取消</t-button>
-                </view>
-
             </t-tab-panel>
         </t-tabs>
     </view>
@@ -422,7 +420,7 @@ See the Mulan PubL v2 for more details.
          show-overlay="{{false}}" visible="{{loadingVisible}}" z-index="11003">
     <view class="block">
         <view class="guess-header">
-            <view class="guess-title">扫版 Extended</view>
+            <view class="guess-title">扫版（维护模式）</view>
         </view>
 
         <view class="guess-message-loading">
