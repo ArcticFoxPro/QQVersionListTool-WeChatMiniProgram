@@ -133,6 +133,12 @@
 .t-tabs__item-suffix::after {
   border-bottom-left-radius: var(--td-radius-large, 18rpx);
 }
+.t-tabs__badge--active {
+  --td-badge-content-text-color: var(--td-tab-item-active-color, var(--td-brand-color, var(--td-primary-color-7, #0052d9)));
+}
+.t-tabs__badge--disabled {
+  --td-badge-content-text-color: var(--td-tab-item-disabled-color, var(--td-text-color-disabled, var(--td-font-gray-4, rgba(0, 0, 0, 0.26))));
+}
 .t-tabs__icon {
   font-size: var(--td-tab-icon-size, 36rpx);
   margin-right: calc(var(--td-spacer, 16rpx) / 4);

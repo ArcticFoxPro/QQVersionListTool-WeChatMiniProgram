@@ -15,6 +15,10 @@ export interface TdSearchProps {
         type: BooleanConstructor;
         value?: boolean;
     };
+    clearTrigger?: {
+        type: StringConstructor;
+        value?: 'always' | 'focus';
+    };
     clearable?: {
         type: BooleanConstructor;
         value?: boolean;
@@ -73,6 +77,10 @@ export interface TdSearchProps {
         value?: string;
         required?: boolean;
     };
+    readonly?: {
+        type: BooleanConstructor;
+        value?: boolean;
+    };
     resultList?: {
         type: ArrayConstructor;
         value?: Array<string>;
@@ -88,10 +96,6 @@ export interface TdSearchProps {
     shape?: {
         type: StringConstructor;
         value?: 'square' | 'round';
-    };
-    style?: {
-        type: StringConstructor;
-        value?: string;
     };
     type?: {
         type: StringConstructor;

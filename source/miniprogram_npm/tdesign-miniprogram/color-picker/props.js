@@ -7,6 +7,10 @@ const props = {
         type: Boolean,
         value: false,
     },
+    fixed: {
+        type: Boolean,
+        value: false,
+    },
     format: {
         type: String,
         value: 'RGB',

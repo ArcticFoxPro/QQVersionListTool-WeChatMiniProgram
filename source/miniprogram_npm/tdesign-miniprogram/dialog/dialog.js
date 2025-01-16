@@ -51,8 +51,8 @@ let Dialog = class Dialog extends SuperComponent {
                     const btn = buttonMap[key];
                     const base = {
                         block: true,
-                        class: [...cls, `${classPrefix}__button--${key}`],
-                        externalClass: [...externalCls, `${prefix}-class-${key}`],
+                        rootClass: [...cls, `${classPrefix}__button--${key}`],
+                        tClass: [...externalCls, `${prefix}-class-${key}`],
                         variant: rect.buttonVariant,
                         openType: '',
                     };

@@ -11,7 +11,6 @@ export default class Input extends SuperComponent {
         classPrefix: string;
         classBasePrefix: string;
         showClearIcon: boolean;
-        defaultCursorColor: string;
     };
     lifetimes: {
         ready(): void;

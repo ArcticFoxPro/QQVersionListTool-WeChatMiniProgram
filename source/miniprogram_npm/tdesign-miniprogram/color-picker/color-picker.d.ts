@@ -11,6 +11,7 @@ export default class ColorPicker extends SuperComponent {
         swatchColors(value: any): void;
         type(value: any): void;
         'usePopup, visible'(usePopup: boolean, visible: boolean): void;
+        value(v: string): void;
     };
     color: Color;
     data: {
@@ -51,10 +52,12 @@ export default class ColorPicker extends SuperComponent {
     };
     lifetimes: {
         ready(): void;
+        attached(): void;
         detached(): void;
     };
     methods: {
         init(): void;
+        updateEleRect(e: WechatMiniprogram.TouchEvent): void;
         getEleReact(): void;
         clickSwatch(e: any): void;
         setCoreStyle(): void;

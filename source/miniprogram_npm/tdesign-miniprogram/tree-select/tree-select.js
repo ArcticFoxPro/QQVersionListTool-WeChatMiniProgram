@@ -29,7 +29,10 @@ let TreeSelect = class TreeSelect extends SuperComponent {
             classPrefix: name,
             scrollIntoView: null,
         };
-        this.properties = props;
+        this.properties = Object.assign(Object.assign({}, props), { customValue: {
+                type: null,
+                value: null,
+            } });
         this.controlledProps = [
             {
                 key: 'value',
@@ -37,7 +40,7 @@ let TreeSelect = class TreeSelect extends SuperComponent {
             },
         ];
         this.observers = {
-            'value, options, keys, multiple'() {
+            'value, customValue, options, keys, multiple'() {
                 this.buildTreeOptions();
             },
         };
@@ -48,9 +51,8 @@ let TreeSelect = class TreeSelect extends SuperComponent {
         };
         this.methods = {
             buildTreeOptions() {
-                const { options, value, multiple, keys } = this.data;
+                const { options, value, defaultValue, customValue, multiple, keys } = this.data;
                 const treeOptions = [];
-                const innerValue = [];
                 let level = -1;
                 let node = { children: options };
                 if (options.length === 0)
@@ -62,7 +64,7 @@ let TreeSelect = class TreeSelect extends SuperComponent {
                         value: item[(keys === null || keys === void 0 ? void 0 : keys.value) || 'value'],
                         children: item.children,
                     }));
-                    const thisValue = value === null || value === void 0 ? void 0 : value[level];
+                    const thisValue = (customValue === null || customValue === void 0 ? void 0 : customValue[level]) || (value === null || value === void 0 ? void 0 : value[level]);
                     treeOptions.push([...list]);
                     if (thisValue == null) {
                         const [firstChild] = list;
@@ -74,30 +76,31 @@ let TreeSelect = class TreeSelect extends SuperComponent {
                     }
                 }
                 const leafLevel = Math.max(0, level);
-                treeOptions === null || treeOptions === void 0 ? void 0 : treeOptions.forEach((ele, idx) => {
-                    const v = idx === treeOptions.length - 1 && multiple ? [ele[0].value] : ele[0].value;
-                    innerValue.push((value === null || value === void 0 ? void 0 : value[idx]) || v);
-                });
                 if (multiple) {
-                    const finalValue = this.data.value || this.data.defaultValue;
+                    const finalValue = customValue || value || defaultValue;
                     if (finalValue[leafLevel] != null && !Array.isArray(finalValue[leafLevel])) {
                         throw TypeError('应传入数组类型的 value');
                     }
                 }
                 this.setData({
-                    innerValue,
+                    innerValue: customValue ||
+                        (treeOptions === null || treeOptions === void 0 ? void 0 : treeOptions.map((ele, idx) => {
+                            const v = idx === treeOptions.length - 1 && multiple ? [ele[0].value] : ele[0].value;
+                            return (value === null || value === void 0 ? void 0 : value[idx]) || v;
+                        })),
                     leafLevel,
                     treeOptions,
                 });
             },
             getScrollIntoView(status) {
-                const { value, scrollIntoView } = this.data;
+                const { value, customValue, scrollIntoView } = this.data;
                 if (status === 'init') {
-                    const scrollIntoView = Array.isArray(value)
-                        ? value.map((item) => {
+                    const _value = customValue || value;
+                    const scrollIntoView = Array.isArray(_value)
+                        ? _value.map((item) => {
                             return Array.isArray(item) ? item[0] : item;
                         })
-                        : [value];
+                        : [_value];
                     this.setData({
                         scrollIntoView,
                     });

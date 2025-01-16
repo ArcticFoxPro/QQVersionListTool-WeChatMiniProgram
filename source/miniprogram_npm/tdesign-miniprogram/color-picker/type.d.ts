@@ -8,6 +8,10 @@ export interface TdColorPickerProps {
         type: BooleanConstructor;
         value?: boolean;
     };
+    fixed?: {
+        type: BooleanConstructor;
+        value?: boolean;
+    };
     format?: {
         type: StringConstructor;
         value?: 'RGB' | 'RGBA' | 'HSL' | 'HSLA' | 'HSB' | 'HSV' | 'HSVA' | 'HEX' | 'CMYK' | 'CSS';

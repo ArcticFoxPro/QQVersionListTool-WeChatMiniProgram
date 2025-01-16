@@ -22,6 +22,10 @@ export default class Guide extends SuperComponent {
         nonOverlay: boolean;
         modeType: string;
     };
+    controlledProps: {
+        key: string;
+        event: string;
+    }[];
     observers: {
         'steps, current, showOverlay'(): Promise<void>;
     };
@@ -38,6 +42,7 @@ export default class Guide extends SuperComponent {
             backButton: any;
             finishButton: any;
         };
+        renderCounter(): any;
         buttonContent(button: any): string;
         onTplButtonTap(e: any): void;
         getPlacement(): {

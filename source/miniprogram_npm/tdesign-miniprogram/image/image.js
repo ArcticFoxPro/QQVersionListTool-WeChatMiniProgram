@@ -26,7 +26,7 @@ let Image = class Image extends SuperComponent {
             innerStyle: '',
             classPrefix: name,
         };
-        this.preSrc = '';
+        this.preSrc = undefined;
         this.observers = {
             src() {
                 if (this.preSrc === this.properties.src)

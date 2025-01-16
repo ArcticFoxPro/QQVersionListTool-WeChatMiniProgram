@@ -8,17 +8,17 @@ import { SuperComponent, wxComponent } from '../common/src/index';
 import config from '../common/config';
 import props from './props';
 import { SATURATION_PANEL_DEFAULT_HEIGHT, SATURATION_PANEL_DEFAULT_WIDTH, SLIDER_DEFAULT_WIDTH, DEFAULT_COLOR, ALPHA_MAX, HUE_MAX, DEFAULT_SYSTEM_SWATCH_COLORS, } from './constants';
-import { getRect } from '../common/utils';
+import { getRect, debounce } from '../common/utils';
 import { Color, getColorObject } from './utils';
 const { prefix } = config;
 const name = `${prefix}-color-picker`;
-const getCoordinate = (e, react, isPopup) => {
+const getCoordinate = (e, react, isFixed) => {
     var _a;
     const { pageX, pageY, clientY } = e.changedTouches[0] || {};
-    const offsetY = isPopup ? react.top : (_a = e.currentTarget) === null || _a === void 0 ? void 0 : _a.offsetTop;
+    const offsetY = isFixed ? react.top : (_a = e.currentTarget) === null || _a === void 0 ? void 0 : _a.offsetTop;
     return {
         x: Math.min(Math.max(0, pageX - react.left), react.width),
-        y: Math.min(Math.max(0, (isPopup ? clientY : pageY) - offsetY), react.height),
+        y: Math.min(Math.max(0, (isFixed ? clientY : pageY) - offsetY), react.height),
     };
 };
 const getFormatList = (format, color) => {
@@ -80,6 +80,11 @@ let ColorPicker = class ColorPicker extends SuperComponent {
                     }, 350);
                 }
             },
+            value(v) {
+                if (v) {
+                    this.init();
+                }
+            },
         };
         this.color = new Color(props.defaultValue.value || props.value.value || DEFAULT_COLOR);
         this.data = {
@@ -122,6 +127,9 @@ let ColorPicker = class ColorPicker extends SuperComponent {
             ready() {
                 this.init();
             },
+            attached() {
+                this.debouncedUpdateEleRect = debounce((e) => this.updateEleRect(e), 150);
+            },
             detached() {
                 clearTimeout(this.timer);
             },
@@ -139,6 +147,21 @@ let ColorPicker = class ColorPicker extends SuperComponent {
                 this.updateColor();
                 this.getEleReact();
             },
+            updateEleRect(e) {
+                if (!e)
+                    return;
+                const { scrollTop } = e.detail;
+                const { width, height, left, initTop } = this.data.panelRect;
+                this.setData({
+                    panelRect: {
+                        width,
+                        height,
+                        left,
+                        top: initTop - scrollTop,
+                        initTop,
+                    },
+                });
+            },
             getEleReact() {
                 Promise.all([getRect(this, `.${name}__saturation`), getRect(this, `.${name}__slider`)]).then(([saturationRect, sliderRect]) => {
                     this.setData({
@@ -147,6 +170,7 @@ let ColorPicker = class ColorPicker extends SuperComponent {
                             height: saturationRect.height || SATURATION_PANEL_DEFAULT_HEIGHT,
                             left: saturationRect.left || 0,
                             top: saturationRect.top || 0,
+                            initTop: saturationRect.top || 0,
                         },
                         sliderRect: {
                             left: sliderRect.left || 0,
@@ -273,7 +297,8 @@ let ColorPicker = class ColorPicker extends SuperComponent {
                 this.setCoreStyle();
             },
             handleSaturationDrag(e) {
-                const coordinate = getCoordinate(e, this.data.panelRect, this.properties.usePopup);
+                const { usePopup, fixed } = this.properties;
+                const coordinate = getCoordinate(e, this.data.panelRect, usePopup || fixed);
                 const { saturation, value } = this.getSaturationAndValueByCoordinate(coordinate);
                 this.onChangeSaturation({ saturation, value });
             },

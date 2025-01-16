@@ -83,11 +83,11 @@
 }
 .t-picker__mask--top {
   top: 0;
-  background: linear-gradient(180deg, var(--td-picker-bg-color, var(--td-bg-color-container, var(--td-font-white-1, #ffffff))) 0%, transparent 100%);
+  background: linear-gradient(180deg, var(--td-picker-bg-color, var(--td-bg-color-container, var(--td-font-white-1, #ffffff))) 0%, var(--td-picker-transparent-color) 100%);
 }
 .t-picker__mask--bottom {
   bottom: 0;
-  background: linear-gradient(180deg, var(--td-picker-bg-color, var(--td-bg-color-container, var(--td-font-white-1, #ffffff))) 0%, transparent 100%);
+  background: linear-gradient(180deg, var(--td-picker-bg-color, var(--td-bg-color-container, var(--td-font-white-1, #ffffff))) 0%, var(--td-picker-transparent-color) 100%);
   transform: matrix(1, 0, 0, -1, 0, 0);
 }
 .t-picker__indicator {

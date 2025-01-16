@@ -13,6 +13,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import isFunction from 'lodash/isFunction';
 import { SuperComponent, wxComponent } from '../common/src/index';
 import props from './props';
 import config from '../common/config';
@@ -54,6 +55,12 @@ let Guide = class Guide extends SuperComponent {
             nonOverlay: false,
             modeType: '',
         };
+        this.controlledProps = [
+            {
+                key: 'current',
+                event: 'change',
+            },
+        ];
         this.observers = {
             'steps, current, showOverlay'() {
                 return __awaiter(this, void 0, void 0, function* () {
@@ -137,14 +144,14 @@ let Guide = class Guide extends SuperComponent {
                 var _a, _b, _c, _d;
                 let skipButton = (_a = step.skipButtonProps) !== null && _a !== void 0 ? _a : this.data.skipButtonProps;
                 const size = mode === 'popover' ? 'extra-small' : 'medium';
-                skipButton = Object.assign(Object.assign({ theme: 'light', content: '跳过', size }, skipButton), { class: `${prefix}-class-skip ${name}__button ${(skipButton === null || skipButton === void 0 ? void 0 : skipButton.class) || ''}`, type: 'skip' });
+                skipButton = Object.assign(Object.assign({ theme: 'light', content: '跳过', size }, skipButton), { tClass: `${prefix}-class-skip ${name}__button ${(skipButton === null || skipButton === void 0 ? void 0 : skipButton.class) || ''}`, type: 'skip' });
                 let nextButton = (_b = step.nextButtonProps) !== null && _b !== void 0 ? _b : this.data.nextButtonProps;
-                nextButton = Object.assign(Object.assign({ theme: 'primary', content: '下一步', size }, nextButton), { class: `${prefix}-class-next ${name}__button ${(nextButton === null || nextButton === void 0 ? void 0 : nextButton.class) || ''}`, type: 'next' });
+                nextButton = Object.assign(Object.assign({ theme: 'primary', content: '下一步', size }, nextButton), { tClass: `${prefix}-class-next ${name}__button ${(nextButton === null || nextButton === void 0 ? void 0 : nextButton.class) || ''}`, type: 'next' });
                 nextButton = Object.assign(Object.assign({}, nextButton), { content: this.buttonContent(nextButton) });
                 let backButton = (_c = step.backButtonProps) !== null && _c !== void 0 ? _c : this.data.backButtonProps;
-                backButton = Object.assign(Object.assign({ theme: 'light', content: '返回', size }, backButton), { class: `${prefix}-class-back ${name}__button ${(backButton === null || backButton === void 0 ? void 0 : backButton.class) || ''}`, type: 'back' });
+                backButton = Object.assign(Object.assign({ theme: 'light', content: '返回', size }, backButton), { tClass: `${prefix}-class-back ${name}__button ${(backButton === null || backButton === void 0 ? void 0 : backButton.class) || ''}`, type: 'back' });
                 let finishButton = (_d = step.finishButtonProps) !== null && _d !== void 0 ? _d : this.data.finishButtonProps;
-                finishButton = Object.assign(Object.assign({ theme: 'primary', content: '完成', size }, finishButton), { class: `${prefix}-class-finish ${name}__button ${(finishButton === null || finishButton === void 0 ? void 0 : finishButton.class) || ''}`, type: 'finish' });
+                finishButton = Object.assign(Object.assign({ theme: 'primary', content: '完成', size }, finishButton), { tClass: `${prefix}-class-finish ${name}__button ${(finishButton === null || finishButton === void 0 ? void 0 : finishButton.class) || ''}`, type: 'finish' });
                 finishButton = Object.assign(Object.assign({}, finishButton), { content: this.buttonContent(finishButton) });
                 return {
                     skipButton,
@@ -153,9 +160,16 @@ let Guide = class Guide extends SuperComponent {
                     finishButton,
                 };
             },
+            renderCounter() {
+                const { steps, current, counter } = this.data;
+                const stepsTotal = steps.length;
+                const innerCurrent = current + 1;
+                const popupSlotCounter = isFunction(counter) ? counter({ total: stepsTotal, current: innerCurrent }) : counter;
+                return counter ? popupSlotCounter : `(${innerCurrent}/${stepsTotal})`;
+            },
             buttonContent(button) {
-                const { steps, current, hideCounter } = this.data;
-                return `${button.content.replace(/ \(.*?\)/, '')}${hideCounter ? '' : ` (${current + 1}/${steps.length})`}`;
+                const { hideCounter } = this.data;
+                return `${button.content.replace(/ \(.*?\)/, '')} ${hideCounter ? '' : this.renderCounter()}`;
             },
             onTplButtonTap(e) {
                 const { type } = e.target.dataset;

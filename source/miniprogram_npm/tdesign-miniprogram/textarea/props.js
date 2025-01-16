@@ -41,10 +41,6 @@ const props = {
     },
     fixed: {
         type: Boolean,
-        value: null,
-    },
-    defaultFixed: {
-        type: Boolean,
         value: false,
     },
     focus: {

@@ -2,11 +2,22 @@ const props = {
     backButtonProps: {
         type: Object,
     },
+    counter: {
+        type: null,
+    },
     current: {
+        type: Number,
+        value: null,
+    },
+    defaultCurrent: {
         type: Number,
     },
     finishButtonProps: {
         type: Object,
+    },
+    hideBack: {
+        type: Boolean,
+        value: false,
     },
     hideCounter: {
         type: Boolean,

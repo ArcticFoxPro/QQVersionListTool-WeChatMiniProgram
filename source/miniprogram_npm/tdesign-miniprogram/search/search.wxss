@@ -65,6 +65,12 @@
   min-height: 48rpx;
   line-height: 48rpx;
 }
+.t-search__input-box .t-input--disabled {
+  color: var(--td-search-disabled-text-color, var(--td-text-color-disabled, var(--td-font-gray-4, rgba(0, 0, 0, 0.26))));
+  cursor: not-allowed;
+  opacity: 1;
+  -webkit-text-fill-color: currentColor;
+}
 .t-search__input-box .t-icon {
   color: var(--td-search-icon-color, var(--td-text-color-placeholder, var(--td-font-gray-3, rgba(0, 0, 0, 0.4))));
   font-size: var(--td-search-icon-font-size, 48rpx);

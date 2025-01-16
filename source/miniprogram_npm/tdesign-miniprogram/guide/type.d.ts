@@ -5,13 +5,28 @@ export interface TdGuideProps {
         type: ObjectConstructor;
         value?: ButtonProps;
     };
+    counter?: {
+        type: StringConstructor;
+        value?: string | ((params: {
+            total: number;
+            current: number;
+        }) => string);
+    };
     current?: {
+        type: NumberConstructor;
+        value?: number;
+    };
+    defaultCurrent?: {
         type: NumberConstructor;
         value?: number;
     };
     finishButtonProps?: {
         type: ObjectConstructor;
         value?: ButtonProps;
+    };
+    hideBack?: {
+        type: BooleanConstructor;
+        value?: boolean;
     };
     hideCounter?: {
         type: BooleanConstructor;

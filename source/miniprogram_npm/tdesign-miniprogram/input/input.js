@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { SuperComponent, wxComponent } from '../common/src/index';
 import config from '../common/config';
 import props from './props';
-import { getCharacterLength, calcIcon, isDef, isIOS } from '../common/utils';
+import { getCharacterLength, calcIcon, isDef } from '../common/utils';
 const { prefix } = config;
 const name = `${prefix}-input`;
 let Input = class Input extends SuperComponent {
@@ -33,7 +33,6 @@ let Input = class Input extends SuperComponent {
             classPrefix: name,
             classBasePrefix: prefix,
             showClearIcon: true,
-            defaultCursorColor: isIOS() ? '#0052d9' : 'default',
         };
         this.lifetimes = {
             ready() {

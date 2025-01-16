@@ -15,7 +15,7 @@ const baseButtonProps = {
     size: 'large',
     shape: 'circle',
     theme: 'primary',
-    externalClass: `${prefix}-fab__button`,
+    tClass: `${prefix}-fab__button`,
 };
 let Fab = class Fab extends SuperComponent {
     constructor() {

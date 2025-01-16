@@ -7,13 +7,16 @@ export default class Search extends SuperComponent {
     properties: import("./type").TdSearchProps;
     observers: {
         resultList(val: any): void;
+        'clearTrigger, clearable, disabled, readonly'(): void;
     };
     data: {
         classPrefix: string;
         prefix: string;
         isShowResultList: boolean;
         isSelected: boolean;
+        showClearIcon: boolean;
     };
+    updateClearIconVisible(value?: boolean): void;
     onInput(e: any): void;
     onFocus(e: any): void;
     onBlur(e: any): void;

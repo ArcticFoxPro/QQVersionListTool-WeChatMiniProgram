@@ -47,13 +47,25 @@ let Search = class Search extends SuperComponent {
                     });
                 }
             },
+            'clearTrigger, clearable, disabled, readonly'() {
+                this.updateClearIconVisible();
+            },
         };
         this.data = {
             classPrefix: name,
             prefix,
             isShowResultList: false,
             isSelected: false,
+            showClearIcon: true,
         };
+    }
+    updateClearIconVisible(value = false) {
+        const { clearTrigger, disabled, readonly } = this.properties;
+        if (disabled || readonly) {
+            this.setData({ showClearIcon: false });
+            return;
+        }
+        this.setData({ showClearIcon: value || String(clearTrigger) === 'always' });
     }
     onInput(e) {
         let { value } = e.detail;
@@ -69,10 +81,12 @@ let Search = class Search extends SuperComponent {
     }
     onFocus(e) {
         const { value } = e.detail;
+        this.updateClearIconVisible(true);
         this.triggerEvent('focus', { value });
     }
     onBlur(e) {
         const { value } = e.detail;
+        this.updateClearIconVisible();
         this.triggerEvent('blur', { value });
     }
     handleClear() {

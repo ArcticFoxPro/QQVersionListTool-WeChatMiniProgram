@@ -15,6 +15,10 @@ const props = {
         type: Boolean,
         value: false,
     },
+    clearTrigger: {
+        type: String,
+        value: 'always',
+    },
     clearable: {
         type: Boolean,
         value: true,
@@ -71,6 +75,10 @@ const props = {
         value: '',
         required: true,
     },
+    readonly: {
+        type: null,
+        value: undefined,
+    },
     resultList: {
         type: Array,
         value: [],
@@ -86,10 +94,6 @@ const props = {
     shape: {
         type: String,
         value: 'square',
-    },
-    style: {
-        type: String,
-        value: '',
     },
     type: {
         type: String,

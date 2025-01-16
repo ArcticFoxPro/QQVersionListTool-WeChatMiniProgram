@@ -10,7 +10,7 @@ export default class Fab extends SuperComponent {
             size: string;
             shape: string;
             theme: string;
-            externalClass: string;
+            tClass: string;
         };
         moveStyle: any;
     };

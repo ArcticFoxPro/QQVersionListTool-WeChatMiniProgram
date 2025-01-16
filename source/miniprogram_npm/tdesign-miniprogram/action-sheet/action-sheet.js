@@ -32,12 +32,20 @@ let ActionSheet = class ActionSheet extends SuperComponent {
                 event: 'visible-change',
             },
         ];
+        this.observers = {
+            'visible, items'(visible) {
+                if (!visible)
+                    return;
+                this.init();
+            },
+        };
         this.methods = {
-            onSwiperChange(e) {
-                const { detail: { current }, } = e;
-                this.setData({
-                    currentSwiperIndex: current,
-                });
+            init() {
+                this.memoInitialData();
+                this.splitGridThemeActions();
+            },
+            memoInitialData() {
+                this.initialData = Object.assign(Object.assign({}, this.properties), this.data);
             },
             splitGridThemeActions() {
                 if (this.data.theme !== ActionSheetTheme.Grid)
@@ -52,9 +60,6 @@ let ActionSheet = class ActionSheet extends SuperComponent {
                 this.autoClose = true;
                 this._trigger('visible-change', { visible: true });
             },
-            memoInitialData() {
-                this.initialData = Object.assign(Object.assign({}, this.properties), this.data);
-            },
             close() {
                 this.triggerEvent('close', { trigger: 'command' });
                 this._trigger('visible-change', { visible: false });
@@ -68,6 +73,12 @@ let ActionSheet = class ActionSheet extends SuperComponent {
                     this.setData({ visible: false });
                     this.autoClose = false;
                 }
+            },
+            onSwiperChange(e) {
+                const { current } = e.detail;
+                this.setData({
+                    currentSwiperIndex: current,
+                });
             },
             onSelect(event) {
                 const { currentSwiperIndex, items, gridThemeItems, count, theme } = this.data;
@@ -91,10 +102,6 @@ let ActionSheet = class ActionSheet extends SuperComponent {
                 }
             },
         };
-    }
-    ready() {
-        this.memoInitialData();
-        this.splitGridThemeActions();
     }
 };
 ActionSheet.show = show;

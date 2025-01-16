@@ -169,7 +169,7 @@ let Calendar = class Calendar extends SuperComponent {
                 const currentMonth = this.data.months.filter((item) => item.year === year && item.month === month);
                 this.updateActionButton(date);
                 this.setData({
-                    currentMonth,
+                    currentMonth: currentMonth.length > 0 ? currentMonth : [this.data.months[0]],
                 });
             },
             calcMonths() {

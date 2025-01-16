@@ -46,10 +46,6 @@ export interface TdTextareaProps {
         type: BooleanConstructor;
         value?: boolean;
     };
-    defaultFixed?: {
-        type: BooleanConstructor;
-        value?: boolean;
-    };
     focus?: {
         type: BooleanConstructor;
         value?: boolean;
