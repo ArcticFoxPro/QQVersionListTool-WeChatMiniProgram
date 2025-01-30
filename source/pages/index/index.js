@@ -76,7 +76,9 @@ Page({
         onWeTypeGet: false,
         expBackLinks: [],
         expBackJson: "",
-        fontHeavySliderMarks: {0: 'Light', 1: 'Regular', 2: 'Bold'},
+        fontHeavySliderMarks: {
+            0: 'Light', 1: 'Regular', 2: 'Bold'
+        },
         getTimNewestLinkLoading: false,
         safeBottomPadding: 0
     }, onLoad: function () {
@@ -440,7 +442,9 @@ Page({
                             if (versionElement && dateElement) {
                                 const version = versionElement.children[0].content.trim();
                                 const publishDate = dateElement.children[0].content.trim().replaceAll('(', '').replaceAll(')', '');
-                                weixinVersionList.push({version, datetime: publishDate, isAlpha: false});
+                                weixinVersionList.push({
+                                    version, datetime: publishDate, isAlpha: false
+                                });
                             }
                         });
                     }
@@ -875,7 +879,7 @@ Page({
                 case 'STATUS_ONGOING':
                     switch (mode) {
                         case 'WeChat':
-                            guessedLink = `https://dldir1.qq.com/weixin/android/weixin${versionBig}android${versionSuf}_0x${v16codeStr}_arm64${wxSoList[sIndex]}.apk`;
+                            guessedLink = `https://dldir1v6.qq.com/weixin/android/weixin${versionBig}android${versionSuf}_0x${v16codeStr}_arm64${wxSoList[sIndex]}.apk`;
                             break;
                         case 'WeType':
                             guessedLink = `https://download.z.weixin.qq.com/app/android/${versionBig}/wxkb_${vSuf}${wetypeSoList[sIndex]}.apk`;
@@ -1488,7 +1492,7 @@ Page({
             getFromWeixinAlphaConfigLoading: true
         })
         wx.request({
-            url: 'https://dldir1.qq.com/weixin/android/weixin_android_alpha_config.json',
+            url: 'https://dldir1v6.qq.com/weixin/android/weixin_android_alpha_config.json',
             method: 'GET',
             success: (res) => {
                 try {

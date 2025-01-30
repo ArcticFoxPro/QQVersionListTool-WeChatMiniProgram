@@ -337,7 +337,7 @@ See the Mulan PubL v2 for more details.
         </t-button>
     </view>
     <view class="cell-detail-button" wx:if="{{detailStatus==='WeixinDetail'}}">
-        <t-button bind:tap="copyWeixinChangelog" block size="large" style="margin-right: 8px;" theme="light">查看更新日志
+        <t-button bind:tap="copyWeixinChangelog" block size="large" style="margin-right: 8px;" theme="light">复制更新日志链接
         </t-button>
         <t-button bind:tap="closeCellDetailPopup" block size="large" style="margin-left: 8px;" theme="primary">确定
         </t-button>

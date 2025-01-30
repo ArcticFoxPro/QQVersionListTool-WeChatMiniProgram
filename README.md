@@ -39,10 +39,10 @@ QQ 版本列表 Vigor for WeChat MiniProgram 是一个使用 TDesign 组件库�
 
 1. 为本地电脑配置 Node.js 和 NPM 环境。Node.js 官网：https://nodejs.org/
 2. 下载仓库源代码，并解压到本地。
-3. [前往微信公众平台注册微信小程序开发者账号](https://mp.weixin.qq.com/cgi-bin/wx)，取得 `AppID`（小程序需配置域名白名单，测试号无法实现这一点）。
+3. [前往微信公众平台注册微信小程序开发者账号](https://mp.weixin.qq.com/cgi-bin/wx)，取得 `AppID`（由于小程序需配置域名白名单，测试号无法实现这一点，因此请注册小程序账号而非测试号）。
 4. 在 [微信公众平台](https://mp.weixin.qq.com/)-开发管理-服务器域名 中，将以下域名导入微信小程序 request 合法域名：
     ```
-    https://csydown.ll.tcdnos.com;https://dldir1.qq.com;https://dldir1v6.qq.com;https://download.z.weixin.qq.com;https://downv6.qq.com;https://im.qq.com;https://imtt.dd.qq.com;https://jsonschema.qpic.cn;https://qq-gray-1258344701.shiply-cdn.qq.com;https://shiply-cdn.qq.com;https://shiply-demo-1258344701.file.myqcloud.com;https://static.tdesign.tencent.com;https://tcb-api.tencentcloudapi.com;https://tim-1258344701.shiply-cdn.qq.com;https://tim.qq.com;https://upage.html5.qq.com;https://z.weixin.qq.com;
+    https://csydown.ll.tcdnos.com;https://dldir1.qq.com;https://dldir1v6.qq.com;https://download.z.weixin.qq.com;https://downv6.qq.com;https://im.qq.com;https://imtt.dd.qq.com;https://jsonschema.qpic.cn;https://open.bigmodel.cn;https://qq-gray-1258344701.shiply-cdn.qq.com;https://shiply-cdn.qq.com;https://shiply-demo-1258344701.file.myqcloud.com;https://static.tdesign.tencent.com;https://tcb-api.tencentcloudapi.com;https://tim-1258344701.shiply-cdn.qq.com;https://tim.qq.com;https://upage.html5.qq.com;https://weixin.qq.com;https://z.weixin.qq.com;
     ```
 5. 下载[微信小程序开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)，登录后点击“小程序”-“导入”，填入上一步取得的 `AppID`，将 `<仓库源代码解压目录>/source` 目录选中后导入。
 6. 点击微信小程序开发者工具上方“预览”按钮并使用手机扫码，即可使用 QQ 版本列表 Vigor for WeChat MiniProgram。
@@ -57,9 +57,15 @@ QQ 版本列表 Vigor for WeChat MiniProgram 是一个使用 TDesign 组件库�
 
 ### 版本列表
 
-在进入 QQ 版本列表 Vigor 时，您首先会看到一系列显示“版本：x.y.z 额定大小：xxx MB”的卡片，这些卡片组成的列表即为 Android QQ 的版本列表，卡片列表展示了已经或即将发布的 Android QQ 版本。QQ 版本信息来源：https://im.qq.com/rainbow/androidQQVersionList
+在进入 QQ 版本列表 Vigor 时，您首先会看到一系列显示“版本：x.y.z 额定大小：xxx MB”的卡片，这些卡片组成的列表即为 Android QQ 的版本列表[^1]，卡片列表展示了已经或即将发布的 Android QQ 版本。
 
-从右向左滑动版本列表，可切换到 TIM 版本列表。TIM 版本信息来源：https://im.qq.com/rainbow/TIMDownload
+[^1]: Android QQ 版本信息来源：https://im.qq.com/rainbow/androidQQVersionList
+
+从右向左滑动版本列表，可切换到 TIM 版本列表[^2]和微信版本列表[^3]。
+
+[^2]: Android TIM 版本信息来源：https://im.qq.com/rainbow/TIMDownload
+
+[^3]: Android 微信版本信息来源：https://weixin.qq.com/updates
 
 点击卡片将弹出弹出层，可查阅到更为详尽的信息和原始 JSON 字符串信息。
 
@@ -147,7 +153,7 @@ QQ、TIM、微信、企业微信、微信输入法使用腾讯应用宝（[腾�
 
     若当次访问未果，默认情况下将按照设置逻辑自动递增小版本号后再次尝试访问，直到访问成功为止。
 
-- （1.1.4 版本起支持）若选择 TIM 扫版，对应的直链为：
+- 若选择 TIM 扫版，对应的直链为：
   - `https://downv6.qq.com/qqweb/QQ_1/android_apk/TIM_<主版本号>.<小版本号><自定义后缀>.apk`
 
     填入相应输入框内容后，软件将尝试访问上述链接。若当次访问未果，默认情况下将自动递增小版本号后再次尝试访问，直到访问成功为止。
@@ -159,8 +165,8 @@ QQ、TIM、微信、企业微信、微信输入法使用腾讯应用宝（[腾�
 >
 > 若选择微信扫版，对话框将变更为三个输入框，分别是“主版本号”、“真实版本号”和“十六进制代码”，对应的直链为：
 >
-> - `http://dldir1.qq.com/weixin/android/weixin<主版本号>android<真实版本号>_<十六进制代码>_arm64.apk`
-> - `http://dldir1.qq.com/weixin/android/weixin<主版本号>android<真实版本号>_<十六进制代码>_arm64_1.apk`
+> - `http://dldir1v6.qq.com/weixin/android/weixin<主版本号>android<真实版本号>_<十六进制代码>_arm64.apk`
+> - `http://dldir1v6.qq.com/weixin/android/weixin<主版本号>android<真实版本号>_<十六进制代码>_arm64_1.apk`
 >
 > 填入相应输入框内容后，小程序将尝试访问上述链接。若当次访问未果，默认情况下将自动递增十六进制代码后再次尝试访问，直到访问成功为止。
 >
@@ -184,9 +190,9 @@ QQ 版本列表 Vigor for WeChat MiniProgram 仅供学习交流使用，不提�
 
 基于对 Android QQ 长期以来的版本号发布规律进行深入观察和分析的结果，我们发现 Android QQ 小版本号更新通常遵循每增加一个有效版本即递增 5 的倍数这一特定模式。为了贴近这一潜在实际规范并确保 QQ 版本列表 Vigor 的快捷性，QQ 版本列表 Vigor 依据最佳实践原则，默认设置小版本号和扫版必须为 5 的倍数的限制规则。此限制并非强制，用户可随时进入设置解除此限制。
 
-### 为什么不提供 Android 微信的版本列表？
+### 为什么不提供 Android 微信的版本列表更新日志？
 
-目前还没有找到来自官方的可靠且请求次数少而信息密度大的 Android 微信版本列表数据源，因此 QQ 版本列表 Vigor 无法提供 Android 微信的版本列表。如果您发现了可靠的 Android 微信版本列表数据源，欢迎提出 Issue(s) 或提交 PR。
+目前还没有找到来自官方的可靠且请求次数少而信息密度大的 Android 微信版本列表更新日志数据源，因此 QQ 版本列表 Vigor 无法提供 Android 微信的版本列表更新日志，烦请复制链接后前往浏览器查看微信官网提供的更新日志。如果您发现了可靠的 Android 微信版本列表更新日志数据源，欢迎提出 Issue(s) 或提交 PR。
 
 ### 什么是 QQNT 技术架构？
 
