@@ -432,7 +432,6 @@ Page({
                         }
 
                         const versionItems = findVersionItems(androidSection.children);
-                        console.log(JSON.stringify(versionItems))
                         versionItems.forEach(item => {
                             const aElement = item.children.find(child => child.tagName === 'a');
                             if (!aElement) return;
@@ -448,8 +447,6 @@ Page({
                             }
                         });
                     }
-
-                    console.log(weixinVersionList)
 
                     this.setData({
                         weixinVersions: weixinVersionList, weixinVersionBig: weixinVersionList[0].version
