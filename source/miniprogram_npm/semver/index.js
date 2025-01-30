@@ -4,7 +4,7 @@ var __DEFINE__ = function(modId, func, req) { var m = { exports: {}, _tempexport
 var __REQUIRE__ = function(modId, source) { if(!__MODS__[modId]) return require(source); if(!__MODS__[modId].status) { var m = __MODS__[modId].m; m._exports = m._tempexports; var desp = Object.getOwnPropertyDescriptor(m, "exports"); if (desp && desp.configurable) Object.defineProperty(m, "exports", { set: function (val) { if(typeof val === "object" && val !== m._exports) { m._exports.__proto__ = val.__proto__; Object.keys(val).forEach(function (k) { m._exports[k] = val[k]; }); } m._tempexports = val }, get: function () { return m._tempexports; } }); __MODS__[modId].status = 1; __MODS__[modId].func(__MODS__[modId].req, m, m.exports); } return __MODS__[modId].m.exports; };
 var __REQUIRE_WILDCARD__ = function(obj) { if(obj && obj.__esModule) { return obj; } else { var newObj = {}; if(obj != null) { for(var k in obj) { if (Object.prototype.hasOwnProperty.call(obj, k)) newObj[k] = obj[k]; } } newObj.default = obj; return newObj; } };
 var __REQUIRE_DEFAULT__ = function(obj) { return obj && obj.__esModule ? obj.default : obj; };
-__DEFINE__(1737033401947, function(require, module, exports) {
+__DEFINE__(1738217112991, function(require, module, exports) {
 // just pre-load all the stuff that index.js lazily exports
 const internalRe = require('./internal/re')
 const constants = require('./internal/constants')
@@ -95,8 +95,8 @@ module.exports = {
   rcompareIdentifiers: identifiers.rcompareIdentifiers,
 }
 
-}, function(modId) {var map = {"./internal/re":1737033401948,"./internal/constants":1737033401949,"./classes/semver":1737033401951,"./internal/identifiers":1737033401953,"./functions/parse":1737033401954,"./functions/valid":1737033401955,"./functions/clean":1737033401956,"./functions/inc":1737033401957,"./functions/diff":1737033401958,"./functions/major":1737033401959,"./functions/minor":1737033401960,"./functions/patch":1737033401961,"./functions/prerelease":1737033401962,"./functions/compare":1737033401963,"./functions/rcompare":1737033401964,"./functions/compare-loose":1737033401965,"./functions/compare-build":1737033401966,"./functions/sort":1737033401967,"./functions/rsort":1737033401968,"./functions/gt":1737033401969,"./functions/lt":1737033401970,"./functions/eq":1737033401971,"./functions/neq":1737033401972,"./functions/gte":1737033401973,"./functions/lte":1737033401974,"./functions/cmp":1737033401975,"./functions/coerce":1737033401976,"./classes/comparator":1737033401977,"./classes/range":1737033401978,"./functions/satisfies":1737033401980,"./ranges/to-comparators":1737033401981,"./ranges/max-satisfying":1737033401982,"./ranges/min-satisfying":1737033401983,"./ranges/min-version":1737033401984,"./ranges/valid":1737033401985,"./ranges/outside":1737033401986,"./ranges/gtr":1737033401987,"./ranges/ltr":1737033401988,"./ranges/intersects":1737033401989,"./ranges/simplify":1737033401990,"./ranges/subset":1737033401991}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401948, function(require, module, exports) {
+}, function(modId) {var map = {"./internal/re":1738217112992,"./internal/constants":1738217112993,"./classes/semver":1738217112995,"./internal/identifiers":1738217112997,"./functions/parse":1738217112998,"./functions/valid":1738217112999,"./functions/clean":1738217113000,"./functions/inc":1738217113001,"./functions/diff":1738217113002,"./functions/major":1738217113003,"./functions/minor":1738217113004,"./functions/patch":1738217113005,"./functions/prerelease":1738217113006,"./functions/compare":1738217113007,"./functions/rcompare":1738217113008,"./functions/compare-loose":1738217113009,"./functions/compare-build":1738217113010,"./functions/sort":1738217113011,"./functions/rsort":1738217113012,"./functions/gt":1738217113013,"./functions/lt":1738217113014,"./functions/eq":1738217113015,"./functions/neq":1738217113016,"./functions/gte":1738217113017,"./functions/lte":1738217113018,"./functions/cmp":1738217113019,"./functions/coerce":1738217113020,"./classes/comparator":1738217113021,"./classes/range":1738217113022,"./functions/satisfies":1738217113024,"./ranges/to-comparators":1738217113025,"./ranges/max-satisfying":1738217113026,"./ranges/min-satisfying":1738217113027,"./ranges/min-version":1738217113028,"./ranges/valid":1738217113029,"./ranges/outside":1738217113030,"./ranges/gtr":1738217113031,"./ranges/ltr":1738217113032,"./ranges/intersects":1738217113033,"./ranges/simplify":1738217113034,"./ranges/subset":1738217113035}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217112992, function(require, module, exports) {
 const {
   MAX_SAFE_COMPONENT_LENGTH,
   MAX_SAFE_BUILD_LENGTH,
@@ -315,8 +315,8 @@ createToken('STAR', '(<|>)?=?\\s*\\*')
 createToken('GTE0', '^\\s*>=\\s*0\\.0\\.0\\s*$')
 createToken('GTE0PRE', '^\\s*>=\\s*0\\.0\\.0-0\\s*$')
 
-}, function(modId) { var map = {"./constants":1737033401949,"./debug":1737033401950}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401949, function(require, module, exports) {
+}, function(modId) { var map = {"./constants":1738217112993,"./debug":1738217112994}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217112993, function(require, module, exports) {
 // Note: this is the semver.org version of the spec that it implements
 // Not necessarily the package version of this code.
 const SEMVER_SPEC_VERSION = '2.0.0'
@@ -354,7 +354,7 @@ module.exports = {
 }
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401950, function(require, module, exports) {
+__DEFINE__(1738217112994, function(require, module, exports) {
 const debug = (
   typeof process === 'object' &&
   process.env &&
@@ -366,7 +366,7 @@ const debug = (
 module.exports = debug
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401951, function(require, module, exports) {
+__DEFINE__(1738217112995, function(require, module, exports) {
 const debug = require('../internal/debug')
 const { MAX_LENGTH, MAX_SAFE_INTEGER } = require('../internal/constants')
 const { safeRe: re, t } = require('../internal/re')
@@ -670,8 +670,8 @@ class SemVer {
 
 module.exports = SemVer
 
-}, function(modId) { var map = {"../internal/debug":1737033401950,"../internal/constants":1737033401949,"../internal/re":1737033401948,"../internal/parse-options":1737033401952,"../internal/identifiers":1737033401953}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401952, function(require, module, exports) {
+}, function(modId) { var map = {"../internal/debug":1738217112994,"../internal/constants":1738217112993,"../internal/re":1738217112992,"../internal/parse-options":1738217112996,"../internal/identifiers":1738217112997}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217112996, function(require, module, exports) {
 // parse out just the options we care about
 const looseOption = Object.freeze({ loose: true })
 const emptyOpts = Object.freeze({ })
@@ -689,7 +689,7 @@ const parseOptions = options => {
 module.exports = parseOptions
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401953, function(require, module, exports) {
+__DEFINE__(1738217112997, function(require, module, exports) {
 const numeric = /^[0-9]+$/
 const compareIdentifiers = (a, b) => {
   const anum = numeric.test(a)
@@ -715,7 +715,7 @@ module.exports = {
 }
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401954, function(require, module, exports) {
+__DEFINE__(1738217112998, function(require, module, exports) {
 const SemVer = require('../classes/semver')
 const parse = (version, options, throwErrors = false) => {
   if (version instanceof SemVer) {
@@ -733,8 +733,8 @@ const parse = (version, options, throwErrors = false) => {
 
 module.exports = parse
 
-}, function(modId) { var map = {"../classes/semver":1737033401951}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401955, function(require, module, exports) {
+}, function(modId) { var map = {"../classes/semver":1738217112995}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217112999, function(require, module, exports) {
 const parse = require('./parse')
 const valid = (version, options) => {
   const v = parse(version, options)
@@ -742,8 +742,8 @@ const valid = (version, options) => {
 }
 module.exports = valid
 
-}, function(modId) { var map = {"./parse":1737033401954}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401956, function(require, module, exports) {
+}, function(modId) { var map = {"./parse":1738217112998}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113000, function(require, module, exports) {
 const parse = require('./parse')
 const clean = (version, options) => {
   const s = parse(version.trim().replace(/^[=v]+/, ''), options)
@@ -751,8 +751,8 @@ const clean = (version, options) => {
 }
 module.exports = clean
 
-}, function(modId) { var map = {"./parse":1737033401954}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401957, function(require, module, exports) {
+}, function(modId) { var map = {"./parse":1738217112998}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113001, function(require, module, exports) {
 const SemVer = require('../classes/semver')
 
 const inc = (version, release, options, identifier, identifierBase) => {
@@ -773,8 +773,8 @@ const inc = (version, release, options, identifier, identifierBase) => {
 }
 module.exports = inc
 
-}, function(modId) { var map = {"../classes/semver":1737033401951}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401958, function(require, module, exports) {
+}, function(modId) { var map = {"../classes/semver":1738217112995}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113002, function(require, module, exports) {
 const parse = require('./parse.js')
 
 const diff = (version1, version2) => {
@@ -841,26 +841,26 @@ const diff = (version1, version2) => {
 
 module.exports = diff
 
-}, function(modId) { var map = {"./parse.js":1737033401954}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401959, function(require, module, exports) {
+}, function(modId) { var map = {"./parse.js":1738217112998}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113003, function(require, module, exports) {
 const SemVer = require('../classes/semver')
 const major = (a, loose) => new SemVer(a, loose).major
 module.exports = major
 
-}, function(modId) { var map = {"../classes/semver":1737033401951}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401960, function(require, module, exports) {
+}, function(modId) { var map = {"../classes/semver":1738217112995}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113004, function(require, module, exports) {
 const SemVer = require('../classes/semver')
 const minor = (a, loose) => new SemVer(a, loose).minor
 module.exports = minor
 
-}, function(modId) { var map = {"../classes/semver":1737033401951}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401961, function(require, module, exports) {
+}, function(modId) { var map = {"../classes/semver":1738217112995}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113005, function(require, module, exports) {
 const SemVer = require('../classes/semver')
 const patch = (a, loose) => new SemVer(a, loose).patch
 module.exports = patch
 
-}, function(modId) { var map = {"../classes/semver":1737033401951}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401962, function(require, module, exports) {
+}, function(modId) { var map = {"../classes/semver":1738217112995}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113006, function(require, module, exports) {
 const parse = require('./parse')
 const prerelease = (version, options) => {
   const parsed = parse(version, options)
@@ -868,28 +868,28 @@ const prerelease = (version, options) => {
 }
 module.exports = prerelease
 
-}, function(modId) { var map = {"./parse":1737033401954}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401963, function(require, module, exports) {
+}, function(modId) { var map = {"./parse":1738217112998}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113007, function(require, module, exports) {
 const SemVer = require('../classes/semver')
 const compare = (a, b, loose) =>
   new SemVer(a, loose).compare(new SemVer(b, loose))
 
 module.exports = compare
 
-}, function(modId) { var map = {"../classes/semver":1737033401951}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401964, function(require, module, exports) {
+}, function(modId) { var map = {"../classes/semver":1738217112995}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113008, function(require, module, exports) {
 const compare = require('./compare')
 const rcompare = (a, b, loose) => compare(b, a, loose)
 module.exports = rcompare
 
-}, function(modId) { var map = {"./compare":1737033401963}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401965, function(require, module, exports) {
+}, function(modId) { var map = {"./compare":1738217113007}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113009, function(require, module, exports) {
 const compare = require('./compare')
 const compareLoose = (a, b) => compare(a, b, true)
 module.exports = compareLoose
 
-}, function(modId) { var map = {"./compare":1737033401963}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401966, function(require, module, exports) {
+}, function(modId) { var map = {"./compare":1738217113007}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113010, function(require, module, exports) {
 const SemVer = require('../classes/semver')
 const compareBuild = (a, b, loose) => {
   const versionA = new SemVer(a, loose)
@@ -898,56 +898,56 @@ const compareBuild = (a, b, loose) => {
 }
 module.exports = compareBuild
 
-}, function(modId) { var map = {"../classes/semver":1737033401951}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401967, function(require, module, exports) {
+}, function(modId) { var map = {"../classes/semver":1738217112995}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113011, function(require, module, exports) {
 const compareBuild = require('./compare-build')
 const sort = (list, loose) => list.sort((a, b) => compareBuild(a, b, loose))
 module.exports = sort
 
-}, function(modId) { var map = {"./compare-build":1737033401966}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401968, function(require, module, exports) {
+}, function(modId) { var map = {"./compare-build":1738217113010}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113012, function(require, module, exports) {
 const compareBuild = require('./compare-build')
 const rsort = (list, loose) => list.sort((a, b) => compareBuild(b, a, loose))
 module.exports = rsort
 
-}, function(modId) { var map = {"./compare-build":1737033401966}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401969, function(require, module, exports) {
+}, function(modId) { var map = {"./compare-build":1738217113010}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113013, function(require, module, exports) {
 const compare = require('./compare')
 const gt = (a, b, loose) => compare(a, b, loose) > 0
 module.exports = gt
 
-}, function(modId) { var map = {"./compare":1737033401963}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401970, function(require, module, exports) {
+}, function(modId) { var map = {"./compare":1738217113007}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113014, function(require, module, exports) {
 const compare = require('./compare')
 const lt = (a, b, loose) => compare(a, b, loose) < 0
 module.exports = lt
 
-}, function(modId) { var map = {"./compare":1737033401963}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401971, function(require, module, exports) {
+}, function(modId) { var map = {"./compare":1738217113007}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113015, function(require, module, exports) {
 const compare = require('./compare')
 const eq = (a, b, loose) => compare(a, b, loose) === 0
 module.exports = eq
 
-}, function(modId) { var map = {"./compare":1737033401963}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401972, function(require, module, exports) {
+}, function(modId) { var map = {"./compare":1738217113007}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113016, function(require, module, exports) {
 const compare = require('./compare')
 const neq = (a, b, loose) => compare(a, b, loose) !== 0
 module.exports = neq
 
-}, function(modId) { var map = {"./compare":1737033401963}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401973, function(require, module, exports) {
+}, function(modId) { var map = {"./compare":1738217113007}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113017, function(require, module, exports) {
 const compare = require('./compare')
 const gte = (a, b, loose) => compare(a, b, loose) >= 0
 module.exports = gte
 
-}, function(modId) { var map = {"./compare":1737033401963}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401974, function(require, module, exports) {
+}, function(modId) { var map = {"./compare":1738217113007}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113018, function(require, module, exports) {
 const compare = require('./compare')
 const lte = (a, b, loose) => compare(a, b, loose) <= 0
 module.exports = lte
 
-}, function(modId) { var map = {"./compare":1737033401963}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401975, function(require, module, exports) {
+}, function(modId) { var map = {"./compare":1738217113007}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113019, function(require, module, exports) {
 const eq = require('./eq')
 const neq = require('./neq')
 const gt = require('./gt')
@@ -1001,8 +1001,8 @@ const cmp = (a, op, b, loose) => {
 }
 module.exports = cmp
 
-}, function(modId) { var map = {"./eq":1737033401971,"./neq":1737033401972,"./gt":1737033401969,"./gte":1737033401973,"./lt":1737033401970,"./lte":1737033401974}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401976, function(require, module, exports) {
+}, function(modId) { var map = {"./eq":1738217113015,"./neq":1738217113016,"./gt":1738217113013,"./gte":1738217113017,"./lt":1738217113014,"./lte":1738217113018}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113020, function(require, module, exports) {
 const SemVer = require('../classes/semver')
 const parse = require('./parse')
 const { safeRe: re, t } = require('../internal/re')
@@ -1064,8 +1064,8 @@ const coerce = (version, options) => {
 }
 module.exports = coerce
 
-}, function(modId) { var map = {"../classes/semver":1737033401951,"./parse":1737033401954,"../internal/re":1737033401948}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401977, function(require, module, exports) {
+}, function(modId) { var map = {"../classes/semver":1738217112995,"./parse":1738217112998,"../internal/re":1738217112992}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113021, function(require, module, exports) {
 const ANY = Symbol('SemVer ANY')
 // hoisted class for cyclic dependency
 class Comparator {
@@ -1208,8 +1208,8 @@ const debug = require('../internal/debug')
 const SemVer = require('./semver')
 const Range = require('./range')
 
-}, function(modId) { var map = {"../internal/parse-options":1737033401952,"../internal/re":1737033401948,"../functions/cmp":1737033401975,"../internal/debug":1737033401950,"./semver":1737033401951,"./range":1737033401978}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401978, function(require, module, exports) {
+}, function(modId) { var map = {"../internal/parse-options":1738217112996,"../internal/re":1738217112992,"../functions/cmp":1738217113019,"../internal/debug":1738217112994,"./semver":1738217112995,"./range":1738217113022}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113022, function(require, module, exports) {
 const SPACE_CHARACTERS = /\s+/g
 
 // hoisted class for cyclic dependency
@@ -1765,8 +1765,8 @@ const testSet = (set, version, options) => {
   return true
 }
 
-}, function(modId) { var map = {"../internal/lrucache":1737033401979,"../internal/parse-options":1737033401952,"./comparator":1737033401977,"../internal/debug":1737033401950,"./semver":1737033401951,"../internal/re":1737033401948,"../internal/constants":1737033401949}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401979, function(require, module, exports) {
+}, function(modId) { var map = {"../internal/lrucache":1738217113023,"../internal/parse-options":1738217112996,"./comparator":1738217113021,"../internal/debug":1738217112994,"./semver":1738217112995,"../internal/re":1738217112992,"../internal/constants":1738217112993}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113023, function(require, module, exports) {
 class LRUCache {
   constructor () {
     this.max = 1000
@@ -1809,7 +1809,7 @@ class LRUCache {
 module.exports = LRUCache
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401980, function(require, module, exports) {
+__DEFINE__(1738217113024, function(require, module, exports) {
 const Range = require('../classes/range')
 const satisfies = (version, range, options) => {
   try {
@@ -1821,8 +1821,8 @@ const satisfies = (version, range, options) => {
 }
 module.exports = satisfies
 
-}, function(modId) { var map = {"../classes/range":1737033401978}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401981, function(require, module, exports) {
+}, function(modId) { var map = {"../classes/range":1738217113022}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113025, function(require, module, exports) {
 const Range = require('../classes/range')
 
 // Mostly just for testing and legacy API reasons
@@ -1832,8 +1832,8 @@ const toComparators = (range, options) =>
 
 module.exports = toComparators
 
-}, function(modId) { var map = {"../classes/range":1737033401978}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401982, function(require, module, exports) {
+}, function(modId) { var map = {"../classes/range":1738217113022}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113026, function(require, module, exports) {
 const SemVer = require('../classes/semver')
 const Range = require('../classes/range')
 
@@ -1860,8 +1860,8 @@ const maxSatisfying = (versions, range, options) => {
 }
 module.exports = maxSatisfying
 
-}, function(modId) { var map = {"../classes/semver":1737033401951,"../classes/range":1737033401978}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401983, function(require, module, exports) {
+}, function(modId) { var map = {"../classes/semver":1738217112995,"../classes/range":1738217113022}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113027, function(require, module, exports) {
 const SemVer = require('../classes/semver')
 const Range = require('../classes/range')
 const minSatisfying = (versions, range, options) => {
@@ -1887,8 +1887,8 @@ const minSatisfying = (versions, range, options) => {
 }
 module.exports = minSatisfying
 
-}, function(modId) { var map = {"../classes/semver":1737033401951,"../classes/range":1737033401978}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401984, function(require, module, exports) {
+}, function(modId) { var map = {"../classes/semver":1738217112995,"../classes/range":1738217113022}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113028, function(require, module, exports) {
 const SemVer = require('../classes/semver')
 const Range = require('../classes/range')
 const gt = require('../functions/gt')
@@ -1951,8 +1951,8 @@ const minVersion = (range, loose) => {
 }
 module.exports = minVersion
 
-}, function(modId) { var map = {"../classes/semver":1737033401951,"../classes/range":1737033401978,"../functions/gt":1737033401969}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401985, function(require, module, exports) {
+}, function(modId) { var map = {"../classes/semver":1738217112995,"../classes/range":1738217113022,"../functions/gt":1738217113013}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113029, function(require, module, exports) {
 const Range = require('../classes/range')
 const validRange = (range, options) => {
   try {
@@ -1965,8 +1965,8 @@ const validRange = (range, options) => {
 }
 module.exports = validRange
 
-}, function(modId) { var map = {"../classes/range":1737033401978}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401986, function(require, module, exports) {
+}, function(modId) { var map = {"../classes/range":1738217113022}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113030, function(require, module, exports) {
 const SemVer = require('../classes/semver')
 const Comparator = require('../classes/comparator')
 const { ANY } = Comparator
@@ -2048,22 +2048,22 @@ const outside = (version, range, hilo, options) => {
 
 module.exports = outside
 
-}, function(modId) { var map = {"../classes/semver":1737033401951,"../classes/comparator":1737033401977,"../classes/range":1737033401978,"../functions/satisfies":1737033401980,"../functions/gt":1737033401969,"../functions/lt":1737033401970,"../functions/lte":1737033401974,"../functions/gte":1737033401973}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401987, function(require, module, exports) {
+}, function(modId) { var map = {"../classes/semver":1738217112995,"../classes/comparator":1738217113021,"../classes/range":1738217113022,"../functions/satisfies":1738217113024,"../functions/gt":1738217113013,"../functions/lt":1738217113014,"../functions/lte":1738217113018,"../functions/gte":1738217113017}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113031, function(require, module, exports) {
 // Determine if version is greater than all the versions possible in the range.
 const outside = require('./outside')
 const gtr = (version, range, options) => outside(version, range, '>', options)
 module.exports = gtr
 
-}, function(modId) { var map = {"./outside":1737033401986}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401988, function(require, module, exports) {
+}, function(modId) { var map = {"./outside":1738217113030}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113032, function(require, module, exports) {
 const outside = require('./outside')
 // Determine if version is less than all the versions possible in the range
 const ltr = (version, range, options) => outside(version, range, '<', options)
 module.exports = ltr
 
-}, function(modId) { var map = {"./outside":1737033401986}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401989, function(require, module, exports) {
+}, function(modId) { var map = {"./outside":1738217113030}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113033, function(require, module, exports) {
 const Range = require('../classes/range')
 const intersects = (r1, r2, options) => {
   r1 = new Range(r1, options)
@@ -2072,8 +2072,8 @@ const intersects = (r1, r2, options) => {
 }
 module.exports = intersects
 
-}, function(modId) { var map = {"../classes/range":1737033401978}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401990, function(require, module, exports) {
+}, function(modId) { var map = {"../classes/range":1738217113022}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113034, function(require, module, exports) {
 // given a set of versions and a range, create a "simplified" range
 // that includes the same versions that the original range does
 // If the original range is shorter than the simplified one, return that.
@@ -2122,8 +2122,8 @@ module.exports = (versions, range, options) => {
   return simplified.length < original.length ? simplified : range
 }
 
-}, function(modId) { var map = {"../functions/satisfies.js":1737033401980,"../functions/compare.js":1737033401963}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1737033401991, function(require, module, exports) {
+}, function(modId) { var map = {"../functions/satisfies.js":1738217113024,"../functions/compare.js":1738217113007}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1738217113035, function(require, module, exports) {
 const Range = require('../classes/range.js')
 const Comparator = require('../classes/comparator.js')
 const { ANY } = Comparator
@@ -2372,8 +2372,8 @@ const lowerLT = (a, b, options) => {
 
 module.exports = subset
 
-}, function(modId) { var map = {"../classes/range.js":1737033401978,"../classes/comparator.js":1737033401977,"../functions/satisfies.js":1737033401980,"../functions/compare.js":1737033401963}; return __REQUIRE__(map[modId], modId); })
-return __REQUIRE__(1737033401947);
+}, function(modId) { var map = {"../classes/range.js":1738217113022,"../classes/comparator.js":1738217113021,"../functions/satisfies.js":1738217113024,"../functions/compare.js":1738217113007}; return __REQUIRE__(map[modId], modId); })
+return __REQUIRE__(1738217112991);
 })()
 //miniprogram-npm-outsideDeps=[]
 //# sourceMappingURL=index.js.map

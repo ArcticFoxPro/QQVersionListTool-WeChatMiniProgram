@@ -15,6 +15,7 @@
 import Message from 'tdesign-miniprogram/message/index';
 import semver from 'semver';
 import dayjs from 'dayjs';
+import {parse} from 'himalaya'
 
 const util = require('../../utils/util.js');
 
@@ -28,10 +29,13 @@ Page({
     }, data: {
         qqVersions: [],
         timVersions: [],
+        weixinVersions: [],
         qqOpa: 0,
         timOpa: 0,
+        weixinOpa: 0,
         qqScrollNumber: 0,
         timScrollNumber: 0,
+        weixinScrollNumber: 0,
         onRefresh: false,
         refreshIcon: "refresh",
         versionSmallVisible: wx.getStorage({
@@ -79,7 +83,7 @@ Page({
         this.setData({
             theme: wx.getAppBaseInfo().theme || 'light',
             PerProSwitch: wx.getStorageSync('isPerProOn'),
-            wechatVersionBig: wx.getStorageSync('wechatVersionBig'),
+            wechatVersionBig: wx.getStorageSync('weixinVersionBig').replaceAll('.', ''),
             wechatVersionTrue: wx.getStorageSync('wechatVersionTrue'),
             wechatVersion16code: wx.getStorageSync('wechatVersion16code'),
             wetypeVersionBig: wx.getStorageSync('wetypeVersionBig'),
@@ -313,7 +317,7 @@ Page({
                     if (match && match[1] && (match[1].startsWith('https://') || match[1].startsWith('http://'))) {
                         wx.request({
                             // https://im.qq.com/rainbow/TIMDownload/ 被弃用
-                            url: match[1].replace('http://', 'https://'), method: 'GET', success: (res) => {
+                            url: match[1].replaceAll('http://', 'https://'), method: 'GET', success: (res) => {
                                 try {
                                     const jsonData = JSON.parse(JSON.stringify(res.data));
                                     const androidLink = jsonData['download_link']['android']
@@ -392,6 +396,80 @@ Page({
                 });
             }
         });
+
+        wx.request({
+            url: 'https://weixin.qq.com/updates', method: 'GET', success: (res) => {
+                try {
+                    const responseData = res.data.toString();
+                    const json = parse(responseData)
+
+                    function findAndroidSection(node) {
+                        if (node.tagName === 'section' && node.attributes.some(attr => attr.key === 'id' && attr.value === 'android')) return node;
+                        if (node.children) for (const child of node.children) {
+                            const result = findAndroidSection(child);
+                            if (result) return result;
+                        }
+                        if (Array.isArray(node)) for (const child of node) {
+                            const result = findAndroidSection(child);
+                            if (result) return result;
+                        }
+                        return null;
+                    }
+
+                    const androidSection = findAndroidSection(json);
+
+                    let weixinVersionList = [];
+                    if (androidSection && androidSection.children) {
+                        function findVersionItems(nodes) {
+                            const versionItems = [];
+                            for (const node of nodes) {
+                                if (node.tagName === 'li' && node.attributes.some(attr => attr.key === 'class' && attr.value === 'faq_section_sublist_item')) versionItems.push(node);
+                                if (node.children) versionItems.push(...findVersionItems(node.children));
+                            }
+                            return versionItems;
+                        }
+
+                        const versionItems = findVersionItems(androidSection.children);
+                        console.log(JSON.stringify(versionItems))
+                        versionItems.forEach(item => {
+                            const aElement = item.children.find(child => child.tagName === 'a');
+                            if (!aElement) return;
+                            const versionElement = aElement.children.find(child => child.tagName === 'span' && child.attributes.some(attr => attr.key === 'class' && attr.value === 'version'));
+                            const dateElement = aElement.children.find(child => child.tagName === 'span' && !child.attributes.some(attr => attr.key === 'class' && attr.value === 'version'));
+
+                            if (versionElement && dateElement) {
+                                const version = versionElement.children[0].content.trim();
+                                const publishDate = dateElement.children[0].content.trim().replaceAll('(', '').replaceAll(')', '');
+                                weixinVersionList.push({version, datetime: publishDate, isAlpha: false});
+                            }
+                        });
+                    }
+
+                    console.log(weixinVersionList)
+
+                    this.setData({
+                        weixinVersions: weixinVersionList, weixinVersionBig: weixinVersionList[0].version
+                    });
+                    wx.setStorageSync('weixinVersionBig', weixinVersionList[0].version);
+
+                    endProgress(this)
+                } catch (e) {
+                    endProgress(this)
+                    const errorMessage = e.errMsg;
+                    this.setData({
+                        errorText: errorMessage, errorVisible: true
+                    });
+                }
+            }, fail: (err) => {
+                endProgress(this)
+                const errorMessage = err.errMsg;
+                this.setData({
+                    errorText: errorMessage, errorVisible: true
+                });
+            },
+        });
+
+
     }, aboutPopupVisible(e) {
         this.setData({
             aboutVisible: e.detail.visible,
@@ -485,7 +563,9 @@ Page({
             qqOpa: opa, qqScrollNumber: e.detail.scrollTop
         }); else if (this.data.verListCurrent === 1) this.setData({
             timOpa: opa, timScrollNumber: e.detail.scrollTop
-        })
+        }); else if (this.data.verListCurrent === 2) this.setData({
+            weixinOpa: opa, weixinScrollNumber: e.detail.scrollTop
+        });
 
         this.setData({
             scrollNumber: e.detail.scrollTop, titleOpacity: opa,
@@ -1252,15 +1332,15 @@ Page({
         });
     }, onToTop() {
         this.setData({
-            topNum: 0, qqOpa: 0, timOpa: 0
+            topNum: 0, qqOpa: 0, timOpa: 0, weixinOpa: 0
         })
     }, swiperChange(e) {
         if (e.detail.source === "touch") this.setData({
-            verListCurrent: e.detail.current,
-
-            // 这里获取的还是更改前的 verListCurrent，所以 Opa 和 ScrollNumber 要取反逻辑
-            titleOpacity: this.data.verListCurrent === 1 ? this.data.qqOpa : this.data.timOpa,
-            scrollNumber: this.data.verListCurrent === 1 ? this.data.qqScrollNumber : this.data.timScrollNumber,
+            verListCurrent: e.detail.current
+        })
+        this.setData({
+            titleOpacity: this.data.verListCurrent === 0 ? this.data.qqOpa : (this.data.verListCurrent === 1 ? this.data.timOpa : this.data.weixinOpa),
+            scrollNumber: this.data.verListCurrent === 0 ? this.data.qqScrollNumber : (this.data.verListCurrent === 1 ? this.data.timScrollNumber : this.data.weixinScrollNumber),
         })
     }, async fetchDownloadLinkFromTencentAppStore(jsonData) {
         return new Promise((resolve, reject) => {
@@ -1420,7 +1500,7 @@ Page({
                         let map = util.resolveWeixinAlphaConfig(totalJson)
                         let mapJson = JSON.stringify(map, null, 2)
 
-                        this.fetchLink(map.url.replace("http://", "https://")).then(isSuccess => {
+                        this.fetchLink(map.url.replaceAll("http://", "https://")).then(isSuccess => {
                             if (isSuccess.exists && isSuccess.fileSize !== false) {
                                 this.setData({
                                     successExpBackLink: map.url,
@@ -1585,5 +1665,15 @@ Page({
                 errorText: errorMessage, errorVisible: true, getTimNewestLinkLoading: false
             });
         });
+    }, clickWeixinCell(e) {
+        const index = e.currentTarget.dataset.index;
+        this.setData({
+            detailStatus: 'WeixinDetail',
+            itemWeixinVersion: this.data.weixinVersions[index].version,
+            itemWeixinDatetime: this.data.weixinVersions[index].datetime,
+            cellDetailVisible: true
+        });
+    }, copyWeixinChangelog() {
+        this.copyUtil(`https://weixin.qq.com/updates?platform=android&version=${this.data.itemWeixinVersion}`)
     }
 })
