@@ -20,8 +20,8 @@ See the Mulan PubL v2 for more details.
     <view id="titleTop1">
         <t-navbar t-class-content="t-navbar-content" t-class-placeholder="t-navbar-placeholder"
                   t-class-title="nav-title">
-            <view id="smallTitle" slot="left"
-                  style="width: 70vw; font-size: 36rpx; font-weight: 600;margin-left: 16rpx; opacity: {{titleOpacity}};">
+            <view class="text-36rpx font-600 ml-16rpx" id="smallTitle" slot="left"
+                  style="width: 70vw; opacity: {{titleOpacity}};">
                 {{ verListCurrent === 0 ? 'QQ 版本列表 Vigor' : (verListCurrent === 1 ? 'TIM 版本列表 Vigor' : '微信版本列表 Vigor') }}
             </view>
         </t-navbar>
@@ -36,31 +36,31 @@ See the Mulan PubL v2 for more details.
                              show-scrollbar="{{false}}" style="height:{{heightRecycle+'px'}};"
                              throttle="{{!ThrottleSwitch}}" type="list">
                     <view class="header-title" id="titleTop2">QQ 版本列表 Vigor</view>
-                    <view class="qq-version-item" style="width: 100%;" wx:for="{{qqVersions}}" wx:key="versions">
+                    <view class="qq-version-item w-full" wx:for="{{qqVersions}}" wx:key="versions">
                         <t-cell-group theme="card">
                             <t-cell arrow bind:tap="clickCell" data-index="{{index}}" hover leftIcon="">
-                                <view slot="title"
-                                      style="font-family: {{TCloudNumberSwitch?'TCloudNumber-'+(TCloudNumberHeavy===2?'Bold':(TCloudNumberHeavy===1?'Regular':'Light'))+',':''}} sans-serif; font-size: 60rpx; display: flex;justify-content: center;align-items: center">
+                                <view class="flex justify-center items-center" slot="title"
+                                      style="font-family: {{TCloudNumberSwitch?'TCloudNumber-'+(TCloudNumberHeavy===2?'Bold':(TCloudNumberHeavy===1?'Regular':'Light'))+',':''}} sans-serif; font-size: 60rpx;">
                                     {{item.versionNumber}}
-                                    <t-icon name="" prefix="ue-logo-src" size="34rpx" slot="icon"
-                                            style="margin-left: 12rpx;" wx:if="{{item.isUnrealEngine&&UESwitch}}"/>
-                                    <t-icon name="" prefix="kuikly-logo-src" size="32rpx" slot="icon"
-                                            style="margin-left: 12rpx;" wx:if="{{item.isKuiklyInside&&KuiklySwitch}}"/>
-                                    <t-icon name="" prefix="qqnt-logo-src" size="44rpx" slot="icon"
-                                            style="margin-left: 6rpx;" wx:if="{{item.isQQNTFramework}}"/>
+                                    <t-icon class="ml-12rpx" name="" prefix="ue-logo-src" size="34rpx" slot="icon"
+                                            wx:if="{{item.isUnrealEngine&&UESwitch}}"/>
+                                    <t-icon class="ml-12rpx" name="" prefix="kuikly-logo-src" size="32rpx" slot="icon"
+                                            wx:if="{{item.isKuiklyInside&&KuiklySwitch}}"/>
+                                    <t-icon class="ml-6rpx" name="" prefix="qqnt-logo-src" size="44rpx" slot="icon"
+                                            wx:if="{{item.isQQNTFramework}}"/>
                                 </view>
-                                <view slot="note" style="display: flex;justify-content: center;align-items: center">
-                                    <t-button icon="link" shape="square" size="medium"
-                                              style="margin-right:16rpx;visibility: hidden" theme="light"/>
-                                    <t-tag icon="{{null}}" size="small" style="margin-left: 12rpx;" theme="primary"
-                                           variant="light" wx:if="{{item.isAccessibility}}">
+                                <view class="flex justify-center items-center" slot="note">
+                                    <t-button class="mr-16rpx" icon="link" shape="square" size="medium"
+                                              style="visibility: hidden" theme="light"/>
+                                    <t-tag class="ml-12rpx" icon="{{null}}" size="small" theme="primary" variant="light"
+                                           wx:if="{{item.isAccessibility}}">
                                         <t-icon name="accessibility_new" prefix="material-symbols-outlined" size="28rpx"
                                                 slot="icon"/>
                                     </t-tag>
-                                    <t-tag size="small" style="margin-left: 12rpx;" theme="primary" variant="light">
+                                    <t-tag class="ml-12rpx" size="small" theme="primary" variant="light">
                                         {{item.size}} MB
                                     </t-tag>
-                                    <t-tag size="small" style="margin-left: 12rpx;" theme="primary" variant="light"
+                                    <t-tag class="ml-12rpx" size="small" theme="primary" variant="light"
                                            wx:if="{{PerProSwitch}}">
                                         {{indexUtil.formatPercent(item.size, maxSize)}}
                                     </t-tag>
@@ -68,8 +68,8 @@ See the Mulan PubL v2 for more details.
                             </t-cell>
                         </t-cell-group>
                     </view>
-                    <view class="qq-version-item-bottom" style="width: 100%; padding: 64rpx"
-                          wx:if="{{qqVersions.length>=1}}" wx:key="lastItem"></view>
+                    <view class="qq-version-item-bottom w-full p-64rpx" wx:if="{{qqVersions.length>=1}}"
+                          wx:key="lastItem"></view>
                 </scroll-view>
             </swiper-item>
             <swiper-item>
@@ -78,25 +78,24 @@ See the Mulan PubL v2 for more details.
                              show-scrollbar="{{false}}" style="height:{{heightRecycle+'px'}};"
                              throttle="{{!ThrottleSwitch}}" type="list">
                     <view class="header-title" id="titleTop3">TIM 版本列表 Vigor</view>
-                    <view class="qq-version-item" style="width: 100%;" wx:for="{{timVersions}}" wx:key="version">
+                    <view class="qq-version-item w-full" wx:for="{{timVersions}}" wx:key="version">
                         <t-cell-group theme="card">
                             <t-cell arrow bind:tap="clickTimCell" data-index="{{index}}" hover leftIcon="">
-                                <view slot="title"
-                                      style="font-family: {{TCloudNumberSwitch?'TCloudNumber-'+(TCloudNumberHeavy===2?'Bold':(TCloudNumberHeavy===1?'Regular':'Light'))+',':''}} sans-serif; font-size: 60rpx; display: flex;justify-content: center;align-items: center">
+                                <view class="text-60rpx flex justify-center items-center" slot="title"
+                                      style="font-family: {{TCloudNumberSwitch?'TCloudNumber-'+(TCloudNumberHeavy===2?'Bold':(TCloudNumberHeavy===1?'Regular':'Light'))+',':''}} sans-serif;">
                                     {{item.version_code}}
-                                    <t-icon name="" prefix="kuikly-logo-src" size="32rpx" slot="icon"
-                                            style="margin-left: 12rpx;" wx:if="{{item.isKuiklyInside&&KuiklySwitch}}"/>
-                                    <t-icon name="" prefix="qqnt-logo-src" size="44rpx" slot="icon"
-                                            style="margin-left: 6rpx;" wx:if="{{item.isQQNTFramework}}"/>
+                                    <t-icon class="ml-12rpx" name="" prefix="kuikly-logo-src" size="32rpx" slot="icon"
+                                            wx:if="{{item.isKuiklyInside&&KuiklySwitch}}"/>
+                                    <t-icon class="ml-6rpx" name="" prefix="qqnt-logo-src" size="44rpx" slot="icon"
+                                            wx:if="{{item.isQQNTFramework}}"/>
                                 </view>
-                                <view slot="note" style="display: flex;justify-content: center;align-items: center">
-                                    <t-button bind:tap="getTimNewestLink" disabled="{{getTimNewestLinkLoading===true}}"
-                                              icon="link" shape="square" size="medium"
-                                              style="margin-right:16rpx;visibility: {{item.link===''?'hidden':'visible'}}"
-                                              theme="light"
-                                              variant="outline"/>
-                                    <t-tag icon="{{null}}" size="small" style="margin-left: 12rpx;" theme="primary"
-                                           variant="light" wx:if="{{item.isAccessibility}}">
+                                <view class="flex justify-center items-center" slot="note">
+                                    <t-button bind:tap="getTimNewestLink" class="mr-16rpx"
+                                              disabled="{{getTimNewestLinkLoading===true}}" icon="link" shape="square"
+                                              size="medium" style="visibility: {{item.link===''?'hidden':'visible'}}"
+                                              theme="light" variant="outline"/>
+                                    <t-tag class="ml-12rpx" icon="{{null}}" size="small" theme="primary" variant="light"
+                                           wx:if="{{item.isAccessibility}}">
                                         <t-icon name="accessibility_new" prefix="material-symbols-outlined" size="28rpx"
                                                 slot="icon"/>
                                     </t-tag>
@@ -104,8 +103,8 @@ See the Mulan PubL v2 for more details.
                             </t-cell>
                         </t-cell-group>
                     </view>
-                    <view class="qq-version-item-bottom" style="width: 100%; padding: 64rpx"
-                          wx:if="{{timVersions.length>=1}}" wx:key="lastItem"></view>
+                    <view class="qq-version-item-bottom w-full p-64rpx" wx:if="{{timVersions.length>=1}}"
+                          wx:key="lastItem"></view>
                 </scroll-view>
             </swiper-item>
             <swiper-item>
@@ -114,22 +113,22 @@ See the Mulan PubL v2 for more details.
                              show-scrollbar="{{false}}" style="height:{{heightRecycle+'px'}};"
                              throttle="{{!ThrottleSwitch}}" type="list">
                     <view class="header-title" id="titleTop4">微信版本列表 Vigor</view>
-                    <view class="qq-version-item" style="width: 100%;" wx:for="{{weixinVersions}}" wx:key="version">
+                    <view class="qq-version-item w-full" wx:for="{{weixinVersions}}" wx:key="version">
                         <t-cell-group theme="card">
                             <t-cell arrow bind:tap="clickWeixinCell" data-index="{{index}}" hover leftIcon="">
-                                <view slot="title"
-                                      style="font-family: {{TCloudNumberSwitch?'TCloudNumber-'+(TCloudNumberHeavy===2?'Bold':(TCloudNumberHeavy===1?'Regular':'Light'))+',':''}} sans-serif; font-size: 60rpx; display: flex;justify-content: center;align-items: center">
+                                <view class="text-60rpx flex justify-center items-center" slot="title"
+                                      style="font-family: {{TCloudNumberSwitch?'TCloudNumber-'+(TCloudNumberHeavy===2?'Bold':(TCloudNumberHeavy===1?'Regular':'Light'))+',':''}} sans-serif;">
                                     {{item.version}}
                                 </view>
-                                <view slot="note" style="display: flex;justify-content: center;align-items: center">
-                                    <t-button icon="link" shape="square" size="medium"
-                                              style="margin-right:16rpx;visibility: hidden" theme="light"/>
+                                <view class="flex justify-center items-center" slot="note">
+                                    <t-button class="mr-16rpx" icon="link" shape="square" size="medium"
+                                              style="visibility: hidden" theme="light"/>
                                 </view>
                             </t-cell>
                         </t-cell-group>
                     </view>
-                    <view class="qq-version-item-bottom" style="width: 100%; padding: 64rpx"
-                          wx:if="{{weixinVersions.length>=1}}" wx:key="lastItem"></view>
+                    <view class="qq-version-item-bottom w-full p-64rpx" wx:if="{{weixinVersions.length>=1}}"
+                          wx:key="lastItem"></view>
                 </scroll-view>
             </swiper-item>
         </swiper>
@@ -139,18 +138,15 @@ See the Mulan PubL v2 for more details.
           style="padding-bottom: {{safeBottomPadding}}px">
         <view class="gradient-layer"></view>
         <view class="icon-button">
-            <t-button aria-label="关于" bind:tap="handleAboutPopup" block class="about-home" icon="info-circle"
-                      shape="square" size="large" style="margin-right: 12rpx;" theme="light"
-                      variant="outline"></t-button>
-            <t-button aria-label="设置" bind:tap="handleSettingPopup" block class="setting-home" icon="setting"
-                      shape="square" size="large" style="margin-left: 12rpx;margin-right: 12rpx;" theme="light"
-                      variant="outline"></t-button>
-            <t-button aria-label="刷新" bind:tap="refreshData" block class="refresh-home" disabled="{{onRefresh}}"
-                      icon="{{refreshIcon}}" loading="{{onRefresh}}" shape="square" size="large"
-                      style="margin-left: 12rpx;margin-right: 12rpx;" theme="light" variant="outline"></t-button>
-            <t-button aria-label="实验性功能" bind:tap="handleExpPopup" block class="beta-home" icon="alpha"
-                      shape="square" size="large" style="margin-left: 12rpx;" theme="light"
-                      variant="outline"></t-button>
+            <t-button aria-label="关于" bind:tap="handleAboutPopup" block class="about-home mr-12rpx" icon="info-circle"
+                      shape="square" size="large" theme="light" variant="outline"></t-button>
+            <t-button aria-label="设置" bind:tap="handleSettingPopup" block class="setting-home ml-12rpx mr-12rpx"
+                      icon="setting" shape="square" size="large" theme="light" variant="outline"></t-button>
+            <t-button aria-label="刷新" bind:tap="refreshData" block class="refresh-home ml-12rpx mr-12rpx"
+                      disabled="{{onRefresh}}" icon="{{refreshIcon}}" loading="{{onRefresh}}" shape="square"
+                      size="large" theme="light" variant="outline"></t-button>
+            <t-button aria-label="实验性功能" bind:tap="handleExpPopup" block class="beta-home ml-12rpx" icon="alpha"
+                      shape="square" size="large" theme="light" variant="outline"></t-button>
         </view>
         <t-button bind:tap="handleGuessPopup" block class="text-button" icon="radar" size="large" variant="outline">
             扫版
@@ -158,9 +154,8 @@ See the Mulan PubL v2 for more details.
     </view>
 
     <view hidden="{{scrollNumber<=600}}">
-        <t-back-top bind:to-top="onToTop" fixed scroll-top="{{scrollTop}}"
-                    style="position: fixed; bottom: {{safeBottomPaddingBackTop}}px; right: -1rpx" text="回到顶部"
-                    theme="half-round"
+        <t-back-top bind:to-top="onToTop" class="right--1rpx fixed" fixed scroll-top="{{scrollTop}}"
+                    style="bottom: {{safeBottomPaddingBackTop}}px;" text="回到顶部" theme="half-round"
                     visibility-height="0"></t-back-top>
     </view>
 </view>
@@ -171,14 +166,14 @@ See the Mulan PubL v2 for more details.
         <view class="about-header">
             <view class="about-title" id="ability-about">关于</view>
         </view>
-        <view class="about-text" style="margin: 0 48rpx 12rpx 48rpx;">QQ 版本列表 Vigor for WeChat MiniProgram</view>
-        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">版本：1.2.0</view>
-        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx;">作者：快乐小牛、有鲫雪狐</view>
-        <view class="about-text" style="margin: 12rpx; padding: 0 36rpx 12rpx 36rpx;">Since 2024.03.12</view>
+        <view class="about-text mr-48rpx mb-12rpx ml-48rpx">QQ 版本列表 Vigor for WeChat MiniProgram</view>
+        <view class="about-text m-12rpx pr-36rpx pl-36rpx">版本：1.2.0</view>
+        <view class="about-text m-12rpx pr-36rpx pl-36rpx">作者：快乐小牛、有鲫雪狐</view>
+        <view class="about-text m-12rpx pr-36rpx pl-36rpx pb-12rpx">Since 2024.03.12</view>
         <view class="TD_and_MulanPubLv2">
-            <image mode="widthFix"
+            <image class="h-auto self-center" mode="widthFix"
                    src="{{ theme === 'dark' ? '../../assets/Built-with-TDesign-Licensed-under-MulanPubLv2-dark.png' : '../../assets/Built-with-TDesign-Licensed-under-MulanPubLv2-light.png' }}"
-                   style="width: 75%; height: auto; align-self: center;"/>
+                   style="width: 75%;"/>
         </view>
         <view class="about-link">
             <t-link bind:tap="copyOSLink" content="GitHub 项目地址" hover prefix-icon="logo-github" size="small"
@@ -226,7 +221,7 @@ See the Mulan PubL v2 for more details.
                          placeholder="{{QQTestSwitch ? '点击以输入' : '打开测试版扫版开关方可输入'}}"
                          tips="填写起始扫描小版本号，扫正式版时无需填写" type="number" value="{{qqVersionSmall}}"/>
                 <t-cell bordered="{{false}}" description="此开关为关闭状态时将扫描正式版" title="测试版扫版">
-                    <t-switch bind:change="handleQQTestSwitchChange" slot="note" style="margin: 0 0 0 48rpx;"
+                    <t-switch bind:change="handleQQTestSwitchChange" class="ml-48rpx" slot="note"
                               value="{{QQTestSwitch}}"/>
                 </t-cell>
                 <view class="guess-button-top">
@@ -293,19 +288,18 @@ See the Mulan PubL v2 for more details.
             <view class="guess-title" id="ability-cellitem">详情</view>
         </view>
 
-        <view class="guess-text" style="margin: 0 32rpx 16rpx 32rpx;">版本：{{itemVersion}}</view>
-        <view class="guess-text" style=" margin: 0 32rpx 16rpx 32rpx;">额定大小：{{itemSize}} MB</view>
-        <view class="guess-text" style=" margin: 0 32rpx 6rpx 32rpx; " wx:if="{{PerProSwitch}}">
+        <view class="guess-text mr-32rpx mb-16rpx ml-32rpx">版本：{{itemVersion}}</view>
+        <view class="guess-text mr-32rpx mb-16rpx ml-32rpx">额定大小：{{itemSize}} MB</view>
+        <view class="guess-text mr-32rpx mb-6rpx ml-32rpx" wx:if="{{PerProSwitch}}">
             占比历史最大包（{{maxSize}} MB）：
         </view>
 
-        <t-progress percentage="{{preSize}}" status="active"
-                    style="margin: 0 32rpx 16rpx 32rpx; font-family: TCloudNumber-Regular, sans-serif;" theme="plump"
-                    wx:if="{{PerProSwitch}}"/>
+        <t-progress class="mr-32rpx mb-16rpx ml-32rpx" percentage="{{preSize}}" status="active"
+                    style="font-family: TCloudNumber-Regular, sans-serif;" theme="plump" wx:if="{{PerProSwitch}}"/>
 
-        <view class="guess-text" style=" margin: 0 32rpx 16rpx 32rpx;">{{itemFeatureTitle}}</view>
+        <view class="guess-text mr-32rpx mb-16rpx ml-32rpx">{{itemFeatureTitle}}</view>
         <view wx:for="{{itemSummary}}">
-            <view class="guess-text" style="margin: 0 32rpx 16rpx 32rpx;">- {{item}}</view>
+            <view class="guess-text mr-32rpx mb-16rpx ml-32rpx">- {{item}}</view>
         </view>
     </view>
     <view class="block" wx:if="{{detailStatus==='TIMDetail'}}">
@@ -313,13 +307,13 @@ See the Mulan PubL v2 for more details.
             <view class="guess-title" id="ability-cell-tim-item">详情</view>
         </view>
 
-        <view class="guess-text" style="margin: 0 32rpx 16rpx 32rpx;">版本：{{itemTimVersion}}</view>
-        <view class="guess-text" style=" margin: 0 32rpx 16rpx 32rpx;">发布日期：{{itemTimDatetime}}</view>
+        <view class="guess-text mr-32rpx mb-16rpx ml-32rpx">版本：{{itemTimVersion}}</view>
+        <view class="guess-text mr-32rpx mb-16rpx ml-32rpx">发布日期：{{itemTimDatetime}}</view>
         <view wx:for="{{itemTimNew}}">
-            <view class="guess-text" style="margin: 0 32rpx 16rpx 32rpx;">- {{item}}</view>
+            <view class="guess-text mr-32rpx mb-16rpx ml-32rpx">- {{item}}</view>
         </view>
         <view wx:for="{{itemTimFix}}">
-            <view class="guess-text" style="margin: 0 32rpx 16rpx 32rpx;">- {{item}}</view>
+            <view class="guess-text mr-32rpx mb-16rpx ml-32rpx">- {{item}}</view>
         </view>
     </view>
     <view class="block" wx:if="{{detailStatus==='WeixinDetail'}}">
@@ -327,19 +321,19 @@ See the Mulan PubL v2 for more details.
             <view class="guess-title" id="ability-cell-weixin-item">详情</view>
         </view>
 
-        <view class="guess-text" style="margin: 0 32rpx 16rpx 32rpx;">版本：{{itemWeixinVersion}}</view>
-        <view class="guess-text" style=" margin: 0 32rpx 16rpx 32rpx;">发布日期：{{itemWeixinDatetime}}</view>
+        <view class="guess-text mr-32rpx mb-16rpx ml-32rpx">版本：{{itemWeixinVersion}}</view>
+        <view class="guess-text mr-32rpx mb-16rpx ml-32rpx">发布日期：{{itemWeixinDatetime}}</view>
     </view>
     <view class="cell-detail-button" wx:if="{{detailStatus!=='WeixinDetail'}}">
-        <t-button bind:tap="displayJson" block size="large" style="margin-right: 8px;" theme="light">查看源 JSON
+        <t-button bind:tap="displayJson" block class="mr-16rpx" size="large" theme="light">查看源 JSON
         </t-button>
-        <t-button bind:tap="closeCellDetailPopup" block size="large" style="margin-left: 8px;" theme="primary">确定
+        <t-button bind:tap="closeCellDetailPopup" block class="ml-16rpx" size="large" theme="primary">确定
         </t-button>
     </view>
     <view class="cell-detail-button" wx:if="{{detailStatus==='WeixinDetail'}}">
-        <t-button bind:tap="copyWeixinChangelog" block size="large" style="margin-right: 8px;" theme="light">复制更新日志链接
+        <t-button bind:tap="copyWeixinChangelog" block class="mr-16rpx" size="large" theme="light">复制更新日志链接
         </t-button>
-        <t-button bind:tap="closeCellDetailPopup" block size="large" style="margin-left: 8px;" theme="primary">确定
+        <t-button bind:tap="closeCellDetailPopup" block class="ml-16rpx" size="large" theme="primary">确定
         </t-button>
     </view>
 </t-popup>
@@ -350,16 +344,16 @@ See the Mulan PubL v2 for more details.
         <view class="guess-header">
             <view class="guess-title" id="ability-jsonitem">JSON 详情</view>
         </view>
-        <view style=" margin: 0 32rpx 16rpx 32rpx;">
-            <text class="json-text" style="font-size:13px; " user-select>{{itemString}}</text>
+        <view class="mr-32rpx mb-16rpx ml-32rpx">
+            <text class="json-text text-13px" user-select>{{itemString}}</text>
         </view>
     </view>
     <t-footer text="— 可长按选择复制内容 —"></t-footer>
     <view class="json-detail-button">
-        <t-button bind:tap="copyCellJsonDetail" block size="large" style="margin-right: 8px;" theme="light">
+        <t-button bind:tap="copyCellJsonDetail" block class="mr-16rpx" size="large" theme="light">
             复制全部
         </t-button>
-        <t-button bind:tap="closeCellJsonDetailPopup" block size="large" style="margin-left: 8px;" theme="primary">
+        <t-button bind:tap="closeCellJsonDetailPopup" block class="ml-16rpx" size="large" theme="primary">
             确定
         </t-button>
     </view>
@@ -377,9 +371,9 @@ See the Mulan PubL v2 for more details.
             <t-result description="{{errorText}}" theme="error" title="发生错误"/>
         </view>
         <view class="error-button">
-            <t-button bind:tap="copyError" block size="large" style="margin-right: 8px;" theme="light">复制错误信息
+            <t-button bind:tap="copyError" block class="mr-16rpx" size="large" theme="light">复制错误信息
             </t-button>
-            <t-button bind:tap="closeErrorPopup" block size="large" style="margin-left: 8px;" theme="light">确定
+            <t-button bind:tap="closeErrorPopup" block class="ml-16rpx" size="large" theme="light">确定
             </t-button>
         </view>
     </view>
@@ -394,7 +388,7 @@ See the Mulan PubL v2 for more details.
 
         <scroll-view class="ua-license-recycle" enhanced scroll-y="{{true}}"
                      style="height: {{(heightRecycle*3/4)+'px'}};" type="list">
-            <view class="ua-license" style="width: 100%;">
+            <view class="ua-license w-full">
                 <view class="page-s">
                     <block>
                         <rich-text
@@ -420,17 +414,16 @@ See the Mulan PubL v2 for more details.
         </view>
         <t-cell bordered description="开启后能更精确监听滚动事件以精准更改标题栏显示状态，但系统资源占用更高"
                 title="高性能模式">
-            <t-switch bind:change="handleThrottleChange" slot="note" style="margin: 0 0 0 48rpx;"
-                      value="{{ThrottleSwitch}}"/>
+            <t-switch bind:change="handleThrottleChange" class="ml-48rpx" slot="note" value="{{ThrottleSwitch}}"/>
         </t-cell>
         <t-cell arrow bind:tap="handlePersonalizationSetting" bordered hover title="个性化"/>
         <t-cell bordered title="扩展测试版扫版直链后缀">
-            <t-switch bind:change="handleExtendSuffixChange" slot="note" style="margin: 0 0 0 48rpx;"
+            <t-switch bind:change="handleExtendSuffixChange" class="ml-48rpx" slot="note"
                       value="{{ExtendSuffixSwitch}}"/>
         </t-cell>
         <t-cell arrow bind:tap="handleSuffixSetting" bordered hover title="扫版直链后缀设置"/>
         <t-cell bordered="{{false}}" title="解除 QQ 测试版扫版小版本号遵循 5 的倍数限制">
-            <t-switch bind:change="handleNot5Change" slot="note" style="margin: 0 0 0 48rpx;" value="{{Not5Switch}}"/>
+            <t-switch bind:change="handleNot5Change" class="ml-48rpx" slot="note" value="{{Not5Switch}}"/>
         </t-cell>
         <view class="setting-button">
             <t-button bind:tap="closeSettingPopup" block size="large" theme="light">确定</t-button>
@@ -476,9 +469,9 @@ See the Mulan PubL v2 for more details.
             <t-button bind:tap="copyGuessSuccess" block size="large" theme="primary">复制链接并停止</t-button>
         </view>
         <view class="guess-success-button">
-            <t-button bind:tap="cancelGuess" block size="large" style="margin-right: 8px;" theme="light">仅停止
+            <t-button bind:tap="cancelGuess" block class="mr-16rpx" size="large" theme="light">仅停止
             </t-button>
-            <t-button bind:tap="continueGuess" block size="large" style="margin-left: 8px;" theme="light">跳过以继续
+            <t-button bind:tap="continueGuess" block class="ml-16rpx" size="large" theme="light">跳过以继续
             </t-button>
         </view>
     </view>
@@ -492,7 +485,7 @@ See the Mulan PubL v2 for more details.
         <view class="guess-success-header">
             <view class="guess-success-title" id="ability-guess-success">扫版直链后缀设置</view>
         </view>
-        <view style="margin-bottom: 16rpx;">
+        <view class="mb-16rpx">
             <t-input bind:change="changeCustomSuffix" confirm-type="done" cursor-spacing="30" id="custom-suffix"
                      label="自定义后缀" placeholder="输入自定义扫版后缀" tips="请使用“, ”（西文逗号+空格）分割"
                      value="{{customSuffix}}"/>
@@ -550,9 +543,9 @@ See the Mulan PubL v2 for more details.
                         icon="rectangle" label="_test"/>
         </view>
         <view class="suffix-setting-button">
-            <t-button bind:tap="closeSuffixSettingPopup" block size="large" style="margin-right: 8px;" theme="light">返回
+            <t-button bind:tap="closeSuffixSettingPopup" block class="mr-16rpx" size="large" theme="light">返回
             </t-button>
-            <t-button bind:tap="saveSuffixSetting" block size="large" style="margin-left: 8px;" theme="primary">保存
+            <t-button bind:tap="saveSuffixSetting" block class="ml-16rpx" size="large" theme="primary">保存
             </t-button>
         </view>
     </view>
@@ -570,21 +563,19 @@ See the Mulan PubL v2 for more details.
         <t-cell bordered
                 description="Kuikly 跨端开发框架通过自研 KMP 逻辑与终端界面原生控件渲染映射协议层，和其声明式与响应式设计，可为开发者提供原生高效的 Android 开发体验和原生性能的跨平台应用开发能力。"
                 title="版本卡片显示 Kuikly 开发框架标识">
-            <t-switch bind:change="handleKuiklyChange" slot="note" style="margin: 0 0 0 48rpx;"
-                      value="{{KuiklySwitch}}"/>
+            <t-switch bind:change="handleKuiklyChange" class="ml-48rpx" slot="note" value="{{KuiklySwitch}}"/>
         </t-cell>
         <t-cell bordered description="虚幻引擎内置情况以 QQ 正式版为判断来源" title="版本卡片显示虚幻引擎标识">
-            <t-switch bind:change="handleUEChange" slot="note" style="margin: 0 0 0 48rpx;" value="{{UESwitch}}"/>
+            <t-switch bind:change="handleUEChange" class="ml-48rpx" slot="note" value="{{UESwitch}}"/>
         </t-cell>
         <t-cell bordered title="QQ 版本卡片显示额定包大小占比历史最大包指示条">
-            <t-switch bind:change="handlePerProChange" slot="note" style="margin: 0 0 0 48rpx;"
-                      value="{{PerProSwitch}}"/>
+            <t-switch bind:change="handlePerProChange" class="ml-48rpx" slot="note" value="{{PerProSwitch}}"/>
         </t-cell>
         <t-cell bordered="{{false}}" title="版本号字体使用 TCloudNumber">
-            <t-switch bind:change="handleTCloudNumberChange" slot="note" style="margin: 0 0 0 48rpx;"
+            <t-switch bind:change="handleTCloudNumberChange" class="ml-48rpx" slot="note"
                       value="{{TCloudNumberSwitch}}"/>
         </t-cell>
-        <view style="margin: 16rpx 48rpx">
+        <view class="mt-16rpx ml-48rpx mr-48rpx mb-16rpx">
             <t-slider bind:change="handleTCloudNumberHeavyChange" disabled="{{!TCloudNumberSwitch}}"
                       marks="{{fontHeavySliderMarks}}" max="2" min="0" step="{{1}}" value="{{TCloudNumberHeavy}}"
                       wx:if="{{suffixPersonalizationVisible}}"/>
@@ -603,15 +594,15 @@ See the Mulan PubL v2 for more details.
         </view>
         <t-cell arrow bind:tap="handleGetFromWeixinAlphaConfig" bordered
                 description="从腾讯服务器配置拉取微信最新测试版下载直链" hover title="获取微信测试版">
-            <view slot="note"
-                  style="margin-left: 4rpx;visibility: {{getFromWeixinAlphaConfigLoading?'visible':'hidden'}}">
+            <view class="ml-4rpx" slot="note"
+                  style="visibility: {{getFromWeixinAlphaConfigLoading?'visible':'hidden'}}">
                 <t-loading/>
             </view>
         </t-cell>
         <t-cell arrow bind:tap="handleGetFromWeTypeLatestChannel" bordered
                 description="从微信输入法测试通道获取微信输入法最新下载直链" hover title="获取微信输入法测试版">
-            <view slot="note"
-                  style="margin-left: 4rpx;visibility: {{getFromWeTypeLatestChannelLoading?'visible':'hidden'}}">
+            <view class="ml-4rpx" slot="note"
+                  style="visibility: {{getFromWeTypeLatestChannelLoading?'visible':'hidden'}}">
                 <t-loading/>
             </view>
         </t-cell>
@@ -632,9 +623,9 @@ See the Mulan PubL v2 for more details.
         <view class="setting-header">
             <view class="setting-title">腾讯应用宝更新获取（实验性）</view>
         </view>
-        <t-notice-bar
-                content="腾讯应用宝更新获取功能为 QQ 版本列表 Vigor 附带的实验性功能，可能存在不可预知的稳定性问题。请明确并确保自身具备足够的风险识别和承受能力。"
-                prefixIcon="{{false}}" style="margin-bottom: 32rpx;" visible="{{true}}">
+        <t-notice-bar class="mb-32rpx"
+                      content="腾讯应用宝更新获取功能为 QQ 版本列表 Vigor 附带的实验性功能，可能存在不可预知的稳定性问题。请明确并确保自身具备足够的风险识别和承受能力。"
+                      prefixIcon="{{false}}" visible="{{true}}">
             <view slot="prefix-icon">
                 <t-icon name="error-circle-filled"></t-icon>
             </view>
@@ -695,10 +686,10 @@ See the Mulan PubL v2 for more details.
             <t-button bind:tap="copyExpBack" block size="large" theme="primary">复制链接</t-button>
         </view>
         <view class="guess-success-button">
-            <t-button bind:tap="handleExpJsonBack" block size="large" style="margin-right: 8px;" theme="light">
+            <t-button bind:tap="handleExpJsonBack" block class="mr-16rpx" size="large" theme="light">
                 查看源 JSON
             </t-button>
-            <t-button bind:tap="closeExpBackPopup" block size="large" style="margin-left: 8px;" theme="light">返回
+            <t-button bind:tap="closeExpBackPopup" block class="ml-16rpx" size="large" theme="light">返回
             </t-button>
         </view>
     </view>
@@ -715,21 +706,20 @@ See the Mulan PubL v2 for more details.
 
         <scroll-view class="ua-license-recycle" enhanced scroll-y="{{true}}"
                      style="height: {{(heightRecycle*3/4)+'px'}};" type="list">
-            <view class="ua-license" style="width: 100%;">
+            <view class="ua-license w-full">
                 <view class="page-s">
-                    <view style="margin: 0 0 16rpx 0;">
-                        <text class="json-text"
-                              style="font-size:13px; word-break:break-all; white-space: pre-wrap; overflow-wrap: normal;"
+                    <view class="mb-16rpx">
+                        <text class="json-text text-13rpx break-all whitespace-pre-wrap" style="overflow-wrap: normal;"
                               user-select>{{expBackJson}}</text>
                     </view>
                 </view>
             </view>
         </scroll-view>
-        <t-footer style="margin-top: 8rpx;" text="— 可长按选择复制内容 —"></t-footer>
+        <t-footer class="mt-8rpx" text="— 可长按选择复制内容 —"></t-footer>
         <view class="guess-success-button-top">
-            <t-button bind:tap="copyExpJsonBack" block size="large" style="margin-right: 8px;" theme="light">复制全部
+            <t-button bind:tap="copyExpJsonBack" block class="mr-16rpx" size="large" theme="light">复制全部
             </t-button>
-            <t-button bind:tap="closeExpJsonBackPopup" block size="large" style="margin-left: 8px;" theme="light">返回
+            <t-button bind:tap="closeExpJsonBackPopup" block class="ml-16rpx" size="large" theme="light">返回
             </t-button>
         </view>
     </view>

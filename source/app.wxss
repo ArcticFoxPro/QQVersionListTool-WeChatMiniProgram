@@ -14,6 +14,7 @@
 
 @import './miniprogram_npm/tdesign-miniprogram/common/style/theme/_light.wxss';
 @import './miniprogram_npm/tdesign-miniprogram/common/style/theme/_dark.wxss';
+@import "./unocss.wxss";
 
 @font-face {
     font-family: 'TCloudNumber';
