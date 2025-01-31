@@ -17,7 +17,7 @@ import semver from 'semver';
 import dayjs from 'dayjs';
 import {parse} from 'himalaya'
 
-const util = require('../../utils/util.js');
+const util = require('../utils/util.js');
 
 Page({
     properties: {

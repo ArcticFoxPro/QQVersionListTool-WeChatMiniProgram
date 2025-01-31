@@ -709,7 +709,7 @@ See the Mulan PubL v2 for more details.
             <view class="ua-license w-full">
                 <view class="page-s">
                     <view class="mb-16rpx">
-                        <text class="json-text text-13rpx break-all whitespace-pre-wrap" style="overflow-wrap: normal;"
+                        <text class="json-text text-13px break-all whitespace-pre-wrap" style="overflow-wrap: normal;"
                               user-select>{{expBackJson}}</text>
                     </view>
                 </view>
