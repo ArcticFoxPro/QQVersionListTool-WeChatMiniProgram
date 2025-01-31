@@ -18,9 +18,8 @@ See the Mulan PubL v2 for more details.
     </t-navbar>
 </view>
 
-<scroll-view class="overflow-y-auto" enhanced scroll-y style="height:{{heightRecycle+'px'}};"
-             type="list">
+<scroll-view class="overflow-y-auto" enhanced scroll-y style="height:{{heightRecycle+'px'}};" type="list">
     <view class="p-32rpx">
-        <text user-select>{{licenseBody}}</text>
+        <text user-select>{{(repoLink !== '' ? repoLink + '\n\n' : '') + licenseBody}}</text>
     </view>
 </scroll-view>

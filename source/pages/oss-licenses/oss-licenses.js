@@ -21,7 +21,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        licensesMp: [], licensesBuild: [], title: "", licenseBody: ""
+        licensesMp: [], licensesBuild: [], title: "", licenseBody: "", repoLink: ""
     },
 
     /**
@@ -31,9 +31,15 @@ Page({
         const type = options.type
         const index = options.index
         if (type === "mp") this.setData({
-            licenseMp: licensesMp, title: licensesMp[index].name, licenseBody: licensesMp[index].licenseText
+            licenseMp: licensesMp,
+            title: licensesMp[index].name,
+            licenseBody: licensesMp[index].licenseText,
+            repoLink: licensesMp[index].repository
         }); else if (type === "build") this.setData({
-            licenseBuild: licensesBuild, title: licensesBuild[index].name, licenseBody: licensesBuild[index].licenseText
+            licenseBuild: licensesBuild,
+            title: licensesBuild[index].name,
+            licenseBody: licensesBuild[index].licenseText,
+            repoLink: licensesBuild[index].repository
         })
     },
 
