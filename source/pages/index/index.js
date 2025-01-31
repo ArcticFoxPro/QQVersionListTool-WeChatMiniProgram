@@ -194,12 +194,14 @@ Page({
             yearNow: dayjs().year()
         })
 
-        const windowHeight = wx.getWindowInfo().windowHeight
-        const safeBottomPadding = wx.getWindowInfo().screenHeight - wx.getWindowInfo().safeArea.bottom
+        const windowInfo = wx.getWindowInfo();
+
+        const windowHeight = windowInfo.windowHeight
+        const safeBottomPadding = windowInfo.screenHeight - windowInfo.safeArea.bottom
 
         this.setData({
-            safeBottomPadding: safeBottomPadding + (32 / 750 * wx.getSystemInfoSync().windowWidth),
-            safeBottomPaddingBackTop: safeBottomPadding + (160 / 750 * wx.getSystemInfoSync().windowWidth)
+            safeBottomPadding: safeBottomPadding + (32 / 750 * windowInfo.windowWidth),
+            safeBottomPaddingBackTop: safeBottomPadding + (160 / 750 * windowInfo.windowWidth)
         });
 
         let elementHeight1, elementHeight2, elementHeight3;
@@ -211,11 +213,7 @@ Page({
                 query.select(selector).boundingClientRect();
 
                 query.exec((res) => {
-                    if (res[0]) {
-                        resolve(res[0].height);
-                    } else {
-                        resolve(0);
-                    }
+                    if (res[0]) resolve(res[0].height); else resolve(0);
                 });
             });
         };
@@ -1676,5 +1674,9 @@ Page({
         });
     }, copyWeixinChangelog() {
         this.copyUtil(`https://weixin.qq.com/updates?platform=android&version=${this.data.itemWeixinVersion}`)
+    }, startOssLicensesMenu(){
+        wx.navigateTo({
+            url: '/pages/oss-licenses-menu/oss-licenses-menu'
+        })
     }
 })

@@ -1,0 +1,49 @@
+<!--oss-licenses-menu.wxml-->
+
+<!--
+Copyright (c) 2024 ArcticFoxPro
+Qverbow Vigor is licensed under Mulan PubL v2.
+You can use this software according to the terms and conditions of the Mulan PubL v2.
+You may obtain a copy of Mulan PubL v2 at:
+        http://license.coscl.org.cn/MulanPubL-2.0
+THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
+EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
+MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
+See the Mulan PubL v2 for more details.
+-->
+
+<view id="titleTop1">
+    <t-navbar left-arrow t-class-content="t-navbar-content" t-class-placeholder="t-navbar-placeholder">
+        <view class="ml-16rpx text-36rpx font-600" slot="left">开放源代码许可</view>
+    </t-navbar>
+</view>
+
+<scroll-view class="overflow-y-auto" enhanced scroll-y style="height:{{heightRecycle+'px'}};"
+             type="list">
+    <t-cell arrow bind:tap="licenseMpClick" description="{{item.description}}" hover wx:for="{{licenseMp}}"
+            wx:key="{{index}}" data-index="{{index}}">
+        <view slot="title">
+            <text>{{item.name}}</text>
+            <t-tag class="ml-16rpx inline-block vertical-bottom" size="small" theme="default" variant="light">
+                {{'v' + item.version}}
+            </t-tag>
+        </view>
+        <t-tag class="ml-12rpx" size="medium" slot="note" theme="primary" variant="light">
+            {{item.licenses}}
+        </t-tag>
+    </t-cell>
+
+    <t-cell arrow bind:tap="licenseBuildClick" description="{{item.description}}" hover wx:for="{{licenseBuild}}"
+            wx:key="{{index}}" data-index="{{index}}">
+        <view slot="title">
+            <text class="inline">{{item.name}}</text>
+            <t-tag class="ml-16rpx inline-block vertical-bottom" size="small" theme="default" variant="light">
+                {{'v' + item.version}}
+            </t-tag>
+        </view>
+        <t-tag class="ml-12rpx" size="medium" slot="note" theme="primary" variant="light">
+            {{item.licenses}}
+        </t-tag>
+    </t-cell>
+    <view class="cell-color" style="height:{{safeBottomPadding+'px'}};"></view>
+</scroll-view>

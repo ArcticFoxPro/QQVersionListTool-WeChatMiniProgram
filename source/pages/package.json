@@ -7,9 +7,5 @@
     "semver": "^7.7.0",
     "tdesign-miniprogram": "^1.8.5"
   },
-  "devDependencies": {},
-  "scripts": {
-    "unocss": "unocss pages/**/*.wxml -c unocss.config.js --watch -o unocss.wxss",
-    "unocss:build": "unocss pages/**/*.wxml -c unocss.config.js -o  unocss.wxss"
-  }
+  "devDependencies": {}
 }

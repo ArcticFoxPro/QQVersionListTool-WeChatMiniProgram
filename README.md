@@ -237,6 +237,7 @@ QQ 版本列表 Vigor 的诞生离不开以下开源项目，感谢以下开源�
 - [Day.js](https://day.js.org/)，Licensed under [MIT License](https://github.com/iamkun/dayjs/blob/dev/LICENSE)
 - [Himalaya（Chris Andrejewski）](https://github.com/andrejewski/himalaya)，Licensed under [ISC License](https://github.com/andrejewski/himalaya/blob/master/LICENSE)
 - [UnoCSS](https://unocss.dev/)，Licensed under [MIT License](https://github.com/unocss/unocss/blob/main/LICENSE)
+- [NPM License Checker（Roman Seidelsohn ）](https://github.com/RSeidelsohn/license-checker-rseidelsohn)，Licensed under [BSD 3-Clause License](https://github.com/RSeidelsohn/license-checker-rseidelsohn/blob/master/LICENSE)
 
 ## 星标趋势
 

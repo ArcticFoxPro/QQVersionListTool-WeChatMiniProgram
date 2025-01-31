@@ -85,79 +85,8 @@
     background-image: linear-gradient(to bottom, transparent, #f6f6f6);
 }
 
-.icon-button {
-    display: flex;
-    align-items: center;
-    margin-right: 24rpx;
-}
-
-.text-button {
-    text-align: right;
-    flex: 1;
-}
-
-.about-header {
-    display: flex;
-    align-items: center;
-    height: 116rpx;
-}
-
-.about-title {
-    flex: 1;
-    text-align: center;
-    font-weight: 600;
-    font-size: 36rpx;
-}
-
-.about-button {
-    margin: 32rpx;
-}
-
-.about-link {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    margin-top: 32rpx;
-}
-
-.guess-header {
-    display: flex;
-    align-items: center;
-    height: 116rpx;
-}
-
-.guess-title {
-    flex: 1;
-    text-align: center;
-    font-weight: 600;
-    font-size: 36rpx;
-}
-
-.guess-button {
-    margin: 32rpx;
-}
-
-.guess-button-top {
-    margin: 16rpx 32rpx 32rpx;
-}
-
 .section__content {
     margin: 80rpx 32rpx 96rpx 32rpx;
-}
-
-.cell-detail-button {
-    margin: 32rpx;
-    display: flex;
-}
-
-.json-detail-button {
-    margin: 32rpx;
-    display: flex;
-}
-
-.json-text {
-    white-space: pre-wrap;
-    word-break: break-all;
 }
 
 .header-title {
@@ -169,118 +98,10 @@
     color: rgba(0, 0, 0.9);
 }
 
-.error-header {
-    display: flex;
-    align-items: center;
-    height: 116rpx;
-}
-
-.error-title {
-    flex: 1;
-    text-align: center;
-    font-weight: 600;
-    font-size: 36rpx;
-}
-
-.error-button {
-    margin: 32rpx;
-    display: flex;
-}
-
-.ua-header {
-    display: flex;
-    align-items: center;
-    height: 116rpx;
-}
-
-.ua-title {
-    flex: 1;
-    text-align: center;
-    font-weight: 600;
-    font-size: 36rpx;
-}
-
-.ua-button {
-    margin: 32rpx;
-}
-
-.page-s {
-    padding-left: 32rpx;
-    padding-right: 32rpx;
-}
-
-.setting-header {
-    display: flex;
-    align-items: center;
-    height: 116rpx;
-}
-
-.setting-title {
-    flex: 1;
-    text-align: center;
-    font-weight: 600;
-    font-size: 36rpx;
-}
-
-.setting-button {
-    margin: 16rpx 32rpx 32rpx;
-}
-
-.loading-button {
-    margin: 32rpx;
-}
-
-.message-container {
-    word-break: break-word;
-    margin-left: 24rpx;
-}
-
-.guess-message-loading {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-left: 32rpx;
-    margin-right: 32rpx;
-}
-
-.guess-success-header {
-    display: flex;
-    align-items: center;
-    height: 116rpx;
-}
-
-.guess-success-title {
-    flex: 1;
-    text-align: center;
-    font-weight: 600;
-    font-size: 36rpx;
-}
-
-.guess-success-button {
-    margin: 32rpx;
-    display: flex;
-}
-
-.guess-success-button-top {
-    margin: 24rpx 32rpx 32rpx;
-    display: flex;
-}
-
-.TD_and_MulanPubLv2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .theme-card {
     border-radius: 24rpx;
     margin: 32rpx;
     overflow: hidden;
-}
-
-.suffix-setting-button {
-    margin: 32rpx;
-    display: flex;
 }
 
 .chbox {
