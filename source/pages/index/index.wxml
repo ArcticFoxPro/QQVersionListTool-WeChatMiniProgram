@@ -113,12 +113,25 @@ See the Mulan PubL v2 for more details.
                              show-scrollbar="{{false}}" style="height:{{heightRecycle+'px'}};"
                              throttle="{{!ThrottleSwitch}}" type="list">
                     <view class="header-title" id="titleTop4">微信版本列表 Vigor</view>
+                    <view class="qq-version-item w-full">
+                        <t-notice-bar bind:click="clickLocalWeixin" class="qq-version-item mx-32rpx rounded-18rpx"
+                                      content="本机微信：{{weixinLocalVersion}}" prefixIcon="{{false}}"
+                                      suffixIcon="chevron-right" visible="{{true}}">
+                            <view slot="prefix-icon">
+                                <t-icon name="phone-search"></t-icon>
+                            </view>
+                        </t-notice-bar>
+                    </view>
                     <view class="qq-version-item w-full" wx:for="{{weixinVersions}}" wx:key="version">
                         <t-cell-group theme="card">
                             <t-cell arrow bind:tap="clickWeixinCell" data-index="{{index}}" hover leftIcon="">
                                 <view class="text-60rpx flex justify-center items-center" slot="title"
                                       style="font-family: {{TCloudNumberSwitch?'TCloudNumber-'+(TCloudNumberHeavy===2?'Bold':(TCloudNumberHeavy===1?'Regular':'Light'))+',':''}} sans-serif;">
                                     {{item.version}}
+                                    <t-tag class="ml-12rpx" size="small" theme="primary" variant="light"
+                                           wx:if="{{item.version===weixinLocalVersion}}">
+                                        已安装
+                                    </t-tag>
                                 </view>
                                 <view class="flex justify-center items-center" slot="note">
                                     <t-button class="mr-16rpx" icon="link" shape="square" size="medium"
@@ -168,7 +181,7 @@ See the Mulan PubL v2 for more details.
             <view class="flex-1 text-center font-600 text-36rpx" id="ability-about">关于</view>
         </view>
         <view class="about-text mx-48rpx mb-12rpx">QQ 版本列表 Vigor for WeChat MiniProgram</view>
-        <view class="about-text m-12rpx px-36rpx">版本：1.2.1</view>
+        <view class="about-text m-12rpx px-36rpx">版本：{{qverbowVersion}}</view>
         <view class="about-text m-12rpx px-36rpx">作者：快乐小牛、有鲫雪狐</view>
         <view class="about-text m-12rpx px-36rpx pb-12rpx">Since 2024.03.12</view>
         <view class="flex justify-center items-center">
@@ -201,9 +214,9 @@ See the Mulan PubL v2 for more details.
         <view class="flex items-center h-116rpx">
             <view class="flex-1 text-center font-600 text-36rpx" id="ability-guess">扫版（维护模式）</view>
         </view>
-        <t-notice-bar
-                content="扫版功能已进入维护模式。您仍可以继续使用现有扫版功能，但 QQ 版本列表 Vigor 不再对相关功能及其任何后果作出任何可靠性保证。请明确并确保自身具备足够的风险识别和承受能力。"
-                prefixIcon="{{false}}" theme="warning" visible="{{true}}">
+        <t-notice-bar class="mx-16rpx rounded-18rpx"
+                      content="扫版功能已进入维护模式。您仍可以继续使用现有扫版功能，但 QQ 版本列表 Vigor 不再对相关功能及其任何后果作出任何可靠性保证。请明确并确保自身具备足够的风险识别和承受能力。"
+                      prefixIcon="{{false}}" theme="warning" visible="{{true}}">
             <view slot="prefix-icon">
                 <t-icon name="error-circle-filled"></t-icon>
             </view>
@@ -211,9 +224,9 @@ See the Mulan PubL v2 for more details.
         <t-tabs bind:change="onTabsChange" bind:click="onTabsClick" id="tabs" swipeable="{{false}}"
                 t-class="custom-tabs" t-class-content="custom-panel" theme="tag" value="{{guessTabDefault}}">
             <t-tab-panel label="QQ" value="0">
-                <t-notice-bar
-                        content="鉴于 QQ 测试版可能存在不可预知的稳定性问题，您在下载及使用该测试版本之前，必须明确并确保自身具备足够的风险识别和承受能力。"
-                        prefixIcon="{{false}}" visible="{{QQTestSwitch}}">
+                <t-notice-bar class="mx-16rpx mt-16rpx rounded-18rpx"
+                              content="鉴于 QQ 测试版可能存在不可预知的稳定性问题，您在下载及使用该测试版本之前，必须明确并确保自身具备足够的风险识别和承受能力。"
+                              prefixIcon="{{false}}" visible="{{QQTestSwitch}}">
                     <view slot="prefix-icon">
                         <t-icon name="error-circle-filled"></t-icon>
                     </view>
@@ -550,7 +563,7 @@ See the Mulan PubL v2 for more details.
             <t-checkbox bind:change="suffixTestChange" block="{{false}}" borderless checked="{{suffixTest}}"
                         icon="rectangle" label="_test"/>
         </view>
-        <view class="suffix-mt-16rpx mx-32rpx mb-32rpx">
+        <view class="flex mt-16rpx mx-32rpx mb-32rpx">
             <t-button bind:tap="closeSuffixSettingPopup" block class="mr-16rpx" size="large" theme="light">返回
             </t-button>
             <t-button bind:tap="saveSuffixSetting" block class="ml-16rpx" size="large" theme="primary">保存
@@ -588,7 +601,7 @@ See the Mulan PubL v2 for more details.
                       marks="{{fontHeavySliderMarks}}" max="2" min="0" step="{{1}}" value="{{TCloudNumberHeavy}}"
                       wx:if="{{suffixPersonalizationVisible}}"/>
         </view>
-        <view class="suffix-mt-16rpx mx-32rpx mb-32rpx">
+        <view class="flex mt-32rpx mx-32rpx mb-32rpx">
             <t-button bind:tap="closePersonalizationSetting" block size="large" theme="light">返回
             </t-button>
         </view>
@@ -631,7 +644,7 @@ See the Mulan PubL v2 for more details.
         <view class="flex items-center h-116rpx">
             <view class="flex-1 text-center font-600 text-36rpx">腾讯应用宝更新获取（实验性）</view>
         </view>
-        <t-notice-bar class="mb-32rpx"
+        <t-notice-bar class="mx-16rpx mb-32rpx rounded-18rpx"
                       content="腾讯应用宝更新获取功能为 QQ 版本列表 Vigor 附带的实验性功能，可能存在不可预知的稳定性问题。请明确并确保自身具备足够的风险识别和承受能力。"
                       prefixIcon="{{false}}" visible="{{true}}">
             <view slot="prefix-icon">
@@ -756,5 +769,27 @@ See the Mulan PubL v2 for more details.
         <view class="m-32rpx flex">
             <t-button bind:tap="closeExpBackPopupWithUrlOnly" block size="large" theme="light">返回</t-button>
         </view>
+    </view>
+</t-popup>
+
+<t-popup bind:visible-change="localWeixinDetailPopupVisible" close-on-overlay-click placement="bottom"
+         visible="{{localWeixinDetailVisible}}">
+    <view class="block">
+        <view class="flex items-center h-116rpx">
+            <view class="flex-1 text-center font-600 text-36rpx">本机微信版本详情</view>
+        </view>
+        <t-cell arrow bind:tap="clickLocalWeixinVersionCell" bordered description="{{weixinLocalVersion}}" hover
+                title="微信版本"/>
+        <t-cell arrow bind:tap="clickLocalWeixinSDKVersionCell" bordered description="{{weixinLocalSDKVersion}}" hover
+                title="微信小程序基础库版本"/>
+        <t-cell arrow bind:tap="clickLocalWeixinPlatformCell" bordered description="{{weixinLocalPlatform}}" hover
+                title="微信客户端平台"/>
+        <t-cell arrow bind:tap="clickLocalWeixinABICell" bordered="{{false}}" description="{{weixinLocalABI}}" hover title="ABI"/>
+    </view>
+    <view class="m-32rpx flex">
+        <t-button bind:tap="copyLocalWeixin" block class="mr-16rpx" size="large" theme="light">复制
+        </t-button>
+        <t-button bind:tap="closeLocalWeixinDetailPopup" block class="ml-16rpx" size="large" theme="primary">确定
+        </t-button>
     </view>
 </t-popup>

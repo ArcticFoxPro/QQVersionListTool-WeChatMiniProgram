@@ -6,6 +6,7 @@ page,::before,::after{--un-rotate:0;--un-rotate-x:0;--un-rotate-y:0;--un-rotate-
 .right--1rpx{right:-1rpx;}
 .m-12rpx{margin:12rpx;}
 .m-32rpx{margin:32rpx;}
+.mx-16rpx{margin-left:16rpx;margin-right:16rpx;}
 .mx-32rpx{margin-left:32rpx;margin-right:32rpx;}
 .mx-48rpx{margin-left:48rpx;margin-right:48rpx;}
 .mb-12rpx{margin-bottom:12rpx;}
@@ -44,6 +45,7 @@ page,::before,::after{--un-rotate:0;--un-rotate-x:0;--un-rotate-y:0;--un-rotate-
 .whitespace-pre-wrap{white-space:pre-wrap;}
 .break-words{overflow-wrap:break-word;}
 .break-all{word-break:break-all;}
+.rounded-18rpx{border-radius:18rpx;}
 .p-32rpx{padding:32rpx;}
 .p-64rpx{padding:64rpx;}
 .px{padding-left:64rpx;padding-right:64rpx;}

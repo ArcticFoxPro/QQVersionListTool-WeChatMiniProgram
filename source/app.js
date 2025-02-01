@@ -15,6 +15,7 @@
 App({
     onLaunch() {
     }, globalData: {
+        QVERBOW_VERSION: "1.2.1",
         UA_VERSION: 3, // 用户协议 2024.11.18 第三版
         EARLIEST_ACCESSIBILITY_QQ_VERSION: false,
         EARLIEST_ACCESSIBILITY_TIM_VERSION: false,

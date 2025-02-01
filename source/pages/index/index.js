@@ -80,8 +80,13 @@ Page({
             0: 'Light', 1: 'Regular', 2: 'Bold'
         },
         getTimNewestLinkLoading: false,
-        safeBottomPadding: 0
+        safeBottomPadding: 0,
+        weixinLocalPlatform: ""
     }, onLoad: function () {
+        const accountInfo = wx.getAccountInfoSync();
+        const appBaseInfo = wx.getAppBaseInfo()
+        const deviceInfo = wx.getDeviceInfo()
+
         this.setData({
             theme: wx.getAppBaseInfo().theme || 'light',
             PerProSwitch: wx.getStorageSync('isPerProOn'),
@@ -93,7 +98,13 @@ Page({
             qqVersionBig: wx.getStorageSync('qqVersionBig'),
             qqVersionSmall: wx.getStorageSync('qqVersionSmall'),
             timVersionBig: wx.getStorageSync('timVersionBig'),
-            timVersionSmall: wx.getStorageSync('timVersionSmall')
+            timVersionSmall: wx.getStorageSync('timVersionSmall'),
+            qverbowVersion: getApp().globalData.QVERBOW_VERSION,
+            qverbowEnvVersion: accountInfo.miniProgram.envVersion,
+            weixinLocalVersion: appBaseInfo.version,
+            weixinLocalSDKVersion: appBaseInfo.SDKVersion,
+            weixinLocalPlatform: deviceInfo.platform,
+            weixinLocalABI: deviceInfo.abi
         });
 
         const suffixKeys = ['suffix64HB', 'suffixHB64', 'suffix64HB1', 'suffixHB164', 'suffix64HB2', 'suffixHB264', 'suffix64HB3', 'suffixHB364', 'suffix64HD', 'suffixHD64', 'suffix64HD1', 'suffixHD164', 'suffix64HD2', 'suffixHD264', 'suffix64HD3', 'suffixHD364', 'suffix64HD1HB', 'suffixHD1HB64', 'suffixTest'];
@@ -402,9 +413,10 @@ Page({
                 try {
                     const responseData = res.data.toString();
                     const json = parse(responseData)
+                    const platform = this.data.weixinLocalPlatform
 
                     function findAndroidSection(node) {
-                        if (node.tagName === 'section' && node.attributes.some(attr => attr.key === 'id' && attr.value === 'android')) return node;
+                        if (node.tagName === 'section' && node.attributes.some(attr => attr.key === 'id' && attr.value === platform)) return node;
                         if (node.children) for (const child of node.children) {
                             const result = findAndroidSection(child);
                             if (result) return result;
@@ -1673,10 +1685,32 @@ Page({
             cellDetailVisible: true
         });
     }, copyWeixinChangelog() {
-        this.copyUtil(`https://weixin.qq.com/updates?platform=android&version=${this.data.itemWeixinVersion}`)
-    }, startOssLicensesMenu(){
+        this.copyUtil(`https://weixin.qq.com/updates?platform=${this.data.weixinLocalPlatform}&version=${this.data.itemWeixinVersion}`)
+    }, startOssLicensesMenu() {
         wx.navigateTo({
             url: '/pages/oss-licenses-menu/oss-licenses-menu'
         })
-    }
+    }, localWeixinDetailPopupVisible(e) {
+        this.setData({
+            localWeixinDetailVisible: e.detail.visible
+        })
+    }, clickLocalWeixin() {
+        this.setData({
+            localWeixinDetailVisible: true
+        })
+    }, closeLocalWeixinDetailPopup() {
+        this.setData({
+            localWeixinDetailVisible: false
+        })
+    }, copyLocalWeixin() {
+        this.copyUtil(`微信版本：${this.data.weixinLocalVersion}\n微信小程序基础库版本：${this.data.weixinLocalSDKVersion}\n微信客户端平台：${this.data.weixinLocalPlatform}\nABI：${this.data.weixinLocalABI}`)
+    }, clickLocalWeixinVersionCell() {
+        this.copyUtil(`微信版本：${this.data.weixinLocalVersion}`)
+    }, clickLocalWeixinSDKVersionCell() {
+        this.copyUtil(`微信小程序基础库版本：${this.data.weixinLocalSDKVersion}`)
+    }, clickLocalWeixinPlatformCell() {
+        this.copyUtil(`微信客户端平台：${this.data.weixinLocalPlatform}`)
+    }, clickLocalWeixinABICell() {
+        this.copyUtil(`ABI：${this.data.weixinLocalABI}`)
+    },
 })
