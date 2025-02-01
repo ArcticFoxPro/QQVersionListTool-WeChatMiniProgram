@@ -35,6 +35,7 @@ page,::before,::after{--un-rotate:0;--un-rotate-x:0;--un-rotate-y:0;--un-rotate-
 .w-full{width:100%;}
 .flex{display:flex;}
 .flex-1{flex:1 1 0%;}
+.flex-col{flex-direction:column;}
 .items-center{align-items:center;}
 .self-center{align-self:center;}
 .justify-center{justify-content:center;}
@@ -53,6 +54,7 @@ page,::before,::after{--un-rotate:0;--un-rotate-x:0;--un-rotate-y:0;--un-rotate-
 .text-right{text-align:right;}
 .vertical-bottom{vertical-align:bottom;}
 .text-13px{font-size:13px;}
+.text-32rpx{font-size:32rpx;}
 .text-36rpx{font-size:36rpx;}
 .text-60rpx{font-size:60rpx;}
 .font-600{font-weight:600;}

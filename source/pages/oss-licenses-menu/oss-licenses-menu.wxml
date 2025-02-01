@@ -23,7 +23,7 @@ See the Mulan PubL v2 for more details.
     <t-cell arrow bind:tap="licenseMpClick" data-index="{{index}}" description="{{item.description}}" hover
             wx:for="{{licenseMp}}" wx:key="{{index}}">
         <view slot="title">
-            <text class="inline">{{item.name + (item.publisher !== '' ? (' (' + item.publisher + ')') : '')}}</text>
+            <text class="text-32rpx inline">{{item.name + (item.publisher !== '' ? (' (' + item.publisher + ')') : '')}}</text>
             <t-tag class="ml-16rpx inline-block vertical-bottom" size="small" theme="default" variant="light">
                 {{'v' + item.version}}
             </t-tag>
@@ -36,7 +36,7 @@ See the Mulan PubL v2 for more details.
     <t-cell arrow bind:tap="licenseBuildClick" data-index="{{index}}" description="{{item.description}}" hover
             wx:for="{{licenseBuild}}" wx:key="{{index}}">
         <view slot="title">
-            <text class="inline">{{item.name + (item.publisher !== '' ? (' (' + item.publisher + ')') : '')}}</text>
+            <text class="text-32rpx inline">{{item.name + (item.publisher !== '' ? (' (' + item.publisher + ')') : '')}}</text>
             <t-tag class="ml-16rpx inline-block vertical-bottom" size="small" theme="default" variant="light">
                 {{'v' + item.version}}
             </t-tag>

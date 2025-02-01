@@ -12,6 +12,8 @@
     See the Mulan PubL v2 for more details.
 */
 
+import Message from 'tdesign-miniprogram/message/index';
+
 const licensesMp = require('../utils/licenses-mp')
 const licensesBuild = require('../utils/licenses-build')
 
@@ -21,7 +23,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        licensesMp: [], licensesBuild: [], title: "", licenseBody: "", repoLink: ""
+        licensesMp: [], licensesBuild: [], title: "",version: "", licenseBody: "", repoLink: "", repoType: ""
     },
 
     /**
@@ -33,13 +35,17 @@ Page({
         if (type === "mp") this.setData({
             licenseMp: licensesMp,
             title: licensesMp[index].name,
+            version: licensesMp[index].version,
             licenseBody: licensesMp[index].licenseText,
-            repoLink: licensesMp[index].repository
+            repoLink: licensesMp[index].repository,
+            repoType: licensesMp[index].repository.toLowerCase().includes("github.com") ? "GitHub" : (licensesMp[index].repository.toLowerCase().includes("gitlab.com") ? "GitLab" : "Unknown")
         }); else if (type === "build") this.setData({
             licenseBuild: licensesBuild,
             title: licensesBuild[index].name,
+            version: licensesBuild[index].version,
             licenseBody: licensesBuild[index].licenseText,
-            repoLink: licensesBuild[index].repository
+            repoLink: licensesBuild[index].repository,
+            repoType: licensesBuild[index].repository.toLowerCase().includes("github.com") ? "GitHub" : (licensesBuild[index].repository.toLowerCase().includes("gitlab.com") ? "GitLab" : "Unknown")
         })
     },
 
@@ -71,6 +77,29 @@ Page({
         this.setData({
             heightRecycle: windowHeight - elementHeight1
         });
-    },
-
+    }, copyUtil(copyData) {
+        const that = this;
+        wx.setClipboardData({
+            data: copyData, success(res) {
+                setTimeout(() => {
+                    wx.showToast({
+                        title: '', duration: 0, icon: 'none'
+                    });
+                    wx.hideToast();
+                }, 0)
+                Message.success({
+                    context: that,
+                    offset: [90, 32],
+                    duration: 3000,
+                    icon: false,
+                    single: false,
+                    content: `已复制：${copyData}`,
+                    align: 'center'
+                });
+            }, fail: function (res) {
+            }
+        })
+    }, copyRepo() {
+        this.copyUtil(this.data.repoLink)
+    }
 })

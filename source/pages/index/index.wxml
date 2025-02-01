@@ -179,8 +179,6 @@ See the Mulan PubL v2 for more details.
         <view class="flex items-center justify-center mt-32rpx">
             <t-link bind:tap="copyOSLink" class="mr-16rpx" content="GitHub 项目地址" hover prefix-icon="logo-github"
                     size="small" theme="primary"/>
-            <t-link bind:tap="startOssLicensesMenu" class="ml-16rpx" content="开放源代码许可" hover size="small"
-                    theme="primary"/>
         </view>
         <t-footer text="Copyright © {{yearNow===2024?'2024':'2024-'+yearNow}} Qverbow Vigor. All Rights Reserved."/>
         <view class="m-32rpx">
@@ -188,6 +186,11 @@ See the Mulan PubL v2 for more details.
         </view>
         <view class="m-32rpx">
             <t-button bind:tap="recallUA" block size="large" theme="light">撤回同意用户协议</t-button>
+        </view>
+        <view class="m-32rpx">
+            <t-button bind:tap="startOssLicensesMenu" block size="medium" theme="primary" variant="text">
+                开放源代码许可
+            </t-button>
         </view>
     </view>
 </t-popup>
@@ -333,10 +336,12 @@ See the Mulan PubL v2 for more details.
         <t-button bind:tap="closeCellDetailPopup" block class="ml-16rpx" size="large" theme="primary">确定
         </t-button>
     </view>
-    <view class="m-32rpx flex" wx:if="{{detailStatus==='WeixinDetail'}}">
-        <t-button bind:tap="copyWeixinChangelog" block class="mr-16rpx" size="large" theme="light">复制更新日志链接
-        </t-button>
-        <t-button bind:tap="closeCellDetailPopup" block class="ml-16rpx" size="large" theme="primary">确定
+
+    <view class="m-32rpx flex items-center flex-col" wx:if="{{detailStatus==='WeixinDetail'}}">
+        <view>
+            <t-link bind:tap="copyWeixinChangelog" content="复制更新日志链接" hover size="medium" theme="primary"/>
+        </view>
+        <t-button bind:tap="closeCellDetailPopup" block class="mt-16rpx" size="large" theme="primary">确定
         </t-button>
     </view>
 </t-popup>
@@ -445,7 +450,7 @@ See the Mulan PubL v2 for more details.
 
         <view class="flex items-center justify-between mx-32rpx">
             <t-loading align="center" class="large" size="68rpx" theme="circular"/>
-            <view class="break-words ml-24rpx">{{updateProgressDialogMessage}}</view>
+            <view class="break-all ml-24rpx">{{updateProgressDialogMessage}}</view>
         </view>
 
         <view class="m-32rpx">

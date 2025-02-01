@@ -12,14 +12,26 @@ MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
 See the Mulan PubL v2 for more details.
 -->
 
+<t-message id="t-message"/>
+
 <view id="titleTop1">
     <t-navbar left-arrow t-class-content="t-navbar-content" t-class-placeholder="t-navbar-placeholder">
-        <view class="ml-16rpx text-36rpx font-600" slot="left">{{title}}</view>
+        <view class="ml-16rpx" slot="left">
+            <view class=" text-36rpx font-600 inline">{{title}}</view>
+            <t-tag class="ml-16rpx inline-block vertical-bottom" size="small" theme="default" variant="light">
+                {{'v' + version}}
+            </t-tag>
+        </view>
     </t-navbar>
 </view>
 
-<scroll-view class="overflow-y-auto" enhanced scroll-y style="height:{{heightRecycle+'px'}};" type="list">
+<scroll-view class="overflow-y-auto block" enhanced scroll-x scroll-y style="height:{{heightRecycle+'px'}};"
+             type="list">
     <view class="p-32rpx">
-        <text user-select>{{(repoLink !== '' ? repoLink + '\n\n' : '') + licenseBody}}</text>
+        <t-link bind:tap="copyRepo" class="mb-32rpx" content="{{repoLink}}" hover
+                prefixIcon="{{repoType==='GitHub'?'logo-github':(repoType==='GitLab'?'logo-gitlab':'git-repository')}}"
+                size="large" theme="primary" wx:if="{{repoLink !== ''}}"/>
+
+        <text class="break-words whitespace-pre-wrap;" user-select>{{licenseBody}}</text>
     </view>
 </scroll-view>
