@@ -1,4 +1,4 @@
-﻿module.exports = {
+module.exports = {
   "dayjs@1.11.13": {
     "licenses": "MIT",
     "repository": "https://github.com/iamkun/dayjs",
@@ -69,4 +69,4 @@
     "version": "1.6.0",
     "description": "Fast Color Parsing and Manipulation"
   }
-}
+};

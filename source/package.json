@@ -7,8 +7,6 @@
   "scripts": {
     "unocss": "unocss pages/**/*.wxml !pages/**/node_modules/** !pages/**/miniprogram_npm/** -c uno.config.js --watch -o unocss.wxss",
     "unocss:build": "unocss pages/**/*.wxml !pages/**/node_modules/** !pages/**/miniprogram_npm/** -c uno.config.js -o unocss.wxss",
-    "license-build": "powershell -Command \"license-checker-rseidelsohn --customPath .\\pages\\utils\\licenseFormat.json --json | jq '.' | Out-File -FilePath .\\pages\\utils\\licenses-build.json -Encoding utf8; echo 'module.exports = ' | Out-File -FilePath .\\pages\\utils\\licenses-build.js -Encoding utf8 -NoNewline; Get-Content .\\pages\\utils\\licenses-build.json | Out-File -FilePath .\\pages\\utils\\licenses-build.js -Encoding utf8 -Append; Remove-Item .\\pages\\utils\\licenses-build.json\"",
-    "license-mp": "powershell -Command \"license-checker-rseidelsohn --start .\\pages\\ --customPath .\\pages\\utils\\licenseFormat.json --json | jq '.' | Out-File -FilePath .\\pages\\utils\\licenses-mp.json -Encoding utf8; echo 'module.exports = ' | Out-File -FilePath .\\pages\\utils\\licenses-mp.js -Encoding utf8 -NoNewline; Get-Content .\\pages\\utils\\licenses-mp.json | Out-File -FilePath .\\pages\\utils\\licenses-mp.js -Encoding utf8 -Append; Remove-Item .\\pages\\utils\\licenses-mp.json\""
-  },
-  "type": "module"
+    "license-build": "node OSSLicensesJSONBuild.js"
+  }
 }
