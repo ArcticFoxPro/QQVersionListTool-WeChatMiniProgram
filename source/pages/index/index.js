@@ -81,7 +81,9 @@ Page({
         },
         getTimNewestLinkLoading: false,
         safeBottomPadding: 0,
-        weixinLocalPlatform: ""
+        weixinLocalPlatform: "",
+        listOrder: ['QQ 版本列表 Vigor', 'TIM 版本列表 Vigor', '微信版本列表 Vigor'],
+        WeixinFirstSwitch: false
     }, onLoad: function () {
         const accountInfo = wx.getAccountInfoSync();
         const appBaseInfo = wx.getAppBaseInfo()
@@ -129,6 +131,12 @@ Page({
             KuiklySwitch: false
         }); else this.setData({
             KuiklySwitch: true
+        })
+
+        if (wx.getStorageSync('isWeixinFirstOn') === false || wx.getStorageSync('isWeixinFirstOn') === "") this.setData({
+            WeixinFirstSwitch: false, listOrder: ['QQ 版本列表 Vigor', 'TIM 版本列表 Vigor', '微信版本列表 Vigor']
+        }); else if (wx.getStorageSync('isWeixinFirstOn') === true) this.setData({
+            WeixinFirstSwitch: true, listOrder: ['微信版本列表 Vigor', 'QQ 版本列表 Vigor', 'TIM 版本列表 Vigor']
         })
 
         if (wx.getStorageSync('TCloudNumberSwitch') === false) this.setData({
@@ -216,8 +224,6 @@ Page({
             safeBottomPaddingBackTop: safeBottomPadding + (160 / 750 * windowInfo.windowWidth)
         });
 
-        let elementHeight1, elementHeight2, elementHeight3;
-
         // 获取元素高度的函数封装
         const getElementHeight = async (selector) => {
             return new Promise((resolve) => {
@@ -231,9 +237,9 @@ Page({
         };
 
         // 获取各个元素高度
-        elementHeight1 = await getElementHeight('#titleTop1');
-        elementHeight2 = await getElementHeight('#titleTop2');
-        elementHeight3 = await getElementHeight('#bottomButton');
+        let elementHeight1 = await getElementHeight('#titleTop1');
+        let elementHeight2 = await getElementHeight('#titleTop2');
+        let elementHeight3 = await getElementHeight('#bottomButton');
 
 
         this.setData({
@@ -414,7 +420,8 @@ Page({
                 try {
                     const responseData = res.data.toString();
                     const json = parse(responseData)
-                    const platform = this.data.weixinLocalPlatform
+                    let platform = this.data.weixinLocalPlatform
+                    if (platform === 'devtools' || platform === 'ohos') platform = 'harmonyos'
 
                     function findAndroidSection(node) {
                         if (node.tagName === 'section' && node.attributes.some(attr => attr.key === 'id' && attr.value === platform)) return node;
@@ -688,6 +695,17 @@ Page({
         wx.setStorageSync('isUEOn', e.detail.value);
         this.setData({
             UESwitch: e.detail.value
+        })
+    }, handleWeixinFirstChange(e) {
+        wx.vibrateShort({
+            type: 'light',
+        });
+        wx.setStorageSync('isWeixinFirstOn', e.detail.value);
+        this.setData({
+            WeixinFirstSwitch: e.detail.value, topNum: 0, qqOpa: 0, timOpa: 0, weixinOpa: 0, titleOpacity: 0
+        })
+        this.setData({
+            listOrder: e.detail.value ? ['微信版本列表 Vigor', 'QQ 版本列表 Vigor', 'TIM 版本列表 Vigor'] : ['QQ 版本列表 Vigor', 'TIM 版本列表 Vigor', '微信版本列表 Vigor'],
         })
     }, handleThrottleChange(e) {
         wx.vibrateShort({
@@ -1684,7 +1702,9 @@ Page({
             cellDetailVisible: true
         });
     }, copyWeixinChangelog() {
-        this.copyUtil(`https://weixin.qq.com/updates?platform=${this.data.weixinLocalPlatform}&version=${this.data.itemWeixinVersion}`)
+        let platform = this.data.weixinLocalPlatform
+        if (platform === 'devtools' || platform === 'ohos') platform = 'harmonyos'
+        this.copyUtil(`https://weixin.qq.com/updates?platform=${platform}&version=${this.data.itemWeixinVersion}`)
     }, startOssLicensesMenu() {
         wx.navigateTo({
             url: '/pages/oss-licenses-menu/oss-licenses-menu'
@@ -1702,7 +1722,7 @@ Page({
             localWeixinDetailVisible: false
         })
     }, copyLocalWeixin() {
-        this.copyUtil(`微信版本：${this.data.weixinLocalVersion}\n微信小程序基础库版本：${this.data.weixinLocalSDKVersion}\n微信客户端平台：${this.data.weixinLocalPlatform}（${this.data.weixinLocalSystem}）\nABI：${this.data.weixinLocalABI}`)
+        this.copyUtil(`微信版本：${this.data.weixinLocalVersion}\n微信小程序基础库版本：${this.data.weixinLocalSDKVersion}\n微信客户端平台：${this.data.weixinLocalPlatform}（${this.data.weixinLocalSystem}）` + (this.data.weixinLocalABI !== undefined ? `\nABI：${this.data.weixinLocalABI}` : ''))
     }, clickLocalWeixinVersionCell() {
         this.copyUtil(`微信版本：${this.data.weixinLocalVersion}`)
     }, clickLocalWeixinSDKVersionCell() {
@@ -1711,5 +1731,7 @@ Page({
         this.copyUtil(`微信客户端平台：${this.data.weixinLocalPlatform}（${this.data.weixinLocalSystem}）`)
     }, clickLocalWeixinABICell() {
         this.copyUtil(`ABI：${this.data.weixinLocalABI}`)
-    },
+    }, updateWeixin() {
+        wx.updateWeChatApp()
+    }
 })

@@ -21,20 +21,18 @@ See the Mulan PubL v2 for more details.
         <t-navbar t-class-content="t-navbar-content" t-class-placeholder="t-navbar-placeholder"
                   t-class-title="nav-title">
             <view class="text-36rpx font-600 ml-16rpx" id="smallTitle" slot="left"
-                  style="width: 70vw; opacity: {{titleOpacity}};">
-                {{ verListCurrent === 0 ? 'QQ 版本列表 Vigor' : (verListCurrent === 1 ? 'TIM 版本列表 Vigor' : '微信版本列表 Vigor') }}
-            </view>
+                  style="width: 70vw; opacity: {{titleOpacity}};">{{listOrder[verListCurrent]}}</view>
         </t-navbar>
     </view>
 
     <view class="recycle-view-container">
         <swiper bind:change="swiperChange" current="{{verListCurrent}}" duration="250"
                 style="height:{{heightRecycle+'px'}};">
-            <swiper-item>
+            <swiper-item wx:for="{{listOrder}}">
                 <scroll-view bind:refresh="onRefresh" bindscroll="titleChange" class="qq-version-list" enable-passive
                              enhanced scroll-top="{{topNum}}" scroll-with-animation scroll-y="{{true}}"
                              show-scrollbar="{{false}}" style="height:{{heightRecycle+'px'}};"
-                             throttle="{{!ThrottleSwitch}}" type="list">
+                             throttle="{{!ThrottleSwitch}}" type="list" wx:if="{{item==='QQ 版本列表 Vigor'}}">
                     <view class="header-title" id="titleTop2">QQ 版本列表 Vigor</view>
                     <view class="qq-version-item w-full" wx:for="{{qqVersions}}" wx:key="versions">
                         <t-cell-group theme="card">
@@ -51,7 +49,7 @@ See the Mulan PubL v2 for more details.
                                 </view>
                                 <view class="flex justify-center items-center" slot="note">
                                     <t-button class="mr-16rpx" icon="link" shape="square" size="medium"
-                                              style="visibility: hidden" theme="light"/>
+                                              style="visibility: hidden" theme="light" variant="outline"/>
                                     <t-tag class="ml-12rpx" icon="{{null}}" size="small" theme="primary" variant="light"
                                            wx:if="{{item.isAccessibility}}">
                                         <t-icon name="accessibility_new" prefix="material-symbols-outlined" size="28rpx"
@@ -71,12 +69,10 @@ See the Mulan PubL v2 for more details.
                     <view class="qq-version-item-bottom w-full p-64rpx" wx:if="{{qqVersions.length>=1}}"
                           wx:key="lastItem"></view>
                 </scroll-view>
-            </swiper-item>
-            <swiper-item>
                 <scroll-view bind:refresh="onRefresh" bindscroll="titleChange" class="qq-version-list" enable-passive
                              enhanced scroll-top="{{topNum}}" scroll-with-animation scroll-y="{{true}}"
                              show-scrollbar="{{false}}" style="height:{{heightRecycle+'px'}};"
-                             throttle="{{!ThrottleSwitch}}" type="list">
+                             throttle="{{!ThrottleSwitch}}" type="list" wx:if="{{item==='TIM 版本列表 Vigor'}}">
                     <view class="header-title" id="titleTop3">TIM 版本列表 Vigor</view>
                     <view class="qq-version-item w-full" wx:for="{{timVersions}}" wx:key="version">
                         <t-cell-group theme="card">
@@ -106,12 +102,10 @@ See the Mulan PubL v2 for more details.
                     <view class="qq-version-item-bottom w-full p-64rpx" wx:if="{{timVersions.length>=1}}"
                           wx:key="lastItem"></view>
                 </scroll-view>
-            </swiper-item>
-            <swiper-item>
                 <scroll-view bind:refresh="onRefresh" bindscroll="titleChange" class="qq-version-list" enable-passive
                              enhanced scroll-top="{{topNum}}" scroll-with-animation scroll-y="{{true}}"
                              show-scrollbar="{{false}}" style="height:{{heightRecycle+'px'}};"
-                             throttle="{{!ThrottleSwitch}}" type="list">
+                             throttle="{{!ThrottleSwitch}}" type="list" wx:if="{{item==='微信版本列表 Vigor'}}">
                     <view class="header-title" id="titleTop4">微信版本列表 Vigor</view>
                     <view class="qq-version-item w-full">
                         <t-notice-bar bind:click="clickLocalWeixin"
@@ -130,13 +124,13 @@ See the Mulan PubL v2 for more details.
                                       style="font-family: {{TCloudNumberSwitch?'TCloudNumber-'+(TCloudNumberHeavy===2?'Bold':(TCloudNumberHeavy===1?'Regular':'Light'))+',':''}} sans-serif;">
                                     {{item.version}}
                                     <t-tag class="ml-12rpx" size="small" theme="primary" variant="light"
-                                           wx:if="{{item.version===weixinLocalVersion}}">
-                                        已安装
+                                           wx:if="{{item.version===weixinLocalVersion}}">已安装
                                     </t-tag>
                                 </view>
                                 <view class="flex justify-center items-center" slot="note">
-                                    <t-button class="mr-16rpx" icon="link" shape="square" size="medium"
-                                              style="visibility: hidden" theme="light"/>
+                                    <t-button bind:tap="updateWeixin" class="mr-16rpx" icon="download-1" shape="square"
+                                              size="medium" style="visibility: {{index===0?'visible':'hidden'}}"
+                                              theme="light" variant="outline"/>
                                 </view>
                             </t-cell>
                         </t-cell-group>
@@ -163,8 +157,7 @@ See the Mulan PubL v2 for more details.
                       shape="square" size="large" theme="light" variant="outline"></t-button>
         </view>
         <t-button bind:tap="handleGuessPopup" block class="text-right flex-1" icon="radar" size="large"
-                  variant="outline">
-            扫版
+                  variant="outline">扫版
         </t-button>
     </view>
 
@@ -586,9 +579,11 @@ See the Mulan PubL v2 for more details.
         <view class="flex items-center h-116rpx">
             <view class="flex-1 text-center font-600 text-36rpx" id="ability-personalization">个性化</view>
         </view>
-        <t-cell bordered
-                description="Kuikly 跨端开发框架通过自研 KMP 逻辑与终端界面原生控件渲染映射协议层，和其声明式与响应式设计，可为开发者提供原生高效的 Android 开发体验和原生性能的跨平台应用开发能力。"
-                title="版本卡片显示 Kuikly 开发框架标识">
+        <t-cell bordered description="开启后，首屏将显示微信版本列表，QQ、TIM 版本列表需从右向左滑动查看"
+                title="首屏设置为微信版本列表">
+            <t-switch bind:change="handleWeixinFirstChange" class="ml-48rpx" slot="note" value="{{WeixinFirstSwitch}}"/>
+        </t-cell>
+        <t-cell bordered description="Kuikly 内置情况以 QQ 正式版为判断来源" title="版本卡片显示 Kuikly 开发框架标识">
             <t-switch bind:change="handleKuiklyChange" class="ml-48rpx" slot="note" value="{{KuiklySwitch}}"/>
         </t-cell>
         <t-cell bordered description="虚幻引擎内置情况以 QQ 正式版为判断来源" title="版本卡片显示虚幻引擎标识">
@@ -787,14 +782,13 @@ See the Mulan PubL v2 for more details.
                 title="微信版本"/>
         <t-cell arrow bind:tap="clickLocalWeixinSDKVersionCell" bordered description="{{weixinLocalSDKVersion}}" hover
                 title="微信小程序基础库版本"/>
-        <t-cell arrow bind:tap="clickLocalWeixinPlatformCell" bordered
-                description="{{weixinLocalPlatform+'（'+weixinLocalSystem+'）'}}" hover
-                title="微信客户端平台"/>
+        <t-cell arrow bind:tap="clickLocalWeixinPlatformCell" bordered="{{weixinLocalABI!==undefined}}"
+                description="{{weixinLocalPlatform+'（'+weixinLocalSystem+'）'}}" hover title="微信客户端平台"/>
         <t-cell arrow bind:tap="clickLocalWeixinABICell" bordered="{{false}}" description="{{weixinLocalABI}}" hover
-                title="ABI"/>
+                title="ABI" wx:if="{{weixinLocalABI!==undefined}}"/>
     </view>
     <view class="m-32rpx flex">
-        <t-button bind:tap="copyLocalWeixin" block class="mr-16rpx" size="large" theme="light">复制
+        <t-button bind:tap="copyLocalWeixin" block class="mr-16rpx" size="large" theme="light">复制全部
         </t-button>
         <t-button bind:tap="closeLocalWeixinDetailPopup" block class="ml-16rpx" size="large" theme="primary">确定
         </t-button>
