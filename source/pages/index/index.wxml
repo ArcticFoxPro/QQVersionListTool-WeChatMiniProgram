@@ -28,7 +28,7 @@ See the Mulan PubL v2 for more details.
     <view class="recycle-view-container">
         <swiper bind:change="swiperChange" current="{{verListCurrent}}" duration="250"
                 style="height:{{heightRecycle+'px'}};">
-            <swiper-item wx:for="{{listOrder}}">
+            <swiper-item wx:for="{{listOrder}}" wx:key="listOrder">
                 <scroll-view bind:refresh="onRefresh" bindscroll="titleChange" class="qq-version-list" enable-passive
                              enhanced scroll-top="{{topNum}}" scroll-with-animation scroll-y="{{true}}"
                              show-scrollbar="{{false}}" style="height:{{heightRecycle+'px'}};"
