@@ -45,8 +45,8 @@ Page({
                 try {
                     const url = new Uri(this.data.licensesBuild[index].repository)
                     const host = url.host().toLowerCase();
-                    if (host.includes("github.com")) return "GitHub";
-                    if (host.includes("gitlab.com")) return "GitLab";
+                    if (host === "github.com") return "GitHub";
+                    if (host === "gitlab.com") return "GitLab";
                 } catch (e) {
                     console.error("Invalid URL:", e);
                 }

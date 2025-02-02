@@ -57,7 +57,7 @@ function buildLicenses(outputFile, customPath, startPath = '') {
     const jsonData = JSON.parse(output);
     const jsContent = `module.exports = ${JSON.stringify(jsonData, null, 2)};`;
     fs.writeFileSync(jsFile, jsContent, 'utf8');
-    shell.rm(jsonFile); // 使用 shelljs 删除文件
+    shell.rm(jsonFile);
 }
 
 function main() {
