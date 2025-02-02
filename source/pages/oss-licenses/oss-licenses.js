@@ -13,9 +13,8 @@
 */
 
 import Message from 'tdesign-miniprogram/message/index';
-
-const licensesMp = require('../utils/licenses-mp')
-const licensesBuild = require('../utils/licenses-build')
+import {createStoreBindings} from 'mobx-miniprogram-bindings';
+import {store} from '../utils/MobXUtil';
 
 Page({
 
@@ -23,30 +22,35 @@ Page({
      * 页面的初始数据
      */
     data: {
-        licensesMp: [], licensesBuild: [], title: "",version: "", licenseBody: "", repoLink: "", repoType: ""
+        title: "", version: "", licenseBody: "", repoLink: "", repoType: ""
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
+        this.storeBindings = createStoreBindings(this, {
+            store, fields: {licensesMp: 'licensesMp', licensesBuild: 'licensesBuild'},
+        });
+        this.storeBindings.updateStoreBindings()
+
         const type = options.type
         const index = options.index
         if (type === "mp") this.setData({
-            licenseMp: licensesMp,
-            title: licensesMp[index].name,
-            version: licensesMp[index].version,
-            licenseBody: licensesMp[index].licenseText,
-            repoLink: licensesMp[index].repository,
-            repoType: licensesMp[index].repository.toLowerCase().includes("github.com") ? "GitHub" : (licensesMp[index].repository.toLowerCase().includes("gitlab.com") ? "GitLab" : "Unknown")
+            title: this.data.licensesMp[index].name,
+            version: this.data.licensesMp[index].version,
+            licenseBody: this.data.licensesMp[index].licenseText,
+            repoLink: this.data.licensesMp[index].repository,
+            repoType: this.data.licensesMp[index].repository.toLowerCase().includes("github.com") ? "GitHub" : (this.data.licensesMp[index].repository.toLowerCase().includes("gitlab.com") ? "GitLab" : "Unknown")
         }); else if (type === "build") this.setData({
-            licenseBuild: licensesBuild,
-            title: licensesBuild[index].name,
-            version: licensesBuild[index].version,
-            licenseBody: licensesBuild[index].licenseText,
-            repoLink: licensesBuild[index].repository,
-            repoType: licensesBuild[index].repository.toLowerCase().includes("github.com") ? "GitHub" : (licensesBuild[index].repository.toLowerCase().includes("gitlab.com") ? "GitLab" : "Unknown")
+            title: this.data.licensesBuild[index].name,
+            version: this.data.licensesBuild[index].version,
+            licenseBody: this.data.licensesBuild[index].licenseText,
+            repoLink: this.data.licensesBuild[index].repository,
+            repoType: this.data.licensesBuild[index].repository.toLowerCase().includes("github.com") ? "GitHub" : (this.data.licensesBuild[index].repository.toLowerCase().includes("gitlab.com") ? "GitLab" : "Unknown")
         })
+    }, onUnload() {
+        this.storeBindings.destroyStoreBindings();
     },
 
     /**

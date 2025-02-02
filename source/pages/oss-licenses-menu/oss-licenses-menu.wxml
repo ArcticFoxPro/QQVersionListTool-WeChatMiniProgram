@@ -21,7 +21,7 @@ See the Mulan PubL v2 for more details.
 <scroll-view class="overflow-y-auto" enhanced scroll-y style="height:{{heightRecycle+'px'}};"
              type="list">
     <t-cell arrow bind:tap="licenseMpClick" data-index="{{index}}" description="{{item.description}}" hover
-            wx:for="{{licenseMp}}" wx:key="{{index}}">
+            wx:for="{{licensesMp}}" wx:key="index">
         <view slot="title">
             <text class="text-32rpx inline">{{item.name + (item.publisher !== '' ? (' (' + item.publisher + ')') : '')}}</text>
             <t-tag class="ml-16rpx inline-block vertical-bottom" size="small" theme="default" variant="light">
@@ -34,7 +34,7 @@ See the Mulan PubL v2 for more details.
     </t-cell>
 
     <t-cell arrow bind:tap="licenseBuildClick" data-index="{{index}}" description="{{item.description}}" hover
-            wx:for="{{licenseBuild}}" wx:key="{{index}}">
+            wx:for="{{licensesBuild}}" wx:key="{{index}}">
         <view slot="title">
             <text class="text-32rpx inline">{{item.name + (item.publisher !== '' ? (' (' + item.publisher + ')') : '')}}</text>
             <t-tag class="ml-16rpx inline-block vertical-bottom" size="small" theme="default" variant="light">

@@ -15,8 +15,8 @@
     "packageNpmManually": true,
     "packNpmRelationList": [
       {
-        "packageJsonPath": "./page/package.json",
-        "miniprogramNpmDistDir": "./miniprogram_npm"
+        "packageJsonPath": "./pages/package.json",
+        "miniprogramNpmDistDir": "./miniprogram_npm/"
       }
     ],
     "babelSetting": {

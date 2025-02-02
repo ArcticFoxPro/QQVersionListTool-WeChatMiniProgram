@@ -39,6 +39,26 @@ module.exports = {
     "version": "2.2.3",
     "description": "JSON for Humans"
   },
+  "mobx-miniprogram-bindings@5.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/wechat-miniprogram/mobx-miniprogram-bindings",
+    "publisher": "wechat-miniprogram",
+    "licenseText": "MIT License\n\nCopyright (c) 2019 wechat-miniprogram\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+    "name": "mobx-miniprogram-bindings",
+    "email": "",
+    "version": "5.0.0",
+    "description": "Mobx binding utils for WeChat miniprogram"
+  },
+  "mobx-miniprogram@6.12.3": {
+    "licenses": "MIT",
+    "repository": "https://github.com/mobxjs/mobx",
+    "publisher": "Michel Weststrate",
+    "licenseText": "The MIT License (MIT)\n\nCopyright (c) 2015 Michel Weststrate\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+    "name": "mobx-miniprogram",
+    "email": "",
+    "version": "6.12.3",
+    "description": "Simple, scalable state management."
+  },
   "semver@7.7.0": {
     "licenses": "ISC",
     "repository": "https://github.com/npm/node-semver",

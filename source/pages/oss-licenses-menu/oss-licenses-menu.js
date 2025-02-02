@@ -11,26 +11,32 @@
     MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
     See the Mulan PubL v2 for more details.
 */
-
-const licensesMp = require('../utils/licenses-mp')
-const licensesBuild = require('../utils/licenses-build')
+import {createStoreBindings} from 'mobx-miniprogram-bindings';
+import {store} from '../utils/MobXUtil';
+import licensesMp from '../utils/licenses-mp';
+import licensesBuild from '../utils/licenses-build';
 
 Page({
 
     /**
      * 页面的初始数据
      */
-    data: {
-        licenseMp: [], licenseBuild: [],
-    },
+    data: {},
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-        this.setData({
-            licenseMp: licensesMp, licenseBuild: licensesBuild,
-        })
+        this.storeBindings = createStoreBindings(this, {
+            store,
+            fields: ['licensesMp', 'licensesBuild'],
+            actions: ['setLicensesMp', 'getLicensesMp', 'setLicensesBuild', 'getLicensesBuild']
+        });
+        if (this.getLicensesMp() !== {}) this.setLicensesMp(licensesMp)
+        if (this.getLicensesBuild() !== {}) this.setLicensesBuild(licensesBuild)
+        this.storeBindings.updateStoreBindings()
+    }, onUnload() {
+        this.storeBindings.destroyStoreBindings();
     },
 
     /**
