@@ -40,7 +40,17 @@ Page({
             version: this.data.licensesBuild[index].version,
             licenseBody: this.data.licensesBuild[index].licenseText,
             repoLink: this.data.licensesBuild[index].repository,
-            repoType: this.data.licensesBuild[index].repository.toLowerCase().includes("github.com") ? "GitHub" : (this.data.licensesBuild[index].repository.toLowerCase().includes("gitlab.com") ? "GitLab" : "Unknown")
+            repoType: (() => {
+                try {
+                    const url = new URL(this.data.licensesBuild[index].repository);
+                    const host = url.host.toLowerCase();
+                    if (host === "github.com") return "GitHub";
+                    if (host === "gitlab.com") return "GitLab";
+                } catch (e) {
+                    console.error("Invalid URL:", e);
+                }
+                return "Unknown";
+            })()
         })
     }, onUnload() {
         this.storeBindings.destroyStoreBindings();
