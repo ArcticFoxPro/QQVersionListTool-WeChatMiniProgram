@@ -1,9 +1,18 @@
 {
   "dependencies": {
+    "dayjs": "^1.11.13",
+    "extract-urls": "^1.4.1",
+    "himalaya": "^1.1.0",
+    "json5": "^2.2.3",
+    "mobx-miniprogram": "^6.12.3",
+    "mobx-miniprogram-bindings": "^5.0.0",
+    "semver": "^7.7.0",
+    "tdesign-miniprogram": "^1.8.5"
+  },
+  "devDependencies": {
     "license-checker-rseidelsohn": "^4.4.2",
     "unocss": "^65.4.3"
   },
-  "devDependencies": {},
   "scripts": {
     "unocss": "unocss pages/**/*.wxml !pages/**/node_modules/** !pages/**/miniprogram_npm/** -c uno.config.js --watch -o unocss.wxss",
     "unocss:build": "unocss pages/**/*.wxml !pages/**/node_modules/** !pages/**/miniprogram_npm/** -c uno.config.js -o unocss.wxss",

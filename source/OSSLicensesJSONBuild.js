@@ -56,7 +56,6 @@ function buildLicenses(outputFile, customPath, startPath = '') {
 function main() {
   const customPath = path.join(__dirname, 'pages/utils/licenseFormat.json');
   buildLicenses('licenses-build', customPath);
-  buildLicenses('licenses-mp', customPath, '--start ./pages/');
 }
 
 main();

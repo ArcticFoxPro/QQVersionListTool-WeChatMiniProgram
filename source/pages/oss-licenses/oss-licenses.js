@@ -30,19 +30,12 @@ Page({
      */
     onLoad(options) {
         this.storeBindings = createStoreBindings(this, {
-            store, fields: {licensesMp: 'licensesMp', licensesBuild: 'licensesBuild'},
+            store, fields: {licensesBuild: 'licensesBuild'},
         });
         this.storeBindings.updateStoreBindings()
 
-        const type = options.type
         const index = options.index
-        if (type === "mp") this.setData({
-            title: this.data.licensesMp[index].name,
-            version: this.data.licensesMp[index].version,
-            licenseBody: this.data.licensesMp[index].licenseText,
-            repoLink: this.data.licensesMp[index].repository,
-            repoType: this.data.licensesMp[index].repository.toLowerCase().includes("github.com") ? "GitHub" : (this.data.licensesMp[index].repository.toLowerCase().includes("gitlab.com") ? "GitLab" : "Unknown")
-        }); else if (type === "build") this.setData({
+        this.setData({
             title: this.data.licensesBuild[index].name,
             version: this.data.licensesBuild[index].version,
             licenseBody: this.data.licensesBuild[index].licenseText,

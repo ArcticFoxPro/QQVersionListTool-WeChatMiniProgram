@@ -13,7 +13,6 @@
 */
 import {createStoreBindings} from 'mobx-miniprogram-bindings';
 import {store} from '../utils/MobXUtil';
-import licensesMp from '../utils/licenses-mp';
 import licensesBuild from '../utils/licenses-build';
 
 Page({
@@ -28,11 +27,8 @@ Page({
      */
     onLoad(options) {
         this.storeBindings = createStoreBindings(this, {
-            store,
-            fields: ['licensesMp', 'licensesBuild'],
-            actions: ['setLicensesMp', 'getLicensesMp', 'setLicensesBuild', 'getLicensesBuild']
+            store, fields: ['licensesBuild'], actions: ['setLicensesBuild', 'getLicensesBuild']
         });
-        if (this.getLicensesMp() !== {}) this.setLicensesMp(licensesMp)
         if (this.getLicensesBuild() !== {}) this.setLicensesBuild(licensesBuild)
         this.storeBindings.updateStoreBindings()
     }, onUnload() {
@@ -69,13 +65,9 @@ Page({
         this.setData({
             heightRecycle: windowHeight - elementHeight1
         });
-    }, licenseMpClick(e) {
-        wx.navigateTo({
-            url: '/pages/oss-licenses/oss-licenses?type=mp&index=' + e.currentTarget.dataset.index,
-        })
     }, licenseBuildClick(e) {
         wx.navigateTo({
-            url: '/pages/oss-licenses/oss-licenses?type=build&index=' + e.currentTarget.dataset.index,
+            url: '/pages/oss-licenses/oss-licenses?index=' + e.currentTarget.dataset.index,
         })
     }
 })
