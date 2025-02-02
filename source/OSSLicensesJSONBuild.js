@@ -18,15 +18,15 @@
  * 每次小程序发布前均需手动执行 `node OSSLicensesJSONBuild.js`
  */
 
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-function runCommand(command) {
+function runCommand(command, args) {
   try {
-    return execSync(command, { encoding: 'utf8' });
+    return execFileSync(command, args, { encoding: 'utf8' });
   } catch (error) {
-    console.error(`命令执行失败: ${command}`);
+    console.error(`命令执行失败: ${command} ${args.join(' ')}`);
     process.exit(1);
   }
 }
@@ -44,8 +44,9 @@ function runCommand(command) {
 function buildLicenses(outputFile, customPath, startPath = '') {
   const jsonFile = path.join(__dirname, `pages/utils/${outputFile}.json`);
   const jsFile = path.join(__dirname, `pages/utils/${outputFile}.js`);
-  const command = `license-checker-rseidelsohn ${startPath} --customPath ${customPath} --json`;
-  const output = runCommand(command);
+  const command = 'license-checker-rseidelsohn';
+  const args = [startPath, '--customPath', customPath, '--json'];
+  const output = runCommand(command, args);
   fs.writeFileSync(jsonFile, output, 'utf8');
   const jsonData = JSON.parse(output);
   const jsContent = `module.exports = ${JSON.stringify(jsonData, null, 2)};`;
