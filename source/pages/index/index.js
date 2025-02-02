@@ -103,6 +103,7 @@ Page({
             qverbowEnvVersion: accountInfo.miniProgram.envVersion,
             weixinLocalVersion: appBaseInfo.version,
             weixinLocalSDKVersion: appBaseInfo.SDKVersion,
+            weixinLocalSystem: deviceInfo.system,
             weixinLocalPlatform: deviceInfo.platform,
             weixinLocalABI: deviceInfo.abi
         });
@@ -1347,11 +1348,9 @@ Page({
         })
     }, swiperChange(e) {
         if (e.detail.source === "touch") this.setData({
-            verListCurrent: e.detail.current
-        })
-        this.setData({
-            titleOpacity: this.data.verListCurrent === 0 ? this.data.qqOpa : (this.data.verListCurrent === 1 ? this.data.timOpa : this.data.weixinOpa),
-            scrollNumber: this.data.verListCurrent === 0 ? this.data.qqScrollNumber : (this.data.verListCurrent === 1 ? this.data.timScrollNumber : this.data.weixinScrollNumber),
+            verListCurrent: e.detail.current,
+            titleOpacity: e.detail.current === 0 ? this.data.qqOpa : (e.detail.current === 1 ? this.data.timOpa : this.data.weixinOpa),
+            scrollNumber: e.detail.current === 0 ? this.data.qqScrollNumber : (e.detail.current === 1 ? this.data.timScrollNumber : this.data.weixinScrollNumber),
         })
     }, async fetchDownloadLinkFromTencentAppStore(jsonData) {
         return new Promise((resolve, reject) => {
@@ -1703,13 +1702,13 @@ Page({
             localWeixinDetailVisible: false
         })
     }, copyLocalWeixin() {
-        this.copyUtil(`微信版本：${this.data.weixinLocalVersion}\n微信小程序基础库版本：${this.data.weixinLocalSDKVersion}\n微信客户端平台：${this.data.weixinLocalPlatform}\nABI：${this.data.weixinLocalABI}`)
+        this.copyUtil(`微信版本：${this.data.weixinLocalVersion}\n微信小程序基础库版本：${this.data.weixinLocalSDKVersion}\n微信客户端平台：${this.data.weixinLocalPlatform}（${this.data.weixinLocalSystem}）\nABI：${this.data.weixinLocalABI}`)
     }, clickLocalWeixinVersionCell() {
         this.copyUtil(`微信版本：${this.data.weixinLocalVersion}`)
     }, clickLocalWeixinSDKVersionCell() {
         this.copyUtil(`微信小程序基础库版本：${this.data.weixinLocalSDKVersion}`)
     }, clickLocalWeixinPlatformCell() {
-        this.copyUtil(`微信客户端平台：${this.data.weixinLocalPlatform}`)
+        this.copyUtil(`微信客户端平台：${this.data.weixinLocalPlatform}（${this.data.weixinLocalSystem}）`)
     }, clickLocalWeixinABICell() {
         this.copyUtil(`ABI：${this.data.weixinLocalABI}`)
     },

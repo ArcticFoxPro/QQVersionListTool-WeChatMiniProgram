@@ -118,6 +118,10 @@
     background-color: var(--td-bg-color-container, #fff);
 }
 
+.local-weixin {
+    border: 1rpx solid #0052d9;
+}
+
 .qqnt-logo-src {
     /*
     ** 专有代码声明 Ⅰ **
@@ -278,6 +282,10 @@
 
     .about-text {
         color: rgba(255, 255, 255, 0.9);
+    }
+
+    .local-weixin {
+        border: 1rpx solid #4582e6;
     }
 
     .qqnt-logo-src {
