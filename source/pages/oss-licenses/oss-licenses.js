@@ -15,6 +15,7 @@
 import Message from 'tdesign-miniprogram/message/index';
 import {createStoreBindings} from 'mobx-miniprogram-bindings';
 import {store} from '../utils/MobXUtil';
+import Uri from 'jsuri'
 
 Page({
 
@@ -42,10 +43,10 @@ Page({
             repoLink: this.data.licensesBuild[index].repository,
             repoType: (() => {
                 try {
-                    const url = new URL(this.data.licensesBuild[index].repository);
-                    const host = url.host.toLowerCase();
-                    if (host === "github.com") return "GitHub";
-                    if (host === "gitlab.com") return "GitLab";
+                    const url = new Uri(this.data.licensesBuild[index].repository)
+                    const host = url.host().toLowerCase();
+                    if (host.includes("github.com")) return "GitHub";
+                    if (host.includes("gitlab.com")) return "GitLab";
                 } catch (e) {
                     console.error("Invalid URL:", e);
                 }

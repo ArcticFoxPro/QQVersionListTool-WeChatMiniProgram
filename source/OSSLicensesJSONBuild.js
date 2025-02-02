@@ -18,17 +18,23 @@
  * 每次小程序发布前均需手动执行 `node OSSLicensesJSONBuild.js`
  */
 
-const { execFileSync } = require('child_process');
+const shell = require('shelljs');
 const fs = require('fs');
 const path = require('path');
 
 function runCommand(command, args) {
-  try {
-    return execFileSync(command, args, { encoding: 'utf8' });
-  } catch (error) {
-    console.error(`命令执行失败: ${command} ${args.join(' ')}`);
-    process.exit(1);
-  }
+    try {
+        // 使用 shelljs.exec 执行命令，并返回输出结果
+        const result = shell.exec(`${command} ${args.join(' ')}`, {silent: true});
+        if (result.code !== 0) {
+            console.error(result.stderr);
+            process.exit(1);
+        }
+        return result.stdout;
+    } catch (error) {
+        console.error(error);
+        process.exit(1);
+    }
 }
 
 /**
@@ -42,21 +48,21 @@ function runCommand(command, args) {
  * @param {string} [startPath=''] - 可选参数，指定从哪个路径开始查找依赖项，默认为当前目录
  */
 function buildLicenses(outputFile, customPath, startPath = '') {
-  const jsonFile = path.join(__dirname, `pages/utils/${outputFile}.json`);
-  const jsFile = path.join(__dirname, `pages/utils/${outputFile}.js`);
-  const command = 'license-checker-rseidelsohn';
-  const args = [startPath, '--customPath', customPath, '--json'];
-  const output = runCommand(command, args);
-  fs.writeFileSync(jsonFile, output, 'utf8');
-  const jsonData = JSON.parse(output);
-  const jsContent = `module.exports = ${JSON.stringify(jsonData, null, 2)};`;
-  fs.writeFileSync(jsFile, jsContent, 'utf8');
-  fs.unlinkSync(jsonFile);
+    const jsonFile = path.join(__dirname, `pages/utils/${outputFile}.json`);
+    const jsFile = path.join(__dirname, `pages/utils/${outputFile}.js`);
+    const command = 'license-checker-rseidelsohn';
+    const args = [startPath, '--customPath', customPath, '--json'];
+    const output = runCommand(command, args);
+    fs.writeFileSync(jsonFile, output, 'utf8');
+    const jsonData = JSON.parse(output);
+    const jsContent = `module.exports = ${JSON.stringify(jsonData, null, 2)};`;
+    fs.writeFileSync(jsFile, jsContent, 'utf8');
+    shell.rm(jsonFile); // 使用 shelljs 删除文件
 }
 
 function main() {
-  const customPath = path.join(__dirname, 'pages/utils/licenseFormat.json');
-  buildLicenses('licenses-build', customPath);
+    const customPath = path.join(__dirname, 'pages/utils/licenseFormat.json');
+    buildLicenses('licenses-build', customPath);
 }
 
 main();
