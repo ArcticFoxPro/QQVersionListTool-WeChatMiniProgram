@@ -1,0 +1,46 @@
+name: Update Licenses
+
+on:
+  push:
+    branches:
+      - main  # 根据需要修改分支名称
+
+jobs:
+  update-licenses:
+    runs-on: ubuntu-latest
+    working-directory: source
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'latest'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run OSSLicensesJSONBuild.js
+        run: license-build
+
+      - name: Compare files
+        id: compare-files
+        run: |
+          if ! cmp -s pages/utils/licenses-build.js pages/utils/licenses-build.js.bak; then
+            echo "files_changed=true" >> $GITHUB_ENV
+          else
+            echo "files_changed=false" >> $GITHUB_ENV
+          fi
+
+      - name: Create Pull Request
+        if: env.files_changed == 'true'
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: 'Update licenses-build.js'
+          body: 'Automatically generated PR to update licenses-build.js'
+          branch: 'update-licenses'
+          commit-message: 'Update licenses-build.js'
+          labels: 'auto-generated'

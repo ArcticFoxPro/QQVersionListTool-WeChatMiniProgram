@@ -40,8 +40,8 @@ function runCommand(command, args) {
 /**
  * 生成并保存项目依赖的许可证信息
  *
- * 该函数通过执行外部命令获取项目依赖的许可证信息，并将其保存为JSON和JS文件
- * 执行完成后，会删除JSON文件，仅保留JS文件
+ * 该函数通过执行外部命令获取项目依赖的许可证信息，并将其保存为 JSON 和 JS 文件
+ * 执行完成后，会删除 JSON 文件，仅保留 JS 文件
  *
  * @param {string} outputFile - 输出文件的名称，不包含文件扩展名
  * @param {string} customPath - 指定依赖项的自定义路径
