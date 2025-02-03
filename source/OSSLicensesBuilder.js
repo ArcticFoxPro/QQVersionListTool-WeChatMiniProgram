@@ -96,6 +96,10 @@ function main() {
         console.error('请先安装 license-checker-rseidelsohn: yarn add license-checker-rseidelsohn');
         process.exit(1);
     }
+    if (!shell.which('json5')) {
+        console.error('请先安装 json5: yarn add json5');
+        process.exit(1);
+    }
     const configPath = path.join(__dirname, 'OSSLicensesBuilderConfig.json5');
     if (!fs.existsSync(configPath)) {
         console.error(`找不到配置文件: ${configPath}`);
