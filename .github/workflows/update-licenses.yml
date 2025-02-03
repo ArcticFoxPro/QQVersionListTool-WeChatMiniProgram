@@ -40,7 +40,6 @@ jobs:
         if: env.files_changed == 'true'
         uses: peter-evans/create-pull-request@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           title: 'Update licenses-build.js'
           body: 'Automatically generated PR to update licenses-build.js'
           branch: 'update-licenses'
