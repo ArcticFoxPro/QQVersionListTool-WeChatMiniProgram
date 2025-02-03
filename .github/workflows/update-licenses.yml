@@ -33,7 +33,7 @@ jobs:
       - name: Compare files
         id: compare-files
         run: |
-          if ! cmp -s pages/utils/licenses-build.js pages/utils/licenses-build.js.bak; then
+          if ! cmp -s pages/utils/OSSLicensesDist.js pages/utils/OSSLicensesDist.js.bak; then
             echo "files_changed=true" >> $GITHUB_ENV
           else
             echo "files_changed=false" >> $GITHUB_ENV
@@ -43,8 +43,8 @@ jobs:
         if: env.files_changed == 'true'
         uses: peter-evans/create-pull-request@v4
         with:
-          title: 'Update licenses-build.js'
-          body: 'Automatically generated PR to update licenses-build.js'
+          title: '更新开源许可证信息（OSSLicensesDist.js）'
+          body: '自动化更新 OSSLicensesDist.js'
           branch: 'update-licenses'
-          commit-message: 'Update licenses-build.js'
+          commit-message: 'Update OSSLicensesDist.js'
           labels: 'auto-generated'

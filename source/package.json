@@ -13,11 +13,12 @@
   "devDependencies": {
     "license-checker-rseidelsohn": "^4.4.2",
     "shelljs": "^0.8.5",
+    "uglify-js": "^3.19.3",
     "unocss": "^65.4.3"
   },
   "scripts": {
     "unocss": "unocss pages/**/*.wxml !pages/**/node_modules/** !pages/**/miniprogram_npm/** -c uno.config.js --watch -o unocss.wxss",
     "unocss:build": "unocss pages/**/*.wxml !pages/**/node_modules/** !pages/**/miniprogram_npm/** -c uno.config.js -o unocss.wxss",
-    "license-build": "node OSSLicensesJSONBuild.js"
+    "license-build": "node OSSLicensesBuilder.js"
   }
 }

@@ -31,19 +31,19 @@ Page({
      */
     onLoad(options) {
         this.storeBindings = createStoreBindings(this, {
-            store, fields: {licensesBuild: 'licensesBuild'},
+            store, fields: ['ossLicensesDist'],
         });
         this.storeBindings.updateStoreBindings()
 
         const index = options.index
         this.setData({
-            title: this.data.licensesBuild[index].name,
-            version: this.data.licensesBuild[index].version,
-            licenseBody: this.data.licensesBuild[index].licenseText,
-            repoLink: this.data.licensesBuild[index].repository,
+            title: this.data.ossLicensesDist[index].name,
+            version: this.data.ossLicensesDist[index].version,
+            licenseBody: this.data.ossLicensesDist[index].licenseText,
+            repoLink: this.data.ossLicensesDist[index].repository,
             repoType: (() => {
                 try {
-                    const url = new Uri(this.data.licensesBuild[index].repository)
+                    const url = new Uri(this.data.ossLicensesDist[index].repository)
                     const host = url.host().toLowerCase();
                     if (host === "github.com") return "GitHub";
                     if (host === "gitlab.com") return "GitLab";

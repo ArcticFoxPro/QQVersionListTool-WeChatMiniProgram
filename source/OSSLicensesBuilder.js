@@ -1,4 +1,4 @@
-// OSSLicensesJSONBuild.js
+// OSSLicensesBuilder.js
 
 /*
     Copyright (c) 2024 ArcticFoxPro
@@ -15,12 +15,13 @@
 /**
  * 此文件用于为微信小程序生成开源项目许可证 JSON 信息，并通过 JavaScript `module.exports` 语句导出为 JS 对象。
  *
- * 每次小程序发布前均需手动执行 `node OSSLicensesJSONBuild.js`
+ * 每次小程序发布前均需手动执行 `node OSSLicensesBuilder.js`
  */
 
 const shell = require('shelljs');
 const fs = require('fs');
 const path = require('path');
+const uglifyJS = require('uglify-js');
 
 function runCommand(command, args) {
     try {
@@ -56,13 +57,16 @@ function buildLicenses(outputFile, customPath, startPath = '') {
     fs.writeFileSync(jsonFile, output, 'utf8');
     const jsonData = JSON.parse(output);
     const jsContent = `module.exports = ${JSON.stringify(jsonData, null, 2)};`;
-    fs.writeFileSync(jsFile, jsContent, 'utf8');
+    const minifiedCode = uglifyJS.minify(jsContent, {
+        mangle: true, compress: true,
+    }).code;
+    fs.writeFileSync(jsFile, minifiedCode, 'utf8');
     shell.rm(jsonFile);
 }
 
 function main() {
-    const customPath = path.join(__dirname, 'pages/utils/licenseFormat.json');
-    buildLicenses('licenses-build', customPath);
+    const customPath = path.join(__dirname, 'pages/utils/OSSLicenseBuildFormat.json');
+    buildLicenses('OSSLicensesDist', customPath);
 }
 
 main();
