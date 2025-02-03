@@ -30,6 +30,15 @@ jobs:
       - name: Build OSSLicensesDist.js
         run: yarn run build-oss-licenses-dist
 
+      - name: Create backup of OSSLicensesDist.js
+        run: |
+          if (Test-Path pages\utils\OSSLicensesDist.js) {
+            Copy-Item pages\utils\OSSLicensesDist.js pages\utils\OSSLicensesDist.js.bak
+          } else {
+            New-Item -ItemType File -Path pages\utils\OSSLicensesDist.js.bak -Force
+          }
+          shell: pwsh
+
       - name: Compare files
         id: compare-files
         run: |
@@ -40,6 +49,11 @@ jobs:
           } else {
             echo "files_changed=false" >> $env:GITHUB_ENV
           }
+        shell: pwsh
+
+      - name: Delete backup file
+        run: |
+          Remove-Item pages\utils\OSSLicensesDist.js.bak -Force
         shell: pwsh
 
       - name: Create Pull Request
