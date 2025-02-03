@@ -83,17 +83,17 @@ t-class-title | 标题样式类
 ### CSS Variables
 
 组件提供了下列 CSS 变量，可用于自定义样式。
-名称 | 默认值 | 描述 
+名称 | 默认值 | 描述
 -- | -- | --
---td-result-description-color | @font-gray-2 | - 
---td-result-description-font-size | @font-size-base | - 
---td-result-description-line-height | 44rpx | - 
---td-result-description-margin-top | @spacer | - 
---td-result-icon-default-color | @brand-color | - 
---td-result-icon-error-color | @error-color | - 
---td-result-icon-success-color | @success-color | - 
---td-result-icon-warning-color | @warning-color | - 
---td-result-title-color | @font-gray-1 | - 
---td-result-title-font-size | @font-size-l | - 
---td-result-title-line-height | 56rpx | - 
+--td-result-description-color | @font-gray-2 | -
+--td-result-description-font-size | @font-size-base | -
+--td-result-description-line-height | 44rpx | -
+--td-result-description-margin-top | @spacer | -
+--td-result-icon-default-color | @brand-color | -
+--td-result-icon-error-color | @error-color | -
+--td-result-icon-success-color | @success-color | -
+--td-result-icon-warning-color | @warning-color | -
+--td-result-title-color | @font-gray-1 | -
+--td-result-title-font-size | @font-size-l | -
+--td-result-title-line-height | 56rpx | -
 --td-result-title-margin-top | @spacer-1 | -

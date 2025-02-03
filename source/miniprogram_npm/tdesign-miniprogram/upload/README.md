@@ -97,13 +97,13 @@ success | `(files: MediaContext)` | 上传成功后触发，包含所有上传�
 ### CSS Variables
 
 组件提供了下列 CSS 变量，可用于自定义样式。
-名称 | 默认值 | 描述 
+名称 | 默认值 | 描述
 -- | -- | --
---td-upload-add-bg-color | @bg-color-secondarycontainer | - 
---td-upload-add-color | @font-gray-3 | - 
---td-upload-add-disabled-bg-color | @bg-color-component-disabled | - 
---td-upload-add-icon-disabled-color | @text-color-disabled | - 
---td-upload-add-icon-font-size | 56rpx | - 
---td-upload-disabled-mask | rgba(255, 255, 255, 0.55) | - 
---td-upload-radius | @radius-default | - 
+--td-upload-add-bg-color | @bg-color-secondarycontainer | -
+--td-upload-add-color | @font-gray-3 | -
+--td-upload-add-disabled-bg-color | @bg-color-component-disabled | -
+--td-upload-add-icon-disabled-color | @text-color-disabled | -
+--td-upload-add-icon-font-size | 56rpx | -
+--td-upload-disabled-mask | rgba(255, 255, 255, 0.55) | -
+--td-upload-radius | @radius-default | -
 --td-upload-drag-z-index | 999 | -

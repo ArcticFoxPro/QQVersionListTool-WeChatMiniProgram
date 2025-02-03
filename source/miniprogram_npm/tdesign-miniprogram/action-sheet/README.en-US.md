@@ -39,14 +39,14 @@ t-class-content | \-
 ### CSS Variables
 
 The component provides the following CSS variables, which can be used to customize styles.
-Name | Default Value | Description 
+Name | Default Value | Description
 -- | -- | --
---td-action-sheet-border-color | @gray-color-1 | - 
---td-action-sheet-border-radius | @radius-extra-large | - 
---td-action-sheet-cancel-color | @font-gray-1 | - 
---td-action-sheet-cancel-height | 96rpx | - 
---td-action-sheet-color | @font-gray-1 | - 
---td-action-sheet-description-color | @font-gray-3 | - 
---td-action-sheet-list-item-disabled-color | @font-gray-4 | - 
---td-action-sheet-list-item-height | 112rpx | - 
+--td-action-sheet-border-color | @gray-color-1 | -
+--td-action-sheet-border-radius | @radius-extra-large | -
+--td-action-sheet-cancel-color | @font-gray-1 | -
+--td-action-sheet-cancel-height | 96rpx | -
+--td-action-sheet-color | @font-gray-1 | -
+--td-action-sheet-description-color | @font-gray-3 | -
+--td-action-sheet-list-item-disabled-color | @font-gray-4 | -
+--td-action-sheet-list-item-height | 112rpx | -
 --td-action-sheet-text-align | center | -

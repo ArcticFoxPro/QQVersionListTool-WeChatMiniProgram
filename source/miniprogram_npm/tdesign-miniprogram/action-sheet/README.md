@@ -127,14 +127,14 @@ t-class-content | 内容样式类
 ### CSS Variables
 
 组件提供了下列 CSS 变量，可用于自定义样式。
-名称 | 默认值 | 描述 
+名称 | 默认值 | 描述
 -- | -- | --
---td-action-sheet-border-color | @gray-color-1 | - 
---td-action-sheet-border-radius | @radius-extra-large | - 
---td-action-sheet-cancel-color | @font-gray-1 | - 
---td-action-sheet-cancel-height | 96rpx | - 
---td-action-sheet-color | @font-gray-1 | - 
---td-action-sheet-description-color | @font-gray-3 | - 
---td-action-sheet-list-item-disabled-color | @font-gray-4 | - 
---td-action-sheet-list-item-height | 112rpx | - 
+--td-action-sheet-border-color | @gray-color-1 | -
+--td-action-sheet-border-radius | @radius-extra-large | -
+--td-action-sheet-cancel-color | @font-gray-1 | -
+--td-action-sheet-cancel-height | 96rpx | -
+--td-action-sheet-color | @font-gray-1 | -
+--td-action-sheet-description-color | @font-gray-3 | -
+--td-action-sheet-list-item-disabled-color | @font-gray-4 | -
+--td-action-sheet-list-item-height | 112rpx | -
 --td-action-sheet-text-align | center | -

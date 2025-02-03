@@ -24,15 +24,15 @@ t-class-row | \-
 ### CSS Variables
 
 The component provides the following CSS variables, which can be used to customize styles.
-Name | Default Value | Description 
+Name | Default Value | Description
 -- | -- | --
---td-skeleton-animation-flashed | rgba(90%, 90%, 90%, 0.3) | - 
---td-skeleton-animation-gradient | rgba(0, 0, 0, 4%) | - 
---td-skeleton-bg-color | @bg-color-page | - 
---td-skeleton-circle-border-radius | @radius-circle | - 
---td-skeleton-circle-height | 96rpx | - 
---td-skeleton-rect-border-radius | @radius-default | - 
---td-skeleton-rect-height | 32rpx | - 
---td-skeleton-row-spacing | @spacer-2 | - 
---td-skeleton-text-border-radius | @radius-small | - 
+--td-skeleton-animation-flashed | rgba(90%, 90%, 90%, 0.3) | -
+--td-skeleton-animation-gradient | rgba(0, 0, 0, 4%) | -
+--td-skeleton-bg-color | @bg-color-page | -
+--td-skeleton-circle-border-radius | @radius-circle | -
+--td-skeleton-circle-height | 96rpx | -
+--td-skeleton-rect-border-radius | @radius-default | -
+--td-skeleton-rect-height | 32rpx | -
+--td-skeleton-row-spacing | @spacer-2 | -
+--td-skeleton-text-border-radius | @radius-small | -
 --td-skeleton-text-height | 32rpx | -

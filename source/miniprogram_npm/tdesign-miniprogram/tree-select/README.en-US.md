@@ -36,11 +36,11 @@ t-class-right-item-label | \-
 ### CSS Variables
 
 The component provides the following CSS variables, which can be used to customize styles.
-Name | Default Value | Description 
+Name | Default Value | Description
 -- | -- | --
---td-tree-bg-color | @bg-color-container | - 
---td-tree-colum-width | 206rpx | - 
---td-tree-item-active-color | @brand-color | - 
---td-tree-item-font-size | 32rpx | - 
---td-tree-item-height | 112rpx | - 
+--td-tree-bg-color | @bg-color-container | -
+--td-tree-colum-width | 206rpx | -
+--td-tree-item-active-color | @brand-color | -
+--td-tree-item-font-size | 32rpx | -
+--td-tree-item-height | 112rpx | -
 --td-tree-root-bg-color | @bg-color-secondarycontainer | -

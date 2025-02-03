@@ -83,17 +83,17 @@ value | String / Number | - | 当前选项的值 | N
 ### CSS Variables
 
 组件提供了下列 CSS 变量，可用于自定义样式。
-名称 | 默认值 | 描述 
+名称 | 默认值 | 描述
 -- | -- | --
---td-side-bar-bg-color | @bg-color-secondarycontainer | - 
---td-side-bar-height | 100% | - 
---td-side-bar-width | 206rpx | - 
---td-side-bar-active-color | @brand-color | - 
---td-side-bar-bg-color | @bg-color-secondarycontainer | - 
---td-side-bar-border-radius | 18rpx | - 
---td-side-bar-color | @font-gray-1 | - 
---td-side-bar-disabled-color | @font-gray-4 | - 
---td-side-bar-font-size | 32rpx | - 
---td-side-bar-icon-size | 40rpx | - 
---td-side-bar-item-height | 112rpx | - 
+--td-side-bar-bg-color | @bg-color-secondarycontainer | -
+--td-side-bar-height | 100% | -
+--td-side-bar-width | 206rpx | -
+--td-side-bar-active-color | @brand-color | -
+--td-side-bar-bg-color | @bg-color-secondarycontainer | -
+--td-side-bar-border-radius | 18rpx | -
+--td-side-bar-color | @font-gray-1 | -
+--td-side-bar-disabled-color | @font-gray-4 | -
+--td-side-bar-font-size | 32rpx | -
+--td-side-bar-icon-size | 40rpx | -
+--td-side-bar-item-height | 112rpx | -
 --td-side-bar-item-line-height | 48rpx | -

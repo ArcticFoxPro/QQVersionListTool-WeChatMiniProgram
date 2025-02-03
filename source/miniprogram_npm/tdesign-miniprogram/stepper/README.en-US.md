@@ -40,9 +40,9 @@ t-class-plus | \-
 ### CSS Variables
 
 The component provides the following CSS variables, which can be used to customize styles.
-Name | Default Value | Description 
+Name | Default Value | Description
 -- | -- | --
---td-stepper-border-color | @component-border | - 
---td-stepper-border-radius | @radius-small | - 
---td-stepper-input-color | @font-gray-1 | - 
+--td-stepper-border-color | @component-border | -
+--td-stepper-border-radius | @radius-small | -
+--td-stepper-input-color | @font-gray-1 | -
 --td-stepper-input-disabled-color | @font-gray-4 | -

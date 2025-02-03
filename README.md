@@ -8,7 +8,7 @@
 
 [贡献成员](#贡献成员) | [开源相关](#开源相关) | [星标趋势](#星标趋势) | [孪生项目](#孪生项目)
 
-</div> 
+</div>
 
 <span id="注意事项"></span>
 
@@ -211,7 +211,7 @@ Kuikly（Kotlin UI Kit）跨端开发框架，是 TDS 腾讯端服务（Tencent 
 > “腾讯”“QQ”“腾讯 QQ”“腾讯 TIM”“微信”“WeChat”“Weixin”“腾讯微信”“企业微信”“WeCom”“微信输入法”“WeType”“应用宝”“腾讯应用宝”“腾讯企点”“TDesign”等是深圳市腾讯计算机系统有限公司和/或其关联公司的商标。本项目对“腾讯”“QQ”“腾讯 QQ”“腾讯 TIM”“微信”“WeChat”“Weixin”“腾讯微信”“企业微信”“WeCom”“微信输入法”“WeType”“应用宝”“腾讯应用宝”“腾讯企点”“TDesign”等的使用旨在注明和指向对应主体，并非表示对“腾讯”“QQ”“腾讯 QQ”“腾讯 TIM”“微信”“WeChat”“Weixin”“腾讯微信”“企业微信”“WeCom”“微信输入法”“WeType”“应用宝”“腾讯应用宝”“腾讯企点”“TDesign”等商标的注册和拥有。
 >
 > Android™ 是 Google LLC 的商标。
-> 
+>
 > Unreal® 及其徽标是 Epic Games, Inc. 在美国及其他国家或地区的商标或注册商标。
 
 ## 贡献成员

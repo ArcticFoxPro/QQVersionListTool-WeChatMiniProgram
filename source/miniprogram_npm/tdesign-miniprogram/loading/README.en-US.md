@@ -33,9 +33,9 @@ t-class-text | \-
 ### CSS Variables
 
 The component provides the following CSS variables, which can be used to customize styles.
-Name | Default Value | Description 
+Name | Default Value | Description
 -- | -- | --
---td-loading-color | @brand-color | - 
---td-loading-text-color | inherit | - 
---td-loading-text-font-size | 24rpx | - 
+--td-loading-color | @brand-color | -
+--td-loading-text-color | inherit | -
+--td-loading-text-font-size | 24rpx | -
 --td-loading-text-line-height | 40rpx | -

@@ -54,22 +54,22 @@ value | String / Number | - | Typescript：`TabValue`，[Tabs API Documents](./t
 ### CSS Variables
 
 The component provides the following CSS variables, which can be used to customize styles.
-Name | Default Value | Description 
+Name | Default Value | Description
 -- | -- | --
---td-tab-border-color | @component-stroke | - 
---td-tab-font-size | 28rpx | - 
---td-tab-icon-size | 36rpx | - 
---td-tab-item-active-color | @brand-color | - 
---td-tab-item-color | @font-gray-1 | - 
---td-tab-item-disabled-color | @font-gray-4 | - 
---td-tab-item-height | 96rpx | - 
---td-tab-item-tag-active-bg | @brand-color-light | - 
---td-tab-item-tag-bg | @bg-color-secondarycontainer | - 
---td-tab-item-tag-height | 64rpx | - 
---td-tab-item-vertical-height | 108rpx | - 
---td-tab-item-vertical-width | 208rpx | - 
---td-tab-nav-bg-color | @bg-color-container | - 
---td-tab-track-color | @brand-color | - 
---td-tab-track-radius | 8rpx | - 
---td-tab-track-thickness | 6rpx | - 
+--td-tab-border-color | @component-stroke | -
+--td-tab-font-size | 28rpx | -
+--td-tab-icon-size | 36rpx | -
+--td-tab-item-active-color | @brand-color | -
+--td-tab-item-color | @font-gray-1 | -
+--td-tab-item-disabled-color | @font-gray-4 | -
+--td-tab-item-height | 96rpx | -
+--td-tab-item-tag-active-bg | @brand-color-light | -
+--td-tab-item-tag-bg | @bg-color-secondarycontainer | -
+--td-tab-item-tag-height | 64rpx | -
+--td-tab-item-vertical-height | 108rpx | -
+--td-tab-item-vertical-width | 208rpx | -
+--td-tab-nav-bg-color | @bg-color-container | -
+--td-tab-track-color | @brand-color | -
+--td-tab-track-radius | 8rpx | -
+--td-tab-track-thickness | 6rpx | -
 --td-tab-track-width | 32rpx | -

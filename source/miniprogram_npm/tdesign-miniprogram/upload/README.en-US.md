@@ -41,13 +41,13 @@ success | `(files: MediaContext)` | [see more ts definition](https://github.com/
 ### CSS Variables
 
 The component provides the following CSS variables, which can be used to customize styles.
-Name | Default Value | Description 
+Name | Default Value | Description
 -- | -- | --
---td-upload-add-bg-color | @bg-color-secondarycontainer | - 
---td-upload-add-color | @font-gray-3 | - 
---td-upload-add-disabled-bg-color | @bg-color-component-disabled | - 
---td-upload-add-icon-disabled-color | @text-color-disabled | - 
---td-upload-add-icon-font-size | 56rpx | - 
---td-upload-disabled-mask | rgba(255, 255, 255, 0.55) | - 
---td-upload-radius | @radius-default | - 
+--td-upload-add-bg-color | @bg-color-secondarycontainer | -
+--td-upload-add-color | @font-gray-3 | -
+--td-upload-add-disabled-bg-color | @bg-color-component-disabled | -
+--td-upload-add-icon-disabled-color | @text-color-disabled | -
+--td-upload-add-icon-font-size | 56rpx | -
+--td-upload-disabled-mask | rgba(255, 255, 255, 0.55) | -
+--td-upload-radius | @radius-default | -
 --td-upload-drag-z-index | 999 | -

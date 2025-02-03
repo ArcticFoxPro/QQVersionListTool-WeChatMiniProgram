@@ -9,5 +9,5 @@ index | String / Number | - | 索引字符 | N
 
 ### IndexesAnchor 外部样式类
 类名 | 说明
--- | -- 
+-- | --
 t-class | 根节点样式类

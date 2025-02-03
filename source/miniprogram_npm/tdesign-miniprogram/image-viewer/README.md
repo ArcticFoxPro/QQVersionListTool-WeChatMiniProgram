@@ -75,12 +75,12 @@ delete | `(index: Number)` | 点击删除操作按钮时触发
 ### CSS Variables
 
 组件提供了下列 CSS 变量，可用于自定义样式。
-名称 | 默认值 | 描述 
+名称 | 默认值 | 描述
 -- | -- | --
---td-image-viewer-close-margin-left | @spacer-1 | - 
---td-image-viewer-delete-margin-right | @spacer-1 | - 
---td-image-viewer-nav-bg-color | @font-gray-3 | - 
---td-image-viewer-nav-color | @font-white-1 | - 
---td-image-viewer-nav-height | 96rpx | - 
---td-image-viewer-nav-index-font-size | @font-size-base | - 
+--td-image-viewer-close-margin-left | @spacer-1 | -
+--td-image-viewer-delete-margin-right | @spacer-1 | -
+--td-image-viewer-nav-bg-color | @font-gray-3 | -
+--td-image-viewer-nav-color | @font-white-1 | -
+--td-image-viewer-nav-height | 96rpx | -
+--td-image-viewer-nav-index-font-size | @font-size-base | -
 --td-image-viewer-top | @position-fixed-top | -

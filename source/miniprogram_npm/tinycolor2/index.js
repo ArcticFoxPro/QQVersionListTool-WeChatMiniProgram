@@ -10,7 +10,7 @@ __DEFINE__(1738525669099, function(require, module, exports) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.tinycolor = factory());
-})(this, (function () { 
+})(this, (function () {
 
   function _typeof(obj) {
     "@babel/helpers - typeof";

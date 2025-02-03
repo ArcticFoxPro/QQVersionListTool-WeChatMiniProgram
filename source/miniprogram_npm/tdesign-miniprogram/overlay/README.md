@@ -60,7 +60,7 @@ click | `({ visible: boolean })` | 点击遮罩时触发
 ### CSS Variables
 
 组件提供了下列 CSS 变量，可用于自定义样式。
-名称 | 默认值 | 描述 
+名称 | 默认值 | 描述
 -- | -- | --
---td-overlay-bg-color | @font-gray-2 | - 
+--td-overlay-bg-color | @font-gray-2 | -
 --td-overlay-transition-duration | 300ms | -

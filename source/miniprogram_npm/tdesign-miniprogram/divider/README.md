@@ -58,10 +58,10 @@ t-class-content | 内容样式类
 ### CSS Variables
 
 组件提供了下列 CSS 变量，可用于自定义样式。
-名称 | 默认值 | 描述 
+名称 | 默认值 | 描述
 -- | -- | --
---td-divider-color | @bg-color-component | - 
---td-divider-content-color | @font-gray-3 | - 
---td-divider-content-font-size | 24rpx | - 
---td-divider-content-line-height | 40rpx | - 
+--td-divider-color | @bg-color-component | -
+--td-divider-content-color | @font-gray-3 | -
+--td-divider-content-font-size | 24rpx | -
+--td-divider-content-line-height | 40rpx | -
 --td-divider-content-line-style | solid | -

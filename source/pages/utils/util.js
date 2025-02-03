@@ -66,4 +66,3 @@ module.exports = {
     getAllAPKUrl: getAllAPKUrl,
     resolveWeixinAlphaConfig: resolveWeixinAlphaConfig
 };
-

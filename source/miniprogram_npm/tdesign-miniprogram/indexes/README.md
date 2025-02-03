@@ -82,24 +82,24 @@ t-class-sidebar-item | 侧边栏选项样式类
 ### CSS Variables
 
 组件提供了下列 CSS 变量，可用于自定义样式。
-名称 | 默认值 | 描述 
+名称 | 默认值 | 描述
 -- | -- | --
---td-indexes-sidebar-active-bg-color | @brand-color | - 
---td-indexes-sidebar-active-color | @font-white-1 | - 
---td-indexes-sidebar-color | @font-gray-1 | - 
---td-indexes-sidebar-font-size | 24rpx | - 
---td-indexes-sidebar-item-size | 40rpx | - 
---td-indexes-sidebar-line-height | 40rpx | - 
---td-indexes-sidebar-right | 16rpx | - 
---td-indexes-sidebar-tips-bg-color | @brand-color-light | - 
---td-indexes-sidebar-tips-color | @brand-color | - 
---td-indexes-sidebar-tips-font-size | 40rpx | - 
---td-indexes-sidebar-tips-right | calc(100% + 32rpx) | - 
---td-indexes-sidebar-tips-size | 96rpx | - 
---td-indexes-anchor-active-bg-color | @bg-color-container | - 
---td-indexes-anchor-active-color | @brand-color | - 
---td-indexes-anchor-active-font-weight | 600 | - 
---td-indexes-anchor-bg-color | @bg-color-secondarycontainer | - 
---td-indexes-anchor-color | @font-gray-1 | - 
---td-indexes-anchor-font-size | 28rpx | - 
+--td-indexes-sidebar-active-bg-color | @brand-color | -
+--td-indexes-sidebar-active-color | @font-white-1 | -
+--td-indexes-sidebar-color | @font-gray-1 | -
+--td-indexes-sidebar-font-size | 24rpx | -
+--td-indexes-sidebar-item-size | 40rpx | -
+--td-indexes-sidebar-line-height | 40rpx | -
+--td-indexes-sidebar-right | 16rpx | -
+--td-indexes-sidebar-tips-bg-color | @brand-color-light | -
+--td-indexes-sidebar-tips-color | @brand-color | -
+--td-indexes-sidebar-tips-font-size | 40rpx | -
+--td-indexes-sidebar-tips-right | calc(100% + 32rpx) | -
+--td-indexes-sidebar-tips-size | 96rpx | -
+--td-indexes-anchor-active-bg-color | @bg-color-container | -
+--td-indexes-anchor-active-color | @brand-color | -
+--td-indexes-anchor-active-font-weight | 600 | -
+--td-indexes-anchor-bg-color | @bg-color-secondarycontainer | -
+--td-indexes-anchor-color | @font-gray-1 | -
+--td-indexes-anchor-font-size | 28rpx | -
 --td-indexes-anchor-line-height | 44rpx | -
