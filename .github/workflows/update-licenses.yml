@@ -25,7 +25,7 @@ jobs:
         run: yarn install
 
       - name: Run OSSLicensesJSONBuild.js
-        run: license-build
+        run: yarn run license-build
 
       - name: Compare files
         id: compare-files
