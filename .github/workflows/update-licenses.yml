@@ -27,9 +27,6 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Build OSSLicensesDist.js
-        run: yarn run build-oss-licenses-dist
-
       - name: Create backup of OSSLicensesDist.js
         run: |
           if (Test-Path pages\utils\OSSLicensesDist.js) {
@@ -38,6 +35,9 @@ jobs:
             New-Item -ItemType File -Path pages\utils\OSSLicensesDist.js.bak -Force
           }
           shell: pwsh
+
+      - name: Build OSSLicensesDist.js
+        run: yarn run build-oss-licenses-dist
 
       - name: Compare files
         id: compare-files
