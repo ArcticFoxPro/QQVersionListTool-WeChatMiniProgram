@@ -3,12 +3,17 @@ name: Update Licenses
 on:
   push:
     branches:
-      - main  # 根据需要修改分支名称
+      - main
 
 jobs:
   update-licenses:
     runs-on: ubuntu-latest
-    working-directory: source
+    permissions:
+      contents: write
+      pull-requests: write
+    defaults:
+      run:
+        working-directory: source
 
     steps:
       - name: Checkout repository
@@ -23,7 +28,7 @@ jobs:
         run: yarn install
 
       - name: Run OSSLicensesJSONBuild.js
-        run: license-build
+        run: yarn run license-build
 
       - name: Compare files
         id: compare-files
@@ -38,7 +43,6 @@ jobs:
         if: env.files_changed == 'true'
         uses: peter-evans/create-pull-request@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           title: 'Update licenses-build.js'
           body: 'Automatically generated PR to update licenses-build.js'
           branch: 'update-licenses'
