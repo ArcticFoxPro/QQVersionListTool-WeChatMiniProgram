@@ -238,6 +238,11 @@ QQ 版本列表 Vigor 的诞生离不开以下开源项目，感谢以下开源�
 - [Himalaya（Chris Andrejewski）](https://github.com/andrejewski/himalaya)，Licensed under [ISC License](https://github.com/andrejewski/himalaya/blob/master/LICENSE)
 - [UnoCSS](https://unocss.dev/)，Licensed under [MIT License](https://github.com/unocss/unocss/blob/main/LICENSE)
 - [NPM License Checker（Roman Seidelsohn）](https://github.com/RSeidelsohn/license-checker-rseidelsohn)，Licensed under [BSD 3-Clause License](https://github.com/RSeidelsohn/license-checker-rseidelsohn/blob/master/LICENSE)
+- [适用于微信小程序的 MobX 构建版](https://github.com/wechat-miniprogram/mobx)，Licensed under [MIT License](https://github.com/wechat-miniprogram/mobx/blob/wechat-miniprogram/LICENSE)
+- [微信小程序的 MobX 绑定辅助库](https://github.com/wechat-miniprogram/mobx-miniprogram-bindings)，Licensed under [MIT License](https://github.com/wechat-miniprogram/mobx-miniprogram-bindings/blob/master/LICENSE)
+- [ShellJS](https://github.com/shelljs/shelljs)，Licensed under [BSD 3-Clause License](https://github.com/shelljs/shelljs/blob/master/LICENSE)
+- [UglifyJS](https://github.com/mishoo/UglifyJS)，Licensed under [BSD License](https://github.com/mishoo/UglifyJS/blob/master/LICENSE)
+- [jsUri](https://github.com/derek-watson/jsUri)，Licensed under [MIT License](https://github.com/derek-watson/jsUri/blob/master/LICENSE)
 
 ## 星标趋势
 
