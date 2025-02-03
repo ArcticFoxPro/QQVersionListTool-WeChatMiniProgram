@@ -33,11 +33,11 @@ jobs:
       - name: Compare files
         id: compare-files
         run: |
-          if not fc /B pages\utils\OSSLicensesDist.js pages\utils\OSSLicensesDist.js.bak >nul; then
+          if ((fc /B pages\utils\OSSLicensesDist.js pages\utils\OSSLicensesDist.js.bak > $null) -ne $true) {
             echo "files_changed=true" >> $env:GITHUB_ENV
-          else
+          } else {
             echo "files_changed=false" >> $env:GITHUB_ENV
-          fi
+          }
         shell: pwsh
 
       - name: Create Pull Request
