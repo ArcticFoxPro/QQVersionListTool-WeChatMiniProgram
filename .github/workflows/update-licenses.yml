@@ -7,7 +7,7 @@ on:
 
 jobs:
   update-licenses:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     permissions:
       contents: write
       pull-requests: write
@@ -33,11 +33,12 @@ jobs:
       - name: Compare files
         id: compare-files
         run: |
-          if ! git diff --no-index --ignore-space-at-eol pages/utils/OSSLicensesDist.js pages/utils/OSSLicensesDist.js.bak; then
-            echo "files_changed=true" >> $GITHUB_ENV
+          if not fc /B pages\utils\OSSLicensesDist.js pages\utils\OSSLicensesDist.js.bak >nul; then
+            echo "files_changed=true" >> $env:GITHUB_ENV
           else
-            echo "files_changed=false" >> $GITHUB_ENV
+            echo "files_changed=false" >> $env:GITHUB_ENV
           fi
+        shell: pwsh
 
       - name: Create Pull Request
         if: env.files_changed == 'true'

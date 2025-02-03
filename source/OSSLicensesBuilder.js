@@ -55,6 +55,16 @@ function runCommand(command, args) {
     }
 }
 
+/**
+ * 生成并保存项目依赖的许可证信息
+ *
+ * 该函数通过执行外部命令获取项目依赖的许可证信息，并将其保存为 JSON 和 JS 文件
+ * 执行完成后，会删除 JSON 文件，仅保留 JS 文件
+ *
+ * @param {string} outputFile - 输出文件的名称，不包含文件扩展名
+ * @param {string} customPath - 指定依赖项的自定义路径
+ * @param {string} [startPath=''] - 可选参数，指定从哪个路径开始查找依赖项，默认为当前目录
+ */
 function buildLicenses(outputFile, customPath, startPath = '') {
     const outputDir = path.join(__dirname, 'pages/utils');
     shell.mkdir('-p', outputDir);
@@ -84,7 +94,7 @@ function buildLicenses(outputFile, customPath, startPath = '') {
 
 function main() {
     if (!shell.which('license-checker-rseidelsohn')) {
-        console.error('请先安装 license-checker-rseidelsohn: npm install -g license-checker-rseidelsohn');
+        console.error('请先安装 license-checker-rseidelsohn: yarn add license-checker-rseidelsohn');
         process.exit(1);
     }
     const customPath = path.join(__dirname, 'pages/utils/OSSLicenseBuildFormat.json');
