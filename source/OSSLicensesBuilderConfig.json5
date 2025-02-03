@@ -1,0 +1,18 @@
+/**
+ * 如需生成多个 npm 依赖目录的开放源代码许可信息，请在此列表下方添加更多对象
+ * `outputFile`: 生成的目录名
+ * `customPath`: 自定义 license-checker-rseidelsohn 生成格式的 JSON 文件路径
+ * `startPath`: 可选，指定扫描的 npm 依赖目录
+ **/
+[
+  {
+    outputFile: "OSSLicensesDist",
+    customPath: "pages/utils/OSSLicenseBuildFormat.json"
+  }
+  // 示例新增：
+  /*,{
+    outputFile: "OSSLicensesDist",
+    customPath: "subpackage/OSSLicenseBuildFormat.json",
+    startPath: "subpackage/"
+  }*/
+]

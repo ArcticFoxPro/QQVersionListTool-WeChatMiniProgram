@@ -28,9 +28,12 @@ See the Mulan PubL v2 for more details.
 <scroll-view class="overflow-y-auto block" enhanced scroll-x scroll-y style="height:{{heightRecycle+'px'}};"
              type="list">
     <view class="p-32rpx">
-        <t-link bind:tap="copyRepo" class="mb-32rpx" content="{{repoLink}}" hover
-                prefixIcon="{{repoType==='GitHub'?'logo-github':(repoType==='GitLab'?'logo-gitlab':'git-repository')}}"
-                size="large" theme="primary" wx:if="{{repoLink !== ''}}"/>
+        <t-notice-bar bind:tap="copyRepo" class="repo-link mb-32rpx rounded-18rpx" content="{{repoLink}}"
+                      prefixIcon="{{false}}" visible="{{true}}" wx:if="{{repoLink !== ''}}">
+            <view slot="prefix-icon">
+                <t-icon name="{{repoType==='GitHub'?'logo-github':(repoType==='GitLab'?'logo-gitlab':'git-repository')}}"></t-icon>
+            </view>
+        </t-notice-bar>
 
         <text class="break-words whitespace-pre-wrap;" user-select>{{licenseBody}}</text>
     </view>

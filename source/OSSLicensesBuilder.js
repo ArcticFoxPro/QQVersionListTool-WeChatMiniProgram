@@ -22,6 +22,7 @@ const shell = require('shelljs');
 const fs = require('fs');
 const path = require('path');
 const uglifyJS = require('uglify-js');
+const JSON5 = require('json5');
 
 function normalizeLineEndings(content) {
     return content.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
@@ -97,13 +98,14 @@ function main() {
         console.error('请先安装 license-checker-rseidelsohn: yarn add license-checker-rseidelsohn');
         process.exit(1);
     }
-    const customPath = path.join(__dirname, 'pages/utils/OSSLicenseBuildFormat.json');
-    if (!fs.existsSync(customPath)) {
-        console.error(`找不到自定义配置文件: ${customPath}`);
+    const configPath = path.join(__dirname, 'OSSLicensesBuilderConfig.json5');
+    if (!fs.existsSync(configPath)) {
+        console.error(`找不到配置文件: ${configPath}`);
         process.exit(1);
     }
     try {
-        buildLicenses('OSSLicensesDist', customPath);
+        const configs = JSON5.parse(fs.readFileSync(configPath, 'utf8'));
+        for (const config of configs) if (config["startPath"] === undefined) buildLicenses(config["outputFile"], config["customPath"]); else buildLicenses(config["outputFile"], config["customPath"], config["startPath"]);
     } catch (error) {
         console.error(`构建失败: ${error.message}`);
         process.exit(1);

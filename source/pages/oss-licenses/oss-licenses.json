@@ -2,9 +2,11 @@
   "component": true,
   "styleIsolation": "apply-shared",
   "usingComponents": {
+    "t-icon": "tdesign-miniprogram/icon/icon",
     "t-link": "tdesign-miniprogram/link/link",
     "t-message": "tdesign-miniprogram/message/message",
     "t-navbar": "tdesign-miniprogram/navbar/navbar",
+    "t-notice-bar": "tdesign-miniprogram/notice-bar/notice-bar",
     "t-tag": "tdesign-miniprogram/tag/tag"
   }
 }

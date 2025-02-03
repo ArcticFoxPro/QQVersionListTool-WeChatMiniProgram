@@ -12,3 +12,13 @@
     See the Mulan PubL v2 for more details.
 */
 
+.repo-link {
+    border: 1rpx solid #0052d9;
+}
+
+@media (prefers-color-scheme: dark) {
+    .repo-link {
+        border: 1rpx solid #4582e6;
+    }
+}
+
