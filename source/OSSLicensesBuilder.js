@@ -1,15 +1,15 @@
-// OSSLicensesBuilder.js
+// https://github.com/ArcticFoxPro/wechat-miniprogram-oss-licenses-semiauto-gen
 
 /*
-    Copyright (c) 2024 ArcticFoxPro
-    Qverbow Vigor is licensed under Mulan PubL v2.
-    You can use this software according to the terms and conditions of the Mulan PubL v2.
-    You may obtain a copy of Mulan PubL v2 at:
-             http://license.coscl.org.cn/MulanPubL-2.0
+    Copyright (c) 2025 ArcticFoxPro
+    WeChat MiniProgram OSS Licenses Semi-Auto Gen is licensed under Mulan PSL v2.
+    You can use this software according to the terms and conditions of the Mulan PSL v2.
+    You may obtain a copy of Mulan PSL v2 at:
+             http://license.coscl.org.cn/MulanPSL2
     THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
     EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
     MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
-    See the Mulan PubL v2 for more details.
+    See the Mulan PSL v2 for more details.
 */
 
 /**
@@ -45,10 +45,7 @@ function runCommand(command, args) {
         const result = shell.exec(`${command} ${sanitizedArgs.join(' ')}`, {
             silent: true, env: {...process.env, LC_ALL: 'C.UTF-8'}
         });
-
         if (result.code !== 0) throw new Error(result.stderr || `Command failed with code ${result.code}`);
-
-        // 新增：标准化命令输出换行符
         return normalizeLineEndings(result.stdout);
     } catch (error) {
         console.error(`[构建错误] ${error.message}`);
