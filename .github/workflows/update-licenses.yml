@@ -8,7 +8,9 @@ on:
 jobs:
   update-licenses:
     runs-on: ubuntu-latest
-    working-directory: source
+    defaults:
+      run:
+        working-directory: source
 
     steps:
       - name: Checkout repository
