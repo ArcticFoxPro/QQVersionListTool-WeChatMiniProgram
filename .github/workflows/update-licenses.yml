@@ -34,7 +34,7 @@ jobs:
           } else {
             New-Item -ItemType File -Path pages\utils\OSSLicensesDist.js.bak -Force
           }
-          shell: pwsh
+        shell: pwsh
 
       - name: Build OSSLicensesDist.js
         run: yarn run build-oss-licenses-dist
