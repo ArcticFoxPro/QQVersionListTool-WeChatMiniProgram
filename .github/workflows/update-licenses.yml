@@ -1,4 +1,4 @@
-name: Update Licenses
+name: Update OSS Licenses Dist
 
 on:
   push:
