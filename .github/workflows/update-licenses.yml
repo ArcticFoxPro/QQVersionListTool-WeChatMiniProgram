@@ -33,7 +33,9 @@ jobs:
       - name: Compare files
         id: compare-files
         run: |
-          if ((fc /B pages\utils\OSSLicensesDist.js pages\utils\OSSLicensesDist.js.bak > $null) -ne $true) {
+          $file1 = Get-Content pages\utils\OSSLicensesDist.js
+          $file2 = Get-Content pages\utils\OSSLicensesDist.js.bak
+          if (Compare-Object -ReferenceObject $file1 -DifferenceObject $file2) {
             echo "files_changed=true" >> $env:GITHUB_ENV
           } else {
             echo "files_changed=false" >> $env:GITHUB_ENV
