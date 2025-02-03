@@ -3,7 +3,7 @@ name: Update Licenses
 on:
   push:
     branches:
-      - main  # 根据需要修改分支名称
+      - main
 
 jobs:
   update-licenses:
@@ -40,7 +40,6 @@ jobs:
         if: env.files_changed == 'true'
         uses: peter-evans/create-pull-request@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           title: 'Update licenses-build.js'
           body: 'Automatically generated PR to update licenses-build.js'
           branch: 'update-licenses'
