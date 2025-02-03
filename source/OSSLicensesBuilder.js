@@ -60,16 +60,17 @@ function runCommand(command, args) {
  * 执行完成后，会删除 JSON 文件，仅保留 JS 文件
  *
  * @param {string} outputFile - 输出文件的名称，不包含文件扩展名
+ * @param {string} customFormat 指定输出许可证信息格式，必填
  * @param {string} customPath - 指定依赖项的自定义路径
  * @param {string} [startPath=''] - 可选参数，指定从哪个路径开始查找依赖项，默认为当前目录
  */
-function buildLicenses(outputFile, customPath, startPath = '') {
-    const outputDir = path.join(__dirname, 'pages/utils');
+function buildLicenses(outputFile, customFormat, customPath, startPath = '') {
+    const outputDir = path.join(__dirname, customPath);
     shell.mkdir('-p', outputDir);
     const jsonFile = path.join(outputDir, `${outputFile}.json`);
     const jsFile = path.join(outputDir, `${outputFile}.js`);
     try {
-        const output = runCommand('license-checker-rseidelsohn', [startPath, '--customPath', customPath, '--json']);
+        const output = runCommand('license-checker-rseidelsohn', [startPath, '--customPath', customFormat, '--json']);
         const jsonData = JSON.parse(output);
         if (Object.keys(jsonData).length === 0) throw new Error('生成的许可证数据为空');
         writeFileCrossPlatform(jsonFile, output);
@@ -102,7 +103,7 @@ function main() {
     }
     try {
         const configs = JSON5.parse(fs.readFileSync(configPath, 'utf8'));
-        for (const config of configs) if (config["startPath"] === undefined) buildLicenses(config["outputFile"], config["customPath"]); else buildLicenses(config["outputFile"], config["customPath"], config["startPath"]);
+        for (const config of configs) if (config["startPath"] === undefined) buildLicenses(config["outputFile"], config["customFormat"], config["customPath"]); else buildLicenses(config["outputFile"], config["customFormat"], config["customPath"], config["startPath"]);
     } catch (error) {
         console.error(`构建失败: ${error.message}`);
         process.exit(1);
