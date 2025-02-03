@@ -19,6 +19,6 @@
   "scripts": {
     "unocss": "unocss pages/**/*.wxml !pages/**/node_modules/** !pages/**/miniprogram_npm/** -c uno.config.js --watch -o unocss.wxss",
     "unocss:build": "unocss pages/**/*.wxml !pages/**/node_modules/** !pages/**/miniprogram_npm/** -c uno.config.js -o unocss.wxss",
-    "license-build": "node OSSLicensesBuilder.js"
+    "build-oss-licenses-dist": "node OSSLicensesBuilder.js"
   }
 }
