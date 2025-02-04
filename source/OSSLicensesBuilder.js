@@ -24,29 +24,13 @@ const path = require('path');
 const uglifyJS = require('uglify-js');
 const JSON5 = require('json5');
 
-function normalizeLineEndings(content) {
-    return content.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
-}
-
-function writeFileCrossPlatform(filePath, content) {
-    const normalized = normalizeLineEndings(content);
-    const cleanContent = normalized.charCodeAt(0) === 0xFEFF ? normalized.slice(1) : normalized;
-    fs.writeFileSync(filePath, cleanContent, {
-        encoding: 'utf8', flag: 'w', mode: 0o644
-    });
-}
-
 function runCommand(command, args) {
-    const isWindows = process.platform === 'win32';
-    const sanitizedArgs = args.map(arg => {
-        return isWindows ? arg.replace(/\//g, '\\') : arg;
-    });
     try {
-        const result = shell.exec(`${command} ${sanitizedArgs.join(' ')}`, {
+        const result = shell.exec(`${command} ${args.join(' ')}`, {
             silent: true, env: {...process.env, LC_ALL: 'C.UTF-8'}
         });
         if (result.code !== 0) throw new Error(result.stderr || `Command failed with code ${result.code}`);
-        return normalizeLineEndings(result.stdout);
+        return result.stdout;
     } catch (error) {
         console.error(`[构建错误] ${error.message}`);
         process.exit(1);
@@ -73,7 +57,7 @@ function buildLicenses(outputFile, customFormat, customPath, startPath = '') {
         const output = runCommand('license-checker-rseidelsohn', [startPath, '--customPath', customFormat, '--json']);
         const jsonData = JSON.parse(output);
         if (Object.keys(jsonData).length === 0) throw new Error('生成的许可证数据为空');
-        writeFileCrossPlatform(jsonFile, output);
+        fs.writeFileSync(jsonFile, output, {encoding: 'utf8', flag: 'w', mode: 0o644});
         const jsContent = `module.exports = ${JSON.stringify(jsonData, null, 2)};`;
         const minifiedResult = uglifyJS.minify(jsContent, {
             mangle: {toplevel: true}, compress: {
@@ -83,11 +67,9 @@ function buildLicenses(outputFile, customFormat, customPath, startPath = '') {
             }
         });
         if (minifiedResult.error) throw minifiedResult.error;
-        writeFileCrossPlatform(jsFile, minifiedResult.code);
+        fs.writeFileSync(jsFile, minifiedResult.code, {encoding: 'utf8', flag: 'w', mode: 0o644});
     } finally {
-        if (fs.existsSync(jsonFile)) {
-            shell.rm('-f', jsonFile);
-        }
+        if (fs.existsSync(jsonFile)) shell.rm('-f', jsonFile);
     }
 }
 

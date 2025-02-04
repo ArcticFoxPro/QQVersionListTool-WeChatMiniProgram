@@ -7,7 +7,7 @@ on:
 
 jobs:
   update-oss-licenses-dist:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
@@ -27,38 +27,35 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Create backup of OSSLicensesDist.js
+      - name: Install unix2dos
+        run: sudo apt-get update && sudo apt-get install unix2dos
+
+      - name: Backup OSSLicensesDist.js
         run: |
-          if (Test-Path pages\utils\OSSLicensesDist.js) {
-            Copy-Item pages\utils\OSSLicensesDist.js pages\utils\OSSLicensesDist.js.bak
-          } else {
-            New-Item -ItemType File -Path pages\utils\OSSLicensesDist.js.bak -Force
-          }
-        shell: pwsh
+          if [ -f pages/utils/OSSLicensesDist.js ]; then
+            cp pages/utils/OSSLicensesDist.js pages/utils/OSSLicensesDist.js.bak
+          else
+            touch pages/utils/OSSLicensesDist.js.bak
+          fi
 
       - name: Build OSSLicensesDist.js
         run: yarn run build-oss-licenses-dist
 
+      - name: unix2dos OSSLicensesDist.js
+        run: unix2dos pages/utils/OSSLicensesDist.js
+
       - name: Compare files
         id: compare-files
         run: |
-          $file1 = Get-Content pages\utils\OSSLicensesDist.js
-          $file2 = Get-Content pages\utils\OSSLicensesDist.js.bak
-          if ($null -eq $file1 -or $null -eq $file2) {
-            echo "files_changed=true" >> $env:GITHUB_ENV
-          } else {
-            if (Compare-Object -ReferenceObject $file1 -DifferenceObject $file2) {
-              echo "files_changed=true" >> $env:GITHUB_ENV
-            } else {
-              echo "files_changed=false" >> $env:GITHUB_ENV
-            }
-          }
-        shell: pwsh
+          if ! git diff --no-index --ignore-space-at-eol pages/utils/OSSLicensesDist.js pages/utils/OSSLicensesDist.js.bak; then
+            echo "files_changed=true" >> $GITHUB_ENV
+          else
+            echo "files_changed=false" >> $GITHUB_ENV
+          fi
 
-      - name: Delete backup file
-        run: |
-          Remove-Item pages\utils\OSSLicensesDist.js.bak -Force
-        shell: pwsh
+      - name: Delete OSSLicensesDist.js.bak
+        if: env.files_changed == 'true'
+        run: rm pages/utils/OSSLicensesDist.js.bak
 
       - name: Create Pull Request
         if: env.files_changed == 'true'
