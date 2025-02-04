@@ -27,8 +27,8 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Install unix2dos
-        run: sudo apt-get update && sudo apt-get install unix2dos
+      - name: Install tofrodos
+        run: sudo apt-get update && sudo apt-get install tofrodos
 
       - name: Backup OSSLicensesDist.js
         run: |
@@ -41,8 +41,8 @@ jobs:
       - name: Build OSSLicensesDist.js
         run: yarn run build-oss-licenses-dist
 
-      - name: unix2dos OSSLicensesDist.js
-        run: unix2dos pages/utils/OSSLicensesDist.js
+      - name: todos OSSLicensesDist.js
+        run: todos pages/utils/OSSLicensesDist.js
 
       - name: Compare files
         id: compare-files
