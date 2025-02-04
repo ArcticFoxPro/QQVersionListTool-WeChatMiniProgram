@@ -1,3 +1,15 @@
+#    https://github.com/ArcticFoxPro/wechat-miniprogram-oss-licenses-semiauto-gen
+
+#    Copyright (c) 2025 ArcticFoxPro
+#    WeChat MiniProgram OSS Licenses Semi-Auto Gen is licensed under Mulan PSL v2.
+#    You can use this software according to the terms and conditions of the Mulan PSL v2.
+#    You may obtain a copy of Mulan PSL v2 at:
+#             http://license.coscl.org.cn/MulanPSL2
+#    THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
+#    EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
+#    MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
+#    See the Mulan PSL v2 for more details.
+
 name: Update OSS Licenses Dist
 
 on:
@@ -9,7 +21,7 @@ jobs:
   update-oss-licenses-dist:
     strategy:
       matrix:
-        os: [ macos-latest ]
+        os: [ windows-latest ] # 请根据您的微信小程序开发环境配置相应系统（如 `macos-latest`、`ubuntu-latest` 等），因为部分 npm 包在不同系统环境下分发的包名不一致
     runs-on: ${{ matrix.os }}
     permissions:
       contents: write
@@ -37,7 +49,7 @@ jobs:
         run: git fetch origin main
 
       - name: Compare files (Windows)
-        if: matrix.os == 'windows-latest'
+        if: matrix.os == 'windows-latest' || matrix.os == 'windows-2019' || matrix.os == 'windows-2022'
         id: compare-files-windows
         run: |
           if ! git diff --exit-code origin/main; then
@@ -48,7 +60,7 @@ jobs:
         shell: bash
 
       - name: Compare files
-        if: matrix.os != 'windows-latest'
+        if: matrix.os != 'windows-latest' && matrix.os != 'windows-2019' && matrix.os != 'windows-2022'
         id: compare-files
         run: |
           if ! git diff --exit-code origin/main; then
@@ -61,8 +73,8 @@ jobs:
         if: env.files_changed == 'true'
         uses: peter-evans/create-pull-request@v4
         with:
-          title: '更新开源许可证信息'
-          body: '自动化更新 npm 依赖项的开放源代码信息'
+          title: '更新开放源代码许可信息文件'
+          body: '自动化更新 npm 依赖项的开放源代码许可信息文件'
           branch: 'update-licenses'
           commit-message: 'Update OSS Licenses Dist'
           labels: 'auto-generated'
