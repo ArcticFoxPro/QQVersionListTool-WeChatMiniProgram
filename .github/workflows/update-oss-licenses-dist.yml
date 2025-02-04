@@ -36,12 +36,19 @@ jobs:
       - name: Fetch latest changes from remote
         run: git fetch origin main
 
-      - name: Set shell type
+      - name: Compare files (Windows)
         if: matrix.os == 'windows-latest'
-        run: echo "SHELL_TYPE=bash" >> $GITHUB_ENV
+        id: compare-files-windows
+        run: |
+          if ! git diff --exit-code origin/main; then
+            echo "files_changed=true" >> $GITHUB_ENV
+          else
+            echo "files_changed=false" >> $GITHUB_ENV
+          fi
         shell: bash
 
       - name: Compare files
+        if: matrix.os != 'windows-latest'
         id: compare-files
         run: |
           if ! git diff --exit-code origin/main; then
@@ -49,7 +56,6 @@ jobs:
           else
             echo "files_changed=false" >> $GITHUB_ENV
           fi
-        shell: ${{ env.SHELL_TYPE || 'sh' }}
 
       - name: Create Pull Request
         if: env.files_changed == 'true'
