@@ -7,7 +7,10 @@ on:
 
 jobs:
   update-oss-licenses-dist:
-    runs-on: windows-latest
+    strategy:
+      matrix:
+        os: [ macos-latest ]
+    runs-on: ${{ matrix.os }}
     permissions:
       contents: write
       pull-requests: write
@@ -41,13 +44,14 @@ jobs:
           else
             echo "files_changed=false" >> $GITHUB_ENV
           fi
+        shell: ${{ matrix.os == 'windows-latest' && 'bash' || 'sh' }}
 
       - name: Create Pull Request
         if: env.files_changed == 'true'
         uses: peter-evans/create-pull-request@v4
         with:
-          title: '更新开源许可证信息（OSSLicensesDist.js）'
-          body: '自动化更新 OSSLicensesDist.js'
+          title: '更新开源许可证信息'
+          body: '自动化更新 npm 依赖项的开放源代码信息'
           branch: 'update-licenses'
-          commit-message: 'Update OSSLicensesDist.js'
+          commit-message: 'Update OSS Licenses Dist'
           labels: 'auto-generated'
