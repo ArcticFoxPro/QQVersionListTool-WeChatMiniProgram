@@ -68,6 +68,6 @@ jobs:
         with:
           title: '更新开源许可证信息（${{ matrix.file }}）'
           body: '自动化更新 ${{ matrix.file }}'
-          branch: 'update-licenses-${{ matrix.file | replace: '/', '-' }}'
+          branch: 'update-licenses-${{ matrix.file }}'
           commit-message: 'Update ${{ matrix.file }}'
           labels: 'auto-generated'
