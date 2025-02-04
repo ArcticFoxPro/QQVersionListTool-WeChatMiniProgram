@@ -41,7 +41,6 @@ jobs:
           else
             echo "files_changed=false" >> $GITHUB_ENV
           fi
-        shell: bash
 
       - name: Create Pull Request
         if: env.files_changed == 'true'
