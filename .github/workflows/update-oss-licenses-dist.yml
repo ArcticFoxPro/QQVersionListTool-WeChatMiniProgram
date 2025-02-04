@@ -7,18 +7,13 @@ on:
 
 jobs:
   update-oss-licenses-dist:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     permissions:
       contents: write
       pull-requests: write
     defaults:
       run:
         working-directory: source
-
-    strategy:
-      matrix:
-        file:
-          - pages/utils/OSSLicensesDist.js
 
     steps:
       - name: Checkout repository
@@ -32,42 +27,37 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Install tofrodos
-        run: sudo apt-get update && sudo apt-get install tofrodos
-
-      - name: Backup ${{ matrix.file }}
-        run: |
-          if [ -f ${{ matrix.file }} ]; then
-            cp ${{ matrix.file }} ${{ matrix.file }}.bak
-          else
-            touch ${{ matrix.file }}.bak
-          fi
-
-      - name: Build ${{ matrix.file }}
+      - name: Build OSSLicensesDist.js
         run: yarn run build-oss-licenses-dist
 
-      - name: todos ${{ matrix.file }}
-        run: todos ${{ matrix.file }}
+      - name: Fetch latest changes from remote
+        run: git fetch origin main
 
-      - name: Compare files for ${{ matrix.file }}
+      - name: Compare files
         id: compare-files
         run: |
-          if ! git diff --no-index --ignore-space-at-eol ${{ matrix.file }} ${{ matrix.file }}.bak; then
-            echo "files_changed=true" >> $GITHUB_ENV
-          else
-            echo "files_changed=false" >> $GITHUB_ENV
-          fi
+          $filesChanged = $false
+          $files = $env:FILES -split ' '
+           foreach ($file in $files) {
+             if (Test-Path $file) {
+               $diffResult = git diff --no-index --exit-code origin/main:$file $file
+               if ($LASTEXITCODE -ne 0) {
+                 $filesChanged = $true
+                 break
+               }
+             } else {
+               Write-Output "File $file not found"
+             }
+          }
+          echo "files_changed=$filesChanged" >> $env:GITHUB_ENV
+        shell: pwsh
 
-      - name: Delete ${{ matrix.file }}.bak
-        if: env.files_changed == 'true'
-        run: rm ${{ matrix.file }}.bak
-
-      - name: Create Pull Request for ${{ matrix.file }}
+      - name: Create Pull Request
         if: env.files_changed == 'true'
         uses: peter-evans/create-pull-request@v4
         with:
-          title: '更新开源许可证信息（${{ matrix.file }}）'
-          body: '自动化更新 ${{ matrix.file }}'
-          branch: 'update-licenses-${{ matrix.file }}'
-          commit-message: 'Update ${{ matrix.file }}'
+          title: '更新开源许可证信息（OSSLicensesDist.js）'
+          body: '自动化更新 OSSLicensesDist.js'
+          branch: 'update-licenses'
+          commit-message: 'Update OSSLicensesDist.js'
           labels: 'auto-generated'
