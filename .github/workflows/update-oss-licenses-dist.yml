@@ -36,12 +36,12 @@ jobs:
       - name: Compare files
         id: compare-files
         run: |
-          if (-not (git diff --exit-code origin/main)) {
-            Write-Output "files_changed=true" | Out-File -FilePath $env:GITHUB_ENV -Append
-          } else {
-            Write-Output "files_changed=false" | Out-File -FilePath $env:GITHUB_ENV -Append
-          }
-        shell: pwsh
+          if ! git diff --exit-code origin/main; then
+            echo "files_changed=true" >> $GITHUB_ENV
+          else
+            echo "files_changed=false" >> $GITHUB_ENV
+          fi
+        shell: bash
 
       - name: Create Pull Request
         if: env.files_changed == 'true'
