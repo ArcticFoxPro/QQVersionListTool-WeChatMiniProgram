@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Build OSSLicensesDist.js
+      - name: Build OSS Licenses Dist
         run: yarn run build-oss-licenses-dist
 
       - name: Fetch latest changes from remote
@@ -36,20 +36,11 @@ jobs:
       - name: Compare files
         id: compare-files
         run: |
-          $filesChanged = $false
-          $files = $env:FILES -split ' '
-           foreach ($file in $files) {
-             if (Test-Path $file) {
-               $diffResult = git diff --no-index --exit-code origin/main:$file $file
-               if ($LASTEXITCODE -ne 0) {
-                 $filesChanged = $true
-                 break
-               }
-             } else {
-               Write-Output "File $file not found"
-             }
+          if (-not (git diff --exit-code origin/main)) {
+            Write-Output "files_changed=true" | Out-File -FilePath $env:GITHUB_ENV -Append
+          } else {
+            Write-Output "files_changed=false" | Out-File -FilePath $env:GITHUB_ENV -Append
           }
-          echo "files_changed=$filesChanged" >> $env:GITHUB_ENV
         shell: pwsh
 
       - name: Create Pull Request
