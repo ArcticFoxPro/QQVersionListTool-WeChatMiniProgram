@@ -14,7 +14,7 @@
 
 import Message from 'tdesign-miniprogram/message/index';
 import {createStoreBindings} from 'mobx-miniprogram-bindings';
-import {store} from '../utils/MobXUtil';
+import {store} from '../../utils/MobXUtil';
 import Uri from 'jsuri'
 
 Page({

@@ -8,13 +8,13 @@
 [
   {
     outputFile: "OSSLicensesDist",
-    customFormat: "pages/utils/OSSLicensesBuildFormat.json",
-    customPath: "pages/utils/"
+    customFormat: "utils/OSSLicensesBuildFormat.json",
+    customPath: "utils/"
   }
   // 示例新增：
   /*,{
     outputFile: "OSSLicensesDist",
-    customFormat: "pages/utils/OSSLicensesBuildFormat.json",
+    customFormat: "utils/OSSLicensesBuildFormat.json",
     customPath: "subpackage/utils/",
     startPath: "subpackage/"
   }*/

@@ -21,7 +21,7 @@ See the Mulan PubL v2 for more details.
 <scroll-view class="overflow-y-auto" enhanced scroll-y style="height:{{heightRecycle+'px'}};"
              type="list">
     <t-cell arrow bind:tap="licenseDistClick" data-index="{{index}}" description="{{item.description}}" hover
-            wx:for="{{ossLicensesDist}}" wx:key="{{index}}">
+            wx:for="{{ossLicensesDist}}" wx:key="index">
         <view slot="title">
             <text class="text-32rpx inline">{{item.name + (item.publisher !== '' ? (' (' + item.publisher + ')') : '')}}</text>
             <t-tag class="ml-16rpx inline-block vertical-bottom" size="small" theme="default" variant="light">

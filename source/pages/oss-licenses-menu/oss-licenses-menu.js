@@ -12,8 +12,8 @@
     See the Mulan PubL v2 for more details.
 */
 import {createStoreBindings} from 'mobx-miniprogram-bindings';
-import {store} from '../utils/MobXUtil';
-import ossLicensesDist from '../utils/OSSLicensesDist';
+import {store} from '../../utils/MobXUtil';
+import ossLicensesDist from '../../utils/OSSLicensesDist';
 
 Page({
 
