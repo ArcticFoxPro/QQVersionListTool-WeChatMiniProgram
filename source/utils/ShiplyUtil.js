@@ -9,7 +9,6 @@
     MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
     See the Mulan PubL v2 for more details.
 */
-
 const generateAESKey = () => {
     return new Promise((resolve, reject) => {
         wx.getRandomValues({
@@ -22,6 +21,11 @@ const generateAESKey = () => {
     });
 };
 
+async function getAESKey() {
+    return await generateAESKey();
+}
+
 module.exports = {
-    generateAESKey: generateAESKey
+    generateAESKey: generateAESKey,
+    getAESKey: getAESKey
 };

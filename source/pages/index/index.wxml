@@ -129,7 +129,7 @@ See the Mulan PubL v2 for more details.
                                 </view>
                                 <view class="flex justify-center items-center" slot="note">
                                     <t-button bind:tap="updateWeixin" class="mr-16rpx" icon="download-1" shape="square"
-                                              size="medium" style="visibility: {{index===0?'visible':'hidden'}}"
+                                              size="medium" style="visibility: {{item.version===weixinLatestVersion?'visible':'hidden'}}"
                                               theme="light" variant="outline"/>
                                 </view>
                             </t-cell>

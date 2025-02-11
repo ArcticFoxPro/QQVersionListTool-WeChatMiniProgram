@@ -83,7 +83,8 @@ Page({
         safeBottomPadding: 0,
         weixinLocalPlatform: "",
         listOrder: ['QQ 版本列表 Vigor', 'TIM 版本列表 Vigor', '微信版本列表 Vigor'],
-        WeixinFirstSwitch: false
+        WeixinFirstSwitch: false,
+        weixinLatestJSON: {}
     }, onLoad: function () {
         const accountInfo = wx.getAccountInfoSync();
         const appBaseInfo = wx.getAppBaseInfo()
@@ -487,6 +488,47 @@ Page({
                 });
             },
         });
+
+        wx.request({
+            fail: (err) => {
+                endProgress(this)
+                const errorMessage = err.errMsg;
+                this.setData({
+                    errorText: errorMessage, errorVisible: true
+                });
+            }, method: 'GET', success: (res) => {
+                try {
+                    const responseData = res.data.toString();
+                    const startString = "var cgiData= {\"errCode\":0,\"errMsg\":\"ok\",\"data\":";
+                    const start = responseData.indexOf(startString) + startString.length;
+                    const end = responseData.indexOf(",\"isMobile\":");
+                    const jsonData = JSON.parse(responseData.substring(start, end));
+                    let platform = this.data.weixinLocalPlatform
+                    const getPlatformVersion = (platform) => {
+                        switch (platform) {
+                            case 'ios':
+                                return 'iosVersion';
+                            case 'windows':
+                                return 'winVersion';
+                            case 'mac':
+                                return 'macVersion';
+                            default:
+                                return 'andrVersion';
+                        }
+                    };
+                    const platformVersion = getPlatformVersion(platform);
+                    this.setData({
+                        weixinLatestJSON: jsonData, weixinLatestVersion: jsonData.prodItems[platformVersion]
+                    })
+                } catch (e) {
+                    endProgress(this)
+                    const errorMessage = e.errMsg;
+                    this.setData({
+                        errorText: errorMessage, errorVisible: true
+                    });
+                }
+            }, url: 'https://support.weixin.qq.com/update/',
+        })
 
 
     }, aboutPopupVisible(e) {
