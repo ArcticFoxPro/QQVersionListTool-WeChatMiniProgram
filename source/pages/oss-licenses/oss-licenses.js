@@ -16,6 +16,7 @@ import Message from 'tdesign-miniprogram/message/index';
 import {createStoreBindings} from 'mobx-miniprogram-bindings';
 import {store} from '../../utils/MobXUtil';
 import Uri from 'jsuri'
+import ossLicensesDistText from '../../utils/OSSLicensesDistText';
 
 Page({
 
@@ -39,14 +40,18 @@ Page({
         this.setData({
             title: this.data.ossLicensesDist[index].name,
             version: this.data.ossLicensesDist[index].version,
-            licenseBody: this.data.ossLicensesDist[index].licenseText,
+            licenseBody: this.data.ossLicensesDist[index].licenseTextHash === '' ? '' : ossLicensesDistText[this.data.ossLicensesDist[index].licenseTextHash],
             repoLink: this.data.ossLicensesDist[index].repository,
             repoType: (() => {
                 try {
                     const url = new Uri(this.data.ossLicensesDist[index].repository)
                     const host = url.host().toLowerCase();
-                    if (host === "github.com") return "GitHub";
-                    if (host === "gitlab.com") return "GitLab";
+                    switch (host) {
+                        case "github.com":
+                            return "GitHub";
+                        case "gitlab.com":
+                            return "GitLab";
+                    }
                 } catch (e) {
                     console.error("Invalid URL:", e);
                 }

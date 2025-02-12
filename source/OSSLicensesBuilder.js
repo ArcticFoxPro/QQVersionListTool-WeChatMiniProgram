@@ -15,12 +15,19 @@
 /**
  * 此文件用于为微信小程序生成开源项目许可证 JSON 信息，并通过 JavaScript `module.exports` 语句导出为 JS 对象。
  *
+ * 为缩减文件大小，防止文件内存在过多重复的许可证文本，将生成两个文件：
+ * - `OSSLicensesDist.js`：包含所有许可证信息的 JavaScript 文件
+ * - `OSSLicensesDistText.js`：包含所有许可证文本的 JavaScript 文件
+ *
+ * `OSSLicensesDist.js` 中的子项将存在 `licenseTextHash` 字段，该字段的值为许可证文本的 SHA256 杂凑值，可在 `OSSLicensesDistText.js` 中作为键找到。
+ *
  * 每次小程序发布前均需手动执行 `node OSSLicensesBuilder.js`
  */
 
 const shell = require('shelljs');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const uglifyJS = require('uglify-js');
 const JSON5 = require('json5');
 
@@ -53,21 +60,40 @@ function buildLicenses(outputFile, customFormat, customPath, startPath = '') {
     shell.mkdir('-p', outputDir);
     const jsonFile = path.join(outputDir, `${outputFile}.json`);
     const jsFile = path.join(outputDir, `${outputFile}.js`);
+    const jsFileText = path.join(outputDir, `${outputFile}Text.js`);
     try {
         const output = runCommand('license-checker-rseidelsohn', [startPath, '--customPath', customFormat, '--json']);
         const jsonData = JSON.parse(output);
         if (Object.keys(jsonData).length === 0) throw new Error('生成的许可证数据为空');
-        fs.writeFileSync(jsonFile, output, {encoding: 'utf8', flag: 'w', mode: 0o644});
-        const jsContent = `module.exports = ${JSON.stringify(jsonData, null, 2)};`;
-        const minifiedResult = uglifyJS.minify(jsContent, {
-            mangle: {toplevel: true}, compress: {
-                sequences: true, dead_code: true, drop_debugger: true, unsafe: false
-            }, output: {
-                beautify: false, comments: false, max_line_len: 0
-            }
+        const jsonDataWithoutLicenseText = {};
+        const licenseTextData = {};
+
+        for (const [key, value] of Object.entries(jsonData)) {
+            jsonDataWithoutLicenseText[key] = {...value};
+            if (value.licenseText && value.licenseText.length > 0) {
+                const sha256Hash = calculateSHA256(value.licenseText);
+                licenseTextData[sha256Hash] = value.licenseText;
+                delete jsonDataWithoutLicenseText[key].licenseText;
+                jsonDataWithoutLicenseText[key].licenseTextHash = sha256Hash;
+            } else jsonDataWithoutLicenseText[key].licenseTextHash = "";
+        }
+        const jsContentWithoutLicenseText = `module.exports = ${JSON5.stringify(jsonDataWithoutLicenseText, null, 2)};`;
+        const minifiedResultWithoutLicenseText = uglifyJS.minify(jsContentWithoutLicenseText, {
+            mangle: {toplevel: true},
+            compress: {sequences: true, dead_code: true, drop_debugger: true, unsafe: false},
+            output: {beautify: false, comments: false, max_line_len: 0},
         });
-        if (minifiedResult.error) throw minifiedResult.error;
-        fs.writeFileSync(jsFile, minifiedResult.code, {encoding: 'utf8', flag: 'w', mode: 0o644});
+        if (minifiedResultWithoutLicenseText.error) throw minifiedResultWithoutLicenseText.error;
+        fs.writeFileSync(jsFile, minifiedResultWithoutLicenseText.code, {encoding: 'utf8', flag: 'w', mode: 0o644});
+        const jsContentLicenseText = `module.exports = ${JSON5.stringify(licenseTextData, null, 2)};`;
+        const minifiedResultLicenseText = uglifyJS.minify(jsContentLicenseText, {
+            mangle: {toplevel: true},
+            compress: {sequences: true, dead_code: true, drop_debugger: true, unsafe: false},
+            output: {beautify: false, comments: false, max_line_len: 0},
+        });
+        if (minifiedResultLicenseText.error) throw minifiedResultLicenseText.error;
+        fs.writeFileSync(jsFileText, minifiedResultLicenseText.code, {encoding: 'utf8', flag: 'w', mode: 0o644});
+
     } finally {
         if (fs.existsSync(jsonFile)) shell.rm('-f', jsonFile);
     }
@@ -100,5 +126,9 @@ process.on('uncaughtException', (err) => {
     console.error('未捕获异常:', err);
     process.exit(1);
 });
+
+function calculateSHA256(text) {
+    return crypto.createHash('sha256').update(text).digest('hex');
+}
 
 main();

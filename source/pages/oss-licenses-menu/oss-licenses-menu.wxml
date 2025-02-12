@@ -28,7 +28,7 @@ See the Mulan PubL v2 for more details.
                 {{'v' + item.version}}
             </t-tag>
         </view>
-        <t-tag class="ml-16rpx" size="medium" slot="note" theme="primary" variant="light">
+        <t-tag class="mt-12rpx" size="medium" slot="description" theme="primary" variant="light">
             {{item.licenses}}
         </t-tag>
     </t-cell>
