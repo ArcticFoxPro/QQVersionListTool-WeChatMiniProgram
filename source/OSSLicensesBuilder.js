@@ -16,7 +16,7 @@
  * 此文件用于为微信小程序生成开源项目许可证 JSON 信息，并通过 JavaScript `module.exports` 语句导出为 JS 对象。
  *
  * 为缩减文件大小，防止文件内存在过多重复的许可证文本，将生成两个文件：
- * - `OSSLicensesDist.js`：包含所有许可证信息的 JavaScript 文件
+ * - `OSSLicensesDist.js`：包含所有依赖项许可证信息的 JavaScript 文件
  * - `OSSLicensesDistText.js`：包含所有许可证文本的 JavaScript 文件
  *
  * `OSSLicensesDist.js` 中的子项将存在 `licenseTextHash` 字段，该字段的值为许可证文本的 SHA256 杂凑值，可在 `OSSLicensesDistText.js` 中作为键找到。
