@@ -247,6 +247,7 @@ QQ 版本列表 Vigor 的诞生离不开以下开源项目，感谢以下开源�
 - [ShellJS](https://github.com/shelljs/shelljs)，Licensed under [BSD 3-Clause License](https://github.com/shelljs/shelljs/blob/master/LICENSE)
 - [UglifyJS](https://github.com/mishoo/UglifyJS)，Licensed under [BSD License](https://github.com/mishoo/UglifyJS/blob/master/LICENSE)
 - [jsUri](https://github.com/derek-watson/jsUri)，Licensed under [MIT License](https://github.com/derek-watson/jsUri/blob/master/LICENSE)
+- [List of SPDX licenses（Sindre Sorhus）](https://github.com/sindresorhus/spdx-license-list)，Licensed under [CC0 1.0 Universal License](https://github.com/sindresorhus/spdx-license-list/blob/main/license)
 
 ## 星标趋势
 
