@@ -77,8 +77,9 @@ function buildLicenses(outputFile, customFormat, customPath, startPath = '') {
                 delete jsonDataWithoutLicenseText[key].licenseText;
                 jsonDataWithoutLicenseText[key].licenseTextHash = sha256Hash;
             } else jsonDataWithoutLicenseText[key].licenseTextHash = "";
-            const spdxItem = spdx[value.licenses]
-            if (spdxItem) jsonDataWithoutLicenseText[key].licenses = spdxItem.name;
+            const spdxId = value.licenses
+            const spdxItem = spdx[spdxId]
+            jsonDataWithoutLicenseText[key].licenseName = (spdxItem) ? spdxItem.name : spdxId
         }
         const jsContentWithoutLicenseText = `module.exports = ${JSON5.stringify(jsonDataWithoutLicenseText, null, 2)};`;
         const minifiedResultWithoutLicenseText = uglifyJS.minify(jsContentWithoutLicenseText, {

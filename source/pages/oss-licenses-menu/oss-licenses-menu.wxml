@@ -29,7 +29,7 @@ See the Mulan PubL v2 for more details.
             </t-tag>
         </view>
         <t-tag class="mt-12rpx" size="medium" slot="description" theme="primary" variant="light">
-            {{item.licenses}}
+            {{item.licenseName}}
         </t-tag>
     </t-cell>
     <view class="cell-color" style="height:{{safeBottomPadding+'px'}};"></view>
