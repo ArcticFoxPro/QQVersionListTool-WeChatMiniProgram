@@ -12,6 +12,8 @@ MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
 See the Mulan PubL v2 for more details.
 -->
 
+<wxs module="utils" src="../../utils/util.wxs"></wxs>
+
 <t-message id="t-message"/>
 
 <view id="titleTop1">
@@ -19,7 +21,7 @@ See the Mulan PubL v2 for more details.
         <view class="ml-16rpx" slot="left">
             <view class=" text-36rpx font-600 inline">{{title}}</view>
             <t-tag class="ml-16rpx inline-block vertical-bottom" size="small" theme="default" variant="light">
-                {{'v' + version}}
+                {{utils.formatVersion(version)}}
             </t-tag>
         </view>
     </t-navbar>
