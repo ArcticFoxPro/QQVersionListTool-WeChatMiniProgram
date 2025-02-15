@@ -19,8 +19,8 @@ See the Mulan PubL v2 for more details.
 <view id="titleTop1">
     <t-navbar left-arrow t-class-content="t-navbar-content" t-class-placeholder="t-navbar-placeholder">
         <view class="ml-16rpx" slot="left">
-            <view class=" text-36rpx font-600 inline">{{title}}</view>
-            <t-tag class="ml-16rpx inline-block vertical-bottom" size="small" theme="default" variant="light">
+            <view class="mr-16rpx text-36rpx font-600 inline">{{title}}</view>
+            <t-tag class="inline-block vertical-bottom" size="small" theme="default" variant="light">
                 {{utils.formatVersion(version)}}
             </t-tag>
         </view>

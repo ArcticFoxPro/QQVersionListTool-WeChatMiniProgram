@@ -15,7 +15,7 @@
     "shelljs": "^0.8.5",
     "spdx-license-list": "^6.9.0",
     "uglify-js": "^3.19.3",
-    "unocss": "^65.4.3"
+    "unocss": "^65.5.0"
   },
   "scripts": {
     "unocss": "unocss pages/**/*.wxml !pages/**/node_modules/** !pages/**/miniprogram_npm/** -c uno.config.js --watch -o unocss.wxss",

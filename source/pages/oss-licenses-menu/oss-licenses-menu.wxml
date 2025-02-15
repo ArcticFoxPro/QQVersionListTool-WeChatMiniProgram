@@ -22,17 +22,19 @@ See the Mulan PubL v2 for more details.
 
 <scroll-view class="overflow-y-auto" enhanced scroll-y style="height:{{heightRecycle+'px'}};"
              type="list">
-    <t-cell arrow bind:tap="licenseDistClick" data-index="{{index}}" description="{{item.description}}" hover
+    <t-cell bind:tap="licenseDistClick" data-index="{{index}}" description="{{item.description}}" hover
             wx:for="{{ossLicensesDist}}" wx:key="index">
         <view slot="title">
-            <text class="text-32rpx inline">{{item.name + (item.publisher !== '' ? (' (' + item.publisher + ')') : '')}}</text>
-            <t-tag class="ml-16rpx inline-block vertical-bottom" size="small" theme="default" variant="light">
+            <text class="text-32rpx">{{item.name + (item.publisher !== '' ? (' (' + item.publisher + ')') : '')}}</text>
+        </view>
+        <view class="inline" slot="description">
+            <t-tag class="mr-16rpx mt-12rpx inline-block" size="medium" theme="default" variant="light">
                 {{utils.formatVersion(item.version)}}
             </t-tag>
+            <t-tag class="mt-12rpx inline-block" size="medium" theme="primary" variant="light">
+                {{item.licenseName}}
+            </t-tag>
         </view>
-        <t-tag class="mt-12rpx" size="medium" slot="description" theme="primary" variant="light">
-            {{item.licenseName}}
-        </t-tag>
     </t-cell>
     <view class="cell-color" style="height:{{safeBottomPadding+'px'}};"></view>
 </scroll-view>
