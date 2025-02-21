@@ -124,6 +124,9 @@ See the Mulan PubL v2 for more details.
                                       style="font-family: {{TCloudNumberSwitch?'TCloudNumber-'+(TCloudNumberHeavy===2?'Bold':(TCloudNumberHeavy===1?'Regular':'Light'))+',':''}} sans-serif;">
                                     {{item.version}}
                                     <t-tag class="ml-12rpx" size="small" theme="primary" variant="light"
+                                           wx:if="{{item.isAlpha}}">已安装
+                                    </t-tag>
+                                    <t-tag class="ml-12rpx" size="small" theme="primary" variant="light"
                                            wx:if="{{item.version===weixinLocalVersion}}">已安装
                                     </t-tag>
                                 </view>

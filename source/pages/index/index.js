@@ -276,7 +276,10 @@ Page({
         }
 
         wx.request({
-            url: 'https://im.qq.com/rainbow/androidQQVersionList', method: 'GET', success: (res) => {
+            url: 'https://im.qq.com/rainbow/androidQQVersionList',
+            useHighPerformanceMode: true,
+            method: 'GET',
+            success: (res) => {
                 try {
                     let responseData = res.data;
                     let start = responseData.indexOf("versions64\":[") + 12;
@@ -312,23 +315,17 @@ Page({
                     endProgress(this)
                 } catch (e) {
                     endProgress(this)
-                    const errorMessage = e.errMsg;
-                    this.setData({
-                        errorText: errorMessage, errorVisible: true
-                    });
+                    this.showErrPopup(e)
                 }
-            }, fail: (err) => {
+            },
+            fail: (err) => {
                 endProgress(this)
-                const errorMessage = err.errMsg;
-                this.setData({
-                    errorText: errorMessage, errorVisible: true
-                });
-
+                this.showErrPopup(err)
             },
         });
 
         wx.request({
-            url: 'https://tim.qq.com/support.html', method: 'GET', success: (res) => {
+            url: 'https://tim.qq.com/support.html', method: 'GET', useHighPerformanceMode: true, success: (res) => {
                 try {
                     const htmlData = res.data;
                     const regex = /jQuery\.ajax\(\{\s*url:\s*'([^']+)'\s*}\)\.done\(function \(versionData\)/;
@@ -336,7 +333,10 @@ Page({
                     if (match && match[1] && (match[1].startsWith('https://') || match[1].startsWith('http://'))) {
                         wx.request({
                             // https://im.qq.com/rainbow/TIMDownload/ 被弃用
-                            url: match[1].replaceAll('http://', 'https://'), method: 'GET', success: (res) => {
+                            url: match[1].replaceAll('http://', 'https://'),
+                            method: 'GET',
+                            useHighPerformanceMode: true,
+                            success: (res) => {
                                 try {
                                     const jsonData = JSON.parse(JSON.stringify(res.data));
                                     const androidLink = jsonData['download_link']['android']
@@ -386,38 +386,27 @@ Page({
 
                                 } catch (e) {
                                     endProgress(this)
-                                    const errorMessage = e.errMsg;
-                                    this.setData({
-                                        errorText: errorMessage, errorVisible: true
-                                    });
+                                    this.showErrPopup(e)
                                 }
-                            }, fail: (err) => {
+                            },
+                            fail: (err) => {
                                 endProgress(this)
-                                const errorMessage = err.errMsg;
-                                this.setData({
-                                    errorText: errorMessage, errorVisible: true
-                                });
+                                this.showErrPopup(err)
                             },
                         })
                     }
                 } catch (e) {
                     endProgress(this)
-                    const errorMessage = e.errMsg;
-                    this.setData({
-                        errorText: errorMessage, errorVisible: true
-                    });
+                    this.showErrPopup(e)
                 }
             }, fail: (err) => {
                 endProgress(this)
-                const errorMessage = err.errMsg;
-                this.setData({
-                    errorText: errorMessage, errorVisible: true
-                });
+                this.showErrPopup(err)
             }
         });
 
         wx.request({
-            url: 'https://weixin.qq.com/updates', method: 'GET', success: (res) => {
+            url: 'https://weixin.qq.com/updates', method: 'GET', useHighPerformanceMode: true, success: (res) => {
                 try {
                     const responseData = res.data.toString();
                     const json = parse(responseData)
@@ -475,28 +464,19 @@ Page({
                     endProgress(this)
                 } catch (e) {
                     endProgress(this)
-                    const errorMessage = e.errMsg;
-                    this.setData({
-                        errorText: errorMessage, errorVisible: true
-                    });
+                    this.showErrPopup(e)
                 }
             }, fail: (err) => {
                 endProgress(this)
-                const errorMessage = err.errMsg;
-                this.setData({
-                    errorText: errorMessage, errorVisible: true
-                });
+                this.showErrPopup(err)
             },
         });
 
         wx.request({
-            fail: (err) => {
-                endProgress(this)
-                const errorMessage = err.errMsg;
-                this.setData({
-                    errorText: errorMessage, errorVisible: true
-                });
-            }, method: 'GET', success: (res) => {
+            url: 'https://support.weixin.qq.com/update/',
+            method: 'GET',
+            useHighPerformanceMode: true,
+            success: (res) => {
                 try {
                     const responseData = res.data.toString();
                     const startString = "var cgiData= {\"errCode\":0,\"errMsg\":\"ok\",\"data\":";
@@ -522,14 +502,13 @@ Page({
                     })
                 } catch (e) {
                     endProgress(this)
-                    const errorMessage = e.errMsg;
-                    this.setData({
-                        errorText: errorMessage, errorVisible: true
-                    });
+                    this.showErrPopup(e)
                 }
-            }, url: 'https://support.weixin.qq.com/update/',
+            },
+            fail: (err) => {
+                this.showErrPopup(err)
+            },
         })
-
 
     }, aboutPopupVisible(e) {
         this.setData({
@@ -882,7 +861,7 @@ Page({
     }, async fetchLink(url) {
         return new Promise((resolve, reject) => {
             wx.request({
-                url, method: 'HEAD', success: function (res) {
+                url, method: 'HEAD', useHighPerformanceMode: true, success: function (res) {
                     if (res.statusCode >= 200 && res.statusCode < 300 && res.header['Content-Type'].startsWith('application/')) {
                         const resContentLength = res.header['Content-Length']
                         const fileSizeInBytes = parseInt(resContentLength, 10);
@@ -1060,11 +1039,7 @@ Page({
                             timerId = setTimeout(guess, 100);
                         }
                     }).catch(err => {
-                        console.error(err);
-                        const errorMessage = err.errMsg;
-                        this.setData({
-                            errorText: errorMessage, errorVisible: true
-                        });
+                        this.showErrPopup(err)
                     });
                     break;
                 case 'STATUS_PAUSE':
@@ -1415,11 +1390,17 @@ Page({
     }, async fetchDownloadLinkFromTencentAppStore(jsonData) {
         return new Promise((resolve, reject) => {
             wx.request({
-                url: 'https://upage.html5.qq.com/wechat-apkinfo', method: 'POST', data: jsonData, header: {
+                url: 'https://upage.html5.qq.com/wechat-apkinfo',
+                method: 'POST',
+                useHighPerformanceMode: true,
+                data: jsonData,
+                header: {
                     'content-type': 'application/json'
-                }, success: function (res) {
+                },
+                success: function (res) {
                     resolve(res.data);
-                }, fail: function (err) {
+                },
+                fail: function (err) {
                     reject(err);
                 }
             });
@@ -1481,11 +1462,7 @@ Page({
                 expShareText: `Android ${appName} ${appVersionName}${this.data.succeedExpBackFileSizeShare}\n\n下载地址：${appUrl}\n\n来自腾讯应用宝`
             })
         } catch (err) {
-            console.error(err);
-            const errorMessage = err.errMsg;
-            this.setData({
-                errorText: errorMessage, errorVisible: true
-            });
+            this.showErrPopup(err)
         } finally {
             switch (type) {
                 case 'QQ':
@@ -1560,6 +1537,7 @@ Page({
         wx.request({
             url: 'https://dldir1v6.qq.com/weixin/android/weixin_android_alpha_config.json',
             method: 'GET',
+            useHighPerformanceMode: true,
             success: (res) => {
                 try {
                     if (res.statusCode >= 200 && res.statusCode < 300) {
@@ -1601,28 +1579,18 @@ Page({
                                 })
                             }
                         }).catch(err => {
-                            console.error(err);
-                            const errorMessage = err.errMsg;
-                            this.setData({
-                                errorText: errorMessage, errorVisible: true
-                            });
+                            this.showErrPopup(err)
                         });
                     } else this.setData({
                         errorText: "似乎未成功访问腾讯服务器配置文件，可能是微信当前没有测试版或测试版已撤包。",
                         errorVisible: true
                     });
                 } catch (e) {
-                    const errorMessage = e.errMsg;
-                    this.setData({
-                        errorText: errorMessage, errorVisible: true
-                    });
+                    this.showErrPopup(e)
                 }
             },
             fail: (err) => {
-                const errorMessage = err.errMsg;
-                this.setData({
-                    errorText: errorMessage, errorVisible: true
-                });
+                this.showErrPopup(err)
             },
             complete: () => {
                 this.setData({
@@ -1637,17 +1605,16 @@ Page({
             getFromWeTypeLatestChannelLoading: true
         })
         wx.request({
-            url: 'https://z.weixin.qq.com/android/download?channel=latest',
+            url: `https://z.weixin.qq.com/android/download?channel=latest`,
             method: 'GET',
             redirect: 'manual',
             fail: (err) => {
-                const errorMessage = err.errMsg;
-                this.setData({
-                    errorText: errorMessage, errorVisible: true
-                });
+                this.showErrPopup(err)
             },
             complete: () => {
-                this.setData({})
+                this.setData({
+                    getFromWeTypeLatestChannelLoading: false
+                })
             }
         }).onHeadersReceived(res => {
             const url = res.header.Location;
@@ -1674,10 +1641,9 @@ Page({
                     expShareText: ""
                 });
             }).catch(err => {
-                console.error(err);
-                const errorMessage = err.errMsg;
+                this.showErrPopup(err)
                 this.setData({
-                    errorText: errorMessage, errorVisible: true, getFromWeTypeLatestChannelLoading: false
+                    getFromWeTypeLatestChannelLoading: false
                 });
             });
         })
@@ -1729,10 +1695,9 @@ Page({
                 })
             }
         }).catch(err => {
-            console.error(err);
-            const errorMessage = err.errMsg;
+            this.showErrPopup(err)
             this.setData({
-                errorText: errorMessage, errorVisible: true, getTimNewestLinkLoading: false
+                getTimNewestLinkLoading: false
             });
         });
     }, clickWeixinCell(e) {
@@ -1775,5 +1740,11 @@ Page({
         this.copyUtil(`ABI：${this.data.weixinLocalABI}`)
     }, updateWeixin() {
         wx.updateWeChatApp()
+    }, showErrPopup(err){
+        console.error(err);
+        const errorMessage = JSON.stringify(err);
+        this.setData({
+            errorText: errorMessage, errorVisible: true
+        });
     }
 })

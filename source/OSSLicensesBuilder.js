@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MulanPSL-2.0
+
 // https://github.com/ArcticFoxPro/wechat-miniprogram-oss-licenses-semiauto-gen
 
 /*
