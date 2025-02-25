@@ -16,6 +16,7 @@ import Message from 'tdesign-miniprogram/message/index';
 import semver from 'semver';
 import dayjs from 'dayjs';
 import {parse} from 'himalaya'
+import JSON5 from "json5";
 
 const util = require('../../utils/util.js');
 
@@ -84,7 +85,15 @@ Page({
         weixinLocalPlatform: "",
         listOrder: ['QQ 版本列表 Vigor', 'TIM 版本列表 Vigor', '微信版本列表 Vigor'],
         WeixinFirstSwitch: false,
-        weixinLatestJSON: {}
+        weixinLatestJSON: {},
+        versionListFontFamily: [{label: '跟随系统', value: 'System'}, {
+            label: '腾讯云数字字体', value: 'TCloudNumber'
+        }, {label: 'WeChat Sans', value: 'WeChatSansSS'}],
+        versionListFontWeightSystem: [{label: '跟随系统', value: 'System'}],
+        versionListFontWeightTCloudNumber: [{label: 'Light', value: 'Light'}, {
+            label: 'Regular', value: 'Regular'
+        }, {label: 'Bold', value: 'Bold'}],
+        versionListFontWeightWeChatSansSS: [{label: 'Regular', value: 'normal'}, {label: 'Bold', value: 'bold'}]
     }, onLoad: function () {
         const accountInfo = wx.getAccountInfoSync();
         const appBaseInfo = wx.getAppBaseInfo()
@@ -140,18 +149,19 @@ Page({
             WeixinFirstSwitch: true, listOrder: ['微信版本列表 Vigor', 'QQ 版本列表 Vigor', 'TIM 版本列表 Vigor']
         })
 
-        if (wx.getStorageSync('TCloudNumberSwitch') === false) this.setData({
-            TCloudNumberSwitch: false
+        const versionListFontStyleValue = wx.getStorageSync('versionListFontStyle')
+        if (versionListFontStyleValue !== "") this.setData({
+            versionListFontStyleValue: JSON5.parse(versionListFontStyleValue)
         }); else this.setData({
-            TCloudNumberSwitch: true
+            versionListFontStyleValue: ['TCloudNumber', 'Light']
         })
 
-        if (wx.getStorageSync('TCloudNumberHeavy') === 1) this.setData({
-            TCloudNumberHeavy: 1
-        }); else if (wx.getStorageSync('TCloudNumberHeavy') === 2) this.setData({
-            TCloudNumberHeavy: 2
-        }); else this.setData({
-            TCloudNumberHeavy: 0
+        if (this.data.versionListFontStyleValue[0] === 'System') this.setData({
+            versionListFontText: '跟随系统'
+        }); else if (this.data.versionListFontStyleValue[0] === 'WeChatSansSS') this.setData({
+            versionListFontText: 'WeChat Sans - ' + this.data.versionListFontStyleValue[1]
+        }); else if (this.data.versionListFontStyleValue[0] === 'TCloudNumber') this.setData({
+            versionListFontText: '腾讯云数字字体 - ' + this.data.versionListFontStyleValue[1]
         })
 
         function setThrottleSwitch(isThrottleOn, benchmarkLevelConditionMet) {
@@ -209,6 +219,10 @@ Page({
             suffixHD1HB64: wx.getStorageSync('suffixHD1HB64'),
             suffixTest: wx.getStorageSync('suffixTest'),
             customSuffix: wx.getStorageSync('customSuffix')
+        })
+
+        wx.loadBuiltInFontFace({
+            global: true, family: 'WeChatSansSS', source: 'WeChatSansSS'
         })
     }, onReady: async function () {
         this.setData({
@@ -887,7 +901,7 @@ Page({
         let timerId;
         const isCustomSufEmpty = wx.getStorageSync('customSuffix') !== "";
         const customSufList = isCustomSufEmpty ? wx.getStorageSync('customSuffix').split(', ') : [];
-        const soListPre = ["_64", "_64_HB", "_64_HB1", "_64_HB2", "_64_HB3", "_HB_64", "_HB1_64", "_HB2_64", "_HB3_64", "_64_BBPJ", "_BBPJ_64"];
+        const soListPre = ["_64", "_64_HB", "_64_HB1", "_64_HB2", "_64_HB3", "_HB_64", "_HB1_64", "_HB2_64", "_HB3_64", "_64_BBPJ", "_BBPJ_64", "_64_HD", "_64_HD1", "_64_HD2", "_64_HD3", "_HD_64", "_HD1_64", "_HD2_64", "_HD3_64"];
         const soList = soListPre.concat(customSufList);
         const stListPre = ["_64"];
         let sIndex = 0;
@@ -1740,11 +1754,46 @@ Page({
         this.copyUtil(`ABI：${this.data.weixinLocalABI}`)
     }, updateWeixin() {
         wx.updateWeChatApp()
-    }, showErrPopup(err){
+    }, showErrPopup(err) {
         console.error(err);
         const errorMessage = JSON.stringify(err);
         this.setData({
             errorText: errorMessage, errorVisible: true
         });
+    }, onVersionListFontPicker() {
+        if (this.data.versionListFontStyleValue[0] === 'System' && this.data.versionListFontWeight !== this.data.versionListFontWeightSystem) this.setData({
+            versionListFontWeight: this.data.versionListFontWeightSystem
+        }); else if (this.data.versionListFontStyleValue[0] === 'WeChatSansSS' && this.data.versionListFontWeight !== this.data.versionListFontWeightWeChatSansSS) this.setData({
+            versionListFontWeight: this.data.versionListFontWeightWeChatSansSS
+        }); else if (this.data.versionListFontStyleValue[0] === 'TCloudNumber' && this.data.versionListFontWeight !== this.data.versionListFontWeightTCloudNumber) this.setData({
+            versionListFontWeight: this.data.versionListFontWeightTCloudNumber
+        });
+        this.setData({
+            versionListFontStylePickerVisible: true
+        })
+    }, onVersionListFontStyleColumnChange(e) {
+        if (e.detail.value[0] === 'System' && this.data.versionListFontWeight !== this.data.versionListFontWeightSystem) this.setData({
+            versionListFontWeight: this.data.versionListFontWeightSystem
+        }); else if (e.detail.value[0] === 'WeChatSansSS' && this.data.versionListFontWeight !== this.data.versionListFontWeightWeChatSansSS) this.setData({
+            versionListFontWeight: this.data.versionListFontWeightWeChatSansSS
+        }); else if (e.detail.value[0] === 'TCloudNumber' && this.data.versionListFontWeight !== this.data.versionListFontWeightTCloudNumber) this.setData({
+            versionListFontWeight: this.data.versionListFontWeightTCloudNumber
+        });
+    }, onVersionListFontStylePickerCancel() {
+        this.setData({
+            versionListFontStylePickerVisible: false
+        })
+    }, onVersionListFontStylePickerChange(e) {
+        this.setData({
+            versionListFontStyleValue: e.detail.value, versionListFontStylePickerVisible: false
+        })
+        if (e.detail.value[0] === 'System') this.setData({
+            versionListFontText: '跟随系统'
+        }); else if (e.detail.value[0] === 'WeChatSansSS') this.setData({
+            versionListFontText: 'WeChat Sans - ' + e.detail.value[1]
+        }); else if (e.detail.value[0] === 'TCloudNumber') this.setData({
+            versionListFontText: '腾讯云数字字体 - ' + e.detail.value[1]
+        })
+        wx.setStorageSync("versionListFontStyle", JSON5.stringify(e.detail.value))
     }
 })

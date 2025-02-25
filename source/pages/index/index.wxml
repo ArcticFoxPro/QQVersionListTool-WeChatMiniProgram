@@ -36,9 +36,10 @@ See the Mulan PubL v2 for more details.
                     <view class="header-title" id="titleTop2">QQ 版本列表 Vigor</view>
                     <view class="qq-version-item w-full" wx:for="{{qqVersions}}" wx:key="versions">
                         <t-cell-group theme="card">
-                            <t-cell arrow bind:tap="clickCell" data-index="{{index}}" hover leftIcon="">
-                                <view class="flex justify-center items-center" slot="title"
-                                      style="font-family: {{TCloudNumberSwitch?'TCloudNumber-'+(TCloudNumberHeavy===2?'Bold':(TCloudNumberHeavy===1?'Regular':'Light'))+',':''}} sans-serif; font-size: 60rpx;">
+                            <t-cell arrow bind:tap="clickCell" class="flex justify-center items-center"
+                                    data-index="{{index}}" hover leftIcon="">
+                                <view class="text-60rpx flex justify-center items-center" slot="title"
+                                      style="font-weight:{{versionListFontStyleValue[0]==='WeChatSansSS'?versionListFontStyleValue[1]:'normal'}};font-family: {{versionListFontStyleValue[0]==='TCloudNumber'?versionListFontStyleValue[0]+'-'+versionListFontStyleValue[1]+',':(versionListFontStyleValue[0]==='WeChatSansSS'?versionListFontStyleValue[0]+',':'')}} sans-serif;">
                                     {{item.versionNumber}}
                                     <t-icon class="ml-12rpx" name="" prefix="ue-logo-src" size="34rpx" slot="icon"
                                             wx:if="{{item.isUnrealEngine&&UESwitch}}"/>
@@ -76,9 +77,10 @@ See the Mulan PubL v2 for more details.
                     <view class="header-title" id="titleTop3">TIM 版本列表 Vigor</view>
                     <view class="qq-version-item w-full" wx:for="{{timVersions}}" wx:key="version">
                         <t-cell-group theme="card">
-                            <t-cell arrow bind:tap="clickTimCell" data-index="{{index}}" hover leftIcon="">
+                            <t-cell arrow bind:tap="clickTimCell" class="flex justify-center items-center"
+                                    data-index="{{index}}" hover leftIcon="">
                                 <view class="text-60rpx flex justify-center items-center" slot="title"
-                                      style="font-family: {{TCloudNumberSwitch?'TCloudNumber-'+(TCloudNumberHeavy===2?'Bold':(TCloudNumberHeavy===1?'Regular':'Light'))+',':''}} sans-serif;">
+                                      style="font-weight:{{versionListFontStyleValue[0]==='WeChatSansSS'?versionListFontStyleValue[1]:'normal'}};font-family: {{versionListFontStyleValue[0]==='TCloudNumber'?versionListFontStyleValue[0]+'-'+versionListFontStyleValue[1]+',':(versionListFontStyleValue[0]==='WeChatSansSS'?versionListFontStyleValue[0]+',':'')}} sans-serif;">
                                     {{item.version_code}}
                                     <t-icon class="ml-12rpx" name="" prefix="kuikly-logo-src" size="32rpx" slot="icon"
                                             wx:if="{{item.isKuiklyInside&&KuiklySwitch}}"/>
@@ -119,9 +121,10 @@ See the Mulan PubL v2 for more details.
                     </view>
                     <view class="qq-version-item w-full" wx:for="{{weixinVersions}}" wx:key="version">
                         <t-cell-group theme="card">
-                            <t-cell arrow bind:tap="clickWeixinCell" data-index="{{index}}" hover leftIcon="">
+                            <t-cell arrow bind:tap="clickWeixinCell" class="flex justify-center items-center"
+                                    data-index="{{index}}" hover leftIcon="">
                                 <view class="text-60rpx flex justify-center items-center" slot="title"
-                                      style="font-family: {{TCloudNumberSwitch?'TCloudNumber-'+(TCloudNumberHeavy===2?'Bold':(TCloudNumberHeavy===1?'Regular':'Light'))+',':''}} sans-serif;">
+                                      style="font-weight:{{versionListFontStyleValue[0]==='WeChatSansSS'?versionListFontStyleValue[1]:'normal'}};font-family: {{versionListFontStyleValue[0]==='TCloudNumber'?versionListFontStyleValue[0]+'-'+versionListFontStyleValue[1]+',':(versionListFontStyleValue[0]==='WeChatSansSS'?versionListFontStyleValue[0]+',':'')}} sans-serif;">
                                     {{item.version}}
                                     <t-tag class="ml-12rpx" size="small" theme="primary" variant="light"
                                            wx:if="{{item.isAlpha}}">已安装
@@ -132,7 +135,8 @@ See the Mulan PubL v2 for more details.
                                 </view>
                                 <view class="flex justify-center items-center" slot="note">
                                     <t-button bind:tap="updateWeixin" class="mr-16rpx" icon="download-1" shape="square"
-                                              size="medium" style="visibility: {{item.version===weixinLatestVersion?'visible':'hidden'}}"
+                                              size="medium"
+                                              style="visibility: {{item.version===weixinLatestVersion?'visible':'hidden'}}"
                                               theme="light" variant="outline"/>
                                 </view>
                             </t-cell>
@@ -191,7 +195,7 @@ See the Mulan PubL v2 for more details.
                    style="width: 75%;"/>
         </view>
         <view class="flex items-center justify-center mt-32rpx">
-            <t-link bind:tap="copyOSLink" class="mr-16rpx" content="GitHub 项目地址" hover prefix-icon="logo-github"
+            <t-link bind:tap="copyOSLink" class="mr-16rpx" content="GitHub 开源仓库地址" hover prefix-icon="logo-github"
                     size="small" theme="primary"/>
         </view>
         <t-footer text="Copyright © {{yearNow===2024?'2024':'2024-'+yearNow}} Qverbow Vigor. All Rights Reserved."/>
@@ -595,16 +599,8 @@ See the Mulan PubL v2 for more details.
         <t-cell bordered title="QQ 版本卡片显示额定包大小占比历史最大包指示条">
             <t-switch bind:change="handlePerProChange" class="ml-48rpx" slot="note" value="{{PerProSwitch}}"/>
         </t-cell>
-        <t-cell bordered="{{false}}" title="版本号字体使用 TCloudNumber">
-            <t-switch bind:change="handleTCloudNumberChange" class="ml-48rpx" slot="note"
-                      value="{{TCloudNumberSwitch}}"/>
-        </t-cell>
-        <view class="mt-16rpx ml-48rpx mr-48rpx mb-16rpx">
-            <t-slider bind:change="handleTCloudNumberHeavyChange" disabled="{{!TCloudNumberSwitch}}"
-                      marks="{{fontHeavySliderMarks}}" max="2" min="0" step="{{1}}" value="{{TCloudNumberHeavy}}"
-                      wx:if="{{suffixPersonalizationVisible}}"/>
-        </view>
-        <view class="flex mt-32rpx mx-32rpx mb-32rpx">
+        <t-cell arrow bordered="{{false}}" bind:click="onVersionListFontPicker" hover note="{{versionListFontText}}" title="版本号字体"/>
+        <view class="flex mt-16rpx mx-32rpx mb-32rpx">
             <t-button bind:tap="closePersonalizationSetting" block size="large" theme="light">返回
             </t-button>
         </view>
@@ -797,3 +793,13 @@ See the Mulan PubL v2 for more details.
         </t-button>
     </view>
 </t-popup>
+
+<t-overlay duration="{{300}}" visible="{{versionListFontStylePickerVisible}}" z-index="11551"/>
+
+<t-picker bindcancel="onVersionListFontStylePickerCancel" bindchange="onVersionListFontStylePickerChange"
+          bindpick="onVersionListFontStyleColumnChange" cancelBtn="取消" confirmBtn="确认"
+          popup-props="{{ { zIndex: 11552, showOverlay: false } }}" title="选择字体样式" usingCustomNavbar
+          value="{{versionListFontStyleValue}}" visible="{{versionListFontStylePickerVisible}}">
+    <t-picker-item options="{{versionListFontFamily}}"></t-picker-item>
+    <t-picker-item options="{{versionListFontWeight}}"></t-picker-item>
+</t-picker>

@@ -22,7 +22,6 @@ page,::before,::after{--un-rotate:0;--un-rotate-x:0;--un-rotate-y:0;--un-rotate-
 .mr-12rpx{margin-right:12rpx;}
 .mr-16rpx{margin-right:16rpx;}
 .mr-24rpx{margin-right:24rpx;}
-.mr-48rpx{margin-right:48rpx;}
 .mt-12rpx{margin-top:12rpx;}
 .mt-16rpx{margin-top:16rpx;}
 .mt-24rpx{margin-top:24rpx;}

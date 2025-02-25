@@ -4,7 +4,7 @@ var __DEFINE__ = function(modId, func, req) { var m = { exports: {}, _tempexport
 var __REQUIRE__ = function(modId, source) { if(!__MODS__[modId]) return require(source); if(!__MODS__[modId].status) { var m = __MODS__[modId].m; m._exports = m._tempexports; var desp = Object.getOwnPropertyDescriptor(m, "exports"); if (desp && desp.configurable) Object.defineProperty(m, "exports", { set: function (val) { if(typeof val === "object" && val !== m._exports) { m._exports.__proto__ = val.__proto__; Object.keys(val).forEach(function (k) { m._exports[k] = val[k]; }); } m._tempexports = val }, get: function () { return m._tempexports; } }); __MODS__[modId].status = 1; __MODS__[modId].func(__MODS__[modId].req, m, m.exports); } return __MODS__[modId].m.exports; };
 var __REQUIRE_WILDCARD__ = function(obj) { if(obj && obj.__esModule) { return obj; } else { var newObj = {}; if(obj != null) { for(var k in obj) { if (Object.prototype.hasOwnProperty.call(obj, k)) newObj[k] = obj[k]; } } newObj.default = obj; return newObj; } };
 var __REQUIRE_DEFAULT__ = function(obj) { return obj && obj.__esModule ? obj.default : obj; };
-__DEFINE__(1738662197625, function(require, module, exports) {
+__DEFINE__(1740465076779, function(require, module, exports) {
 
 
 Object.defineProperty(exports, "__esModule", {
@@ -53,8 +53,8 @@ function stringify(ast) {
 }
 //# sourceMappingURL=index.js.map
 
-}, function(modId) {var map = {"./lexer":1738662197626,"./parser":1738662197628,"./format":1738662197629,"./stringify":1738662197630,"./tags":1738662197631}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1738662197626, function(require, module, exports) {
+}, function(modId) {var map = {"./lexer":1740465076780,"./parser":1740465076782,"./format":1740465076783,"./stringify":1740465076784,"./tags":1740465076785}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1740465076780, function(require, module, exports) {
 
 
 Object.defineProperty(exports, "__esModule", {
@@ -400,8 +400,8 @@ function lexSkipTag(tagName, state) {
 }
 //# sourceMappingURL=lexer.js.map
 
-}, function(modId) { var map = {"./compat":1738662197627}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1738662197627, function(require, module, exports) {
+}, function(modId) { var map = {"./compat":1740465076781}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1740465076781, function(require, module, exports) {
 
 
 Object.defineProperty(exports, "__esModule", {
@@ -456,7 +456,7 @@ function arrayIncludes(array, searchElement, position) {
 //# sourceMappingURL=compat.js.map
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1738662197628, function(require, module, exports) {
+__DEFINE__(1740465076782, function(require, module, exports) {
 
 
 Object.defineProperty(exports, "__esModule", {
@@ -607,8 +607,8 @@ function parse(state) {
 }
 //# sourceMappingURL=parser.js.map
 
-}, function(modId) { var map = {"./compat":1738662197627}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1738662197629, function(require, module, exports) {
+}, function(modId) { var map = {"./compat":1740465076781}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1740465076783, function(require, module, exports) {
 
 
 Object.defineProperty(exports, "__esModule", {
@@ -661,7 +661,7 @@ function formatAttributes(attributes) {
 //# sourceMappingURL=format.js.map
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1738662197630, function(require, module, exports) {
+__DEFINE__(1740465076784, function(require, module, exports) {
 
 
 Object.defineProperty(exports, "__esModule", {
@@ -706,8 +706,8 @@ function toHTML(tree, options) {
 exports.default = { toHTML: toHTML };
 //# sourceMappingURL=stringify.js.map
 
-}, function(modId) { var map = {"./compat":1738662197627}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1738662197631, function(require, module, exports) {
+}, function(modId) { var map = {"./compat":1740465076781}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1740465076785, function(require, module, exports) {
 
 
 Object.defineProperty(exports, "__esModule", {
@@ -751,7 +751,7 @@ var voidTags = exports.voidTags = ['!doctype', 'area', 'base', 'br', 'col', 'com
 //# sourceMappingURL=tags.js.map
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-return __REQUIRE__(1738662197625);
+return __REQUIRE__(1740465076779);
 })()
 //miniprogram-npm-outsideDeps=[]
 //# sourceMappingURL=index.js.map
