@@ -523,7 +523,6 @@ Page({
                 this.showErrPopup(err)
             },
         })
-
     }, aboutPopupVisible(e) {
         this.setData({
             aboutVisible: e.detail.visible,
@@ -963,13 +962,15 @@ Page({
                     })
                     this.fetchLink(guessedLink).then(isSuccess => {
                         if (isSuccess.exists && isSuccess.fileSize !== false) {
+                            const hdVersions = ["_64_HD", "_64_HD1", "_64_HD2", "_64_HD3", "_HD_64", "_HD1_64", "_HD2_64", "_HD3_64"]
+                            const isHD = hdVersions.some(hdVersion => guessedLink.includes(hdVersion))
                             this.setData({
                                 successGuessedLink: guessedLink,
                                 guessSuccessVisible: true,
                                 successGuessedModeShare: mode === 'WeChat' ? '微信' : mode === 'WeType' ? '微信输入法' : mode === 'TIM' ? 'TIM' : 'QQ',
-                                succeedGuessedVersionShare: mode === 'WeChat' ? versionBig + `（${versionSuf}）` : mode === 'WeType' ? versionBig + `（${vSuf}）` : mode === 'QQOfficial' ? versionBig + ` 正式版` : mode === 'TIM' ? versionBig + '.' + vSuf : versionBig + '.' + vSuf + ' 测试版',
+                                succeedGuessedVersionShare: mode === 'WeChat' ? versionBig + `（${versionSuf}）` : mode === 'WeType' ? versionBig + `（${vSuf}）` : (mode === 'QQOfficial' && !isHD) ? versionBig + ` 正式版` : mode === 'TIM' ? versionBig + '.' + vSuf : versionBig + (mode === 'QQOfficial' ? '' : '.' + vSuf) + ' 测试版',
                                 succeedGuessedFileSizeShare: `（大小：${isSuccess.fileSize} MB）`,
-                                successGuessedWarningShare: mode === 'QQTest' ? '鉴于 QQ 测试版可能存在不可预知的稳定性问题，您在下载及使用该测试版本之前，必须明确并确保自身具备足够的风险识别和承受能力。' : false
+                                successGuessedWarningShare: (mode === 'QQTest' || (mode === 'QQOfficial' && isHD)) ? '鉴于 QQ 测试版可能存在不可预知的稳定性问题，您在下载及使用该测试版本之前，必须明确并确保自身具备足够的风险识别和承受能力。' : false
                             });
                             switch (mode) {
                                 case 'WeChat':
