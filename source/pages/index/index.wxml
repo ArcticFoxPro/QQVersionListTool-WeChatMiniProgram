@@ -599,7 +599,8 @@ See the Mulan PubL v2 for more details.
         <t-cell bordered title="QQ 版本卡片显示额定包大小占比历史最大包指示条">
             <t-switch bind:change="handlePerProChange" class="ml-48rpx" slot="note" value="{{PerProSwitch}}"/>
         </t-cell>
-        <t-cell arrow bordered="{{false}}" bind:click="onVersionListFontPicker" hover note="{{versionListFontText}}" title="版本号字体"/>
+        <t-cell arrow bind:click="onVersionListFontPicker" bordered="{{false}}" hover note="{{versionListFontText}}"
+                title="版本号字体"/>
         <view class="flex mt-16rpx mx-32rpx mb-32rpx">
             <t-button bind:tap="closePersonalizationSetting" block size="large" theme="light">返回
             </t-button>
@@ -781,6 +782,10 @@ See the Mulan PubL v2 for more details.
                 title="微信版本"/>
         <t-cell arrow bind:tap="clickLocalWeixinSDKVersionCell" bordered description="{{weixinLocalSDKVersion}}" hover
                 title="微信小程序基础库版本"/>
+        <t-cell arrow bind:tap="clickLocalWeixinSkylineCell" bordered description="{{weixinLocalSkyline}}" hover
+                title="Skyline 渲染引擎版本"/>
+        <t-cell arrow bind:tap="clickLocalWeixinAICell" bordered description="{{weixinLocalAI}}" hover
+                title="通用 AI 推理引擎版本" wx:if="{{weixinLocalAI!==''}}"/>
         <t-cell arrow bind:tap="clickLocalWeixinPlatformCell" bordered="{{weixinLocalABI!==undefined}}"
                 description="{{weixinLocalPlatform+'（'+weixinLocalSystem+'）'}}" hover title="微信客户端平台"/>
         <t-cell arrow bind:tap="clickLocalWeixinABICell" bordered="{{false}}" description="{{weixinLocalABI}}" hover

@@ -112,6 +112,7 @@ Page({
         const accountInfo = wx.getAccountInfoSync();
         const appBaseInfo = wx.getAppBaseInfo()
         const deviceInfo = wx.getDeviceInfo()
+        const skylineInfo = wx.getSkylineInfoSync();
 
         this.setData({
             theme: wx.getAppBaseInfo().theme || 'light',
@@ -131,8 +132,17 @@ Page({
             weixinLocalSDKVersion: appBaseInfo.SDKVersion,
             weixinLocalSystem: deviceInfo.system,
             weixinLocalPlatform: deviceInfo.platform,
-            weixinLocalABI: deviceInfo.abi
+            weixinLocalABI: deviceInfo.abi,
+            weixinLocalSkyline: skylineInfo.version
         });
+
+        wx.getInferenceEnvInfo({
+            complete: (res) => {
+                this.setData({
+                    weixinLocalAI: res.ver
+                })
+            },
+        })
 
         const suffixKeys = ['suffix64HB', 'suffixHB64', 'suffix64HB1', 'suffixHB164', 'suffix64HB2', 'suffixHB264', 'suffix64HB3', 'suffixHB364', 'suffix64HD', 'suffixHD64', 'suffix64HD1', 'suffixHD164', 'suffix64HD2', 'suffixHD264', 'suffix64HD3', 'suffixHD364', 'suffix64HD1HB', 'suffixHD1HB64', 'suffixTest'];
         suffixKeys.forEach(suffixKey => {
@@ -1760,16 +1770,33 @@ Page({
         this.setData({
             localWeixinDetailVisible: false
         })
+    }, copyWeixinInfo(type = 'all') {
+        const infoMap = {
+            version: `微信版本：${this.data.weixinLocalVersion}`,
+            sdk: `微信小程序基础库版本：${this.data.weixinLocalSDKVersion}`,
+            skyline: `Skyline 渲染引擎版本：${this.data.weixinLocalSkyline}`,
+            ai: this.data.weixinLocalAI !== '' ? `通用 AI 推理引擎版本：${this.data.weixinLocalAI}` : '',
+            platform: `微信客户端平台：${this.data.weixinLocalPlatform}（${this.data.weixinLocalSystem}）`,
+            abi: this.data.weixinLocalABI !== undefined ? `ABI：${this.data.weixinLocalABI}` : '',
+        };
+        if (type === 'all') {
+            const filteredValues = Object.values(infoMap).filter(value => value !== '');
+            this.copyUtil(filteredValues.join('\n'));
+        } else if (infoMap[type]) this.copyUtil(infoMap[type]);
     }, copyLocalWeixin() {
-        this.copyUtil(`微信版本：${this.data.weixinLocalVersion}\n微信小程序基础库版本：${this.data.weixinLocalSDKVersion}\n微信客户端平台：${this.data.weixinLocalPlatform}（${this.data.weixinLocalSystem}）` + (this.data.weixinLocalABI !== undefined ? `\nABI：${this.data.weixinLocalABI}` : ''))
+        this.copyWeixinInfo()
     }, clickLocalWeixinVersionCell() {
-        this.copyUtil(`微信版本：${this.data.weixinLocalVersion}`)
+        this.copyWeixinInfo('version')
     }, clickLocalWeixinSDKVersionCell() {
-        this.copyUtil(`微信小程序基础库版本：${this.data.weixinLocalSDKVersion}`)
+        this.copyWeixinInfo('sdk')
     }, clickLocalWeixinPlatformCell() {
-        this.copyUtil(`微信客户端平台：${this.data.weixinLocalPlatform}（${this.data.weixinLocalSystem}）`)
+        this.copyWeixinInfo('platform')
     }, clickLocalWeixinABICell() {
-        this.copyUtil(`ABI：${this.data.weixinLocalABI}`)
+        this.copyWeixinInfo('abi')
+    }, clickLocalWeixinSkylineCell() {
+        this.copyWeixinInfo('skyline')
+    }, clickLocalWeixinAICell() {
+        this.copyWeixinInfo('ai')
     }, updateWeixin() {
         wx.updateWeChatApp()
     }, showErrPopup(err) {
