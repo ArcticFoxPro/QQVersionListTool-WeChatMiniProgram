@@ -62,8 +62,16 @@ function resolveWeixinAlphaConfig(jsonString) {
     };
 }
 
+/**
+ * 将一个单词的首字母转换为大写
+ * @param {string} word - 需要转换的单词
+ * @returns {string} - 转换后的单词
+ */
+const capitalizeFirstLetter = (word) => word.charAt(0).toUpperCase() + word.slice(1);
+
 module.exports = {
     getAllAPKUrl: getAllAPKUrl,
-    resolveWeixinAlphaConfig: resolveWeixinAlphaConfig
+    resolveWeixinAlphaConfig: resolveWeixinAlphaConfig,
+    capitalizeFirstLetter: capitalizeFirstLetter
 };
 

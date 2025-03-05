@@ -126,6 +126,14 @@ QQ、TIM、微信、企业微信、微信输入法使用腾讯应用宝（[腾�
   - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>_HB2_64.apk`
   - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>_HB3_64.apk`
   - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>_BBPJ_64.apk`
+  - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>_64_HD.apk`
+  - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>_64_HD1.apk`
+  - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>_64_HD2.apk`
+  - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>_64_HD3.apk`
+  - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>_HD_64.apk`
+  - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>_HD1_64.apk`
+  - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>_HD2_64.apk`
+  - `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>_HD3_64.apk`
 
 - 若“测试版扫版”开关为开时，则需要填写起始小版本号后才可开始扫版。
   - 默认情况下，软件将尝试访问 `https://downv6.qq.com/qqweb/QQ_1/android_apk/Android_<主版本号>.<小版本号>_64.apk` ，若当次访问未果，默认情况下将按照设置逻辑自动递增小版本号后再次尝试访问，直到访问成功为止。
