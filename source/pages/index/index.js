@@ -1636,6 +1636,7 @@ Page({
         wx.request({
             url: `https://z.weixin.qq.com/android/download?channel=latest`,
             method: 'GET',
+            useHighPerformanceMode: true,
             redirect: 'manual',
             fail: (err) => {
                 this.showErrPopup(err)
@@ -1646,7 +1647,9 @@ Page({
                 })
             }
         }).onHeadersReceived(res => {
-            const url = res.header.Location;
+            const urlPre = res.header.location;
+            const urlPre2 = res.header.Location;
+            const url = urlPre || urlPre2;
             this.fetchLink(url).then(isSuccess => {
                 if (isSuccess.exists && isSuccess.fileSize !== false) this.setData({
                     successExpBackLink: url,
