@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "license-checker-rseidelsohn": "^4.4.2",
-    "shelljs": "^0.8.5",
+    "shelljs": "^0.9.1",
     "spdx-license-list": "^6.9.0",
     "uglify-js": "^3.19.3",
     "unocss": "^66.0.0"
