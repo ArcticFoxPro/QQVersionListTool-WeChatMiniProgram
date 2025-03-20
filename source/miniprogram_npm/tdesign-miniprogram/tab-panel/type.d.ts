@@ -16,6 +16,10 @@ export interface TdTabPanelProps {
         type: StringConstructor;
         value?: string;
     };
+    lazy?: {
+        type: BooleanConstructor;
+        value?: boolean;
+    };
     panel?: {
         type: StringConstructor;
         value?: string;

@@ -34,7 +34,7 @@ export interface TdToastProps {
     };
     theme?: {
         type: StringConstructor;
-        value?: 'loading' | 'success' | 'error';
+        value?: 'loading' | 'success' | 'warning' | 'error';
     };
     usingCustomNavbar?: {
         type: BooleanConstructor;

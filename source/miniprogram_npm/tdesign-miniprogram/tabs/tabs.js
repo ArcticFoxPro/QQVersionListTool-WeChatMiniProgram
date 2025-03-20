@@ -155,16 +155,21 @@ let Tabs = class Tabs extends SuperComponent {
                 return getRect(this, `.${name}`);
             },
             getTrackSize() {
+                const { bottomLineMode } = this.properties;
+                const targetMap = {
+                    fixed: `.${prefix}-tabs__track`,
+                    auto: `.${prefix}-tabs__item--active .${prefix}-tabs__item-inner`,
+                    full: `.${prefix}-tabs__item--active`,
+                };
                 return new Promise((resolve, reject) => {
                     if (this.trackWidth) {
                         resolve(this.trackWidth);
                         return;
                     }
-                    getRect(this, `.${prefix}-tabs__track`)
+                    getRect(this, targetMap[bottomLineMode] || targetMap.fixed)
                         .then((res) => {
                         if (res) {
-                            this.trackWidth = res.width;
-                            resolve(this.trackWidth);
+                            resolve(res.width);
                         }
                     })
                         .catch(reject);
@@ -204,13 +209,14 @@ let Tabs = class Tabs extends SuperComponent {
                             this._hasObserved = true;
                             getObserver(this, `.${name}`).then(() => this.setTrack());
                         }
+                        const trackLineWidth = yield this.getTrackSize();
                         if (this.data.theme === 'line') {
-                            const trackLineWidth = yield this.getTrackSize();
                             distance += (rect.width - trackLineWidth) / 2;
                         }
                         this.setData({
                             trackStyle: `-webkit-transform: translateX(${distance}px);
             transform: translateX(${distance}px);
+            width:${trackLineWidth}px;
           `,
                         });
                     }

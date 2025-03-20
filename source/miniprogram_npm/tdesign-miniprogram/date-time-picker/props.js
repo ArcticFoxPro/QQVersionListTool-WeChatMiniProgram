@@ -18,15 +18,15 @@ const props = {
     end: {
         type: null,
     },
-    externalClasses: {
-        type: Array,
-    },
     filter: {
         type: null,
     },
     format: {
         type: String,
         value: 'YYYY-MM-DD HH:mm:ss',
+    },
+    formatter: {
+        type: null,
     },
     header: {
         type: Boolean,

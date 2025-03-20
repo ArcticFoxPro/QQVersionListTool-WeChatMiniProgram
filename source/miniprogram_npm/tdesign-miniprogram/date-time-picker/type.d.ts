@@ -20,10 +20,6 @@ export interface TdDateTimePickerProps {
         type: null;
         value?: string | number;
     };
-    externalClasses?: {
-        type: ArrayConstructor;
-        value?: ['t-class', 't-class-confirm', 't-class-cancel', 't-class-title'];
-    };
     filter?: {
         type: undefined;
         value?: (type: TimeModeValues, columns: DateTimePickerColumn) => DateTimePickerColumn;
@@ -31,6 +27,10 @@ export interface TdDateTimePickerProps {
     format?: {
         type: StringConstructor;
         value?: string;
+    };
+    formatter?: {
+        type: undefined;
+        value?: (option: DateTimePickerColumnItem, columnIndex: number) => DateTimePickerColumnItem;
     };
     header?: {
         type: BooleanConstructor;

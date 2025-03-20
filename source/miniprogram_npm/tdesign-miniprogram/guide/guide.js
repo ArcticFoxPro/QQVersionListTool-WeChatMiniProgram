@@ -99,13 +99,15 @@ let Guide = class Guide extends SuperComponent {
                         const highlightPadding = rpx2px((_c = step.highlightPadding) !== null && _c !== void 0 ? _c : this.data.highlightPadding);
                         const referenceTop = rect.top - highlightPadding;
                         const referenceRight = systemInfo.windowWidth - rect.right - highlightPadding;
-                        const referenceBottom = systemInfo.windowHeight - rect.bottom - highlightPadding;
                         const referenceLeft = rect.left - highlightPadding;
+                        const referenceWidth = rect.width + 2 * highlightPadding;
+                        const referenceHeight = rect.height + 2 * highlightPadding;
                         const style = {
                             top: `${referenceTop}px`,
                             right: `${referenceRight}px`,
-                            bottom: `${referenceBottom}px`,
                             left: `${referenceLeft}px`,
+                            width: `${referenceWidth}px`,
+                            height: `${referenceHeight}px`,
                         };
                         this.setData({
                             _steps: this.data.steps,
@@ -200,12 +202,11 @@ let Guide = class Guide extends SuperComponent {
                 const space = rpx2px(32);
                 const offsetLeft = (offset) => unitConvert(isNumber(offset === null || offset === void 0 ? void 0 : offset[0]) ? `${offset === null || offset === void 0 ? void 0 : offset[0]}rpx` : (offset === null || offset === void 0 ? void 0 : offset[0]) || 0);
                 const offsetTop = (offset) => unitConvert(isNumber(offset === null || offset === void 0 ? void 0 : offset[1]) ? `${offset === null || offset === void 0 ? void 0 : offset[1]}rpx` : (offset === null || offset === void 0 ? void 0 : offset[1]) || 0);
-                const bottom = (place) => parseFloat(place.bottom);
                 const left = (place) => parseFloat(place.left);
                 const right = (place) => parseFloat(place.right);
                 const top = (place) => parseFloat(place.top);
-                const height = (place) => systemInfo.windowHeight - bottom(place) - top(place);
-                const width = (place) => systemInfo.windowWidth - left(place) - right(place);
+                const height = (place) => parseFloat(place.height);
+                const width = (place) => parseFloat(place.width);
                 return {
                     center: (rect, place, offset) => ({
                         top: `${Math.max(height(place) + top(place) + space + offsetTop(offset), 1)}px`,
@@ -232,7 +233,7 @@ let Guide = class Guide extends SuperComponent {
                         right: `${Math.max(width(place) + right(place) + space - offsetLeft(offset), 1)}px`,
                     }),
                     'left-bottom': (rect, place, offset) => ({
-                        bottom: `${Math.max(bottom(place) - offsetTop(offset), 1)}px`,
+                        top: `${Math.max(top(place) + height(place) - rect.height - offsetTop(offset), 1)}px`,
                         right: `${Math.max(width(place) + right(place) + space - offsetLeft(offset), 1)}px`,
                     }),
                     right: (rect, place, offset) => ({
@@ -244,19 +245,19 @@ let Guide = class Guide extends SuperComponent {
                         left: `${Math.max(left(place) + width(place) + space + offsetLeft(offset), 1)}px`,
                     }),
                     'right-bottom': (rect, place, offset) => ({
-                        bottom: `${Math.max(bottom(place) - offsetTop(offset), 1)}px`,
+                        top: `${Math.max(top(place) + height(place) - rect.height - offsetTop(offset), 1)}px`,
                         left: `${Math.max(left(place) + width(place) + space + offsetLeft(offset), 1)}px`,
                     }),
                     top: (rect, place, offset) => ({
-                        bottom: `${Math.max(height(place) + bottom(place) + space - offsetTop(offset), 1)}px`,
+                        top: `${Math.max(top(place) - rect.height - space + offsetTop(offset), 1)}px`,
                         left: `${Math.max(width(place) / 2 + left(place) - rect.width / 2 + offsetLeft(offset), 1)}px`,
                     }),
                     'top-left': (rect, place, offset) => ({
-                        bottom: `${Math.max(height(place) + bottom(place) + space - offsetTop(offset), 1)}px`,
+                        top: `${Math.max(top(place) - rect.height - space + offsetTop(offset), 1)}px`,
                         left: `${Math.max(left(place) + offsetLeft(offset), 1)}px`,
                     }),
                     'top-right': (rect, place, offset) => ({
-                        bottom: `${Math.max(height(place) + bottom(place) + space - offsetTop(offset), 1)}px`,
+                        top: `${Math.max(top(place) - rect.height - space + offsetTop(offset), 1)}px`,
                         right: `${Math.max(right(place) - offsetLeft(offset), 1)}px`,
                     }),
                 };

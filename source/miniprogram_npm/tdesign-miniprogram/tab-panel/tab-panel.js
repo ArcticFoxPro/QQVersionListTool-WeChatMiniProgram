@@ -28,9 +28,10 @@ let TabPanel = class TabPanel extends SuperComponent {
             active: false,
             hide: true,
             id: '',
+            hasActivated: false,
         };
         this.observers = {
-            'label, badgeProps, disabled, icon, panel, value'() {
+            'label, badgeProps, disabled, icon, panel, value, lazy'() {
                 this.update();
             },
         };
@@ -50,6 +51,9 @@ let TabPanel = class TabPanel extends SuperComponent {
     }
     render(active, parent) {
         this.initialized = this.initialized || active;
+        if (active && !this.data.hasActivated) {
+            this.setData({ hasActivated: true });
+        }
         this.setData({
             active,
             hide: !parent.data.animation && !active,

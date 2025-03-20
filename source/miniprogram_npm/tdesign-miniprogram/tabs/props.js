@@ -2,6 +2,10 @@ const props = {
     animation: {
         type: Object,
     },
+    bottomLineMode: {
+        type: String,
+        value: 'fixed',
+    },
     externalClasses: {
         type: Array,
     },

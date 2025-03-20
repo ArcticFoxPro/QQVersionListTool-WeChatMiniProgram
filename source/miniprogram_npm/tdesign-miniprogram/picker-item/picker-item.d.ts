@@ -1,4 +1,5 @@
 import { SuperComponent, RelationsOptions, ComponentsOptionsType } from '../common/src/index';
+import { PickerItemOption } from './type';
 export default class PickerItem extends SuperComponent {
     relations: RelationsOptions;
     options: ComponentsOptionsType;
@@ -17,6 +18,7 @@ export default class PickerItem extends SuperComponent {
         columnIndex: number;
         labelAlias: string;
         valueAlias: string;
+        formatOptions: PickerItemOption[];
     };
     lifetimes: {
         created(): void;
@@ -24,10 +26,9 @@ export default class PickerItem extends SuperComponent {
     methods: {
         onTouchStart(event: any): void;
         onTouchMove(event: any): void;
-        onTouchEnd(): void;
+        onTouchEnd(event: any): void;
+        formatOption(options: PickerItemOption[], columnIndex: number, format: any): any[];
         update(): void;
-        resetOrigin(): void;
         getCount(): any;
     };
-    calculateViewDeltaY(touchDeltaY: number, itemHeight: number): number;
 }

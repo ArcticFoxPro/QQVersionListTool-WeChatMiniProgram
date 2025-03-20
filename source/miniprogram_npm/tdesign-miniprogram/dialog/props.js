@@ -23,9 +23,6 @@ const props = {
     content: {
         type: String,
     },
-    externalClasses: {
-        type: Array,
-    },
     overlayProps: {
         type: Object,
         value: {},
@@ -38,12 +35,12 @@ const props = {
         type: Boolean,
         value: true,
     },
-    style: {
-        type: String,
-        value: '',
-    },
     title: {
         type: String,
+    },
+    usingCustomNavbar: {
+        type: Boolean,
+        value: false,
     },
     visible: {
         type: Boolean,

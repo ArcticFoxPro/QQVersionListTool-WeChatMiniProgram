@@ -29,7 +29,7 @@ let Link = class Link extends SuperComponent {
             classPrefix: name,
         };
         this.observers = {
-            'theme, status, size, underline, navigatorProps'() {
+            'theme, disabled, size, underline, navigatorProps'() {
                 this.setClass();
             },
             prefixIcon(v) {

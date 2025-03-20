@@ -1,7 +1,7 @@
 /// <reference types="miniprogram-api-typings" />
 /// <reference types="miniprogram-api-typings" />
 declare type Context = WechatMiniprogram.Page.TrivialInstance | WechatMiniprogram.Component.TrivialInstance;
-declare type ToastType = 'loading' | 'success' | 'error';
+declare type ToastType = 'loading' | 'success' | 'warning' | 'error';
 declare type ToastPositionType = 'top' | 'middle' | 'bottom';
 declare type ToastDirectionType = 'row' | 'column';
 export declare type ToastOptionsType = {

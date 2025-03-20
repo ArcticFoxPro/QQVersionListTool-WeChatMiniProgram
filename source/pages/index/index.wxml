@@ -614,14 +614,14 @@ See the Mulan PubL v2 for more details.
             <view class="flex-1 text-center font-600 text-36rpx" id="ability-exp">实验性功能</view>
         </view>
         <t-cell arrow bind:tap="handleGetFromWeixinAlphaConfig" bordered
-                description="从腾讯服务器配置拉取微信最新测试版下载直链" hover title="获取微信测试版">
+                description="从腾讯服务器配置拉取 Android 微信最新测试版下载直链" hover title="获取微信测试版">
             <view class="ml-4rpx" slot="note"
                   style="visibility: {{getFromWeixinAlphaConfigLoading?'visible':'hidden'}}">
                 <t-loading/>
             </view>
         </t-cell>
         <t-cell arrow bind:tap="handleGetFromWeTypeLatestChannel" bordered
-                description="从微信输入法测试通道获取微信输入法最新下载直链" hover title="获取微信输入法测试版">
+                description="从微信输入法测试通道获取 Android 微信输入法最新下载直链" hover title="获取微信输入法测试版">
             <view class="ml-4rpx" slot="note"
                   style="visibility: {{getFromWeTypeLatestChannelLoading?'visible':'hidden'}}">
                 <t-loading/>
@@ -783,9 +783,11 @@ See the Mulan PubL v2 for more details.
         <t-cell arrow bind:tap="clickLocalWeixinSDKVersionCell" bordered description="{{weixinLocalSDKVersion}}" hover
                 title="微信小程序基础库版本"/>
         <t-cell arrow bind:tap="clickLocalWeixinSkylineCell" bordered description="{{weixinLocalSkyline}}" hover
-                title="Skyline 渲染引擎版本"/>
+                title="Skyline 渲染引擎版本"
+                wx:if="{{weixinLocalSkyline!==undefined&&weixinLocalSkyline!==''&&weixinLocalSkyline!==null}}"/>
         <t-cell arrow bind:tap="clickLocalWeixinAICell" bordered description="{{weixinLocalAI}}" hover
-                title="通用 AI 推理引擎版本" wx:if="{{weixinLocalAI!==''}}"/>
+                title="通用 AI 推理引擎版本"
+                wx:if="{{weixinLocalAI!==undefined&&weixinLocalAI!==''&&weixinLocalAI!==null}}"/>
         <t-cell arrow bind:tap="clickLocalWeixinPlatformCell" bordered="{{weixinLocalABI!==undefined}}"
                 description="{{weixinLocalPlatform+'（'+weixinLocalSystem+'）'}}" hover title="微信客户端平台"/>
         <t-cell arrow bind:tap="clickLocalWeixinABICell" bordered="{{false}}" description="{{weixinLocalABI}}" hover

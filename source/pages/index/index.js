@@ -1774,8 +1774,8 @@ Page({
         const infoMap = {
             version: `微信版本：${this.data.weixinLocalVersion}`,
             sdk: `微信小程序基础库版本：${this.data.weixinLocalSDKVersion}`,
-            skyline: `Skyline 渲染引擎版本：${this.data.weixinLocalSkyline}`,
-            ai: this.data.weixinLocalAI !== '' ? `通用 AI 推理引擎版本：${this.data.weixinLocalAI}` : '',
+            skyline: this.data.weixinLocalSkyline !== '' && this.data.weixinLocalSkyline !== undefined && this.data.weixinLocalSkyline !== null ? `Skyline 渲染引擎版本：${this.data.weixinLocalSkyline}` : '',
+            ai: this.data.weixinLocalAI !== '' && this.data.weixinLocalAI !== undefined && this.data.weixinLocalAI !== null ? `通用 AI 推理引擎版本：${this.data.weixinLocalAI}` : '',
             platform: `微信客户端平台：${this.data.weixinLocalPlatform}（${this.data.weixinLocalSystem}）`,
             abi: this.data.weixinLocalABI !== undefined ? `ABI：${this.data.weixinLocalABI}` : '',
         };

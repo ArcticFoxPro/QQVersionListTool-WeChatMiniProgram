@@ -1,5 +1,5 @@
 import { ButtonProps } from '../button/index';
-import { TdOverlayProps as OverlayProps } from '../overlay/type';
+import { OverlayProps } from '../overlay/index';
 export interface TdDialogProps {
     actions?: {
         type: ArrayConstructor;
@@ -29,10 +29,6 @@ export interface TdDialogProps {
         type: StringConstructor;
         value?: string;
     };
-    externalClasses?: {
-        type: ArrayConstructor;
-        value?: ['t-class', 't-class-content', 't-class-confirm', 't-class-cancel'];
-    };
     overlayProps?: {
         type: ObjectConstructor;
         value?: OverlayProps;
@@ -44,10 +40,6 @@ export interface TdDialogProps {
     showOverlay?: {
         type: BooleanConstructor;
         value?: boolean;
-    };
-    style?: {
-        type: StringConstructor;
-        value?: string;
     };
     title?: {
         type: StringConstructor;

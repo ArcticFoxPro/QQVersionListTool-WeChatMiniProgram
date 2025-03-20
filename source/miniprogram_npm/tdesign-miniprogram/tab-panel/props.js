@@ -13,6 +13,10 @@ const props = {
         type: String,
         value: '',
     },
+    lazy: {
+        type: Boolean,
+        value: false,
+    },
     panel: {
         type: String,
     },
