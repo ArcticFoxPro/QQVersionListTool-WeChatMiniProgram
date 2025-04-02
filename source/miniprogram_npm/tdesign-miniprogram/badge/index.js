@@ -1,3 +1,1 @@
-export * from './type';
-export * from './props';
-export * from './badge';
+export*from"./type";export*from"./props";export*from"./badge";

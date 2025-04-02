@@ -1,7 +1,1 @@
-{
-  "component": true,
-  "styleIsolation": "apply-shared",
-  "usingComponents": {
-    "t-radio": "../radio/radio"
-  }
-}
+{"component":true,"styleIsolation":"apply-shared","usingComponents":{"t-radio":"../radio/radio"}}

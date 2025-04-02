@@ -1,4 +1,4 @@
-import { SuperComponent, RelationsOptions } from '../common/src/index';
+import { RelationsOptions, SuperComponent } from '../common/src/index';
 import { TdTabsProps } from './type';
 export interface TabsProps extends TdTabsProps {
 }
@@ -23,7 +23,11 @@ export default class Tabs extends SuperComponent {
         tabs: any[];
         currentLabels: any[];
         currentIndex: number;
-        trackStyle: string;
+        trackOption: {
+            lineWidth: number;
+            distance: number;
+            isInit: boolean;
+        };
         offset: number;
         scrollLeft: number;
         tabID: string;

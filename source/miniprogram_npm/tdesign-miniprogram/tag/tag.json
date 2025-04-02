@@ -1,7 +1,1 @@
-{
-  "component": true,
-  "styleIsolation": "apply-shared",
-  "usingComponents": {
-    "t-icon": ".././icon/icon"
-  }
-}
+{"component":true,"styleIsolation":"apply-shared","usingComponents":{"t-icon":".././icon/icon"}}

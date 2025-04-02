@@ -1,2 +1,1 @@
-export * from './props';
-export * from './image';
+export*from"./props";export*from"./image";

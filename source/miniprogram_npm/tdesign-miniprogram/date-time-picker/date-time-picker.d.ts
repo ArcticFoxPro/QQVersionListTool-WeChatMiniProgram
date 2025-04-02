@@ -39,6 +39,7 @@ export default class DateTimePicker extends SuperComponent {
     }[];
     methods: {
         updateColumns(): void;
+        getDaysOfWeekInMonth(date: Dayjs): any[];
         getParseDate(): Dayjs;
         getMinDate(): Dayjs;
         getMaxDate(): Dayjs;
@@ -48,7 +49,7 @@ export default class DateTimePicker extends SuperComponent {
         setYear(date: Dayjs, year: number): Dayjs;
         setMonth(date: Dayjs, month: number): Dayjs;
         getColumnOptions(): any[];
-        getOptionByType(type: any): ColumnItemValue[];
+        getOptionByType(type: string): any;
         getYearOptions(dateParams: any): ColumnItemValue[];
         getOptionEdge(minOrMax: 'min' | 'max', type: any): any;
         getMonthOptions(): ColumnItemValue[];

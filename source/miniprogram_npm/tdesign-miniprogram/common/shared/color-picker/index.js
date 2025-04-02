@@ -1,3 +1,1 @@
-export * from './cmyk';
-export * from './color';
-export * from './gradient';
+export*from"./cmyk";export*from"./color";export*from"./gradient";

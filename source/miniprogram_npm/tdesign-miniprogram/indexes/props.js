@@ -1,14 +1,1 @@
-const props = {
-    indexList: {
-        type: null,
-    },
-    sticky: {
-        type: Boolean,
-        value: true,
-    },
-    stickyOffset: {
-        type: Number,
-        value: 0,
-    },
-};
-export default props;
+const props={indexList:{type:null},sticky:{type:Boolean,value:!0},stickyOffset:{type:Number,value:0}};export default props;

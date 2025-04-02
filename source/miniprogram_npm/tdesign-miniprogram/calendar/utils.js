@@ -1,16 +1,1 @@
-export function getMonthByOffset(date, offset) {
-    const _date = new Date(date);
-    _date.setMonth(_date.getMonth() + offset);
-    _date.setDate(1);
-    return _date;
-}
-export function getYearByOffset(date, offset) {
-    const _date = new Date(date);
-    _date.setFullYear(_date.getFullYear() + offset);
-    _date.setDate(1);
-    return _date;
-}
-export const getPrevMonth = (date) => getMonthByOffset(date, -1);
-export const getNextMonth = (date) => getMonthByOffset(date, 1);
-export const getPrevYear = (date) => getYearByOffset(date, -1);
-export const getNextYear = (date) => getYearByOffset(date, 1);
+export function getMonthByOffset(t,e){const n=new Date(t);return n.setMonth(n.getMonth()+e),n.setDate(1),n}export function getYearByOffset(t,e){const n=new Date(t);return n.setFullYear(n.getFullYear()+e),n.setDate(1),n}export const getPrevMonth=t=>getMonthByOffset(t,-1);export const getNextMonth=t=>getMonthByOffset(t,1);export const getPrevYear=t=>getYearByOffset(t,-1);export const getNextYear=t=>getYearByOffset(t,1);

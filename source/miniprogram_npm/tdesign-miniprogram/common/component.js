@@ -1,5 +1,1 @@
-const TComponent = (options) => {
-    options.options = Object.assign({ multipleSlots: true, addGlobalClass: true }, options.options);
-    return Component(options);
-};
-export default TComponent;
+const TComponent=o=>(o.options=Object.assign({multipleSlots:!0,addGlobalClass:!0},o.options),Component(o));export default TComponent;

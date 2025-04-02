@@ -1,7 +1,1 @@
-export var MessageType;
-(function (MessageType) {
-    MessageType["info"] = "info";
-    MessageType["success"] = "success";
-    MessageType["warning"] = "warning";
-    MessageType["error"] = "error";
-})(MessageType || (MessageType = {}));
+export var MessageType;!function(e){e.info="info",e.success="success",e.warning="warning",e.error="error"}(MessageType||(MessageType={}));

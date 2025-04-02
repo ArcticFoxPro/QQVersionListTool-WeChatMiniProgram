@@ -1,3 +1,1 @@
-export * from './props';
-export * from './type';
-export * from './overlay';
+export*from"./props";export*from"./type";export*from"./overlay";
