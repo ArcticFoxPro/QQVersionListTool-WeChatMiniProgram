@@ -11,7 +11,7 @@
     "tdesign-miniprogram": "^1.9.0-beta.1"
   },
   "devDependencies": {
-    "license-checker-rseidelsohn": "^4.4.2",
+    "license-checker-rseidelsohn": "^5.0.1",
     "shelljs": "^0.10.0",
     "spdx-license-list": "^6.10.0",
     "uglify-js": "^3.19.3",
